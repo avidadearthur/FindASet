@@ -1,8 +1,8 @@
 package be.kuleuven.findaset.test;
 
-import be.kuleuven.findaset.model.shape.Color;
-import be.kuleuven.findaset.model.shape.Shading;
-import be.kuleuven.findaset.model.shape.Type;
+import be.kuleuven.findaset.model.shape.enums.Color;
+import be.kuleuven.findaset.model.shape.enums.Shading;
+import be.kuleuven.findaset.model.shape.enums.Type;
 
 public interface TestableShape {
     Enum<Color> getColor();
