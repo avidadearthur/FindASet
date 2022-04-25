@@ -6,10 +6,20 @@ import be.kuleuven.findaset.model.card.enums.Shading;
 import be.kuleuven.findaset.model.card.enums.Type;
 
 public class Card extends AbstractCard{
+    private Enum<ShapeCount> shapeCountEnum;
+    private Enum<Shading> shadingEnum;
+    private Enum<Color> colorEnum;
+    private Enum<Type> typeEnum;
+
+    public Card(Enum<ShapeCount> shapeCountEnum, Enum<Shading> shadingEnum, Enum<Color> colorEnum, Enum<Type> typeEnum) {
+        this.shapeCountEnum = shapeCountEnum;
+        this.shadingEnum = shadingEnum;
+        this.colorEnum = colorEnum;
+        this.typeEnum = typeEnum;
+    }
 
     @Override
     public void toggle() {
-
     }
 
     @Override
@@ -19,21 +29,21 @@ public class Card extends AbstractCard{
 
     @Override
     public Enum<Color> getColor() {
-        return null;
+        return colorEnum;
     }
 
     @Override
     public Enum<Shading> getShading() {
-        return null;
+        return shadingEnum;
     }
 
     @Override
     public Enum<Type> getType() {
-        return null;
+        return typeEnum;
     }
 
     @Override
     public Enum<ShapeCount> getCount() {
-        return null;
+        return shapeCountEnum;
     }
 }
