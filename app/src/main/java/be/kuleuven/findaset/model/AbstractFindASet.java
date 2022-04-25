@@ -5,6 +5,8 @@ import be.kuleuven.findaset.test.TestableFindASet;
 
 public abstract class AbstractFindASet implements TestableFindASet {
 
+    public abstract AbstractCard[] generateSet();
+
     public abstract void setTable(AbstractCard[] table);
 
     public abstract void updateTable(int[] cardIndexes);

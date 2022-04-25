@@ -1,15 +1,15 @@
 package be.kuleuven.findaset.test;
 
-import be.kuleuven.findaset.model.card.enums.Color;
-import be.kuleuven.findaset.model.card.enums.Shading;
-import be.kuleuven.findaset.model.card.enums.ShapeCount;
-import be.kuleuven.findaset.model.card.enums.Type;
+import be.kuleuven.findaset.model.card.enums.COLOR;
+import be.kuleuven.findaset.model.card.enums.SHADING;
+import be.kuleuven.findaset.model.card.enums.SHAPECOUNT;
+import be.kuleuven.findaset.model.card.enums.TYPE;
 
 public interface TestableCard {
     void toggle();
     boolean isSelected();
-    Enum<ShapeCount> getCount();
-    Enum<Shading> getShading();
-    Enum<Color> getColor();
-    Enum<Type> getType();
+    Enum<SHAPECOUNT> getCount();
+    Enum<SHADING> getShading();
+    Enum<COLOR> getColor();
+    Enum<TYPE> getType();
 }
