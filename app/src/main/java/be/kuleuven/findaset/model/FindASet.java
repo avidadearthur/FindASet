@@ -1,8 +1,10 @@
 package be.kuleuven.findaset.model;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
 
@@ -76,10 +78,17 @@ public class FindASet extends AbstractFindASet{
                 }
             }
             else {
-
-
+                ArrayList<Integer> diffFeatures = new ArrayList<>(3);
+                int i = 0;
+                while (i < 3){
+                    int next = rd.nextInt(3) + 1;
+                    if (!diffFeatures.contains(next)){
+                        diffFeatures.add(next);
+                        i++;
+                    }
+                }
                 for (int row = 0; row < 2; row++) {
-                    featureMatrix[row][col] = 0;
+                    featureMatrix[row][col] = diffFeatures.get(row);
                 }
             }
         }

@@ -6,7 +6,7 @@ import be.kuleuven.findaset.model.card.enums.SHADING;
 import be.kuleuven.findaset.model.card.enums.TYPE;
 import be.kuleuven.findaset.test.TestableCard;
 
-public abstract class AbstractCard implements TestableCard{
+public abstract class AbstractCard implements TestableCard {
     public abstract void toggle();
     public abstract boolean isSelected();
     public abstract Enum<COLOR> getColor();
