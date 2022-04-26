@@ -28,7 +28,7 @@ public class GameModelTester {
     @Test
     public void testGeneratingCard() {
         AbstractCard card = new Card(SHAPECOUNT.one, SHADING.open, COLOR.red, TYPE.diamond);
-        assertSame(card.getCount(), SHAPECOUNT.one);
+        assertTrue(card.getCount() == SHAPECOUNT.one);
     }
 
     @org.junit.Test
