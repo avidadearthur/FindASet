@@ -1,4 +1,4 @@
-package be.kuleuven.findaset.test;
+package be.kuleuven.findaset.model;
 
 import be.kuleuven.findaset.model.card.AbstractCard;
 

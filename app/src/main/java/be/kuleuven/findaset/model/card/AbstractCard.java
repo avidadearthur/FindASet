@@ -4,7 +4,6 @@ import be.kuleuven.findaset.model.card.enums.SHAPECOUNT;
 import be.kuleuven.findaset.model.card.enums.COLOR;
 import be.kuleuven.findaset.model.card.enums.SHADING;
 import be.kuleuven.findaset.model.card.enums.TYPE;
-import be.kuleuven.findaset.test.TestableCard;
 
 public abstract class AbstractCard implements TestableCard {
     public abstract void toggle();

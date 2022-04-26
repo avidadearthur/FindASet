@@ -1,7 +1,6 @@
 package be.kuleuven.findaset.model;
 
 import be.kuleuven.findaset.model.card.AbstractCard;
-import be.kuleuven.findaset.test.TestableFindASet;
 
 public abstract class AbstractFindASet implements TestableFindASet {
 

@@ -1,4 +1,4 @@
-package be.kuleuven.findaset.test;
+package be.kuleuven.findaset.model.card;
 
 import be.kuleuven.findaset.model.card.enums.COLOR;
 import be.kuleuven.findaset.model.card.enums.SHADING;
