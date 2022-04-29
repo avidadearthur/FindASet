@@ -8,5 +8,6 @@ public interface TestableFindASet {
     AbstractCard getCard(int i);
     void select(int i);
     void unselect(int i);
-    AbstractCard[] generateSet();
+    AbstractCard[] generateSet(int[][] featureMatrix);
+    int[][] getFeatureMatrix();
 }
