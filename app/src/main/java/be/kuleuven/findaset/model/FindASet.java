@@ -1,14 +1,11 @@
 package be.kuleuven.findaset.model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Random;
-import java.util.Set;
 
 import be.kuleuven.findaset.model.card.AbstractCard;
+import be.kuleuven.findaset.model.card.Card;
+import be.kuleuven.findaset.model.card.enums.EnumHandler;
 
 public class FindASet extends AbstractFindASet{
     private AbstractCard[] cards;
@@ -19,7 +16,8 @@ public class FindASet extends AbstractFindASet{
     }
 
     /**
-     * Generates a correct set of three cards when the game is initialized.
+     * Generates matrix that maps to a correct set of three cards
+     * when the game is initialized.
      *
      * Game rules:
      *
@@ -53,9 +51,7 @@ public class FindASet extends AbstractFindASet{
      * @return AbstractCard array of size 3
      */
     @Override
-    public AbstractCard[] generateSet(){
-
-        AbstractCard[] set = new AbstractCard[3];
+    public int[][] getFeatureMatrix(){
 
         Random rd = new Random();
         int[][] featureMatrix = new int[3][4];
@@ -93,6 +89,33 @@ public class FindASet extends AbstractFindASet{
             }
         }
 
+        return featureMatrix;
+    }
+
+    // I split the methods here mainly for testing purposes
+    /**
+     * Generates a set of abstract cards based on a feature matrix
+     * passed as an argument.
+     *
+     * @param featureMatrix - two dimensional array of ints that
+     *                      represent the enum options.
+     *
+     * @return AbstractCard array of size 3
+     */
+    @Override
+    public AbstractCard[] generateSet(int[][] featureMatrix){
+        AbstractCard[] set = new AbstractCard[3];
+
+        EnumHandler handler = new EnumHandler();
+        int i = 0;
+        for (int[] card: featureMatrix) {
+            AbstractCard newCard = new Card(handler.shapeCount(card[0]),
+                    handler.shading(card[1]), handler.color(card[2]),
+                    handler.type(card[3]));
+            set[i] = newCard;
+            i++;
+        }
+
         return set;
     }
 
@@ -103,7 +126,6 @@ public class FindASet extends AbstractFindASet{
      */
     @Override
     public void setTable(AbstractCard[] table) {
-        AbstractCard[] set = generateSet();
     }
 
     @Override
@@ -125,4 +147,5 @@ public class FindASet extends AbstractFindASet{
     public void unselect(int i) {
 
     }
+
 }
