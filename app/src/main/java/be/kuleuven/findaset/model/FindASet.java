@@ -46,7 +46,9 @@ public class FindASet extends AbstractFindASet{
      *  solid(1), striped(2), open(3)
      *
      *  So the example above would pick a set of
-     *  (...)
+     *  one green solid oval
+     *  one green open diamond
+     *  one green striped squiggle
      *
      * @return AbstractCard array of size 3
      */
