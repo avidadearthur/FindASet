@@ -1,5 +1,6 @@
 package be.kuleuven.findaset.model.card;
 
+import be.kuleuven.findaset.model.card.enums.EnumHandler;
 import be.kuleuven.findaset.model.card.enums.SHAPECOUNT;
 import be.kuleuven.findaset.model.card.enums.COLOR;
 import be.kuleuven.findaset.model.card.enums.SHADING;
@@ -45,5 +46,18 @@ public class Card extends AbstractCard{
     @Override
     public Enum<SHAPECOUNT> getCount() {
         return shapeCountEnum;
+    }
+
+    @Override
+    public String toString() {
+        SHAPECOUNT count = (SHAPECOUNT) shapeCountEnum;
+        SHADING shading = (SHADING) shadingEnum;
+        COLOR color = (COLOR) colorEnum;
+        TYPE type = (TYPE) typeEnum;
+        int ID = count.getIndex()*1000+shading.getIndex()*100+color.getIndex()*10+type.getIndex();
+        return  "count=" + shapeCountEnum + "\n" +
+                "shading=" + shadingEnum + "\n" +
+                "color=" + colorEnum + "\n" +
+                "type=" + typeEnum + "\n" + ID;
     }
 }

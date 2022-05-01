@@ -70,11 +70,11 @@ public class GameModelTester {
          *  bool        1       0        1         0
          */
 
-        // isEqual is an array that keeps track of weather all cards share the
+        // isEqual is an array that keeps track of whether all cards share the
         // same feature(1) or if at the least one is different from the others(0).
         int[] isEqual = {0,0,0,0};
-        for(int col = 0; col<4; col++){
-            for (int row = 0; row < 1; row++) {
+        for(int col = 0; col < 4; col++){
+            for (int row = 0; row <= 1; row++) {
                 if (setCandidate[row][col] != setCandidate[row + 1][col]) {
                     continue;
                 }
