@@ -123,8 +123,6 @@ public class FindASet extends AbstractFindASet{
         return set;
     }
 
-
-
     /**
      * Generates an feature ID for each set card according to matrix.
      * This array will be easier to check if there are the same cards,
@@ -219,6 +217,14 @@ public class FindASet extends AbstractFindASet{
         return false;
     }
 
+    /**
+     * Toggle all cards in such positions first.
+     *
+     * (The logic here has problems that we need to make sure there are still set existed
+     * and the card selected won't occur again.)
+     *
+     * @param cardIndexes the ArrayList contained 3 positions needed to update
+     */
     @Override
     public void updateTable(ArrayList<Integer> cardIndexes) {
         EnumHandler handler = new EnumHandler();

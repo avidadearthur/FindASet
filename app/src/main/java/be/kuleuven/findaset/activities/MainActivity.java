@@ -89,6 +89,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         gameModel.setTable(null);
     }
 
+    /**
+     * First get the index of which call the method.
+     *
+     * If there are already 3 selected cards, remove the first.
+     *
+     * After that, call checkSet() to check if there is set.
+     *
+     * If there is, call updateTable().
+     */
     @Override
     public void onClick(View view) {
         int index = Arrays.asList(cardImages).indexOf(view);
@@ -113,6 +122,62 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    public void refreshBtn_Clicked(View caller){
+        for (int i = 0; i < selectedCardsIndex.size(); i++) {
+            gameModel.toggle(selectedCardsIndex.get(i));
+        }
+        selectedCardsIndex.clear();
+        gameModel.emptyTable();
+        gameModel.setTable(null);
+    }
+
+    public void setGameModel(TestableFindASet newGameModel) {
+        this.gameModel = newGameModel;
+        this.gameModel.setUI(this);
+    }
+
+    /**
+     * Display images of all cards.
+     */
+    public void notifyNewGame() {
+        for(int i = 0; i < cardImages.length; i++){
+            notifyCard(i);
+        }
+
+        //JUST for TEST
+        String str = "SET cards position: "
+                + (gameModel.getJustForTest()[0]+1) + " "
+                + (gameModel.getJustForTest()[1]+1) + " "
+                + (gameModel.getJustForTest()[2]+1) + " ";
+        testTxt.setText(str);
+    }
+
+    /**
+     * Display images of one card accroding to index.
+     */
+    public void notifyCard(int index) {
+        AbstractCard nextCard = gameModel.getCard(index);
+        cardImages[index].setImageBitmap(combineImageIntoOne(setBitmaps(nextCard)));
+        cardTexts[index].setText(nextCard.toString());
+    }
+
+    /**
+     * If there is no green border, add one.
+     * If there is already one green border, delete it.
+     */
+    public void notifyToggle(int index) {
+        if(gameModel.getCard(index).isSelected())
+            cardImages[index].setBackground(getDrawable(R.drawable.selected_card));
+        else
+            cardImages[index].setBackground(null);
+    }
+
+    /**
+     * Store features of all cards into 4*3 featureMatrix.
+     * For every column, check if is all same numbers or the sum equals to 6.
+     *
+     * @return If there is set, true will be returned.
+     */
     private boolean checkSet() {
         int[][] featureMatrix = new int[3][4];
         for (int i = 0; i < 3; i++) {
@@ -137,46 +202,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return isSet;
     }
 
-    public void refreshBtn_Clicked(View caller){
-        for (int i = 0; i < selectedCardsIndex.size(); i++) {
-            gameModel.toggle(selectedCardsIndex.get(i));
-        }
-        selectedCardsIndex.clear();
-        gameModel.emptyTable();
-        gameModel.setTable(null);
-    }
-
-    public void setGameModel(TestableFindASet newGameModel) {
-        this.gameModel = newGameModel;
-        this.gameModel.setUI(this);
-    }
-
-    public void notifyNewGame() {
-        for(int i = 0; i < cardImages.length; i++){
-            notifyCard(i);
-        }
-
-        //JUST for TEST
-        String str = "SET cards position: "
-                + (gameModel.getJustForTest()[0]+1) + " "
-                + (gameModel.getJustForTest()[1]+1) + " "
-                + (gameModel.getJustForTest()[2]+1) + " ";
-        testTxt.setText(str);
-    }
-
-    public void notifyCard(int index) {
-        AbstractCard nextCard = gameModel.getCard(index);
-        cardImages[index].setImageBitmap(combineImageIntoOne(setBitmaps(nextCard)));
-        cardTexts[index].setText(nextCard.toString());
-    }
-
-    public void notifyToggle(int index) {
-        if(gameModel.getCard(index).isSelected())
-            cardImages[index].setBackground(getDrawable(R.drawable.selected_card));
-        else
-            cardImages[index].setBackground(null);
-    }
-
+    /**
+     * cardPicturesIds[] is an array that stores all Ids of basic components drawables.
+     *
+     * According to the feature IDs, the index of basic component in the array can be
+     * derived.
+     *
+     * @param card Object in AbstractCard class.
+     *
+     * @return An arraylist with the size equals to ShapeCountInt of card,
+     *          which stores basic components.
+     */
     private ArrayList<Bitmap> setBitmaps(AbstractCard card) {
         int color = card.getColorInt() - 1;
         int shading = card.getShadingInt() - 1;
@@ -190,6 +226,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return newBitMap;
     }
 
+    /**
+     * Combine basic components to final image of each card according to the ShapeCountInt.
+     *
+     * Set the gap between components to make sure the width of new Bitmap equals to
+     * 4.5 times of width of basic components, which is fixed no matter how many components.
+     *
+     * @param bitmap the basic component of
+     *
+     * @return a new Bitmap contained several components
+     */
     private Bitmap combineImageIntoOne(ArrayList<Bitmap> bitmap) {
         int width = bitmap.get(0).getWidth();
         int height = bitmap.get(0).getHeight();
