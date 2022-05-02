@@ -92,4 +92,9 @@ public class Card extends AbstractCard{
     public int getTypeInt() {
         return typeInt;
     }
+
+    @Override
+    public int getID() {
+        return colorInt*1000 + shadingInt*100 + colorInt*10 + typeInt;
+    }
 }

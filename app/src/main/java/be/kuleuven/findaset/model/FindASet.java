@@ -1,5 +1,7 @@
 package be.kuleuven.findaset.model;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -11,11 +13,13 @@ public class FindASet extends AbstractFindASet{
     private AbstractCard[] cards;
     private int[] cardFeatures;
     private int[] justForTest;
+    private ArrayList<Integer> foundedSetCardsFeatures;
 
     public FindASet() {
         this.cards = new Card[12];
         this.cardFeatures = new int[12];
         this.justForTest = new int[3];
+        this.foundedSetCardsFeatures = new ArrayList<>();
     }
 
     /**
@@ -231,6 +235,8 @@ public class FindASet extends AbstractFindASet{
         Random rd = new Random();
         for (int i = 0; i < 3; i++) {
             toggle(cardIndexes.get(i));
+            foundedSetCardsFeatures.add(cardFeatures[cardIndexes.get(i)]);
+            Log.d("updateId", "updateTable: " + foundedSetCardsFeatures.get(i));
             boolean contain = true;
             while (contain){
                 int ID0 = rd.nextInt(3);
@@ -238,7 +244,7 @@ public class FindASet extends AbstractFindASet{
                 int ID2 = rd.nextInt(3);
                 int ID3 = rd.nextInt(3);
                 int ID = ID0*1000 + ID1*100 + ID2*10 + ID3;
-                contain = arrayContainsValue(cardFeatures, ID);
+                contain = arrayContainsValue(cardFeatures, ID) || foundedSetCardsFeatures.contains(ID);
                 if(!contain){
                     cards[cardIndexes.get(i)] = new Card(
                             handler.shapeCount(ID0),
@@ -254,11 +260,14 @@ public class FindASet extends AbstractFindASet{
 
     /**
      * Generate two new arrays to empty existed arrays.
+     *
+     * Also empty foundedSetCardsFeatures.
      */
     @Override
     public void emptyTable() {
         cards = new AbstractCard[12];
         cardFeatures = new int[12];
+        foundedSetCardsFeatures = new ArrayList<>();
         justForTest = new int[3]; //JUST for TEST
     }
 

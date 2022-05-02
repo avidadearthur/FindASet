@@ -12,4 +12,9 @@ public interface TestableCard {
     Enum<SHADING> getShading();
     Enum<COLOR> getColor();
     Enum<TYPE> getType();
+    int getShapeCountInt();
+    int getShadingInt();
+    int getColorInt();
+    int getTypeInt();
+    int getID();
 }
