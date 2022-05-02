@@ -66,9 +66,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cardImages[9] = findViewById(R.id.card10);
         cardImages[10] = findViewById(R.id.card11);
         cardImages[11] = findViewById(R.id.card12);
-        cardImages[0].setOnClickListener(this);
-        cardImages[1].setOnClickListener(this);
-        cardImages[2].setOnClickListener(this);
 
         cardTexts = new TextView[12];
         cardTexts[0] = findViewById(R.id.card1Text);
@@ -84,9 +81,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cardTexts[10] = findViewById(R.id.card11Text);
         cardTexts[11] = findViewById(R.id.card12Text);
 
+        for(int i = 0; i < 12; i++) {
+            cardImages[i].setOnClickListener(this);
+        }
+
         TestableFindASet findASet = new FindASet();
         setGameModel(findASet);
-
         gameModel.setTable(null);
     }
 
@@ -102,6 +102,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.card3:
                 gameModel.select(2);
                 break;
+            case R.id.card4:
+                gameModel.select(3);
+                break;
+            case R.id.card5:
+                gameModel.select(4);
+                break;
+            case R.id.card6:
+                gameModel.select(5);
+                break;
+            case R.id.card7:
+                gameModel.select(6);
+                break;
+            case R.id.card8:
+                gameModel.select(7);
+                break;
+            case R.id.card9:
+                gameModel.select(8);
+                break;
+            case R.id.card10:
+                gameModel.select(9);
+                break;
+            case R.id.card11:
+                gameModel.select(10);
+                break;
+            case R.id.card12:
+                gameModel.select(11);
+                break;
         }
     }
 
@@ -114,7 +141,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void imageView1_Clicked(View caller){
         gameModel.select(0);
     }
-
      */
 
     public void setGameModel(TestableFindASet newGameModel) {
