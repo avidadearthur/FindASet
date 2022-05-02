@@ -19,7 +19,7 @@ import be.kuleuven.findaset.model.TestableFindASet;
 import be.kuleuven.findaset.model.card.AbstractCard;
 import be.kuleuven.findaset.model.card.Card;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private TestableFindASet gameModel;
     private ImageView[] cardImages;
@@ -66,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
         cardImages[9] = findViewById(R.id.card10);
         cardImages[10] = findViewById(R.id.card11);
         cardImages[11] = findViewById(R.id.card12);
+        cardImages[0].setOnClickListener(this);
+        cardImages[1].setOnClickListener(this);
+        cardImages[2].setOnClickListener(this);
 
         cardTexts = new TextView[12];
         cardTexts[0] = findViewById(R.id.card1Text);
@@ -87,14 +90,32 @@ public class MainActivity extends AppCompatActivity {
         gameModel.setTable(null);
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.card1:
+                gameModel.select(0);
+                break;
+            case R.id.card2:
+                gameModel.select(1);
+                break;
+            case R.id.card3:
+                gameModel.select(2);
+                break;
+        }
+    }
+
     public void refreshBtn_Clicked(View caller){
         gameModel.emptyTable();
         gameModel.setTable(null);
     }
 
+    /*
     public void imageView1_Clicked(View caller){
         gameModel.select(0);
     }
+
+     */
 
     public void setGameModel(TestableFindASet newGameModel) {
         this.gameModel = newGameModel;

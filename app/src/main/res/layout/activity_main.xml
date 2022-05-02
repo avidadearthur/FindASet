@@ -11,7 +11,6 @@
         android:layout_width="0dp"
         android:layout_height="102dp"
         android:clickable="true"
-        android:onClick="imageView1_Clicked"
         app:layout_constraintEnd_toStartOf="@+id/card2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
