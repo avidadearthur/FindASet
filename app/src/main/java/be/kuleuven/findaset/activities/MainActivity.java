@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,18 +23,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TestableFindASet gameModel;
     private ImageView[] cardImages;
     private TextView[] cardTexts;
-    private Button refreshBtn;
     private TextView testTxt;
-    private Integer[] cardPicturesIds = {
-            Integer.valueOf(R.drawable.ovaal1groen), Integer.valueOf(R.drawable.ovaal2groen), Integer.valueOf(R.drawable.ovaal3groen),
-            Integer.valueOf(R.drawable.ovaal1rood), Integer.valueOf(R.drawable.ovaal2rood), Integer.valueOf(R.drawable.ovaal3rood),
-            Integer.valueOf(R.drawable.ovaal1paars), Integer.valueOf(R.drawable.ovaal2paars), Integer.valueOf(R.drawable.ovaal3paars),
-            Integer.valueOf(R.drawable.ruit1groen), Integer.valueOf(R.drawable.ruit2groen), Integer.valueOf(R.drawable.ruit3groen),
-            Integer.valueOf(R.drawable.ruit1rood), Integer.valueOf(R.drawable.ruit2rood), Integer.valueOf(R.drawable.ruit3rood),
-            Integer.valueOf(R.drawable.ruit1paars), Integer.valueOf(R.drawable.ruit2paars), Integer.valueOf(R.drawable.ruit3paars),
-            Integer.valueOf(R.drawable.tilde1groen), Integer.valueOf(R.drawable.tilde2groen), Integer.valueOf(R.drawable.tilde3groen),
-            Integer.valueOf(R.drawable.tilde1rood), Integer.valueOf(R.drawable.tilde2rood), Integer.valueOf(R.drawable.tilde3rood),
-            Integer.valueOf(R.drawable.tilde1paars), Integer.valueOf(R.drawable.tilde2paars), Integer.valueOf(R.drawable.tilde3paars)};
+    private final Integer[] cardPicturesIds = {
+            R.drawable.ovaal1groen, R.drawable.ovaal2groen, R.drawable.ovaal3groen,
+            R.drawable.ovaal1rood, R.drawable.ovaal2rood, R.drawable.ovaal3rood,
+            R.drawable.ovaal1paars, R.drawable.ovaal2paars, R.drawable.ovaal3paars,
+            R.drawable.ruit1groen, R.drawable.ruit2groen, R.drawable.ruit3groen,
+            R.drawable.ruit1rood, R.drawable.ruit2rood, R.drawable.ruit3rood,
+            R.drawable.ruit1paars, R.drawable.ruit2paars, R.drawable.ruit3paars,
+            R.drawable.tilde1groen, R.drawable.tilde2groen, R.drawable.tilde3groen,
+            R.drawable.tilde1rood, R.drawable.tilde2rood, R.drawable.tilde3rood,
+            R.drawable.tilde1paars, R.drawable.tilde2paars, R.drawable.tilde3paars};
     private ArrayList<Integer> selectedCardsIndex;
 
     /**
@@ -51,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        refreshBtn = findViewById(R.id.refreshBtn);
         testTxt = findViewById(R.id.testTxt);
         selectedCardsIndex = new ArrayList<>(3);
 
@@ -181,11 +178,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private ArrayList<Bitmap> setBitmaps(AbstractCard card) {
-        int index = 0;
         int color = card.getColorInt() - 1;
         int shading = card.getShadingInt() - 1;
         int shape = card.getTypeInt() - 1;
-        index = shape * 9 + color * 3 + shading;
+        int index = shape * 9 + color * 3 + shading;
         Bitmap test = BitmapFactory.decodeResource(getResources(), cardPicturesIds[index]);
         ArrayList<Bitmap> newBitMap = new ArrayList<>();
         for (int i = 0; i < card.getShapeCountInt(); i++) {
