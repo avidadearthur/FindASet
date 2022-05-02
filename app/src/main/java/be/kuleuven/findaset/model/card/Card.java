@@ -15,6 +15,7 @@ public class Card extends AbstractCard{
     private int shadingInt;
     private int colorInt;
     private int typeInt;
+    private boolean isSelected;
 
     public Card(Enum<SHAPECOUNT> shapeCountEnum, Enum<SHADING> shadingEnum, Enum<COLOR> colorEnum, Enum<TYPE> typeEnum) {
         this.shapeCountEnum = shapeCountEnum;
@@ -25,15 +26,18 @@ public class Card extends AbstractCard{
         this.shadingInt = ((SHADING) shadingEnum).getIndex();
         this.colorInt = ((COLOR) colorEnum).getIndex();
         this.typeInt = ((TYPE) typeEnum).getIndex();
+
+        isSelected = false;
     }
 
     @Override
     public void toggle() {
+        isSelected = !isSelected;
     }
 
     @Override
     public boolean isSelected() {
-        return false;
+        return isSelected;
     }
 
     @Override

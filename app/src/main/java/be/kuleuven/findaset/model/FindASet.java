@@ -1,11 +1,7 @@
 package be.kuleuven.findaset.model;
 
-import android.util.Log;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
-import java.util.stream.IntStream;
 
 import be.kuleuven.findaset.model.card.AbstractCard;
 import be.kuleuven.findaset.model.card.Card;
@@ -245,7 +241,8 @@ public class FindASet extends AbstractFindASet{
 
     @Override
     public void select(int i) {
-
+        cards[i].toggle();
+        mainActivity.notifyToggle(i);
     }
 
     @Override

@@ -92,6 +92,10 @@ public class MainActivity extends AppCompatActivity {
         gameModel.setTable(null);
     }
 
+    public void imageView1_Clicked(View caller){
+        gameModel.select(0);
+    }
+
     public void setGameModel(TestableFindASet newGameModel) {
         this.gameModel = newGameModel;
         this.gameModel.setUI(this);
@@ -150,5 +154,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return temp;
+    }
+
+    public void notifyToggle(int index) {
+        if(gameModel.getCard(index).isSelected())
+            cardImages[index].setBackground(getDrawable(R.drawable.selected_card));
+        else
+            cardImages[index].setBackground(null);
     }
 }
