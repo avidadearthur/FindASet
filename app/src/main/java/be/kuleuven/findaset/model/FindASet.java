@@ -192,14 +192,14 @@ public class FindASet extends AbstractFindASet{
         for (int j = 0; j < cards.length; j++) {
             if(cardFeatures[j] == 0){
                 boolean contain = true;
-                while (contain){
+                while (contain) {
                     int ID0 = rd.nextInt(3);
                     int ID1 = rd.nextInt(3);
                     int ID2 = rd.nextInt(3);
                     int ID3 = rd.nextInt(3);
                     int ID = ID0*1000 + ID1*100 + ID2*10 + ID3;
                     contain = arrayContainsValue(cardFeatures, ID);
-                    if(!contain){
+                    if (!contain){
                         cards[j] = new Card(
                                 handler.shapeCount(ID0),
                                 handler.shading(ID1),
@@ -236,7 +236,6 @@ public class FindASet extends AbstractFindASet{
         for (int i = 0; i < 3; i++) {
             toggle(cardIndexes.get(i));
             foundedSetCardsFeatures.add(cardFeatures[cardIndexes.get(i)]);
-            Log.d("updateId", "updateTable: " + foundedSetCardsFeatures.get(i));
             boolean contain = true;
             while (contain){
                 int ID0 = rd.nextInt(3);
