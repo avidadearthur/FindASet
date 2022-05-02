@@ -46,9 +46,9 @@ public class FindASet extends AbstractFindASet{
      *
      *  Based on the classification:
      *  one(1),two(2),three(3)
-     *  diamond(1), squiggle(2), oval(3)
      *  red(1), green(2), purple(3)
      *  solid(1), striped(2), open(3)
+     *  diamond(1), squiggle(2), oval(3)
      *
      *  So the example above would pick a set of
      *  one purple striped solid
