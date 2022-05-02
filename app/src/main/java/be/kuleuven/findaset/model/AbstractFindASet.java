@@ -1,5 +1,7 @@
 package be.kuleuven.findaset.model;
 
+import java.util.ArrayList;
+
 import be.kuleuven.findaset.activities.MainActivity;
 import be.kuleuven.findaset.model.card.AbstractCard;
 
@@ -18,13 +20,11 @@ public abstract class AbstractFindASet implements TestableFindASet {
 
     public abstract void setTable(AbstractCard[] table);
 
-    public abstract void updateTable(int[] cardIndexes);
+    public abstract void updateTable(ArrayList<Integer> cardIndexes);
 
     public abstract void emptyTable();
 
     public abstract AbstractCard getCard(int i);
 
-    public abstract void select(int i);
-
-    public abstract void unselect(int i);
+    public abstract void toggle(int i);
 }

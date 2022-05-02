@@ -13,13 +13,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.stream.IntStream;
 
 import be.kuleuven.findaset.R;
 import be.kuleuven.findaset.model.FindASet;
 import be.kuleuven.findaset.model.TestableFindASet;
 import be.kuleuven.findaset.model.card.AbstractCard;
-import be.kuleuven.findaset.model.card.Card;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -38,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Integer.valueOf(R.drawable.tilde1groen), Integer.valueOf(R.drawable.tilde2groen), Integer.valueOf(R.drawable.tilde3groen),
             Integer.valueOf(R.drawable.tilde1rood), Integer.valueOf(R.drawable.tilde2rood), Integer.valueOf(R.drawable.tilde3rood),
             Integer.valueOf(R.drawable.tilde1paars), Integer.valueOf(R.drawable.tilde2paars), Integer.valueOf(R.drawable.tilde3paars)};
+    private ArrayList<Integer> selectedCardsIndex;
 
     /**
      * Firstly bound all fields with UI components.
@@ -54,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         refreshBtn = findViewById(R.id.refreshBtn);
         testTxt = findViewById(R.id.testTxt);
+        selectedCardsIndex = new ArrayList<>(3);
 
         cardImages = new ImageView[12];
         cardImages[0] = findViewById(R.id.card1);
@@ -94,11 +94,57 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        int index =  Arrays.asList(cardImages).indexOf(view);
-        gameModel.select(index);
+        int index = Arrays.asList(cardImages).indexOf(view);
+        if (gameModel.getCard(index).isSelected()) {
+            selectedCardsIndex.remove(selectedCardsIndex.indexOf(index));
+            gameModel.toggle(index);
+        }
+        else {
+            if (selectedCardsIndex.size() == 3) {
+                gameModel.toggle(selectedCardsIndex.get(0));
+                selectedCardsIndex.remove(0);
+            }
+            selectedCardsIndex.add(index);
+            gameModel.toggle(index);
+            if (selectedCardsIndex.size() == 3) {
+                if(checkSet()) {
+                    testTxt.setText("set Found");
+                    gameModel.updateTable(selectedCardsIndex);
+                    selectedCardsIndex.clear();
+                }
+            }
+        }
+    }
+
+    private boolean checkSet() {
+        int[][] featureMatrix = new int[3][4];
+        for (int i = 0; i < 3; i++) {
+            AbstractCard next = gameModel.getCard(selectedCardsIndex.get(i));
+            featureMatrix[i][0] = next.getShapeCountInt();
+            featureMatrix[i][1] = next.getShadingInt();
+            featureMatrix[i][2] = next.getColorInt();
+            featureMatrix[i][3] = next.getTypeInt();
+        }
+        boolean isSet = true;
+        for (int col = 0; col < 4; col++) {
+            if (featureMatrix[0][col] == featureMatrix[1][col]) {
+                if (featureMatrix[1][col] != featureMatrix[2][col]) {
+                    isSet = false;
+                    break;
+                }
+            } else if (featureMatrix[0][col] + featureMatrix[1][col] + featureMatrix[2][col] != 6) {
+                isSet = false;
+                break;
+            }
+        }
+        return isSet;
     }
 
     public void refreshBtn_Clicked(View caller){
+        for (int i = 0; i < selectedCardsIndex.size(); i++) {
+            gameModel.toggle(selectedCardsIndex.get(i));
+        }
+        selectedCardsIndex.clear();
         gameModel.emptyTable();
         gameModel.setTable(null);
     }
@@ -110,9 +156,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void notifyNewGame() {
         for(int i = 0; i < cardImages.length; i++){
-            AbstractCard nextCard = gameModel.getCard(i);
-            cardImages[i].setImageBitmap(combineImageIntoOne(setBitmaps(nextCard)));
-            cardTexts[i].setText(nextCard.toString());
+            notifyCard(i);
         }
 
         //JUST for TEST
@@ -121,6 +165,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 + (gameModel.getJustForTest()[1]+1) + " "
                 + (gameModel.getJustForTest()[2]+1) + " ";
         testTxt.setText(str);
+    }
+
+    public void notifyCard(int index) {
+        AbstractCard nextCard = gameModel.getCard(index);
+        cardImages[index].setImageBitmap(combineImageIntoOne(setBitmaps(nextCard)));
+        cardTexts[index].setText(nextCard.toString());
+    }
+
+    public void notifyToggle(int index) {
+        if(gameModel.getCard(index).isSelected())
+            cardImages[index].setBackground(getDrawable(R.drawable.selected_card));
+        else
+            cardImages[index].setBackground(null);
     }
 
     private ArrayList<Bitmap> setBitmaps(AbstractCard card) {
@@ -161,12 +218,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         return temp;
-    }
-
-    public void notifyToggle(int index) {
-        if(gameModel.getCard(index).isSelected())
-            cardImages[index].setBackground(getDrawable(R.drawable.selected_card));
-        else
-            cardImages[index].setBackground(null);
     }
 }

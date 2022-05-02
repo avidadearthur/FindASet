@@ -220,8 +220,30 @@ public class FindASet extends AbstractFindASet{
     }
 
     @Override
-    public void updateTable(int[] cardIndexes) {
-
+    public void updateTable(ArrayList<Integer> cardIndexes) {
+        EnumHandler handler = new EnumHandler();
+        Random rd = new Random();
+        for (int i = 0; i < 3; i++) {
+            toggle(cardIndexes.get(i));
+            boolean contain = true;
+            while (contain){
+                int ID0 = rd.nextInt(3);
+                int ID1 = rd.nextInt(3);
+                int ID2 = rd.nextInt(3);
+                int ID3 = rd.nextInt(3);
+                int ID = ID0*1000 + ID1*100 + ID2*10 + ID3;
+                contain = arrayContainsValue(cardFeatures, ID);
+                if(!contain){
+                    cards[cardIndexes.get(i)] = new Card(
+                            handler.shapeCount(ID0),
+                            handler.shading(ID1),
+                            handler.color(ID2),
+                            handler.type(ID3));
+                    cardFeatures[cardIndexes.get(i)] = ID;
+                }
+            }
+            mainActivity.notifyCard(cardIndexes.get(i));
+        }
     }
 
     /**
@@ -240,14 +262,9 @@ public class FindASet extends AbstractFindASet{
     }
 
     @Override
-    public void select(int i) {
+    public void toggle(int i) {
         cards[i].toggle();
         mainActivity.notifyToggle(i);
-    }
-
-    @Override
-    public void unselect(int i) {
-
     }
 
     //JUST for TEST
