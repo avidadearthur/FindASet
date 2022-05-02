@@ -11,12 +11,20 @@ public class Card extends AbstractCard{
     private Enum<SHADING> shadingEnum;
     private Enum<COLOR> colorEnum;
     private Enum<TYPE> typeEnum;
+    private int shapeCountInt;
+    private int shadingInt;
+    private int colorInt;
+    private int typeInt;
 
     public Card(Enum<SHAPECOUNT> shapeCountEnum, Enum<SHADING> shadingEnum, Enum<COLOR> colorEnum, Enum<TYPE> typeEnum) {
         this.shapeCountEnum = shapeCountEnum;
         this.shadingEnum = shadingEnum;
         this.colorEnum = colorEnum;
         this.typeEnum = typeEnum;
+        this.shapeCountInt = ((SHAPECOUNT) shapeCountEnum).getIndex();
+        this.shadingInt = ((SHADING) shadingEnum).getIndex();
+        this.colorInt = ((COLOR) colorEnum).getIndex();
+        this.typeInt = ((TYPE) typeEnum).getIndex();
     }
 
     @Override
@@ -59,5 +67,25 @@ public class Card extends AbstractCard{
                 "shading=" + shadingEnum + "\n" +
                 "color=" + colorEnum + "\n" +
                 "type=" + typeEnum + "\n" + ID;
+    }
+
+    @Override
+    public int getShapeCountInt() {
+        return shapeCountInt;
+    }
+
+    @Override
+    public int getShadingInt() {
+        return shadingInt;
+    }
+
+    @Override
+    public int getColorInt() {
+        return colorInt;
+    }
+
+    @Override
+    public int getTypeInt() {
+        return typeInt;
     }
 }

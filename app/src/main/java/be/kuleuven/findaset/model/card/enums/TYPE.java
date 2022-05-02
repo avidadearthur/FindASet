@@ -1,7 +1,7 @@
 package be.kuleuven.findaset.model.card.enums;
 
 public enum TYPE {
-    diamond(1), squiggle(2), oval(3);
+    oval(1), diamond(2), squiggle(3);
 
     private final int index;
 

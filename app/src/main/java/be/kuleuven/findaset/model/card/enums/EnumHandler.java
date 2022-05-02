@@ -19,30 +19,30 @@ public class EnumHandler {
     }
     public SHADING shading(int index){
         if(index == 1){
-            return SHADING.solid;
+            return SHADING.open;
         }
         else if(index == 2){
             return SHADING.striped;
         }
-        return SHADING.open;
+        return SHADING.solid;
     }
     public COLOR color(int index){
         if(index == 1){
-            return COLOR.red;
+            return COLOR.green;
         }
         else if(index == 2){
-            return COLOR.green;
+            return COLOR.red;
         }
         return COLOR.purple;
     }
     public TYPE type(int index){
         if(index == 1){
-            return TYPE.diamond;
+            return TYPE.oval;
         }
         else if(index == 2){
-            return TYPE.squiggle;
+            return TYPE.diamond;
         }
-        return TYPE.oval;
+        return TYPE.squiggle;
     }
 
 }

@@ -1,7 +1,7 @@
 package be.kuleuven.findaset.model.card.enums;
 
 public enum SHADING {
-    solid(1), striped(2), open(3);
+    open(1), striped(2), solid(3);
 
     private final int index;
 

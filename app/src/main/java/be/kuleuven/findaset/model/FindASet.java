@@ -44,16 +44,16 @@ public class FindASet extends AbstractFindASet{
      *  --------------------------------------------
      *  bool        1       0        1         0
      *
-     *  Based on the classification:
-     *  one(1),two(2),three(3)
-     *  red(1), green(2), purple(3)
-     *  solid(1), striped(2), open(3)
-     *  diamond(1), squiggle(2), oval(3)
+     * Based on the classification:
+     * one(1),two(2),three(3)
+     * green(1), red(2), purple(3)
+     * open(1), striped(2), solid(3)
+     * oval(1), diamond(2), squiggle(3)
      *
      *  So the example above would pick a set of
-     *  one purple striped solid
-     *  one red striped oval
+     *  one purple striped oval
      *  one green striped squiggle
+     *  one red striped diamond
      *
      * @return AbstractCard array of size 3
      */

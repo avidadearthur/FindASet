@@ -12,4 +12,8 @@ public abstract class AbstractCard implements TestableCard {
     public abstract Enum<SHADING> getShading();
     public abstract Enum<TYPE> getType();
     public abstract Enum<SHAPECOUNT> getCount();
+    public abstract int getShapeCountInt();
+    public abstract int getShadingInt();
+    public abstract int getColorInt();
+    public abstract int getTypeInt();
 }

@@ -2,16 +2,22 @@ package be.kuleuven.findaset.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import be.kuleuven.findaset.R;
 import be.kuleuven.findaset.model.FindASet;
 import be.kuleuven.findaset.model.TestableFindASet;
 import be.kuleuven.findaset.model.card.AbstractCard;
+import be.kuleuven.findaset.model.card.Card;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +26,16 @@ public class MainActivity extends AppCompatActivity {
     private TextView[] cardTexts;
     private Button refreshBtn;
     private TextView testTxt;
+    private Integer[] cardPicturesIds = {
+            Integer.valueOf(R.drawable.ovaal1groen), Integer.valueOf(R.drawable.ovaal2groen), Integer.valueOf(R.drawable.ovaal3groen),
+            Integer.valueOf(R.drawable.ovaal1rood), Integer.valueOf(R.drawable.ovaal2rood), Integer.valueOf(R.drawable.ovaal3rood),
+            Integer.valueOf(R.drawable.ovaal1paars), Integer.valueOf(R.drawable.ovaal2paars), Integer.valueOf(R.drawable.ovaal3paars),
+            Integer.valueOf(R.drawable.ruit1groen), Integer.valueOf(R.drawable.ruit2groen), Integer.valueOf(R.drawable.ruit3groen),
+            Integer.valueOf(R.drawable.ruit1rood), Integer.valueOf(R.drawable.ruit2rood), Integer.valueOf(R.drawable.ruit3rood),
+            Integer.valueOf(R.drawable.ruit1paars), Integer.valueOf(R.drawable.ruit2paars), Integer.valueOf(R.drawable.ruit3paars),
+            Integer.valueOf(R.drawable.tilde1groen), Integer.valueOf(R.drawable.tilde2groen), Integer.valueOf(R.drawable.tilde3groen),
+            Integer.valueOf(R.drawable.tilde1rood), Integer.valueOf(R.drawable.tilde2rood), Integer.valueOf(R.drawable.tilde3rood),
+            Integer.valueOf(R.drawable.tilde1paars), Integer.valueOf(R.drawable.tilde2paars), Integer.valueOf(R.drawable.tilde3paars)};
 
     /**
      * Firstly bound all fields with UI components.
@@ -84,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
     public void notifyNewGame() {
         for(int i = 0; i < cardImages.length; i++){
             AbstractCard nextCard = gameModel.getCard(i);
+            cardImages[i].setImageBitmap(combineImageIntoOne(setBitmaps(nextCard)));
             cardTexts[i].setText(nextCard.toString());
         }
 
@@ -93,5 +110,45 @@ public class MainActivity extends AppCompatActivity {
                 + (gameModel.getJustForTest()[1]+1) + " "
                 + (gameModel.getJustForTest()[2]+1) + " ";
         testTxt.setText(str);
+    }
+
+    private ArrayList<Bitmap> setBitmaps(AbstractCard card) {
+        int index = 0;
+        int color = card.getColorInt() - 1;
+        int shading = card.getShadingInt() - 1;
+        int shape = card.getTypeInt() - 1;
+        index = shape * 9 + color * 3 + shading;
+        Bitmap test = BitmapFactory.decodeResource(getResources(), cardPicturesIds[index]);
+        ArrayList<Bitmap> newBitMap = new ArrayList<>();
+        for (int i = 0; i < card.getShapeCountInt(); i++) {
+            newBitMap.add(test);
+        }
+        return newBitMap;
+    }
+
+    private Bitmap combineImageIntoOne(ArrayList<Bitmap> bitmap) {
+        int width = bitmap.get(0).getWidth();
+        int height = bitmap.get(0).getHeight();
+        int size = bitmap.size();
+
+        Bitmap temp = Bitmap.createBitmap((int) (4.5 * width), height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(temp);
+        float left = 0;
+        if (size == 3) {
+            for (int i = 0; i < size; i++) {
+                left = (i == 0 ? 0.25f * width : left + 1.5f * width);
+                canvas.drawBitmap(bitmap.get(i), left, 0f, null);
+            }
+        } else if (size == 2) {
+            for (int i = 0; i < size; i++) {
+                left = (i == 0 ? 0.5f * width : left + 2.5f * width);
+                canvas.drawBitmap(bitmap.get(i), left, 0f, null);
+            }
+        } else {
+            left = 1.75f * width;
+            canvas.drawBitmap(bitmap.get(0), left, 0f, null);
+        }
+
+        return temp;
     }
 }
