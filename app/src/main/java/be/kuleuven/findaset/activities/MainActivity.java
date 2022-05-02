@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.IntStream;
 
 import be.kuleuven.findaset.R;
 import be.kuleuven.findaset.model.FindASet;
@@ -92,56 +94,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.card1:
-                gameModel.select(0);
-                break;
-            case R.id.card2:
-                gameModel.select(1);
-                break;
-            case R.id.card3:
-                gameModel.select(2);
-                break;
-            case R.id.card4:
-                gameModel.select(3);
-                break;
-            case R.id.card5:
-                gameModel.select(4);
-                break;
-            case R.id.card6:
-                gameModel.select(5);
-                break;
-            case R.id.card7:
-                gameModel.select(6);
-                break;
-            case R.id.card8:
-                gameModel.select(7);
-                break;
-            case R.id.card9:
-                gameModel.select(8);
-                break;
-            case R.id.card10:
-                gameModel.select(9);
-                break;
-            case R.id.card11:
-                gameModel.select(10);
-                break;
-            case R.id.card12:
-                gameModel.select(11);
-                break;
-        }
+        int index =  Arrays.asList(cardImages).indexOf(view);
+        gameModel.select(index);
     }
 
     public void refreshBtn_Clicked(View caller){
         gameModel.emptyTable();
         gameModel.setTable(null);
     }
-
-    /*
-    public void imageView1_Clicked(View caller){
-        gameModel.select(0);
-    }
-     */
 
     public void setGameModel(TestableFindASet newGameModel) {
         this.gameModel = newGameModel;
