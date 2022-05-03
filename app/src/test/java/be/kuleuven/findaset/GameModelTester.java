@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.testng.annotations.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
@@ -47,6 +48,7 @@ public class GameModelTester {
         assertSame(element1.getColor(), element2.getColor());
         assertSame(element1.getShading(), element2.getShading());
         assertSame(element1.getType(), element2.getType());
+        assertSame(element1.getId(), element2.getId());
         assertEquals(element1.getFeatures(), element2.getFeatures());
     }
 
@@ -60,7 +62,15 @@ public class GameModelTester {
         assertSame(card1.getElementId(), card2.getElementId());
         assertSame(card1.getSize(), card2.getSize());
         assertEquals(card1.getCardFeatures(),card2.getCardFeatures());
+    }
 
+    @org.junit.Test
+    public void testToggleAlternativeCard() {
+        // id = 123, corresponds to a green striped diamond
+        AlternativeCard card1 = new AlternativeCard(3123);
+        assertFalse(card1.isSelected());
+        card1.toggle();
+        assertTrue(card1.isSelected());
     }
 
     /**
