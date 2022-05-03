@@ -4,14 +4,20 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.testng.annotations.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Comparator;
 
 import be.kuleuven.findaset.model.FindASet;
 import be.kuleuven.findaset.model.card.AbstractCard;
+import be.kuleuven.findaset.model.card.AlternativeCard;
 import be.kuleuven.findaset.model.card.Card;
+import be.kuleuven.findaset.model.card.CardElement;
 import be.kuleuven.findaset.model.card.enums.COLOR;
 import be.kuleuven.findaset.model.card.enums.EnumHandler;
 import be.kuleuven.findaset.model.card.enums.SHADING;
@@ -26,6 +32,35 @@ public class GameModelTester {
     public void init() {
         //uncomment the line below once your game model code is ready for testing
         gameBoard = new FindASet();
+    }
+
+    /**
+     * Creates two new CardElement objects based on the int based
+     * logic and test both constructors.
+     */
+    @org.junit.Test
+    public void testGenerateCardElement() {
+        // test to create a green striped diamond
+        CardElement element1 = new CardElement(123);
+        CardElement element2 = new CardElement(1,2,3);
+
+        assertSame(element1.getColor(), element2.getColor());
+        assertSame(element1.getShading(), element2.getShading());
+        assertSame(element1.getType(), element2.getType());
+        assertEquals(element1.getFeatures(), element2.getFeatures());
+    }
+
+    @org.junit.Test
+    public void testGenerateAlternativeCard() {
+        // id = 123, corresponds to a green striped diamond
+        AlternativeCard card1 = new AlternativeCard(3123);
+        AlternativeCard card2 = new AlternativeCard(123,3);
+
+        assertSame(card1.getCardId(), card2.getCardId());
+        assertSame(card1.getElementId(), card2.getElementId());
+        assertSame(card1.getSize(), card2.getSize());
+        assertEquals(card1.getCardFeatures(),card2.getCardFeatures());
+
     }
 
     /**
@@ -88,7 +123,7 @@ public class GameModelTester {
                 {1,0,0,1},{0,1,0,1},{0,0,1,1}, --> sums to 2
                 {1,0,1,1},{0,1,1,1}} --> sums to 3
         */
-        assertTrue(Arrays.stream(isEqual).sum() <= 3);
+        assertTrue(Arrays.stream(isEqual).sum() <= 3 | Arrays.stream(isEqual).sum() == 6);
     }
 
 }
