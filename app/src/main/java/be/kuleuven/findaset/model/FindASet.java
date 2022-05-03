@@ -3,14 +3,19 @@ package be.kuleuven.findaset.model;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Random;
 
 import be.kuleuven.findaset.model.card.AbstractCard;
+import be.kuleuven.findaset.model.card.AlternativeCard;
 import be.kuleuven.findaset.model.card.Card;
 import be.kuleuven.findaset.model.card.enums.EnumHandler;
 
 public class FindASet extends AbstractFindASet{
     private AbstractCard[] cards;
+    private ArrayList<AlternativeCard> cardsTable;
+    private ArrayList<Integer> cardsIdTable;
     private int[] cardFeatures;
     private int[] justForTest;
     private ArrayList<Integer> foundedSetCardsFeatures;
@@ -155,6 +160,95 @@ public class FindASet extends AbstractFindASet{
         }
 
         return setFeatures;
+    }
+    public void startNewGame(){
+        // init class fields
+        this.cardsTable = new ArrayList<>();
+        this.cardsIdTable = new ArrayList<>();
+        alternativeSetCardsTable(cardsTable, cardsIdTable);
+        // notify new game
+    }
+
+    /**
+     * Alternative implementation of generate set that is compatible with alternativeSetCardsTable.
+     *
+     * Returns a set of three AlternativeCard objects by:
+     *      1.Invoking a featureMatrix
+     *      2.Converting the featureMatrix card arrays into AlternativeCard objects
+     *      3.Finally adding them to ArrayList<AlternativeCard> set
+     *
+     * @return set - ArrayList<AlternativeCard> of size 3
+     */
+    private ArrayList<AlternativeCard> alternativeGenerateSet(){
+        int[][] setFeatureMatrix = getFeatureMatrix();
+        ArrayList<AlternativeCard> set = new ArrayList<>();
+
+        for (int[] features: setFeatureMatrix) {
+            ArrayList<Integer> cardFeatures = new ArrayList<>();
+            for (int i : features)
+            {
+                cardFeatures.add(i);
+            }
+            AlternativeCard newCard = new AlternativeCard(cardFeatures);
+            set.add(newCard);
+        }
+
+        return set;
+    }
+
+    /**
+     * Alternative setting table method that uses the AlternativeCard objects
+     *
+     * Populates ArrayList<AlternativeCard> cardsTable by:
+     *      0. Populate table with dummy cards with ID 9999
+     *      1. Choosing 3 random indexes to place the three cards previously generated
+     *         from alternativeGenerateSet().
+     *      2. Populates the array with unique randomly generated cards to be placed in the empty
+     *         positions.
+     *      3. Finally call method in MainActivity to display all cards.
+     *
+     */
+    public void alternativeSetCardsTable(ArrayList<AlternativeCard> cardsTable,
+                                         ArrayList<Integer> cardsIdTable)
+    {
+        ArrayList<AlternativeCard> set = alternativeGenerateSet();
+        // Step 0
+        for(AlternativeCard card: cardsTable){
+            AlternativeCard newCard = new AlternativeCard(9999);
+            cardsTable.add(newCard);
+            cardsIdTable.add(9999);
+        }
+        // Step 1
+        Random rd = new Random();
+        for(int i = 0; i <= set.size(); i++){
+            if(cardsTable.get(i).getCardId() == 9999){
+                int randomIndex = rd.nextInt(11);
+                cardsTable.add(randomIndex,set.get(i%3)); // i%3 will pick one card from three
+                cardsIdTable.add(randomIndex,set.get(i%3).getCardId());
+            }
+        }
+        // Step 2
+        while(cardsIdTable.contains(9999)){
+            int nr = rd.nextInt(3);
+            int color = rd.nextInt(3);
+            int shading = rd.nextInt(3);
+            int type = rd.nextInt(3);
+
+            int newCardId = (int) (nr*10E3 + color*10E2 + shading*10 + type);
+            AlternativeCard newCard = new AlternativeCard(newCardId);
+
+            if(!cardsIdTable.contains(newCardId)){
+                // Very inefficient algo to add cards in the available spots
+                int randomIndex;
+                do{
+                    randomIndex = rd.nextInt(11);
+                }
+                while (cardsIdTable.get(randomIndex) == 9999);
+                cardsTable.add(randomIndex,newCard); // i%3 will pick one card from three
+                cardsIdTable.add(randomIndex,newCardId);
+            }
+        }
+        // Step 3
     }
 
     /**
