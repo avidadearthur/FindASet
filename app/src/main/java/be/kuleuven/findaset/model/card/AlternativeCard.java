@@ -29,6 +29,7 @@ public class AlternativeCard {
     public AlternativeCard(int elementId, int size) {
         this.isSelected = false;
         this.cardId = (int) (size * 10E3 + elementId);
+        this.cardFeatures = new ArrayList<>();
         intToArray(elementId);
     }
 
@@ -47,9 +48,17 @@ public class AlternativeCard {
     public AlternativeCard(int cardId) {
         this.isSelected = false;
         this.cardId = cardId;
-        this.elementId = cardId % 1000;
-        intToArray(this.elementId);
         this.size = cardId / 1000;
+        this.elementId = cardId % 1000;
+        this.cardFeatures = new ArrayList<>();
+        intToArray(this.elementId);
+    }
+
+    /**
+     *
+     */
+    public void toggle() {
+        isSelected = !isSelected;
     }
 
     /**
