@@ -15,6 +15,7 @@ public class AlternativeCard {
 
 
     /**
+     * Construct by Element ID and Number of elements
      * Creates card object that has its features based on the feature codes:
      *
      * color    - green(1), red(2), purple(3)
@@ -34,6 +35,7 @@ public class AlternativeCard {
     }
 
     /**
+     * Construct by Card feature ID
      * Creates card object that has its features based on the following codes:
      *
      * size     - one(1), two(2), three(3)
@@ -52,6 +54,28 @@ public class AlternativeCard {
         this.elementId = cardId % 1000;
         this.cardFeatures = new ArrayList<>();
         intToArray(this.elementId);
+    }
+    /**
+     * Construct by Array of card Features
+     * Creates card object that has its features based on the following codes:
+     *
+     * cardFeatures.get(0) size     - one(1),   two(2)     or three(3)
+     * cardFeatures.get(1) color    - green(1), red(2)     or purple(3)
+     * cardFeatures.get(2) shading  - open(1),  striped(2) or solid(3)
+     * cardFeatures.get(3) shape    - oval(1),  diamond(2) or squiggle(3)
+     *
+     * i.e. id = 3123, corresponds to a card with three green striped diamonds
+     *      cardFeatures = ArrayList<Integer> 3,1,2,3
+     *
+     * @param cardFeatures - 4 digit ArrayList<Integer> with features of a card.
+     */
+    public AlternativeCard(ArrayList<Integer> cardFeatures) {
+        this.isSelected = false;
+        this.cardFeatures = cardFeatures;
+        this.cardId = (int) (cardFeatures.get(0) * 10E3 + cardFeatures.get(1) * 10E2 +
+                                        cardFeatures.get(2) * 10E1 + cardFeatures.get(3));
+        this.size = cardId / 1000;
+        this.elementId = cardId % 1000;
     }
 
     /**
