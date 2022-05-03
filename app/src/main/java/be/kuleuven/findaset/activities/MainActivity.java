@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * Display images of one card accroding to index.
+     * Display images of one card according to index.
      */
     public void notifyCard(int index) {
         AbstractCard nextCard = gameModel.getCard(index);
