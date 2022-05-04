@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import be.kuleuven.findaset.activities.MainActivity;
 import be.kuleuven.findaset.model.card.AbstractCard;
+import be.kuleuven.findaset.model.card.AlternativeCard;
 
 public interface TestableFindASet {
     void setTable(AbstractCard[] table);
@@ -16,4 +17,7 @@ public interface TestableFindASet {
     int[][] getFeatureMatrix();
     void setUI(MainActivity mainActivity);
     int[] getJustForTest();
+
+    void startNewGame();
+    AlternativeCard AlternativeGetCard(int index);
 }
