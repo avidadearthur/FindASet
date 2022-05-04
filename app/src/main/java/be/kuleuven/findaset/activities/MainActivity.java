@@ -17,6 +17,7 @@ import be.kuleuven.findaset.R;
 import be.kuleuven.findaset.model.FindASet;
 import be.kuleuven.findaset.model.TestableFindASet;
 import be.kuleuven.findaset.model.card.AbstractCard;
+import be.kuleuven.findaset.model.card.AlternativeCard;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -86,7 +87,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         TestableFindASet findASet = new FindASet();
         setGameModel(findASet);
-        gameModel.setTable(null);
+        gameModel.startNewGame();
+    }
+
+    public void setGameModel(TestableFindASet newGameModel) {
+        this.gameModel = newGameModel;
+        this.gameModel.setUI(this);
+    }
+
+    /**
+     * Display images of all cards.
+     */
+    public void notifyNewGame() {
+        for(int i = 0; i < cardImages.length; i++){
+            notifyCard(i);
+        }
+
+        //JUST for TEST
+        String str = "SET cards position: "
+                + (gameModel.getJustForTest()[0]+1) + " "
+                + (gameModel.getJustForTest()[1]+1) + " "
+                + (gameModel.getJustForTest()[2]+1) + " ";
+        testTxt.setText(str);
+    }
+
+    /**
+     * Display images of one card according to index.
+     * 1. Gets the cards created on init
+     * 2. Creates Image bitmap based on the card images
+     * 3.Set card text for test
+     */
+    public void notifyCard(int index) {
+        AlternativeCard nextCard = gameModel.AlternativeGetCard(index);
+        cardImages[index].setImageBitmap(combineImageIntoOne(setBitmaps(nextCard)));
+        cardTexts[index].setText(nextCard.toString());
     }
 
     /**
@@ -131,35 +165,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         gameModel.setTable(null);
     }
 
-    public void setGameModel(TestableFindASet newGameModel) {
-        this.gameModel = newGameModel;
-        this.gameModel.setUI(this);
-    }
-
-    /**
-     * Display images of all cards.
-     */
-    public void notifyNewGame() {
-        for(int i = 0; i < cardImages.length; i++){
-            notifyCard(i);
-        }
-
-        //JUST for TEST
-        String str = "SET cards position: "
-                + (gameModel.getJustForTest()[0]+1) + " "
-                + (gameModel.getJustForTest()[1]+1) + " "
-                + (gameModel.getJustForTest()[2]+1) + " ";
-        testTxt.setText(str);
-    }
-
-    /**
-     * Display images of one card according to index.
-     */
-    public void notifyCard(int index) {
-        AbstractCard nextCard = gameModel.getCard(index);
-        cardImages[index].setImageBitmap(combineImageIntoOne(setBitmaps(nextCard)));
-        cardTexts[index].setText(nextCard.toString());
-    }
 
     /**
      * If there is no green border, add one.
@@ -203,6 +208,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
+     * Retrieves the shape
      * cardPicturesIds[] is an array that stores all Ids of basic components drawables.
      *
      * According to the feature IDs, the index of basic component in the array can be
@@ -210,23 +216,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      *
      * @param card Object in AbstractCard class.
      *
-     * @return An arraylist with the size equals to ShapeCountInt of card,
-     *          which stores basic components.
+     * @return newBitMap - An arraylist with the size equals to card.getSize(),
+     *                     which stores basic components.
      */
-    private ArrayList<Bitmap> setBitmaps(AbstractCard card) {
-        int color = card.getColorInt() - 1;
-        int shading = card.getShadingInt() - 1;
-        int shape = card.getTypeInt() - 1;
+    private ArrayList<Bitmap> setBitmaps(AlternativeCard card) {
+        int color = card.getCardFeatures().get(1) - 1;
+        int shading = card.getCardFeatures().get(2) - 1;
+        int shape = card.getCardFeatures().get(3) - 1;
         int index = shape * 9 + color * 3 + shading;
         Bitmap test = BitmapFactory.decodeResource(getResources(), cardPicturesIds[index]);
         ArrayList<Bitmap> newBitMap = new ArrayList<>();
-        for (int i = 0; i < card.getShapeCountInt(); i++) {
+        for (int i = 0; i < card.getSize(); i++) {
             newBitMap.add(test);
         }
         return newBitMap;
     }
 
     /**
+     * Forms image
      * Combine basic components to final image of each card according to the ShapeCountInt.
      *
      * Set the gap between components to make sure the width of new Bitmap equals to
