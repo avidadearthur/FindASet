@@ -161,11 +161,16 @@ public class FindASet extends AbstractFindASet{
 
         return setFeatures;
     }
+
+    /**
+     *
+     */
     public void startNewGame(){
         // init class fields
-        this.cardsTable = new ArrayList<>();
-        this.cardsIdTable = new ArrayList<>();
+        this.cardsTable = new ArrayList<>(12);
+        this.cardsIdTable = new ArrayList<>(12);
         alternativeSetCardsTable(cardsTable, cardsIdTable);
+        mainActivity.notifyNewGame();
         // notify new game
     }
 
@@ -205,15 +210,14 @@ public class FindASet extends AbstractFindASet{
      *         from alternativeGenerateSet().
      *      2. Populates the array with unique randomly generated cards to be placed in the empty
      *         positions.
-     *      3. Finally call method in MainActivity to display all cards.
-     *
      */
     public void alternativeSetCardsTable(ArrayList<AlternativeCard> cardsTable,
                                          ArrayList<Integer> cardsIdTable)
     {
         ArrayList<AlternativeCard> set = alternativeGenerateSet();
         // Step 0
-        for(AlternativeCard card: cardsTable){
+        //for(AlternativeCard card: cardsTable)
+        for(int i = 0; i < 12; i++){
             AlternativeCard newCard = new AlternativeCard(9999);
             cardsTable.add(newCard);
             cardsIdTable.add(9999);
@@ -248,7 +252,6 @@ public class FindASet extends AbstractFindASet{
                 cardsIdTable.add(randomIndex,newCardId);
             }
         }
-        // Step 3
     }
 
     /**
@@ -362,6 +365,14 @@ public class FindASet extends AbstractFindASet{
         cardFeatures = new int[12];
         foundedSetCardsFeatures = new ArrayList<>();
         justForTest = new int[3]; //JUST for TEST
+    }
+
+    /**
+     * @param i
+     * @return
+     */
+    public AlternativeCard AlternativeGetCard(int i) {
+        return cardsTable.get(i);
     }
 
     @Override
