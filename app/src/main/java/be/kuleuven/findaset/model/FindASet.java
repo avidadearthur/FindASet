@@ -224,34 +224,37 @@ public class FindASet extends AbstractFindASet{
         }
         // Step 1
         Random rd = new Random();
-        for(int i = 0; i <= set.size(); i++){
-            if(cardsTable.get(i).getCardId() == 9999){
-                int randomIndex = rd.nextInt(11);
-                cardsTable.add(randomIndex,set.get(i%3)); // i%3 will pick one card from three
-                cardsIdTable.add(randomIndex,set.get(i%3).getCardId());
+        for(int i = 0; i < set.size(); i++){
+            int randomIndex;
+            do {
+                randomIndex = rd.nextInt(11);
             }
+            while (cardsTable.get(randomIndex).getCardId() != 9999);
+            cardsTable.set(randomIndex,set.get(i)); // i%3 will pick one card from three
+            cardsIdTable.set(randomIndex,set.get(i).getCardId());
         }
         // Step 2
         while(cardsIdTable.contains(9999)){
-            int nr = rd.nextInt(3);
-            int color = rd.nextInt(3);
-            int shading = rd.nextInt(3);
-            int type = rd.nextInt(3);
+            int nr = rd.nextInt(3) + 1;
+            int color = rd.nextInt(3) + 1;
+            int shading = rd.nextInt(3) + 1;
+            int type = rd.nextInt(3) + 1;
 
-            int newCardId = (int) (nr*10E3 + color*10E2 + shading*10 + type);
+            int newCardId = nr*1000 + color*100 + shading*10 + type;
             AlternativeCard newCard = new AlternativeCard(newCardId);
 
             if(!cardsIdTable.contains(newCardId)){
                 // Very inefficient algo to add cards in the available spots
                 int randomIndex;
                 do{
-                    randomIndex = rd.nextInt(11);
+                    randomIndex = rd.nextInt(12);
                 }
-                while (cardsIdTable.get(randomIndex) == 9999);
-                cardsTable.add(randomIndex,newCard); // i%3 will pick one card from three
-                cardsIdTable.add(randomIndex,newCardId);
+                while (cardsIdTable.get(randomIndex) != 9999);
+                cardsTable.set(randomIndex,newCard); // i%3 will pick one card from three
+                cardsIdTable.set(randomIndex,newCardId);
             }
         }
+        Log.d("WHILEloop", "Finished while ");
     }
 
     /**
