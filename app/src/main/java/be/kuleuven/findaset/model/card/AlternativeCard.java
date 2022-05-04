@@ -36,9 +36,9 @@ public class AlternativeCard {
      */
     public AlternativeCard(int elementId, int size) {
         this.isSelected = false;
-        this.cardId = (int) (size * 10E3 + elementId);
-        this.cardFeatures = new ArrayList<>();
-        intToArray(elementId);
+        this.cardId = (int) (size * 1000 + elementId);
+        this.cardFeatures = new ArrayList<>(4);
+        intToArray(cardId);
     }
 
     /**
@@ -59,8 +59,8 @@ public class AlternativeCard {
         this.cardId = cardId;
         this.size = cardId / 1000;
         this.elementId = cardId % 1000;
-        this.cardFeatures = new ArrayList<>();
-        intToArray(this.elementId);
+        this.cardFeatures = new ArrayList<>(4);
+        intToArray(this.cardId);
     }
     /**
      * Construct by Array of card Features
@@ -79,8 +79,8 @@ public class AlternativeCard {
     public AlternativeCard(ArrayList<Integer> cardFeatures) {
         this.isSelected = false;
         this.cardFeatures = cardFeatures;
-        this.cardId = (int) (cardFeatures.get(0) * 10E3 + cardFeatures.get(1) * 10E2 +
-                                        cardFeatures.get(2) * 10E1 + cardFeatures.get(3));
+        this.cardId = cardFeatures.get(0) * 1000 + cardFeatures.get(1) * 100 +
+                                        cardFeatures.get(2) * 10 + cardFeatures.get(3);
         this.size = cardId / 1000;
         this.elementId = cardId % 1000;
     }
@@ -137,10 +137,11 @@ public class AlternativeCard {
     // https://stackoverflow.com/questions/8033550/convert-an-integer-to-an-array-of-digits
     public void intToArray(int num){
         if( num != 0){
-            int featureId = num %10;
+            int pos = String.valueOf(num).length() - 1;
+            int featureId = num % 10;
             num /= 10;
             intToArray(num);
-            cardFeatures.add(featureId);
+            cardFeatures.add(pos, featureId);
         }
     }
 
