@@ -1,7 +1,14 @@
 package be.kuleuven.findaset.model.card;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
+
+import be.kuleuven.findaset.model.card.enums.COLOR;
+import be.kuleuven.findaset.model.card.enums.SHADING;
+import be.kuleuven.findaset.model.card.enums.SHAPECOUNT;
+import be.kuleuven.findaset.model.card.enums.TYPE;
 
 /**
  *
@@ -111,6 +118,12 @@ public class AlternativeCard {
      */
     public ArrayList<Integer> getCardFeatures() {
         return cardFeatures;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Element Id=" + "\n" + elementId;
     }
 
     /**
