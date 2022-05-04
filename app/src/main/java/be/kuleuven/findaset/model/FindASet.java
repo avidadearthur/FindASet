@@ -244,10 +244,12 @@ public class FindASet extends AbstractFindASet{
         Random rd = new Random();
         // 1.
         for (int i = 0; i < 3; i++) {
-            int selectedCardIndex = selectedCardsIndex.get(i);
-            //Log.d("UPDATE", "alternativeUpdateTable: " + selectedCardIndex.toString());
-            toggle(selectedCardIndex);
-            foundedSetCardsIds.add(cardsIdTable.get(selectedCardIndex));
+            int selectedIndex = selectedCardsIndex.get(i);
+            //Error: toggle(selectedIndex);
+            isCardSelected.set(selectedIndex, false);
+            mainActivity.notifyUnselect(selectedIndex);
+
+            foundedSetCardsIds.add(cardsIdTable.get(selectedIndex));
             int newCardId;
             //2.
             do {
@@ -261,10 +263,10 @@ public class FindASet extends AbstractFindASet{
             while (cardsIdTable.contains(newCardId) || foundedSetCardsIds.contains(newCardId));
             //3.
             AlternativeCard newCard = new AlternativeCard(newCardId);
-            cardsTable.set(selectedCardIndex, newCard);
-            cardsIdTable.set(selectedCardIndex, newCardId);
+            cardsTable.set(selectedIndex, newCard);
+            cardsIdTable.set(selectedIndex, newCardId);
             // 4.
-            mainActivity.notifyCard(selectedCardIndex);
+            mainActivity.notifyCard(selectedIndex);
         }
     }
 
