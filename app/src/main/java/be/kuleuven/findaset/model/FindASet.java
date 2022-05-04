@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
+import be.kuleuven.findaset.activities.MainActivity;
 import be.kuleuven.findaset.model.card.AbstractCard;
 import be.kuleuven.findaset.model.card.AlternativeCard;
 import be.kuleuven.findaset.model.card.Card;
@@ -16,15 +17,24 @@ public class FindASet extends AbstractFindASet{
     private AbstractCard[] cards;
     private ArrayList<AlternativeCard> cardsTable;
     private ArrayList<Integer> cardsIdTable;
-    private int[] cardFeatures;
     private int[] justForTest;
-    private ArrayList<Integer> foundedSetCardsFeatures;
+    private ArrayList<Integer> selectedCardsIndex;
 
     public FindASet() {
-        this.cards = new Card[12];
-        this.cardFeatures = new int[12];
+    }
+
+    /**
+     *
+     */
+    public void startNewGame(){
+        // init class fields
         this.justForTest = new int[3];
-        this.foundedSetCardsFeatures = new ArrayList<>();
+        this.cardsTable = new ArrayList<>(12);
+        this.cardsIdTable = new ArrayList<>(12);
+        this.selectedCardsIndex = new ArrayList<>(3);
+        alternativeSetCardsTable(cardsTable, cardsIdTable);
+        mainActivity.notifyNewGame();
+        // notify new game
     }
 
     /**
@@ -73,14 +83,14 @@ public class FindASet extends AbstractFindASet{
         for (int i = 0; i <4; i++) {
             isEqual[i] = rd.nextInt(2);
             sum += isEqual[i];
-            if(sum==4){isEqual[i] = 0;}                                 //error: i = 0;
+            if(sum==4){isEqual[i] = 0;}
         }
 
         for (int col = 0; col<4; col++){
             if(isEqual[col] == 1) {
                 // choose feature that will be equal
                 int value = rd.nextInt(3) + 1;
-                for(int row = 0; row<3; row++){                         //error: row<2;
+                for(int row = 0; row<3; row++){
                     featureMatrix[row][col] = value;
                 }
             }
@@ -94,84 +104,13 @@ public class FindASet extends AbstractFindASet{
                         i++;
                     }
                 }
-                for (int row = 0; row < 3; row++) {                     //error: row<2;
+                for (int row = 0; row < 3; row++) {
                     featureMatrix[row][col] = diffFeatures.get(row);
                 }
             }
         }
 
         return featureMatrix;
-    }
-
-    // I split the methods here mainly for testing purposes
-    /**
-     * Generates a set of abstract cards based on a feature matrix
-     * passed as an argument.
-     *
-     * @param featureMatrix - two dimensional array of ints that
-     *                      represent the enum options.
-     *
-     * @return AbstractCard array of size 3
-     */
-    @Override
-    public AbstractCard[] generateSet(int[][] featureMatrix){
-        AbstractCard[] set = new AbstractCard[3];
-
-        EnumHandler handler = new EnumHandler();
-        int i = 0;
-        for (int[] card: featureMatrix) {
-            AbstractCard newCard = new Card(
-                    handler.shapeCount(card[0]),
-                    handler.shading(card[1]),
-                    handler.color(card[2]),
-                    handler.type(card[3]));
-            set[i] = newCard;
-            i++;
-        }
-
-        return set;
-    }
-
-    /**
-     * Generates an feature ID for each set card according to matrix.
-     * This array will be easier to check if there are the same cards,
-     * as well as the check of if there is the set.
-     *
-     * Example:
-     *             nr.     color    shading   type
-     * card n1.    1       3        2         1
-     *
-     * Feature ID of card n1. is 1321
-     *
-     * @param featureMatrix - two dimensional array of ints that
-     *                      represent the enum options.
-     *
-     * @return int array of size 3
-     */
-    @Override
-    public int[] generateSetFeature(int[][] featureMatrix){
-        int[] setFeatures = new int[3];
-
-        int i = 0;
-        for (int[] card: featureMatrix) {
-            int newCardFeature = card[0]*1000 + card[1]*100 + card[2]*10 + card[3];
-            setFeatures[i] = newCardFeature;
-            i++;
-        }
-
-        return setFeatures;
-    }
-
-    /**
-     *
-     */
-    public void startNewGame(){
-        // init class fields
-        this.cardsTable = new ArrayList<>(12);
-        this.cardsIdTable = new ArrayList<>(12);
-        alternativeSetCardsTable(cardsTable, cardsIdTable);
-        mainActivity.notifyNewGame();
-        // notify new game
     }
 
     /**
@@ -232,6 +171,7 @@ public class FindASet extends AbstractFindASet{
             while (cardsTable.get(randomIndex).getCardId() != 9999);
             cardsTable.set(randomIndex,set.get(i)); // i%3 will pick one card from three
             cardsIdTable.set(randomIndex,set.get(i).getCardId());
+            justForTest[i] = randomIndex;
         }
         // Step 2
         while(cardsIdTable.contains(9999)){
@@ -254,71 +194,37 @@ public class FindASet extends AbstractFindASet{
                 cardsIdTable.set(randomIndex,newCardId);
             }
         }
-        Log.d("WHILEloop", "Finished while ");
     }
 
     /**
-     * Populates AbstractCard[] cards.
+     * Store features of all cards into 4*3 featureMatrix.
+     * For every column, check if is all same numbers or the sum equals to 6.
      *
-     * First randomly choose 3 indexes and then copy the cards
-     * returned by generateSet().
-     *
-     * Then generate one 4-dit feature ID for each empty cards.
-     * Usage of "int[] cardFeatures" can avoid multiple
-     * occurrences of one card.
-     *
-     * Finally call method in MainActivity to display all cards.
-     *
-     * @param table - empty 12 element array of cards.
+     * @return If there is set, true will be returned.
      */
-    @Override
-    public void setTable(AbstractCard[] table) {
-        int[][] setFeatureMatrix = getFeatureMatrix();
-        AbstractCard[] set = generateSet(setFeatureMatrix);
-        int[] setFeatures = generateSetFeature(setFeatureMatrix);
-
-        EnumHandler handler = new EnumHandler();
-        Random rd = new Random();
-        int i = 0;
-        while (i < 3){
-            int next = rd.nextInt(cards.length);
-            if(cardFeatures[next] == 0){
-                cards[next] = set[i];
-                cardFeatures[next] = setFeatures[i];
-                justForTest[i] = next; //JUST for TEST
-                i++;
-            }
+    public boolean checkSet(ArrayList<Integer> selectedCardsIndex) {
+        int[][] featureMatrix = new int[3][4];
+        for (int i = 0; i < 3; i++) {
+            AlternativeCard nextCard = AlternativeGetCard(selectedCardsIndex.get(i));
+            featureMatrix[i][0] = nextCard.getSize();
+            featureMatrix[i][1] = nextCard.getCardFeatures().get(0);
+            featureMatrix[i][2] = nextCard.getCardFeatures().get(1);
+            featureMatrix[i][3] = nextCard.getCardFeatures().get(2);
         }
-        for (int j = 0; j < cards.length; j++) {
-            if(cardFeatures[j] == 0){
-                boolean contain = true;
-                while (contain) {
-                    int ID0 = rd.nextInt(3);
-                    int ID1 = rd.nextInt(3);
-                    int ID2 = rd.nextInt(3);
-                    int ID3 = rd.nextInt(3);
-                    int ID = ID0*1000 + ID1*100 + ID2*10 + ID3;
-                    contain = arrayContainsValue(cardFeatures, ID);
-                    if (!contain){
-                        cards[j] = new Card(
-                                handler.shapeCount(ID0),
-                                handler.shading(ID1),
-                                handler.color(ID2),
-                                handler.type(ID3));
-                        cardFeatures[j] = ID;
-                    }
+
+        boolean isSet = true;
+        for (int col = 0; col < 4; col++) {
+            if (featureMatrix[0][col] == featureMatrix[1][col]) {
+                if (featureMatrix[1][col] != featureMatrix[2][col]) {
+                    isSet = false;
+                    break;
                 }
+            } else if (featureMatrix[0][col] + featureMatrix[1][col] + featureMatrix[2][col] != 6) {
+                isSet = false;
+                break;
             }
         }
-        mainActivity.notifyNewGame();
-    }
-
-    private boolean arrayContainsValue(int[] array, int targetValue) {
-        for (int next: array) {
-            if (next == targetValue)
-                return true;
-        }
-        return false;
+        return isSet;
     }
 
     /**
@@ -357,6 +263,34 @@ public class FindASet extends AbstractFindASet{
         }
     }
 
+    @Override
+    public void alternativeUpdateTable(ArrayList<Integer> cardIndexes) {
+        EnumHandler handler = new EnumHandler();
+        Random rd = new Random();
+        for (int i = 0; i < 3; i++) {
+            toggle(cardIndexes.get(i));
+            foundedSetCardsFeatures.add(cardFeatures[cardIndexes.get(i)]);
+            boolean contain = true;
+            while (contain){
+                int ID0 = rd.nextInt(3);
+                int ID1 = rd.nextInt(3);
+                int ID2 = rd.nextInt(3);
+                int ID3 = rd.nextInt(3);
+                int ID = ID0*1000 + ID1*100 + ID2*10 + ID3;
+                contain = arrayContainsValue(cardFeatures, ID) || foundedSetCardsFeatures.contains(ID);
+                if(!contain){
+                    cards[cardIndexes.get(i)] = new Card(
+                            handler.shapeCount(ID0),
+                            handler.shading(ID1),
+                            handler.color(ID2),
+                            handler.type(ID3));
+                    cardFeatures[cardIndexes.get(i)] = ID;
+                }
+            }
+            mainActivity.notifyCard(cardIndexes.get(i));
+        }
+    }
+
     /**
      * Generate two new arrays to empty existed arrays.
      *
@@ -364,9 +298,8 @@ public class FindASet extends AbstractFindASet{
      */
     @Override
     public void emptyTable() {
-        cards = new AbstractCard[12];
-        cardFeatures = new int[12];
-        foundedSetCardsFeatures = new ArrayList<>();
+        cardsTable = new ArrayList<>(12);
+        cardsIdTable = new ArrayList<>(12);
         justForTest = new int[3]; //JUST for TEST
     }
 
@@ -379,18 +312,36 @@ public class FindASet extends AbstractFindASet{
     }
 
     @Override
-    public AbstractCard getCard(int i) {
-        return cards[i];
-    }
+    public void toggle(int index) {
+        cardsTable.get(index).toggle();
 
-    @Override
-    public void toggle(int i) {
-        cards[i].toggle();
-        mainActivity.notifyToggle(i);
+        if (AlternativeGetCard(index).isSelected()) {
+            mainActivity.notifyToggle(index);
+            selectedCardsIndex.remove(selectedCardsIndex.indexOf(index));
+        }
+        else {
+            if (selectedCardsIndex.size() == 3) {
+                mainActivity.notifyToggle(selectedCardsIndex.get(0));
+                selectedCardsIndex.remove(0);
+            }
+            selectedCardsIndex.add(index);
+            mainActivity.notifyToggle(index);
+            if (selectedCardsIndex.size() == 3) {
+                if(checkSet(selectedCardsIndex)) {
+                    mainActivity.setTestTxt("set Found");
+                    //gameModel.updateTable(selectedCardsIndex);
+                    selectedCardsIndex.clear();
+                }
+            }
+        }
     }
 
     //JUST for TEST
     public int[] getJustForTest() {
         return justForTest;
+    }
+
+    public ArrayList<Integer> getSelectedCardsIndex() {
+        return selectedCardsIndex;
     }
 }

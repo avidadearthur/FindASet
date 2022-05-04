@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             R.drawable.tilde1groen, R.drawable.tilde2groen, R.drawable.tilde3groen,
             R.drawable.tilde1rood, R.drawable.tilde2rood, R.drawable.tilde3rood,
             R.drawable.tilde1paars, R.drawable.tilde2paars, R.drawable.tilde3paars};
-    private ArrayList<Integer> selectedCardsIndex;
 
     /**
      * Firstly bound all fields with UI components.
@@ -51,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         testTxt = findViewById(R.id.testTxt);
-        selectedCardsIndex = new ArrayList<>(3);
 
         cardImages = new ImageView[12];
         cardImages[0] = findViewById(R.id.card1);
@@ -133,36 +131,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * If there is, call updateTable().
      */
     @Override
-    public void onClick(View view) {
-        int index = Arrays.asList(cardImages).indexOf(view);
-        if (gameModel.getCard(index).isSelected()) {
-            selectedCardsIndex.remove(selectedCardsIndex.indexOf(index));
-            gameModel.toggle(index);
-        }
-        else {
-            if (selectedCardsIndex.size() == 3) {
-                gameModel.toggle(selectedCardsIndex.get(0));
-                selectedCardsIndex.remove(0);
-            }
-            selectedCardsIndex.add(index);
-            gameModel.toggle(index);
-            if (selectedCardsIndex.size() == 3) {
-                if(checkSet()) {
-                    testTxt.setText("set Found");
-                    gameModel.updateTable(selectedCardsIndex);
-                    selectedCardsIndex.clear();
-                }
-            }
-        }
+    public void onClick(View clickedView) {
+        int index = Arrays.asList(cardImages).indexOf(clickedView);
+        gameModel.toggle(index);
     }
 
     public void refreshBtn_Clicked(View caller){
-        for (int i = 0; i < selectedCardsIndex.size(); i++) {
-            gameModel.toggle(selectedCardsIndex.get(i));
+        for (int i = 0; i < gameModel.getSelectedCardsIndex().size(); i++) {
+            gameModel.toggle(gameModel.getSelectedCardsIndex().get(i));
         }
-        selectedCardsIndex.clear();
         gameModel.emptyTable();
-        gameModel.setTable(null);
+        gameModel.startNewGame();
     }
 
 
@@ -171,40 +150,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * If there is already one green border, delete it.
      */
     public void notifyToggle(int index) {
-        if(gameModel.getCard(index).isSelected())
+        if(gameModel.AlternativeGetCard(index).isSelected()) {
             cardImages[index].setBackground(getDrawable(R.drawable.selected_card));
-        else
+        }
+        else {
             cardImages[index].setBackground(null);
+        }
     }
 
-    /**
-     * Store features of all cards into 4*3 featureMatrix.
-     * For every column, check if is all same numbers or the sum equals to 6.
-     *
-     * @return If there is set, true will be returned.
-     */
-    private boolean checkSet() {
-        int[][] featureMatrix = new int[3][4];
-        for (int i = 0; i < 3; i++) {
-            AbstractCard next = gameModel.getCard(selectedCardsIndex.get(i));
-            featureMatrix[i][0] = next.getShapeCountInt();
-            featureMatrix[i][1] = next.getShadingInt();
-            featureMatrix[i][2] = next.getColorInt();
-            featureMatrix[i][3] = next.getTypeInt();
-        }
-        boolean isSet = true;
-        for (int col = 0; col < 4; col++) {
-            if (featureMatrix[0][col] == featureMatrix[1][col]) {
-                if (featureMatrix[1][col] != featureMatrix[2][col]) {
-                    isSet = false;
-                    break;
-                }
-            } else if (featureMatrix[0][col] + featureMatrix[1][col] + featureMatrix[2][col] != 6) {
-                isSet = false;
-                break;
-            }
-        }
-        return isSet;
+    public void setTestTxt(String str) {
+        testTxt.setText(str);
     }
 
     /**
