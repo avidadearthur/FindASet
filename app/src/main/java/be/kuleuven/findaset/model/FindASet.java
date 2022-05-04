@@ -36,7 +36,7 @@ public class FindASet extends AbstractFindASet{
         this.selectedCardsIndex = new ArrayList<>(3);
         this.foundedSetCardsIds= new ArrayList<>();
         this.isCardSelected = new ArrayList<>();
-        for (int i = 0; i < 12; i++) { this.isCardSelected.add(Boolean.FALSE); }
+        for (int i = 0; i < 12; i++) { this.isCardSelected.add(false); }
         alternativeSetCardsTable(cardsTable,cardsIdTable);
         mainActivity.notifyNewGame();
     }
@@ -231,42 +231,6 @@ public class FindASet extends AbstractFindASet{
         return isSet;
     }
 
-/*    *//**
-     * Toggle all cards in such positions first.
-     *
-     * (The logic here has problems that we need to make sure there are still set existed
-     * and the card selected won't occur again.)
-     *
-     * @param cardIndexes the ArrayList contained 3 positions needed to update
-     *//*
-    @Override
-    public void updateTable(ArrayList<Integer> cardIndexes) {
-        EnumHandler handler = new EnumHandler();
-        Random rd = new Random();
-        for (int i = 0; i < 3; i++) {
-            toggle(cardIndexes.get(i));
-            foundedSetCardsIds.add(cardsIdTable.get(cardIndexes.get(i)));
-            boolean contain = true;
-            while (contain){
-                int ID0 = rd.nextInt(3);
-                int ID1 = rd.nextInt(3);
-                int ID2 = rd.nextInt(3);
-                int ID3 = rd.nextInt(3);
-                int ID = ID0*1000 + ID1*100 + ID2*10 + ID3;
-                contain = arrayContainsValue(cardFeatures, ID) || foundedSetCardsFeatures.contains(ID);
-                if(!contain){
-                    cards[cardIndexes.get(i)] = new Card(
-                            handler.shapeCount(ID0),
-                            handler.shading(ID1),
-                            handler.color(ID2),
-                            handler.type(ID3));
-                    cardFeatures[cardIndexes.get(i)] = ID;
-                }
-            }
-            mainActivity.notifyCard(cardIndexes.get(i));
-        }
-    }*/
-
     /**
      * Updates table when set is found by:
      *      1. Update foundedSetCardsIds and Toggle the set cards
@@ -325,40 +289,52 @@ public class FindASet extends AbstractFindASet{
 
     @Override
     public void toggle(int index) {
-        //cardsTable.get(index).toggle();
-        boolean cardIsSelected = isCardSelected.get(index);
-        isCardSelected.set(index,!cardIsSelected);
-        int nrSelectedCards = selectedCardsIndex.size();
-        int lastAddedCardIndex = selectedCardsIndex.get(0);
-
-        //if (AlternativeGetCard(index).isSelected())
-        if (!cardIsSelected)
-        {
-            mainActivity.notifyToggle(index);
-            selectedCardsIndex.remove(selectedCardsIndex.indexOf(index));
-        }
-        else {
-            if (nrSelectedCards == 3) {
-                mainActivity.notifyToggle(lastAddedCardIndex);
-                selectedCardsIndex.remove(lastAddedCardIndex);
+        boolean isSelected = isCardSelected.get(index);
+        if (!isSelected) {
+            Log.d("SELECT", "toggle: " + isSelected);
+            select(index);
+            Log.d("SELECT", "toggle: " + isCardSelected.get(index));
+            if(selectedCardsIndex.size()==4) {
+                Log.d("SELECT", "4: " + selectedCardsIndex.toString());
+                unselect(selectedCardsIndex.get(0));
+                Log.d("SELECT", "4: " + selectedCardsIndex.toString());
             }
-            selectedCardsIndex.add(index);
-            nrSelectedCards++;
-            mainActivity.notifyToggle(index);
-            if (nrSelectedCards == 3) {
+            if(selectedCardsIndex.size()==3) {
+                Log.d("SELECT", "checkset: " + selectedCardsIndex.toString());
                 if(checkSet(selectedCardsIndex)) {
                     mainActivity.setTestTxt("set Found");
                     alternativeUpdateTable();
+                    Log.d("SELECT", "toggle: " + selectedCardsIndex.toString());
                     selectedCardsIndex.clear();
+                    Log.d("SELECT", "toggle: " + selectedCardsIndex.toString());
                 }
             }
         }
+        else {
+            unselect(index);
+        }
     }
 
+    @Override
+    public void select(int index) {
+        selectedCardsIndex.add(index);
+        isCardSelected.set(index, true);
+        mainActivity.notifySelect(index);
+    }
+
+    @Override
+    public void unselect(int index) {
+        isCardSelected.set(index, false);
+        selectedCardsIndex.remove(selectedCardsIndex.indexOf(index));
+        mainActivity.notifyUnselect(index);
+    }
+
+    @Override
     public ArrayList<Boolean> getIsCardSelected() {
         return isCardSelected;
     }
 
+    @Override
     public ArrayList<Integer> getSelectedCardsIndex() {
         return selectedCardsIndex;
     }

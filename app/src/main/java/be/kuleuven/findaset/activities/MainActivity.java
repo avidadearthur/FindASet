@@ -149,13 +149,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * If there is no green border, add one.
      * If there is already one green border, delete it.
      */
-    public void notifyToggle(int index) {
-        if(gameModel.getIsCardSelected().get(index)) {
-            cardImages[index].setBackground(getDrawable(R.drawable.selected_card));
-        }
-        else {
-            cardImages[index].setBackground(null);
-        }
+    public void notifySelect(int index) {
+        cardImages[index].setBackground(getDrawable(R.drawable.selected_card));
+    }
+
+    public void notifyUnselect(int index) {
+        cardImages[index].setBackground(null);
     }
 
     public void setTestTxt(String str) {
