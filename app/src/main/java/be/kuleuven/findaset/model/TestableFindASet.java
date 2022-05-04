@@ -18,7 +18,7 @@ public interface TestableFindASet {
 
     void startNewGame();
     AlternativeCard AlternativeGetCard(int index);
-    void alternativeUpdateTable();
+    void alternativeUpdateTable(ArrayList<Integer> selectedCardsIndex);
 
     boolean checkSet(ArrayList<Integer> selectedCardsIndex);
 

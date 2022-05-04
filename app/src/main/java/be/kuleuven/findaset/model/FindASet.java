@@ -240,11 +240,12 @@ public class FindASet extends AbstractFindASet{
      * ArrayList<Integer> of indexes (0 - 11) of selected cards
      */
     @Override
-    public void alternativeUpdateTable() {
+    public void alternativeUpdateTable(ArrayList<Integer> selectedCardsIndex) {
         Random rd = new Random();
         // 1.
         for (int i = 0; i < 3; i++) {
             int selectedCardIndex = selectedCardsIndex.get(i);
+            //Log.d("UPDATE", "alternativeUpdateTable: " + selectedCardIndex.toString());
             toggle(selectedCardIndex);
             foundedSetCardsIds.add(cardsIdTable.get(selectedCardIndex));
             int newCardId;
@@ -303,7 +304,7 @@ public class FindASet extends AbstractFindASet{
                 Log.d("SELECT", "checkset: " + selectedCardsIndex.toString());
                 if(checkSet(selectedCardsIndex)) {
                     mainActivity.setTestTxt("set Found");
-                    alternativeUpdateTable();
+                    alternativeUpdateTable(selectedCardsIndex);
                     Log.d("SELECT", "toggle: " + selectedCardsIndex.toString());
                     selectedCardsIndex.clear();
                     Log.d("SELECT", "toggle: " + selectedCardsIndex.toString());
