@@ -246,8 +246,7 @@ public class FindASet extends AbstractFindASet{
         for (int i = 0; i < 3; i++) {
             int selectedIndex = selectedCardsIndex.get(i);
             //Error: toggle(selectedIndex);
-            isCardSelected.set(selectedIndex, false);
-            mainActivity.notifyUnselect(selectedIndex);
+            unselect(selectedIndex);
 
             foundedSetCardsIds.add(cardsIdTable.get(selectedIndex));
             int newCardId;
@@ -294,33 +293,28 @@ public class FindASet extends AbstractFindASet{
     public void toggle(int index) {
         boolean isSelected = isCardSelected.get(index);
         if (!isSelected) {
-            Log.d("SELECT", "toggle: " + isSelected);
             select(index);
-            Log.d("SELECT", "toggle: " + isCardSelected.get(index));
+            selectedCardsIndex.add(index);
             if(selectedCardsIndex.size()==4) {
-                Log.d("SELECT", "4: " + selectedCardsIndex.toString());
                 unselect(selectedCardsIndex.get(0));
-                Log.d("SELECT", "4: " + selectedCardsIndex.toString());
+                selectedCardsIndex.remove(selectedCardsIndex.get(0));
             }
             if(selectedCardsIndex.size()==3) {
-                Log.d("SELECT", "checkset: " + selectedCardsIndex.toString());
                 if(checkSet(selectedCardsIndex)) {
                     mainActivity.setTestTxt("set Found");
                     alternativeUpdateTable(selectedCardsIndex);
-                    Log.d("SELECT", "toggle: " + selectedCardsIndex.toString());
                     selectedCardsIndex.clear();
-                    Log.d("SELECT", "toggle: " + selectedCardsIndex.toString());
                 }
             }
         }
         else {
             unselect(index);
+            selectedCardsIndex.remove(selectedCardsIndex.indexOf(index));
         }
     }
 
     @Override
     public void select(int index) {
-        selectedCardsIndex.add(index);
         isCardSelected.set(index, true);
         mainActivity.notifySelect(index);
     }
@@ -328,7 +322,6 @@ public class FindASet extends AbstractFindASet{
     @Override
     public void unselect(int index) {
         isCardSelected.set(index, false);
-        selectedCardsIndex.remove(selectedCardsIndex.indexOf(index));
         mainActivity.notifyUnselect(index);
     }
 

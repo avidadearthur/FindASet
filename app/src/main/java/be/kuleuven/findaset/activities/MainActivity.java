@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void refreshBtn_Clicked(View caller){
         for (int i = 0; i < gameModel.getSelectedCardsIndex().size(); i++) {
-            gameModel.toggle(gameModel.getSelectedCardsIndex().get(i));
+            gameModel.unselect(gameModel.getSelectedCardsIndex().get(i));
         }
         gameModel.emptyTable();
         gameModel.startNewGame();
