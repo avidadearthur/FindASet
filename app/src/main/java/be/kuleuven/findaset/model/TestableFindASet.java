@@ -23,4 +23,6 @@ public interface TestableFindASet {
     boolean checkSet(ArrayList<Integer> selectedCardsIndex);
 
     ArrayList<Integer> getSelectedCardsIndex();
+
+    ArrayList<Boolean> getIsCardSelected();
 }

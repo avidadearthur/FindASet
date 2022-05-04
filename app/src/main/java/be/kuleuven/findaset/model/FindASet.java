@@ -19,6 +19,7 @@ public class FindASet extends AbstractFindASet{
     private ArrayList<Integer> cardsIdTable;
     private int[] justForTest;
     private ArrayList<Integer> selectedCardsIndex;
+    private ArrayList<Boolean> isCardSelected;
     private ArrayList<Integer> foundedSetCardsIds;
 
     public FindASet() {
@@ -34,9 +35,10 @@ public class FindASet extends AbstractFindASet{
         this.cardsIdTable = new ArrayList<>(12);
         this.selectedCardsIndex = new ArrayList<>(3);
         this.foundedSetCardsIds= new ArrayList<>();
-        alternativeSetCardsTable(cardsTable, cardsIdTable);
+        this.isCardSelected = new ArrayList<>();
+        for (int i = 0; i < 12; i++) { this.isCardSelected.add(Boolean.FALSE); }
+        alternativeSetCardsTable(cardsTable,cardsIdTable);
         mainActivity.notifyNewGame();
-        // notify new game
     }
 
     /**
@@ -323,27 +325,38 @@ public class FindASet extends AbstractFindASet{
 
     @Override
     public void toggle(int index) {
-        cardsTable.get(index).toggle();
+        //cardsTable.get(index).toggle();
+        boolean cardIsSelected = isCardSelected.get(index);
+        isCardSelected.set(index,!cardIsSelected);
+        int nrSelectedCards = selectedCardsIndex.size();
+        int lastAddedCardIndex = selectedCardsIndex.get(0);
 
-        if (AlternativeGetCard(index).isSelected()) {
+        //if (AlternativeGetCard(index).isSelected())
+        if (!cardIsSelected)
+        {
             mainActivity.notifyToggle(index);
             selectedCardsIndex.remove(selectedCardsIndex.indexOf(index));
         }
         else {
-            if (selectedCardsIndex.size() == 3) {
-                mainActivity.notifyToggle(selectedCardsIndex.get(0));
-                selectedCardsIndex.remove(0);
+            if (nrSelectedCards == 3) {
+                mainActivity.notifyToggle(lastAddedCardIndex);
+                selectedCardsIndex.remove(lastAddedCardIndex);
             }
             selectedCardsIndex.add(index);
+            nrSelectedCards++;
             mainActivity.notifyToggle(index);
-            if (selectedCardsIndex.size() == 3) {
+            if (nrSelectedCards == 3) {
                 if(checkSet(selectedCardsIndex)) {
                     mainActivity.setTestTxt("set Found");
-                    //gameModel.updateTable(selectedCardsIndex);
+                    alternativeUpdateTable();
                     selectedCardsIndex.clear();
                 }
             }
         }
+    }
+
+    public ArrayList<Boolean> getIsCardSelected() {
+        return isCardSelected;
     }
 
     public ArrayList<Integer> getSelectedCardsIndex() {
