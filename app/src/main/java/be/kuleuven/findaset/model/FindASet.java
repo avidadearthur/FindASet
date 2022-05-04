@@ -325,12 +325,13 @@ public class FindASet extends AbstractFindASet{
     public void toggle(int index) {
         cardsTable.get(index).toggle();
 
-        if (AlternativeGetCard(index).isSelected()) {
+        if (!AlternativeGetCard(index).isSelected()) {
             mainActivity.notifyToggle(index);
             selectedCardsIndex.remove(selectedCardsIndex.indexOf(index));
         }
         else {
             if (selectedCardsIndex.size() == 3) {
+                cardsTable.get(selectedCardsIndex.get(0)).toggle();
                 mainActivity.notifyToggle(selectedCardsIndex.get(0));
                 selectedCardsIndex.remove(0);
             }
