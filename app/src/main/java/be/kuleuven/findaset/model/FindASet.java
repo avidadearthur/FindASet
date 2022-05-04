@@ -19,6 +19,7 @@ public class FindASet extends AbstractFindASet{
     private ArrayList<Integer> cardsIdTable;
     private int[] justForTest;
     private ArrayList<Integer> selectedCardsIndex;
+    private ArrayList<Integer> foundedSetCardsIds;
 
     public FindASet() {
     }
@@ -32,6 +33,7 @@ public class FindASet extends AbstractFindASet{
         this.cardsTable = new ArrayList<>(12);
         this.cardsIdTable = new ArrayList<>(12);
         this.selectedCardsIndex = new ArrayList<>(3);
+        this.foundedSetCardsIds= new ArrayList<>();
         alternativeSetCardsTable(cardsTable, cardsIdTable);
         mainActivity.notifyNewGame();
         // notify new game
@@ -190,7 +192,7 @@ public class FindASet extends AbstractFindASet{
                     randomIndex = rd.nextInt(12);
                 }
                 while (cardsIdTable.get(randomIndex) != 9999);
-                cardsTable.set(randomIndex,newCard); // i%3 will pick one card from three
+                cardsTable.set(randomIndex,newCard);
                 cardsIdTable.set(randomIndex,newCardId);
             }
         }
@@ -227,21 +229,21 @@ public class FindASet extends AbstractFindASet{
         return isSet;
     }
 
-    /**
+/*    *//**
      * Toggle all cards in such positions first.
      *
      * (The logic here has problems that we need to make sure there are still set existed
      * and the card selected won't occur again.)
      *
      * @param cardIndexes the ArrayList contained 3 positions needed to update
-     */
+     *//*
     @Override
     public void updateTable(ArrayList<Integer> cardIndexes) {
         EnumHandler handler = new EnumHandler();
         Random rd = new Random();
         for (int i = 0; i < 3; i++) {
             toggle(cardIndexes.get(i));
-            foundedSetCardsFeatures.add(cardFeatures[cardIndexes.get(i)]);
+            foundedSetCardsIds.add(cardsIdTable.get(cardIndexes.get(i)));
             boolean contain = true;
             while (contain){
                 int ID0 = rd.nextInt(3);
@@ -261,33 +263,41 @@ public class FindASet extends AbstractFindASet{
             }
             mainActivity.notifyCard(cardIndexes.get(i));
         }
-    }
+    }*/
 
+    /**
+     * Updates table when set is found by:
+     *      1. Update foundedSetCardsIds and Toggle the set cards
+     *      2.
+     *      3.
+     *
+     * ArrayList<Integer> of indexes (0 - 11) of selected cards
+     */
     @Override
-    public void alternativeUpdateTable(ArrayList<Integer> cardIndexes) {
-        EnumHandler handler = new EnumHandler();
+    public void alternativeUpdateTable() {
         Random rd = new Random();
+        // 1.
         for (int i = 0; i < 3; i++) {
-            toggle(cardIndexes.get(i));
-            foundedSetCardsFeatures.add(cardFeatures[cardIndexes.get(i)]);
-            boolean contain = true;
-            while (contain){
-                int ID0 = rd.nextInt(3);
-                int ID1 = rd.nextInt(3);
-                int ID2 = rd.nextInt(3);
-                int ID3 = rd.nextInt(3);
-                int ID = ID0*1000 + ID1*100 + ID2*10 + ID3;
-                contain = arrayContainsValue(cardFeatures, ID) || foundedSetCardsFeatures.contains(ID);
-                if(!contain){
-                    cards[cardIndexes.get(i)] = new Card(
-                            handler.shapeCount(ID0),
-                            handler.shading(ID1),
-                            handler.color(ID2),
-                            handler.type(ID3));
-                    cardFeatures[cardIndexes.get(i)] = ID;
-                }
+            int selectedCardIndex = selectedCardsIndex.get(i);
+            toggle(selectedCardIndex);
+            foundedSetCardsIds.add(cardsIdTable.get(selectedCardIndex));
+            int newCardId;
+            //2.
+            do {
+                int nr = rd.nextInt(3) + 1;
+                int color = rd.nextInt(3) + 1;
+                int shading = rd.nextInt(3) + 1;
+                int type = rd.nextInt(3) + 1;
+
+                newCardId = nr * 1000 + color * 100 + shading * 10 + type;
             }
-            mainActivity.notifyCard(cardIndexes.get(i));
+            while (cardsIdTable.contains(newCardId) || foundedSetCardsIds.contains(newCardId));
+            //3.
+            AlternativeCard newCard = new AlternativeCard(newCardId);
+            cardsTable.set(selectedCardIndex, newCard);
+            cardsIdTable.set(selectedCardIndex, newCardId);
+            // 4.
+            mainActivity.notifyCard(selectedCardIndex);
         }
     }
 
@@ -336,12 +346,14 @@ public class FindASet extends AbstractFindASet{
         }
     }
 
+    public ArrayList<Integer> getSelectedCardsIndex() {
+        return selectedCardsIndex;
+    }
+
     //JUST for TEST
     public int[] getJustForTest() {
         return justForTest;
     }
 
-    public ArrayList<Integer> getSelectedCardsIndex() {
-        return selectedCardsIndex;
-    }
+
 }
