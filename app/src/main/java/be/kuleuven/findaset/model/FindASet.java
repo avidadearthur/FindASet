@@ -320,6 +320,14 @@ public class FindASet extends AbstractFindASet{
         mainActivity.notifyUnselect(index);
     }
 
+    /**
+     * Used for testing updateTable method
+     */
+    @Override
+    public ArrayList<Integer> getCardsIdTable() {
+        return cardsIdTable;
+    }
+
     @Override
     public ArrayList<Boolean> getIsCardSelected() {
         return isCardSelected;
