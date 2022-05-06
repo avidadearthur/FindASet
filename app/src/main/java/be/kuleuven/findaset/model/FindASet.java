@@ -266,6 +266,29 @@ public class FindASet extends AbstractFindASet{
             // 4.
             mainActivity.notifyCard(selectedIndex);
         }
+        //Loop over all the possible card combinations
+        ArrayList<Integer> setCandidates = new ArrayList<>(3);
+        setCandidates.add(99);
+        setCandidates.add(99);
+        setCandidates.add(99);
+        for (int i=0; i<9;i++){
+            for(int j=1; j<10;j++){
+                for(int k=2; k<11;k++){
+                    // add 1 to correspond to card nr (1-12)
+                    setCandidates.set(0,i);
+                    setCandidates.set(1,j);
+                    setCandidates.set(2,k);
+                    if(i != j & i != k & j != k){
+                        if(checkSet(setCandidates)){
+                            Log.d("SetCandidate", "alternativeUpdateTable: " + setCandidates);
+                            mainActivity.setTestTxt("Mind: 0-11" + setCandidates);
+                        }
+                    }
+
+                }
+            }
+        }
+        // If no sets found recreate table
     }
 
     /**
