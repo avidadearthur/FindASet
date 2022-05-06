@@ -14,7 +14,6 @@ import be.kuleuven.findaset.model.card.Card;
 import be.kuleuven.findaset.model.card.enums.EnumHandler;
 
 public class FindASet extends AbstractFindASet{
-    private AbstractCard[] cards;
     private ArrayList<AlternativeCard> cardsTable;
     private ArrayList<Integer> cardsIdTable;
     private int[] justForTest;
@@ -281,10 +280,6 @@ public class FindASet extends AbstractFindASet{
         justForTest = new int[3]; //JUST for TEST
     }
 
-    /**
-     * @param i
-     * @return
-     */
     public AlternativeCard AlternativeGetCard(int i) {
         return cardsTable.get(i);
     }
