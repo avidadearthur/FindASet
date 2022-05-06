@@ -9,6 +9,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -135,5 +137,35 @@ public class GameModelTester {
         */
         assertTrue(Arrays.stream(isEqual).sum() <= 3 | Arrays.stream(isEqual).sum() == 6);
     }
+
+    /**
+     * Check that when table is updated at least one set is present.
+     */
+    @org.junit.Test
+    public void testUpdateTable() {
+        gameBoard.startNewGame();
+        ArrayList<Integer> cardsIdTable = gameBoard.getCardsIdTable();
+
+        //Loop over all the possible card combinations
+        for (int i=0; i<9;i++){
+            for(int j=1; j<10;j++){
+                for(int k=2; k<11;k++){
+                    ArrayList<Integer> setCandidates = new ArrayList<>();
+                    setCandidates.add(i);
+                    setCandidates.add(j);
+                    setCandidates.add(k);
+                    if(gameBoard.checkSet(setCandidates)){
+                        System.out.printf("Set Found");
+                        ArrayList<Integer> set;
+                        set = setCandidates;
+                        set.add(cardsIdTable.get(i));
+                        set.add(cardsIdTable.get(j));
+                        set.add(cardsIdTable.get(k));
+                    }
+                }
+            }
+        }
+    }
+
 
 }
