@@ -288,6 +288,20 @@ public class FindASet extends AbstractFindASet{
                 }
             }
         }
+        /*
+        for (int i = 0; i < cardsIdTable.size(); i++) {
+            for (int j = i + 1; j < cardsIdTable.size(); j++)
+                for (int k = j + 1; j < cardsIdTable.size(); k++){
+                    setCandidates.set(0,i);
+                    setCandidates.set(1,j);
+                    setCandidates.set(2,k);
+                    if(checkSet(setCandidates)){
+                        Log.d("SetCandidate", "alternativeUpdateTable: " + setCandidates);
+                        mainActivity.setTestTxt("Mind: 0-11" + setCandidates);
+                    }
+            }
+        }
+         */
         // If no sets found recreate table
     }
 
