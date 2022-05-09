@@ -1,7 +1,5 @@
 package be.kuleuven.findaset.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -10,21 +8,17 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import be.kuleuven.findaset.R;
 import be.kuleuven.findaset.model.FindASet;
 import be.kuleuven.findaset.model.TestableFindASet;
-import be.kuleuven.findaset.model.card.AbstractCard;
 import be.kuleuven.findaset.model.card.AlternativeCard;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TestableFindASet gameModel;
-    private ImageView[] cardImages;
-    private TextView[] cardTexts;
-    private TextView testTxt;
     private final Integer[] cardPicturesIds = {
             R.drawable.ovaal1groen, R.drawable.ovaal2groen, R.drawable.ovaal3groen,
             R.drawable.ovaal1rood, R.drawable.ovaal2rood, R.drawable.ovaal3rood,
@@ -35,10 +29,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             R.drawable.tilde1groen, R.drawable.tilde2groen, R.drawable.tilde3groen,
             R.drawable.tilde1rood, R.drawable.tilde2rood, R.drawable.tilde3rood,
             R.drawable.tilde1paars, R.drawable.tilde2paars, R.drawable.tilde3paars};
+    private TestableFindASet gameModel;
+    private ImageView[] cardImages;
+    private TextView[] cardTexts;
+    private TextView testTxt;
 
     /**
      * Firstly bound all fields with UI components.
-     *
+     * <p>
      * Then bound gameModel with new FindASet()
      * to use the method in FindASet.
      *
@@ -79,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cardTexts[10] = findViewById(R.id.card11Text);
         cardTexts[11] = findViewById(R.id.card12Text);
 
-        for(int i = 0; i < 12; i++) {
+        for (int i = 0; i < 12; i++) {
             cardImages[i].setOnClickListener(this);
         }
 
@@ -96,16 +94,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * Display images of all cards.
      */
-    public void notifyNewGame() {
-        for(int i = 0; i < cardImages.length; i++){
+    public void notifyNewGame(int sizeOfCards) {
+        for (int i = 0; i < sizeOfCards; i++) {
+            cardImages[i].setEnabled(true);
             notifyCard(i);
         }
 
         //JUST for TEST
         String str = "SET cards position: "
-                + (gameModel.getJustForTest()[0]+1) + " "
-                + (gameModel.getJustForTest()[1]+1) + " "
-                + (gameModel.getJustForTest()[2]+1) + " ";
+                + (gameModel.getJustForTest()[0] + 1) + " "
+                + (gameModel.getJustForTest()[1] + 1) + " "
+                + (gameModel.getJustForTest()[2] + 1) + " ";
         testTxt.setText(str);
     }
 
@@ -123,11 +122,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * First get the index of which call the method.
-     *
+     * <p>
      * If there are already 3 selected cards, remove the first.
-     *
+     * <p>
      * After that, call checkSet() to check if there is set.
-     *
+     * <p>
      * If there is, call updateTable().
      */
     @Override
@@ -136,11 +135,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         gameModel.toggle(index);
     }
 
-    public void refreshBtn_Clicked(View caller){
+    public void refreshBtn_Clicked(View caller) {
         for (int i = 0; i < gameModel.getSelectedCardsIndex().size(); i++) {
             gameModel.unselect(gameModel.getSelectedCardsIndex().get(i));
         }
-        gameModel.emptyTable();
         gameModel.startNewGame();
     }
 
@@ -157,6 +155,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cardImages[index].setBackground(null);
     }
 
+    public void notifyUnavailable(int index) {
+        cardImages[index].setEnabled(false);
+        cardImages[index].setVisibility(View.INVISIBLE);
+    }
+
     public void setTestTxt(String str) {
         testTxt.setText(str);
     }
@@ -164,14 +167,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * Retrieves the shape
      * cardPicturesIds[] is an array that stores all Ids of basic components drawables.
-     *
+     * <p>
      * According to the feature IDs, the index of basic component in the array can be
      * derived.
      *
      * @param card Object in AbstractCard class.
-     *
      * @return newBitMap - An arraylist with the size equals to card.getSize(),
-     *                     which stores basic components.
+     * which stores basic components.
      */
     private ArrayList<Bitmap> setBitmaps(AlternativeCard card) {
         int color = card.getCardFeatures().get(1) - 1;
@@ -189,12 +191,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * Forms image
      * Combine basic components to final image of each card according to the ShapeCountInt.
-     *
+     * <p>
      * Set the gap between components to make sure the width of new Bitmap equals to
      * 4.5 times of width of basic components, which is fixed no matter how many components.
      *
      * @param bitmap the basic component of
-     *
      * @return a new Bitmap contained several components
      */
     private Bitmap combineImageIntoOne(ArrayList<Bitmap> bitmap) {
