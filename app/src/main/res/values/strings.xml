@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">FindASet</string>
+    <string name="lbl_login">Login</string>
+    <string name="login_username">username</string>
+    <string name="login_password">password</string>
+    <string name="btn_login">login</string>
+
+    <string name="lbl_register">Register</string>
+    <string name="register_username">username</string>
+    <string name="register_password">password</string>
+    <string name="register_confirm_password">password</string>
+    <string name="btn_register">register</string>
+
+    <string name="btn_play_as_guest">play as guest</string>
 </resources>
