@@ -216,10 +216,10 @@ public class FindASet extends AbstractFindASet{
         int[][] featureMatrix = new int[3][4];
         for (int i = 0; i < 3; i++) {
             AlternativeCard nextCard = AlternativeGetCard(testedCardsIndex.get(i));
-            featureMatrix[i][0] = nextCard.getSize();
-            featureMatrix[i][1] = nextCard.getCardFeatures().get(0);
-            featureMatrix[i][2] = nextCard.getCardFeatures().get(1);
-            featureMatrix[i][3] = nextCard.getCardFeatures().get(2);
+            featureMatrix[i][0] = nextCard.getCardFeatures().get(0);
+            featureMatrix[i][1] = nextCard.getCardFeatures().get(1);
+            featureMatrix[i][2] = nextCard.getCardFeatures().get(2);
+            featureMatrix[i][3] = nextCard.getCardFeatures().get(3);
         }
 
         boolean isSet = true;
