@@ -127,18 +127,26 @@ public class FindASet extends AbstractFindASet{
      * @return set - ArrayList<AlternativeCard> of size 3
      */
     private ArrayList<AlternativeCard> alternativeGenerateSet(){
-        int[][] setFeatureMatrix = getFeatureMatrix();
+        boolean setFoundedAlready = false;
         ArrayList<AlternativeCard> set = new ArrayList<>();
 
-        for (int[] features: setFeatureMatrix) {
-            ArrayList<Integer> cardFeatures = new ArrayList<>();
-            for (int i : features)
-            {
-                cardFeatures.add(i);
+        do {
+            int[][] setFeatureMatrix = getFeatureMatrix();
+
+            for (int[] features : setFeatureMatrix) {
+                int cardId = features[0] * 1000 + features[1] * 100 + features[2] * 10 + features[3];
+                if (foundedSetCardsIds.contains(cardId)) {
+                    setFoundedAlready = true;
+                    set.clear();
+                    break;
+                }
+                else {
+                    AlternativeCard newCard = new AlternativeCard(cardId);
+                    set.add(newCard);
+                }
             }
-            AlternativeCard newCard = new AlternativeCard(cardFeatures);
-            set.add(newCard);
         }
+        while (setFoundedAlready);
 
         return set;
     }
@@ -147,7 +155,7 @@ public class FindASet extends AbstractFindASet{
      * Alternative setting table method that uses the AlternativeCard objects
      *
      * Populates ArrayList<AlternativeCard> cardsTable by:
-     *      0. Populate table with dummy cards with ID 9999
+     *      0. Populate table with dummy cards with ID 9999 (inside emptyTable())
      *      1. Choosing 3 random indexes to place the three cards previously generated
      *         from alternativeGenerateSet().
      *      2. Populates the array with unique randomly generated cards to be placed in the empty
@@ -158,7 +166,6 @@ public class FindASet extends AbstractFindASet{
     {
         ArrayList<AlternativeCard> set = alternativeGenerateSet();
         // Step 0
-        //for(AlternativeCard card: cardsTable)
         for(int i = 0; i < 12; i++){
             AlternativeCard newCard = new AlternativeCard(9999);
             cardsTable.add(newCard);
@@ -172,7 +179,7 @@ public class FindASet extends AbstractFindASet{
                 randomIndex = rd.nextInt(11);
             }
             while (cardsTable.get(randomIndex).getCardId() != 9999);
-            cardsTable.set(randomIndex,set.get(i)); // i%3 will pick one card from three
+            cardsTable.set(randomIndex,set.get(i));
             cardsIdTable.set(randomIndex,set.get(i).getCardId());
             justForTest[i] = randomIndex;
         }
@@ -186,7 +193,7 @@ public class FindASet extends AbstractFindASet{
             int newCardId = nr*1000 + color*100 + shading*10 + type;
             AlternativeCard newCard = new AlternativeCard(newCardId);
 
-            if(!cardsIdTable.contains(newCardId)){
+            if(!cardsIdTable.contains(newCardId) && !foundedSetCardsIds.contains(newCardId)){
                 // Very inefficient algo to add cards in the available spots
                 int randomIndex;
                 do{
@@ -205,10 +212,10 @@ public class FindASet extends AbstractFindASet{
      *
      * @return If there is set, true will be returned.
      */
-    public boolean checkSet(ArrayList<Integer> selectedCardsIndex) {
+    public boolean checkSet(ArrayList<Integer> testedCardsIndex) {
         int[][] featureMatrix = new int[3][4];
         for (int i = 0; i < 3; i++) {
-            AlternativeCard nextCard = AlternativeGetCard(selectedCardsIndex.get(i));
+            AlternativeCard nextCard = AlternativeGetCard(testedCardsIndex.get(i));
             featureMatrix[i][0] = nextCard.getSize();
             featureMatrix[i][1] = nextCard.getCardFeatures().get(0);
             featureMatrix[i][2] = nextCard.getCardFeatures().get(1);
@@ -271,31 +278,12 @@ public class FindASet extends AbstractFindASet{
         setCandidates.add(99);
         setCandidates.add(99);
         setCandidates.add(99);
-        /*
-        for (int i=0; i<9;i++){
-            for(int j=1; j<10;j++){
-                for(int k=2; k<11;k++){
-                    // add 1 to correspond to card nr (1-12)
-                    setCandidates.set(0,i);
-                    setCandidates.set(1,j);
-                    setCandidates.set(2,k);
-                    if(i != j & i != k & j != k){
-                        if(checkSet(setCandidates)){
-                            Log.d("SetCandidate", "alternativeUpdateTable: " + setCandidates);
-                            mainActivity.setTestTxt("Mind: 0-11" + setCandidates);
-                        }
-                    }
-
-                }
-            }
-        }
-         */
         ArrayList<Integer> testSetMessage = new ArrayList<>(); // JUST for test
         int cardsIdTableSize = cardsIdTable.size();
         boolean setExisted = false;
         for (int i = 0; i < cardsIdTableSize - 2; i++) {
             for (int j = i + 1; j < cardsIdTableSize - 1; j++)
-                for (int k = j + 1; j < cardsIdTableSize; k++){
+                for (int k = j + 1; k < cardsIdTableSize; k++){
                     setCandidates.set(0,i);
                     setCandidates.set(1,j);
                     setCandidates.set(2,k);
@@ -310,15 +298,17 @@ public class FindASet extends AbstractFindASet{
                     }
             }
         }
-        //JUST for test
+            //JUST for test
         String testMessage = "Set in this screen: \n";
         for(int i : testSetMessage) {
-            testMessage = testMessage + i + " ";
+            int j = i+1;
+            testMessage = testMessage + j + " ";
         }
         mainActivity.setTestTxt(testMessage);
         // If no sets found recreate table
         if (!setExisted) {
-
+            emptyTable();
+            alternativeSetCardsTable(cardsTable,cardsIdTable);
         }
     }
 
