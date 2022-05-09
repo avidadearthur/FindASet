@@ -271,6 +271,7 @@ public class FindASet extends AbstractFindASet{
         setCandidates.add(99);
         setCandidates.add(99);
         setCandidates.add(99);
+        /*
         for (int i=0; i<9;i++){
             for(int j=1; j<10;j++){
                 for(int k=2; k<11;k++){
@@ -288,21 +289,37 @@ public class FindASet extends AbstractFindASet{
                 }
             }
         }
-        /*
-        for (int i = 0; i < cardsIdTable.size() - 2; i++) {
-            for (int j = i + 1; j < cardsIdTable.size() - 1; j++)
-                for (int k = j + 1; j < cardsIdTable.size(); k++){
+         */
+        ArrayList<Integer> testSetMessage = new ArrayList<>(); // JUST for test
+        int cardsIdTableSize = cardsIdTable.size();
+        boolean setExisted = false;
+        for (int i = 0; i < cardsIdTableSize - 2; i++) {
+            for (int j = i + 1; j < cardsIdTableSize - 1; j++)
+                for (int k = j + 1; j < cardsIdTableSize; k++){
                     setCandidates.set(0,i);
                     setCandidates.set(1,j);
                     setCandidates.set(2,k);
                     if(checkSet(setCandidates)){
                         Log.d("SetCandidate", "alternativeUpdateTable: " + setCandidates);
-                        mainActivity.setTestTxt("Mind: 0-11" + setCandidates);
+                        //JUST for test
+                        testSetMessage.add(setCandidates.get(0));
+                        testSetMessage.add(setCandidates.get(1));
+                        testSetMessage.add(setCandidates.get(2));
+                        setExisted = true;
+                        //break;
                     }
             }
         }
-         */
+        //JUST for test
+        String testMessage = "Set in this screen: \n";
+        for(int i : testSetMessage) {
+            testMessage = testMessage + i + " ";
+        }
+        mainActivity.setTestTxt(testMessage);
         // If no sets found recreate table
+        if (!setExisted) {
+
+        }
     }
 
     /**
