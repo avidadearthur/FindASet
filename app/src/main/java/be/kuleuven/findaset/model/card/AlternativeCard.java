@@ -123,7 +123,7 @@ public class AlternativeCard {
     @NonNull
     @Override
     public String toString() {
-        return "Element Id=" + "\n" + elementId;
+        return "Element Id=" + "\n" + cardId;
     }
 
     /**
