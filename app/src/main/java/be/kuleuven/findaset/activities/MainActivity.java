@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         for (int i = 0; i < 12; i++) {
             cardImages[i].setOnClickListener(this);
+            cardImages[i].setBackgroundColor(getColor(R.color.white));
         }
 
         TestableFindASet findASet = new FindASet();
@@ -97,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void notifyNewGame(int sizeOfCards) {
         for (int i = 0; i < sizeOfCards; i++) {
             cardImages[i].setEnabled(true);
+            cardImages[i].setVisibility(View.VISIBLE);
             notifyCard(i);
         }
 
@@ -117,7 +119,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void notifyCard(int index) {
         AlternativeCard nextCard = gameModel.AlternativeGetCard(index);
         cardImages[index].setImageBitmap(combineImageIntoOne(setBitmaps(nextCard)));
-        cardTexts[index].setText(nextCard.toString());
+        //cardTexts[index].setText(nextCard.toString());
+        cardTexts[index].setText("");
     }
 
     /**
@@ -152,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void notifyUnselect(int index) {
-        cardImages[index].setBackground(null);
+        cardImages[index].setBackgroundColor(getColor(R.color.white));
     }
 
     public void notifyUnavailable(int index) {
