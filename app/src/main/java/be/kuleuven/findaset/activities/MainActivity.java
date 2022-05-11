@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -46,6 +47,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // testing register and login
+        TextView txtInfo = (TextView) findViewById(R.id.textView2);
+        String loginInfo;
+        try{
+            Bundle extras = getIntent().getExtras();
+            loginInfo = extras.getString("LoginInfo");
+        }
+        catch (Exception e){
+            loginInfo = "guest";
+        }
+
+        txtInfo.setText(loginInfo);
 
         testTxt = findViewById(R.id.testTxt);
 
