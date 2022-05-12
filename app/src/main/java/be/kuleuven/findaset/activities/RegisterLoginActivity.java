@@ -39,10 +39,11 @@ public class RegisterLoginActivity extends AppCompatActivity {
     }
 
     public void onBtnLogin_Clicked(View caller) {
-        TextView txtResponse = null;
 
         requestQueue = Volley.newRequestQueue( this );
-        String requestURL = baseURL + "/" + "login";
+        String requestURL = baseURL + "login";
+
+        Intent intent = new Intent(this, MainActivity.class);
 
         StringRequest submitRequest = new StringRequest(Request.Method.GET, requestURL,
 
@@ -57,9 +58,11 @@ public class RegisterLoginActivity extends AppCompatActivity {
                             for( int i = 0; i < responseArray.length(); i++ )
                             {
                                 JSONObject curObject = responseArray.getJSONObject( i );
-                                responseString += curObject.getString( "name" ) + " : " + curObject.getString( "email" ) + "\n";
+                                responseString += curObject.getString( "username" );
                             }
-                            txtResponse.setText(responseString);
+
+                            intent.putExtra("LoginInfo",responseString);
+                            startActivity(intent);
                         }
                         catch( JSONException e )
                         {
@@ -73,16 +76,13 @@ public class RegisterLoginActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error)
                     {
-                        txtResponse.setText( error.getLocalizedMessage() );
+                        intent.putExtra("LoginInfo",error.getLocalizedMessage());
+                        startActivity(intent);
                     }
                 }
         );
 
         requestQueue.add(submitRequest);
-
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("LoginInfo",txtResponse.getText().toString());
-        startActivity(intent);
     }
 
     public void onBtnRegister_Clicked(View caller) {
