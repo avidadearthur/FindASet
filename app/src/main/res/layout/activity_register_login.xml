@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:onClick="onBtnGuest_Clicked"
+        android:onClick="onBtnRegister_Clicked"
         android:text="@string/btn_register"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPasswordConfirm" />
