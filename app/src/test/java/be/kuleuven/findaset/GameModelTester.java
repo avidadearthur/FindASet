@@ -12,15 +12,8 @@ import java.util.Arrays;
 
 import be.kuleuven.findaset.model.FindASet;
 import be.kuleuven.findaset.model.TestableFindASet;
-import be.kuleuven.findaset.model.card.AbstractCard;
 import be.kuleuven.findaset.model.card.AlternativeCard;
-import be.kuleuven.findaset.model.card.Card;
 import be.kuleuven.findaset.model.card.CardElement;
-import be.kuleuven.findaset.model.card.enums.COLOR;
-import be.kuleuven.findaset.model.card.enums.EnumHandler;
-import be.kuleuven.findaset.model.card.enums.SHADING;
-import be.kuleuven.findaset.model.card.enums.SHAPECOUNT;
-import be.kuleuven.findaset.model.card.enums.TYPE;
 
 public class GameModelTester {
     private TestableFindASet gameBoard;
@@ -67,22 +60,6 @@ public class GameModelTester {
         assertFalse(card1.isSelected());
         card1.toggle();
         assertTrue(card1.isSelected());
-    }
-
-    /**
-     * Checks if card generation by enum and by index both work.
-     */
-    @org.junit.Test
-    @Test
-    public void testGeneratingCard() {
-        EnumHandler handler = new EnumHandler();
-        AbstractCard card1 = new Card(SHAPECOUNT.one, SHADING.open, COLOR.red, TYPE.diamond);
-        AbstractCard card2 = new Card(handler.shapeCount(1), handler.shading(3),
-                handler.color(1), handler.type(1));
-        assertSame(card1.getCount(), card2.getCount());
-        assertSame(card1.getColor(), card2.getColor());
-        assertSame(card1.getShading(), card2.getShading());
-        assertSame(card1.getType(), card2.getType());
     }
 
     /**
