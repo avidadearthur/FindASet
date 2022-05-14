@@ -4,7 +4,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.View;
+import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView[] cardImages;
     private TextView[] cardTexts;
     private TextView testTxt;
+    private Chronometer chronometer;
 
     /**
      * Firstly bound all fields with UI components.
@@ -47,6 +50,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Init chronometer
+        chronometer = findViewById(R.id.chronometer);
+
 
         // testing register and login
         TextView txtInfo = (TextView) findViewById(R.id.textView2);
@@ -115,6 +122,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             cardImages[i].setVisibility(View.VISIBLE);
             notifyCard(i);
         }
+
+        //Init chronometer
+        chronometer.setBase(SystemClock.elapsedRealtime());
+        chronometer.start();
 
         //JUST for TEST
         String str = "SET cards position: "
