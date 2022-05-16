@@ -32,9 +32,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        TextView join =  findViewById(R.id.tvJoin);
-        join.setOnClickListener(this::onJoin_Clicked);
     }
 
     public void onJoin_Clicked(View caller) {

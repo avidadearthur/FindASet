@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/learn_bg_gradient_grey"
+    android:onClick="onJoin_Clicked"
     tools:context=".activities.LoginActivity">
 
     <ImageView
@@ -102,13 +103,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/learn_spacing_standard_new"
-            android:clickable="true"
+            android:clickable="false"
+            android:onClick="onJoin_Clicked"
             android:padding="@dimen/learn_spacing_control"
             android:text="@string/learn_lbl_join"
             android:textAppearance="@style/LearnerFontSemiBold"
             android:textColor="@color/learn_colorPrimary"
-            android:textSize="@dimen/learn_font_size_medium"
-            android:focusable="true" />
+            android:textSize="@dimen/learn_font_size_medium" />
     </LinearLayout>
 
 </RelativeLayout>
