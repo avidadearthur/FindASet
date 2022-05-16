@@ -5,22 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:fitsSystemWindows="true"
-    tools:context=".activities.LearnerWalkThroughActivity">
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/findAllModeBtn2"
-        style="@style/ModeButton.Filled"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="@dimen/learn_spacing_standard_new"
-        android:paddingTop="@dimen/learn_spacing_middle"
-        android:paddingEnd="@dimen/learn_spacing_standard_new"
-        android:paddingBottom="@dimen/learn_spacing_middle"
-        android:text="@string/learn_lblget_started"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline2" />
+    android:fitsSystemWindows="true">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -49,7 +34,7 @@
             android:layout_height="@dimen/_200sdp"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/learn_spacing_xlarge"
-            android:layout_marginBottom="@dimen/learn_spacing_middle"/>
+            android:layout_marginBottom="@dimen/learn_spacing_middle" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
@@ -96,37 +81,37 @@
     </RelativeLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/findAllModeBtn"
+        android:id="@+id/findTenModeBtn"
         style="@style/ModeButton.Filled"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/_180sdp"
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/learn_spacing_standard_new"
         android:paddingTop="@dimen/learn_spacing_middle"
         android:paddingEnd="@dimen/learn_spacing_standard_new"
         android:paddingBottom="@dimen/learn_spacing_middle"
         android:text="@string/find_ten_mode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/findAllModeBtn" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/findAllModeBtn"
+        style="@style/ModeButton.Filled"
+        android:layout_width="@dimen/_180sdp"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/learn_spacing_standard_new"
+        android:paddingTop="@dimen/learn_spacing_middle"
+        android:paddingEnd="@dimen/learn_spacing_standard_new"
+        android:paddingBottom="@dimen/learn_spacing_middle"
+        android:text="@string/find_all_mode"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guideline2" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/findTenModeBtn"
-        style="@style/ModeButton.Filled"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="@dimen/learn_spacing_standard_new"
-        android:paddingTop="@dimen/learn_spacing_middle"
-        android:paddingEnd="@dimen/learn_spacing_standard_new"
-        android:paddingBottom="@dimen/learn_spacing_middle"
-        android:text="@string/find_ten_mode"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/findAllModeBtn2" />
-
-    <com.google.android.material.button.MaterialButton
         android:id="@+id/tutorialModeBtn"
         style="@style/ModeButton.Filled"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/_180sdp"
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/learn_spacing_standard_new"
         android:paddingTop="@dimen/learn_spacing_middle"

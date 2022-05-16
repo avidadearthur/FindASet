@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FindASet">
         <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".WelcomeActivity"
             android:exported="false" />
         <activity
@@ -25,7 +28,7 @@
         </activity>
         <activity
             android:name=".activities.MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>
