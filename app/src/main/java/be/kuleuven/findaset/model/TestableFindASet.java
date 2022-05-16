@@ -1,19 +1,28 @@
 package be.kuleuven.findaset.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import be.kuleuven.findaset.activities.MainActivity;
-import be.kuleuven.findaset.model.card.AbstractCard;
 
 public interface TestableFindASet {
-    void setTable(AbstractCard[] table);
-    void updateTable(ArrayList<Integer> cardIndexes);
-    void emptyTable();
-    AbstractCard getCard(int i);
-    void toggle(int i);
-    AbstractCard[] generateSet(int[][] featureMatrix);
-    int[] generateSetFeature(int[][] featureMatrix);
-    int[][] getFeatureMatrix();
     void setUI(MainActivity mainActivity);
+
+    void startNewGame();
+    void initializeTable(int sizeOfCards);
+
+    void toggle(int index);
+    void select(int index);
+    void unselect(int index);
+
+    int[][] getFeatureMatrix();
     int[] getJustForTest();
+    void alternativeUpdateTable(ArrayList<Integer> selectedCardsIndex);
+
+    boolean checkSet(ArrayList<Integer> selectedCardsIndex);
+
+    ArrayList<Integer> getSelectedCardsIndex();
+    ArrayList<Integer> getCardsIdTable();
+    ArrayList<Boolean> getIsCardSelected();
+
 }

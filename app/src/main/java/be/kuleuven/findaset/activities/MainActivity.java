@@ -1,14 +1,16 @@
 package be.kuleuven.findaset.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.View;
+import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,14 +18,9 @@ import java.util.Arrays;
 import be.kuleuven.findaset.R;
 import be.kuleuven.findaset.model.FindASet;
 import be.kuleuven.findaset.model.TestableFindASet;
-import be.kuleuven.findaset.model.card.AbstractCard;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TestableFindASet gameModel;
-    private ImageView[] cardImages;
-    private TextView[] cardTexts;
-    private TextView testTxt;
     private final Integer[] cardPicturesIds = {
             R.drawable.ovaal1groen, R.drawable.ovaal2groen, R.drawable.ovaal3groen,
             R.drawable.ovaal1rood, R.drawable.ovaal2rood, R.drawable.ovaal3rood,
@@ -34,11 +31,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             R.drawable.tilde1groen, R.drawable.tilde2groen, R.drawable.tilde3groen,
             R.drawable.tilde1rood, R.drawable.tilde2rood, R.drawable.tilde3rood,
             R.drawable.tilde1paars, R.drawable.tilde2paars, R.drawable.tilde3paars};
-    private ArrayList<Integer> selectedCardsIndex;
+    private TestableFindASet gameModel;
+    private ImageView[] cardImages;
+    private TextView[] cardTexts;
+    private TextView testTxt;
+    private Chronometer chronometer;
 
     /**
      * Firstly bound all fields with UI components.
-     *
+     * <p>
      * Then bound gameModel with new FindASet()
      * to use the method in FindASet.
      *
@@ -49,8 +50,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Init chronometer
+        chronometer = findViewById(R.id.chronometer);
+
+
+        // testing register and login
+        TextView txtInfo = (TextView) findViewById(R.id.textView2);
+        String loginInfo;
+        try{
+            Bundle extras = getIntent().getExtras();
+            loginInfo = extras.getString("LoginInfo");
+        }
+        catch (Exception e){
+            loginInfo = "guest";
+        }
+
+        txtInfo.setText(loginInfo);
+
         testTxt = findViewById(R.id.testTxt);
-        selectedCardsIndex = new ArrayList<>(3);
 
         cardImages = new ImageView[12];
         cardImages[0] = findViewById(R.id.card1);
@@ -80,55 +97,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cardTexts[10] = findViewById(R.id.card11Text);
         cardTexts[11] = findViewById(R.id.card12Text);
 
-        for(int i = 0; i < 12; i++) {
+        for (int i = 0; i < 12; i++) {
             cardImages[i].setOnClickListener(this);
+            cardImages[i].setBackgroundColor(getColor(R.color.white));
         }
 
         TestableFindASet findASet = new FindASet();
         setGameModel(findASet);
-        gameModel.setTable(null);
-    }
-
-    /**
-     * First get the index of which call the method.
-     *
-     * If there are already 3 selected cards, remove the first.
-     *
-     * After that, call checkSet() to check if there is set.
-     *
-     * If there is, call updateTable().
-     */
-    @Override
-    public void onClick(View view) {
-        int index = Arrays.asList(cardImages).indexOf(view);
-        if (gameModel.getCard(index).isSelected()) {
-            selectedCardsIndex.remove(selectedCardsIndex.indexOf(index));
-            gameModel.toggle(index);
-        }
-        else {
-            if (selectedCardsIndex.size() == 3) {
-                gameModel.toggle(selectedCardsIndex.get(0));
-                selectedCardsIndex.remove(0);
-            }
-            selectedCardsIndex.add(index);
-            gameModel.toggle(index);
-            if (selectedCardsIndex.size() == 3) {
-                if(checkSet()) {
-                    testTxt.setText("set Found");
-                    gameModel.updateTable(selectedCardsIndex);
-                    selectedCardsIndex.clear();
-                }
-            }
-        }
-    }
-
-    public void refreshBtn_Clicked(View caller){
-        for (int i = 0; i < selectedCardsIndex.size(); i++) {
-            gameModel.toggle(selectedCardsIndex.get(i));
-        }
-        selectedCardsIndex.clear();
-        gameModel.emptyTable();
-        gameModel.setTable(null);
+        gameModel.startNewGame();
     }
 
     public void setGameModel(TestableFindASet newGameModel) {
@@ -139,101 +115,114 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * Display images of all cards.
      */
-    public void notifyNewGame() {
-        for(int i = 0; i < cardImages.length; i++){
+    public void notifyNewGame(int sizeOfCards) {
+        for (int i = 0; i < sizeOfCards; i++) {
+            cardImages[i].setEnabled(true);
+            cardImages[i].setVisibility(View.VISIBLE);
             notifyCard(i);
         }
 
+        //Init chronometer
+        chronometer.setBase(SystemClock.elapsedRealtime());
+        chronometer.start();
+
         //JUST for TEST
         String str = "SET cards position: "
-                + (gameModel.getJustForTest()[0]+1) + " "
-                + (gameModel.getJustForTest()[1]+1) + " "
-                + (gameModel.getJustForTest()[2]+1) + " ";
+                + (gameModel.getJustForTest()[0] + 1) + " "
+                + (gameModel.getJustForTest()[1] + 1) + " "
+                + (gameModel.getJustForTest()[2] + 1) + " ";
         testTxt.setText(str);
     }
 
     /**
-     * Display images of one card accroding to index.
+     * Display images of one card according to index.
+     * 1. Gets the cards created on init
+     * 2. Creates Image bitmap based on the card images
+     * 3.Set card text for test
      */
     public void notifyCard(int index) {
-        AbstractCard nextCard = gameModel.getCard(index);
-        cardImages[index].setImageBitmap(combineImageIntoOne(setBitmaps(nextCard)));
-        cardTexts[index].setText(nextCard.toString());
+        int nextCardId = gameModel.getCardsIdTable().get(index);
+        cardImages[index].setImageBitmap(combineImageIntoOne(setBitmaps(nextCardId)));
+        //cardTexts[index].setText(nextCard.toString());
+        cardTexts[index].setText("");
     }
+
+    /**
+     * First get the index of which call the method.
+     * <p>
+     * If there are already 3 selected cards, remove the first.
+     * <p>
+     * After that, call checkSet() to check if there is set.
+     * <p>
+     * If there is, call updateTable().
+     */
+    @Override
+    public void onClick(View clickedView) {
+        int index = Arrays.asList(cardImages).indexOf(clickedView);
+        gameModel.toggle(index);
+    }
+
+    public void refreshBtn_Clicked(View caller) {
+        for (int i = 0; i < gameModel.getSelectedCardsIndex().size(); i++) {
+            gameModel.unselect(gameModel.getSelectedCardsIndex().get(i));
+        }
+        gameModel.startNewGame();
+    }
+
 
     /**
      * If there is no green border, add one.
      * If there is already one green border, delete it.
      */
-    public void notifyToggle(int index) {
-        if(gameModel.getCard(index).isSelected())
-            cardImages[index].setBackground(getDrawable(R.drawable.selected_card));
-        else
-            cardImages[index].setBackground(null);
+    public void notifySelect(int index) {
+        cardImages[index].setBackground(getDrawable(R.drawable.selected_card));
+    }
+
+    public void notifyUnselect(int index) {
+        cardImages[index].setBackgroundColor(getColor(R.color.white));
+    }
+
+    public void notifyUnavailable(int index) {
+        cardImages[index].setEnabled(false);
+        cardImages[index].setVisibility(View.INVISIBLE);
+    }
+
+    public void setTestTxt(String str) {
+        testTxt.setText(str);
     }
 
     /**
-     * Store features of all cards into 4*3 featureMatrix.
-     * For every column, check if is all same numbers or the sum equals to 6.
-     *
-     * @return If there is set, true will be returned.
-     */
-    private boolean checkSet() {
-        int[][] featureMatrix = new int[3][4];
-        for (int i = 0; i < 3; i++) {
-            AbstractCard next = gameModel.getCard(selectedCardsIndex.get(i));
-            featureMatrix[i][0] = next.getShapeCountInt();
-            featureMatrix[i][1] = next.getShadingInt();
-            featureMatrix[i][2] = next.getColorInt();
-            featureMatrix[i][3] = next.getTypeInt();
-        }
-        boolean isSet = true;
-        for (int col = 0; col < 4; col++) {
-            if (featureMatrix[0][col] == featureMatrix[1][col]) {
-                if (featureMatrix[1][col] != featureMatrix[2][col]) {
-                    isSet = false;
-                    break;
-                }
-            } else if (featureMatrix[0][col] + featureMatrix[1][col] + featureMatrix[2][col] != 6) {
-                isSet = false;
-                break;
-            }
-        }
-        return isSet;
-    }
-
-    /**
+     * Retrieves the shape
      * cardPicturesIds[] is an array that stores all Ids of basic components drawables.
-     *
+     * <p>
      * According to the feature IDs, the index of basic component in the array can be
      * derived.
      *
      * @param card Object in AbstractCard class.
-     *
-     * @return An arraylist with the size equals to ShapeCountInt of card,
-     *          which stores basic components.
+     * @return newBitMap - An arraylist with the size equals to card.getSize(),
+     * which stores basic components.
      */
-    private ArrayList<Bitmap> setBitmaps(AbstractCard card) {
-        int color = card.getColorInt() - 1;
-        int shading = card.getShadingInt() - 1;
-        int shape = card.getTypeInt() - 1;
+    private ArrayList<Bitmap> setBitmaps(int card) {
+        int color = (card%1000)/100 - 1;
+        int shading = (card%100)/10 - 1;
+        int shape = card%10 - 1;
         int index = shape * 9 + color * 3 + shading;
         Bitmap test = BitmapFactory.decodeResource(getResources(), cardPicturesIds[index]);
         ArrayList<Bitmap> newBitMap = new ArrayList<>();
-        for (int i = 0; i < card.getShapeCountInt(); i++) {
+        for (int i = 0; i < card/1000; i++) {
             newBitMap.add(test);
         }
         return newBitMap;
     }
 
     /**
+     * Forms image
      * Combine basic components to final image of each card according to the ShapeCountInt.
-     *
+     * <p>
      * Set the gap between components to make sure the width of new Bitmap equals to
      * 4.5 times of width of basic components, which is fixed no matter how many components.
      *
      * @param bitmap the basic component of
-     *
      * @return a new Bitmap contained several components
      */
     private Bitmap combineImageIntoOne(ArrayList<Bitmap> bitmap) {
