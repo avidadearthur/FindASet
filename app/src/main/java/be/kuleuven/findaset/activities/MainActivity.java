@@ -18,7 +18,6 @@ import java.util.Arrays;
 import be.kuleuven.findaset.R;
 import be.kuleuven.findaset.model.FindASet;
 import be.kuleuven.findaset.model.TestableFindASet;
-import be.kuleuven.findaset.model.card.AlternativeCard;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -142,8 +141,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 3.Set card text for test
      */
     public void notifyCard(int index) {
-        AlternativeCard nextCard = gameModel.AlternativeGetCard(index);
-        cardImages[index].setImageBitmap(combineImageIntoOne(setBitmaps(nextCard)));
+        int nextCardId = gameModel.getCardsIdTable().get(index);
+        cardImages[index].setImageBitmap(combineImageIntoOne(setBitmaps(nextCardId)));
         //cardTexts[index].setText(nextCard.toString());
         cardTexts[index].setText("");
     }
@@ -203,14 +202,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * @return newBitMap - An arraylist with the size equals to card.getSize(),
      * which stores basic components.
      */
-    private ArrayList<Bitmap> setBitmaps(AlternativeCard card) {
-        int color = card.getCardFeatures().get(1) - 1;
-        int shading = card.getCardFeatures().get(2) - 1;
-        int shape = card.getCardFeatures().get(3) - 1;
+    private ArrayList<Bitmap> setBitmaps(int card) {
+        int color = (card%1000)/100 - 1;
+        int shading = (card%100)/10 - 1;
+        int shape = card%10 - 1;
         int index = shape * 9 + color * 3 + shading;
         Bitmap test = BitmapFactory.decodeResource(getResources(), cardPicturesIds[index]);
         ArrayList<Bitmap> newBitMap = new ArrayList<>();
-        for (int i = 0; i < card.getSize(); i++) {
+        for (int i = 0; i < card/1000; i++) {
             newBitMap.add(test);
         }
         return newBitMap;

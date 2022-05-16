@@ -12,8 +12,6 @@ import java.util.Arrays;
 
 import be.kuleuven.findaset.model.FindASet;
 import be.kuleuven.findaset.model.TestableFindASet;
-import be.kuleuven.findaset.model.card.AlternativeCard;
-import be.kuleuven.findaset.model.card.CardElement;
 
 public class GameModelTester {
     private TestableFindASet gameBoard;
@@ -28,6 +26,7 @@ public class GameModelTester {
      * Creates two new CardElement objects based on the int based
      * logic and test both constructors.
      */
+    /*
     @org.junit.Test
     public void testGenerateCardElement() {
         // test to create a green striped diamond
@@ -41,6 +40,7 @@ public class GameModelTester {
         assertEquals(element1.getFeatures(), element2.getFeatures());
     }
 
+
     @org.junit.Test
     public void testGenerateAlternativeCard() {
         // id = 123, corresponds to a green striped diamond
@@ -53,6 +53,7 @@ public class GameModelTester {
         assertEquals(card1.getCardFeatures(), card2.getCardFeatures());
     }
 
+
     @org.junit.Test
     public void testToggleAlternativeCard() {
         // id = 123, corresponds to a green striped diamond
@@ -61,6 +62,23 @@ public class GameModelTester {
         card1.toggle();
         assertTrue(card1.isSelected());
     }
+
+     */
+
+    /*
+    @org.junit.Test
+    @Test
+    public void testGeneratingCard() {
+        EnumHandler handler = new EnumHandler();
+        AbstractCard card1 = new Card(SHAPECOUNT.one, SHADING.open, COLOR.red, TYPE.diamond);
+        AbstractCard card2 = new Card(handler.shapeCount(1), handler.shading(3),
+                handler.color(1), handler.type(1));
+        assertSame(card1.getCount(), card2.getCount());
+        assertSame(card1.getColor(), card2.getColor());
+        assertSame(card1.getShading(), card2.getShading());
+        assertSame(card1.getType(), card2.getType());
+    }
+    */
 
     /**
      * Checks if generateSet method creates valid sets according to the rule:
