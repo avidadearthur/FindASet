@@ -1,6 +1,5 @@
 package be.kuleuven.findaset.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,7 +22,7 @@ import java.security.NoSuchAlgorithmException;
 
 import be.kuleuven.findaset.R;
 
-public class RegisterLoginActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
     private TextView usernameRegister;
     private RequestQueue requestQueue;
     private String baseURL = "https://studev.groept.be/api/a21pt113/";
@@ -31,57 +30,7 @@ public class RegisterLoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_login);
-    }
-
-    public void onBtnGuest_Clicked(View caller) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-
-    public void onBtnLogin_Clicked(View caller) {
-        EditText loginUsername = (EditText) findViewById(R.id.editTextTextPersonName);
-        EditText loginPassword = (EditText) findViewById(R.id.editTextTextPassword);
-
-        String username = loginUsername.getText().toString();
-        String pass = loginPassword.getText().toString();
-
-        requestQueue = Volley.newRequestQueue( this );
-        String requestURL = baseURL + "login" + "/" + username;
-
-        Intent intent = new Intent(this, MainActivity.class);
-
-        StringRequest submitRequest = new StringRequest(Request.Method.GET, requestURL,
-
-                response -> {
-                    try {
-                        JSONArray responseArray = new JSONArray(response);
-                        JSONObject curObject = responseArray.getJSONObject( 0 );
-                        String responseString = curObject.getString( "hash" );
-
-                        String hash = get_SHA_1_SecurePassword(pass);
-
-                        if(hash.equals(responseString)){
-                            //Login success
-                            responseString = curObject.getString( "username" );
-                        }
-
-                        intent.putExtra("LoginInfo",responseString);
-                        startActivity(intent);
-                    }
-                    catch( JSONException e )
-                    {
-                        Log.e( "Database", e.getMessage(), e );
-                    }
-                },
-
-                error -> {
-                    JSONException e = null;
-                    Log.e( "Database", e.getMessage(), e );
-                }
-        );
-
-        requestQueue.add(submitRequest);
+        setContentView(R.layout.activity_register);
     }
 
     public void onBtnRegister_Clicked(View caller) throws NoSuchAlgorithmException {

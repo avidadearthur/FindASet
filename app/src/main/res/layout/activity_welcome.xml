@@ -5,86 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    tools:context=".activities.WelcomeActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.7" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
+        app:layout_constraintGuide_percent="0.54" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_200sdp"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/learn_spacing_xlarge"
-            android:layout_marginBottom="@dimen/learn_spacing_middle" />
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline">
-
-        <TextView
-            android:id="@+id/tvHeading"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_12sdp"
-            android:layout_marginTop="@dimen/learn_spacing_standard"
-            android:layout_marginEnd="@dimen/_12sdp"
-            android:gravity="center_horizontal"
-            android:text="@string/learn_lbl_welcome"
-            android:textAppearance="@style/LearnerFontSemiBold"
-            android:textColor="@color/learn_textColorPrimary"
-            android:textSize="@dimen/learn_font_size_xxxlarge"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvSubHeading"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvHeading"
-            android:layout_marginStart="@dimen/learn_spacing_large"
-            android:layout_marginTop="@dimen/learn_spacing_standard_new"
-            android:layout_marginEnd="@dimen/learn_spacing_large"
-            android:gravity="center_horizontal"
-            android:lineSpacingExtra="@dimen/learn_spacing_control"
-            android:lines="3"
-            android:text="@string/learn_short_text"
-            android:textColor="@color/learn_textColorSecondary"
-            android:textSize="@dimen/learn_font_size_large" />
-
-    </RelativeLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/findTenModeBtn"
         style="@style/ModeButton.Filled"
         android:layout_width="@dimen/_180sdp"
         android:layout_height="wrap_content"
+        android:onClick="onClick_FindTen"
         android:paddingStart="@dimen/learn_spacing_standard_new"
         android:paddingTop="@dimen/learn_spacing_middle"
         android:paddingEnd="@dimen/learn_spacing_standard_new"
@@ -99,6 +42,7 @@
         style="@style/ModeButton.Filled"
         android:layout_width="@dimen/_180sdp"
         android:layout_height="wrap_content"
+        android:onClick="onClick_FindAll"
         android:paddingStart="@dimen/learn_spacing_standard_new"
         android:paddingTop="@dimen/learn_spacing_middle"
         android:paddingEnd="@dimen/learn_spacing_standard_new"
@@ -113,6 +57,7 @@
         style="@style/ModeButton.Filled"
         android:layout_width="@dimen/_180sdp"
         android:layout_height="wrap_content"
+        android:onClick="onClick_FindLearning"
         android:paddingStart="@dimen/learn_spacing_standard_new"
         android:paddingTop="@dimen/learn_spacing_middle"
         android:paddingEnd="@dimen/learn_spacing_standard_new"
@@ -127,6 +72,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/learn_spacing_large"
+        android:minHeight="48dp"
+        android:onClick="onClick_Login"
         android:text="@string/learn_lbl_login_underlined"
         android:textAppearance="@style/LearnerFontMedium"
         android:textColor="@color/learn_textColorSecondary"
@@ -134,5 +81,37 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvHeading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginTop="116dp"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:gravity="center_horizontal"
+        android:text="@string/learn_lbl_welcome"
+        android:textAppearance="@style/LearnerFontSemiBold"
+        android:textColor="@color/learn_textColorPrimary"
+        android:textSize="@dimen/learn_font_size_xxxlarge"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvSubHeading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="178dp"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="@dimen/learn_spacing_control"
+        android:lines="3"
+        android:text="@string/learn_short_text"
+        android:textColor="@color/learn_textColorSecondary"
+        android:textSize="@dimen/learn_font_size_large"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="20dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
