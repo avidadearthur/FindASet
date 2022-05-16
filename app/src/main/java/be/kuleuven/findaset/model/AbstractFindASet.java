@@ -10,6 +10,4 @@ public abstract class AbstractFindASet implements TestableFindASet {
     public final void setUI(MainActivity mainActivity){
         this.mainActivity = mainActivity;
     }
-
-    public abstract ArrayList<Integer> getCardsIdTable();
 }

@@ -12,15 +12,6 @@ import java.util.Arrays;
 
 import be.kuleuven.findaset.model.FindASet;
 import be.kuleuven.findaset.model.TestableFindASet;
-import be.kuleuven.findaset.model.card.AbstractCard;
-import be.kuleuven.findaset.model.card.AlternativeCard;
-import be.kuleuven.findaset.model.card.Card;
-import be.kuleuven.findaset.model.card.CardElement;
-import be.kuleuven.findaset.model.card.enums.COLOR;
-import be.kuleuven.findaset.model.card.enums.EnumHandler;
-import be.kuleuven.findaset.model.card.enums.SHADING;
-import be.kuleuven.findaset.model.card.enums.SHAPECOUNT;
-import be.kuleuven.findaset.model.card.enums.TYPE;
 
 public class GameModelTester {
     private TestableFindASet gameBoard;
@@ -35,6 +26,7 @@ public class GameModelTester {
      * Creates two new CardElement objects based on the int based
      * logic and test both constructors.
      */
+    /*
     @org.junit.Test
     public void testGenerateCardElement() {
         // test to create a green striped diamond
@@ -48,6 +40,7 @@ public class GameModelTester {
         assertEquals(element1.getFeatures(), element2.getFeatures());
     }
 
+
     @org.junit.Test
     public void testGenerateAlternativeCard() {
         // id = 123, corresponds to a green striped diamond
@@ -60,6 +53,7 @@ public class GameModelTester {
         assertEquals(card1.getCardFeatures(), card2.getCardFeatures());
     }
 
+
     @org.junit.Test
     public void testToggleAlternativeCard() {
         // id = 123, corresponds to a green striped diamond
@@ -69,9 +63,9 @@ public class GameModelTester {
         assertTrue(card1.isSelected());
     }
 
-    /**
-     * Checks if card generation by enum and by index both work.
      */
+
+    /*
     @org.junit.Test
     @Test
     public void testGeneratingCard() {
@@ -84,6 +78,7 @@ public class GameModelTester {
         assertSame(card1.getShading(), card2.getShading());
         assertSame(card1.getType(), card2.getType());
     }
+    */
 
     /**
      * Checks if generateSet method creates valid sets according to the rule:
