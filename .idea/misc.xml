@@ -8,6 +8,10 @@
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/drawable-v24/card_background.xml" value="0.115" />
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/drawable/selected_card.xml" value="0.1115" />
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/layout/activity_register_login.xml" value="0.13541666666666666" />
+        <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/layout/learn_activity_login.xml" value="0.13541666666666666" />
+        <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/layout/learn_activity_register.xml" value="0.13541666666666666" />
+        <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/layout/learner_activity_walk_through_new.xml" value="0.264" />
       </map>
     </option>
   </component>

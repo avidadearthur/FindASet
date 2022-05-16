@@ -1,0 +1,39 @@
+<resources>
+    <style name="ModeButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/learn_font_size_normal</item>
+        <item name="android:paddingTop">@dimen/learn_spacing_standard</item>
+        <item name="android:paddingBottom">@dimen/learn_spacing_standard</item>
+        <item name="android:paddingStart">@dimen/learn_spacing_standard</item>
+        <item name="android:paddingEnd">@dimen/learn_spacing_standard</item>
+        <item name="android:theme">@style/Theme.MaterialComponents.Light</item>
+        <item name="cornerRadius">@dimen/_20sdp</item>
+    </style>
+
+    <style name="ModeButton.Filled">
+        <item name="backgroundTint">@color/learn_colorPrimary</item>
+        <item name="android:textColor">@color/learn_white</item>
+        <item name="rippleColor">@color/learn_white</item>
+    </style>
+
+    <style name="ModeButton.Stroked">
+        <item name="backgroundTint">@color/learn_white</item>
+        <item name="strokeColor">@color/learn_colorAccent</item>
+        <item name="strokeWidth">@dimen/_1sdp</item>
+        <item name="android:textColor">@color/learn_colorPrimary</item>
+    </style>
+
+    <style name="LearnerFontSemiBold">
+        <item name="font">@string/learn_font_semi_bold</item>
+    </style>
+
+    <style name="LearnerFontBold">
+        <item name="font">@string/learn_font_bold</item>
+    </style>
+
+    <style name="LearnerFontMedium">
+        <item name="font">@string/learn_font_medium</item>
+    </style>
+
+
+</resources>
