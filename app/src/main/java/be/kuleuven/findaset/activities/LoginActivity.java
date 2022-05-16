@@ -32,9 +32,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getSupportActionBar().hide();
     }
 
-    public void onJoin_Clicked(View caller) {
+    public void onClick_Join(View caller) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
