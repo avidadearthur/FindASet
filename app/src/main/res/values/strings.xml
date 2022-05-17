@@ -25,10 +25,10 @@
     <string name="learn_lbl_login_underlined"><u>Login</u></string>
     <string name="learn_samplelong_text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.dummy text of the printing and typesetting </string>
     <string name="learn_short_text">Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit</string>
-    <string name="learn_hint_email">Email</string>
-    <string name="learn_txt_johndoe_gmail_com">johndoe@gmail.com</string>
     <string name="learn_hint_password">password</string>
-    <string name="learn_hint_fisrnamelastname">Full Name</string>
+    <string name="learn_txt_email">username</string>
+    <string name="learn_hint_confirm_password">confirm password</string>
+    <string name="learn_hint_username">username</string>
     <string name="learn_register_note">By Pressing \'Join\' you agree to our</string>
     <string name="learn_txt_terms_condition"><u>Terms &amp; Condition</u></string>
     <string name="learn_lblget_started">Get Started</string>

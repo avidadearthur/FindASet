@@ -24,18 +24,21 @@
         android:orientation="vertical">
 
         <EditText
+            android:id="@+id/etUsername"
             style="@style/LearnEditTextStyleRound"
             android:layout_marginTop="@dimen/learn_spacing_large"
             android:hint="@string/learn_hint_fisrnamelastname" />
 
         <EditText
+            android:id="@+id/etPassword"
             style="@style/LearnEditTextStyleRound"
-            android:hint="@string/learn_hint_email" />
+            android:hint="@string/learn_hint_password" />
 
         <EditText
+            android:id="@+id/etConfirmPassword"
             style="@style/LearnEditTextStyleRound"
             android:layout_marginBottom="@dimen/learn_spacing_xlarge"
-            android:hint="@string/learn_hint_password"
+            android:hint="@string/learn_hint_confirm_password"
             android:inputType="textPassword" />
 
         <com.google.android.material.button.MaterialButton
@@ -44,6 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:onClick="onBtnRegister_Clicked"
             android:paddingStart="@dimen/learn_spacing_xlarge"
             android:paddingEnd="@dimen/learn_spacing_xlarge"
             android:text="@string/learn_lbl_join"

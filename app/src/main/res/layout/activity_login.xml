@@ -15,7 +15,8 @@
         android:layout_marginStart="@dimen/learn_spacing_standard_new"
         android:layout_marginTop="@dimen/learn_spacing_standard_new"
         android:padding="@dimen/_5sdp"
-        android:src="@drawable/learn_ic_back" />
+        android:src="@drawable/learn_ic_back"
+        android:contentDescription="TODO" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,10 +25,13 @@
         android:orientation="vertical">
 
         <EditText
+            android:id="@+id/etUsernameLogin"
             style="@style/LearnEditTextStyleRound"
             android:layout_marginTop="@dimen/learn_spacing_large"
-            android:hint="@string/learn_hint_email"
-            android:text="@string/learn_txt_johndoe_gmail_com" />
+            android:autofillHints=""
+            android:hint="@string/learn_hint_username"
+            android:inputType="text"
+            android:text="@string/learn_txt_email" />
 
 
         <RelativeLayout
@@ -43,14 +47,18 @@
             android:paddingBottom="@dimen/learn_spacing_standard_new">
 
             <EditText
+                android:id="@+id/etPasswordLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:hint="@string/learn_lbl_password"
+                android:inputType="textPassword"
                 android:maxEms="7"
                 android:textAppearance="@style/LearnerFontSemiBold"
                 android:textColor="@color/learn_textColorPrimary"
-                android:textSize="@dimen/learn_font_size_normal" />
+                android:textColorHint="#757575"
+                android:textSize="@dimen/learn_font_size_normal"
+                android:autofillHints="" />
 
             <TextView
                 android:id="@+id/tvForget"
@@ -73,6 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:onClick="onBtnEnter_Clicked"
             android:paddingStart="@dimen/learn_spacing_xlarge"
             android:paddingEnd="@dimen/learn_spacing_xlarge"
             android:text="@string/learn_lbl_enter"
@@ -92,7 +101,6 @@
             android:id="@+id/tvNote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@id/tvTOC"
             android:text="@string/learn_lbl_don_t_joined_yet"
             android:textAppearance="@style/LearnerFontMedium"
             android:textColor="@color/learn_textColorPrimary"

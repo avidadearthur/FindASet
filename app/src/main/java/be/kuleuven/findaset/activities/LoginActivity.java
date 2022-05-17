@@ -41,8 +41,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onBtnEnter_Clicked(View caller) {
-        EditText loginUsername = (EditText) findViewById(R.id.editTextTextPersonName);
-        EditText loginPassword = (EditText) findViewById(R.id.editTextTextPassword);
+        EditText loginUsername = (EditText) findViewById(R.id.etUsernameLogin);
+        EditText loginPassword = (EditText) findViewById(R.id.etPasswordLogin);
 
         String username = loginUsername.getText().toString();
         String pass = loginPassword.getText().toString();
