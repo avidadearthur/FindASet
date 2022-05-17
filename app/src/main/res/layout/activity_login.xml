@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/learn_bg_gradient_grey"
+    android:onClick="onClick_Join"
+    tools:context=".activities.LoginActivity">
+
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/learn_spacing_standard_new"
+        android:layout_marginTop="@dimen/learn_spacing_standard_new"
+        android:padding="@dimen/_5sdp"
+        android:src="@drawable/learn_ic_back" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <EditText
+            style="@style/LearnEditTextStyleRound"
+            android:layout_marginTop="@dimen/learn_spacing_large"
+            android:hint="@string/learn_hint_email"
+            android:text="@string/learn_txt_johndoe_gmail_com" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/learn_spacing_xlarge"
+            android:layout_marginEnd="@dimen/learn_spacing_xlarge"
+            android:layout_marginBottom="@dimen/learn_spacing_xlarge"
+            android:background="@drawable/learn_shadow_edittext"
+            android:paddingStart="@dimen/learn_spacing_large"
+            android:paddingTop="@dimen/learn_spacing_standard_new"
+            android:paddingEnd="@dimen/learn_spacing_standard"
+            android:paddingBottom="@dimen/learn_spacing_standard_new">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="@string/learn_lbl_password"
+                android:maxEms="7"
+                android:textAppearance="@style/LearnerFontSemiBold"
+                android:textColor="@color/learn_textColorPrimary"
+                android:textSize="@dimen/learn_font_size_normal" />
+
+            <TextView
+                android:id="@+id/tvForget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/learn_spacing_standard_new"
+                android:background="@null"
+                android:text="@string/learn_lbl_forget"
+                android:textAppearance="@style/LearnerFontSemiBold"
+                android:textColor="@color/learn_colorPrimary"
+                android:textSize="@dimen/learn_font_size_normal" />
+
+
+        </RelativeLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEnter"
+            style="@style/ModeButton.Filled"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingStart="@dimen/learn_spacing_xlarge"
+            android:paddingEnd="@dimen/learn_spacing_xlarge"
+            android:text="@string/learn_lbl_enter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline2" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:id="@+id/tvNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tvTOC"
+            android:text="@string/learn_lbl_don_t_joined_yet"
+            android:textAppearance="@style/LearnerFontMedium"
+            android:textColor="@color/learn_textColorPrimary"
+            android:textSize="@dimen/learn_font_size_medium" />
+
+        <TextView
+            android:id="@+id/tvJoin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/learn_spacing_standard_new"
+            android:padding="@dimen/learn_spacing_control"
+            android:text="@string/learn_lbl_join"
+            android:textAppearance="@style/LearnerFontSemiBold"
+            android:textColor="@color/learn_colorPrimary"
+            android:textSize="@dimen/learn_font_size_medium" />
+    </LinearLayout>
+
+</RelativeLayout>

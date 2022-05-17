@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:ignore="MissingDefaultResource">
+
+    <!-- Drop Shadow Stack -->
+
+    <item>
+        <shape
+            android:shape="oval">
+
+            <solid android:color="@color/learn_white" />
+
+            <corners android:radius="@dimen/learn_spacing_standard" />
+        </shape>
+    </item>
+
+    <!-- Background -->
+    <item
+        android:top="@dimen/_4sdp"
+        android:left="@dimen/_4sdp"
+        android:right="@dimen/_4sdp"
+        android:bottom="@dimen/_4sdp"
+        android:id="@+id/itemStatus">
+        <shape
+            android:shape="oval">
+            <solid android:color="@color/learn_green" />
+
+            <corners android:radius="@dimen/learn_spacing_standard" />
+        </shape>
+    </item>
+
+</layer-list>
