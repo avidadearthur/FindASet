@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="learn_font_size_nano">10sp</dimen>
-    <dimen name="learn_font_size_micro">12sp</dimen>
-    <dimen name="learn_font_size_small">14sp</dimen>
-    <dimen name="learn_font_size_medium">16sp</dimen>
-    <dimen name="learn_font_size_normal">18sp</dimen>
-    <dimen name="learn_font_size_large">20sp</dimen>
-    <dimen name="learn_font_size_xlarge">22sp</dimen>
-    <dimen name="learn_font_size_xxlarge">26sp</dimen>
-    <dimen name="learn_font_size_xxxlarge">30sp</dimen>
-    <dimen name="learn_font_size_splash">40sp</dimen>
+    <dimen name="font_size_nano">10sp</dimen>
+    <dimen name="font_size_micro">12sp</dimen>
+    <dimen name="font_size_small">14sp</dimen>
+    <dimen name="font_size_medium">16sp</dimen>
+    <dimen name="font_size_normal">18sp</dimen>
+    <dimen name="font_size_large">20sp</dimen>
+    <dimen name="font_size_xlarge">22sp</dimen>
+    <dimen name="font_size_xxlarge">26sp</dimen>
+    <dimen name="font_size_xxxlarge">30sp</dimen>
+    <dimen name="font_size_splash">40sp</dimen>
 
     <dimen name="learn_spacing_control_half">@dimen/_2sdp</dimen>
     <dimen name="learn_spacing_control">@dimen/_4sdp</dimen>

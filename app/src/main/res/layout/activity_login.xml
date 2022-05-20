@@ -26,8 +26,9 @@
         <EditText
             style="@style/LearnEditTextStyleRound"
             android:layout_marginTop="@dimen/learn_spacing_large"
-            android:hint="@string/learn_hint_email"
-            android:text="@string/learn_txt_johndoe_gmail_com" />
+            android:hint="@string/hint_email"
+            android:text="@string/learn_txt_johndoe_gmail_com"
+            android:textStyle="bold" />
 
 
         <RelativeLayout
@@ -46,11 +47,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:hint="@string/learn_lbl_password"
+                android:hint="@string/hint_password"
                 android:maxEms="7"
-                android:textAppearance="@style/LearnerFontSemiBold"
                 android:textColor="@color/learn_textColorPrimary"
-                android:textSize="@dimen/learn_font_size_normal" />
+                android:textSize="@dimen/font_size_normal"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvForget"
@@ -59,10 +60,10 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="@dimen/learn_spacing_standard_new"
                 android:background="@null"
-                android:text="@string/learn_lbl_forget"
-                android:textAppearance="@style/LearnerFontSemiBold"
+                android:text="@string/login_forget"
                 android:textColor="@color/learn_colorPrimary"
-                android:textSize="@dimen/learn_font_size_normal" />
+                android:textSize="@dimen/font_size_normal"
+                android:textStyle="bold" />
 
 
         </RelativeLayout>
@@ -75,7 +76,7 @@
             android:layout_gravity="center_horizontal"
             android:paddingStart="@dimen/learn_spacing_xlarge"
             android:paddingEnd="@dimen/learn_spacing_xlarge"
-            android:text="@string/learn_lbl_enter"
+            android:text="@string/login_enter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/guideline2" />
@@ -92,22 +93,22 @@
             android:id="@+id/tvNote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@id/tvTOC"
-            android:text="@string/learn_lbl_don_t_joined_yet"
-            android:textAppearance="@style/LearnerFontMedium"
+            android:text="@string/login_don_t_joined_yet"
             android:textColor="@color/learn_textColorPrimary"
-            android:textSize="@dimen/learn_font_size_medium" />
+            android:textSize="@dimen/font_size_medium" />
 
         <TextView
             android:id="@+id/tvJoin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/learn_spacing_standard_new"
+            android:clickable="false"
+            android:onClick="onClick_Join"
             android:padding="@dimen/learn_spacing_control"
-            android:text="@string/learn_lbl_join"
-            android:textAppearance="@style/LearnerFontSemiBold"
+            android:text="@string/login_join"
             android:textColor="@color/learn_colorPrimary"
-            android:textSize="@dimen/learn_font_size_medium" />
+            android:textSize="@dimen/font_size_medium"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </RelativeLayout>

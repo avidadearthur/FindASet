@@ -36,8 +36,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onClick_Join(View caller) {
-        Intent intent = new Intent(this, RegisterActivity.class);
-        startActivity(intent);
+        try {
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     public void onBtnEnter_Clicked(View caller) {

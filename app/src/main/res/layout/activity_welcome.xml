@@ -8,34 +8,24 @@
     android:fitsSystemWindows="true"
     tools:context=".activities.WelcomeActivity">
 
+    <ImageView
+        android:id="@+id/imgWalk"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:src="@drawable/learen_walk_bg"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.54" />
-
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/findTenModeBtn"
-        style="@style/ModeButton.Filled"
-        android:layout_width="@dimen/_180sdp"
-        android:layout_height="wrap_content"
-        android:onClick="onClick_FindTen"
-        android:paddingStart="@dimen/learn_spacing_standard_new"
-        android:paddingTop="@dimen/learn_spacing_middle"
-        android:paddingEnd="@dimen/learn_spacing_standard_new"
-        android:paddingBottom="@dimen/learn_spacing_middle"
-        android:text="@string/find_ten_mode"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/findAllModeBtn" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/findAllModeBtn"
@@ -48,9 +38,26 @@
         android:paddingEnd="@dimen/learn_spacing_standard_new"
         android:paddingBottom="@dimen/learn_spacing_middle"
         android:text="@string/find_all_mode"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guideline2" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/findTenModeBtn"
+        style="@style/ModeButton.Filled"
+        android:layout_width="@dimen/_180sdp"
+        android:layout_height="wrap_content"
+        android:onClick="onClick_FindTen"
+        android:paddingStart="@dimen/learn_spacing_standard_new"
+        android:paddingTop="@dimen/learn_spacing_middle"
+        android:paddingEnd="@dimen/learn_spacing_standard_new"
+        android:paddingBottom="@dimen/learn_spacing_middle"
+        android:text="@string/find_ten_mode"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/findAllModeBtn" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/tutorialModeBtn"
@@ -63,6 +70,7 @@
         android:paddingEnd="@dimen/learn_spacing_standard_new"
         android:paddingBottom="@dimen/learn_spacing_middle"
         android:text="@string/tutorial_mode"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/findTenModeBtn" />
@@ -75,9 +83,9 @@
         android:minHeight="48dp"
         android:onClick="onClick_Login"
         android:text="@string/learn_lbl_login_underlined"
-        android:textAppearance="@style/LearnerFontMedium"
         android:textColor="@color/learn_textColorSecondary"
-        android:textSize="@dimen/learn_font_size_large"
+        android:textSize="@dimen/font_size_large"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -91,9 +99,8 @@
         android:layout_marginEnd="@dimen/_12sdp"
         android:gravity="center_horizontal"
         android:text="@string/learn_lbl_welcome"
-        android:textAppearance="@style/LearnerFontSemiBold"
         android:textColor="@color/learn_textColorPrimary"
-        android:textSize="@dimen/learn_font_size_xxxlarge"
+        android:textSize="@dimen/font_size_xxxlarge"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -110,7 +117,8 @@
         android:lines="3"
         android:text="@string/learn_short_text"
         android:textColor="@color/learn_textColorSecondary"
-        android:textSize="@dimen/learn_font_size_large"
+        android:textSize="@dimen/font_size_large"
+        android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="20dp" />
 

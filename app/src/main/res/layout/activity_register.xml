@@ -19,24 +19,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ivBack"
-        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
         android:orientation="vertical">
 
         <EditText
             style="@style/LearnEditTextStyleRound"
             android:layout_marginTop="@dimen/learn_spacing_large"
-            android:hint="@string/learn_hint_fisrnamelastname" />
+            android:hint="@string/learn_hint_fisrnamelastname"
+            android:textStyle="bold" />
 
         <EditText
             style="@style/LearnEditTextStyleRound"
-            android:hint="@string/learn_hint_email" />
+            android:hint="@string/hint_email"
+            android:textStyle="bold" />
 
         <EditText
             style="@style/LearnEditTextStyleRound"
             android:layout_marginBottom="@dimen/learn_spacing_xlarge"
-            android:hint="@string/learn_hint_password"
-            android:inputType="textPassword" />
+            android:hint="@string/hint_password"
+            android:inputType="textPassword"
+            android:textStyle="bold" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnJoin"
@@ -46,34 +49,13 @@
             android:layout_gravity="center_horizontal"
             android:paddingStart="@dimen/learn_spacing_xlarge"
             android:paddingEnd="@dimen/learn_spacing_xlarge"
-            android:text="@string/learn_lbl_join"
+            android:text="@string/login_join"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/guideline2" />
 
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/tvTOC"
-        android:layout_centerHorizontal="true"
-        android:text="@string/learn_register_note"
-        android:textAppearance="@style/LearnerFontMedium"
-        android:textColor="@color/learn_textColorPrimary"
-        android:textSize="@dimen/learn_font_size_medium" />
-
-    <TextView
-        android:id="@+id/tvTOC"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/learn_spacing_standard_new"
-        android:text="@string/learn_txt_terms_condition"
-        android:textAppearance="@style/LearnerFontSemiBold"
-        android:textColor="@color/learn_colorPrimary"
-        android:textSize="@dimen/learn_font_size_medium" />
 
 
 </RelativeLayout>
