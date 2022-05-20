@@ -18,6 +18,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -64,13 +67,15 @@ public class LoginActivity extends AppCompatActivity {
 
                         if(hash.equals(responseString)){
                             //Login success
+                            //Save the username and the hash in the credentials
+                            updateCredentials(username,hash);
                             responseString = curObject.getString( "username" );
                         }
 
                         intent.putExtra("LoginInfo",responseString);
                         startActivity(intent);
                     }
-                    catch( JSONException e )
+                    catch(JSONException | FileNotFoundException e )
                     {
                         Log.e( "Database", e.getMessage(), e );
                     }
@@ -101,5 +106,19 @@ public class LoginActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return generatedPassword;
+    }
+
+    private void updateCredentials(String username, String hash) throws FileNotFoundException {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("loginCredentials", new String[]{username, hash});
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try (PrintWriter out = new PrintWriter(new FileWriter("credentials.txt"))) {
+            out.write(json.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
