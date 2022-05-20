@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/layout_background"
+    tools:context=".activities.LeaderBoardActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/learn_spacing_standard_new"
+            android:layout_marginTop="@dimen/learn_spacing_standard_new"
+            android:contentDescription="@string/back"
+            android:onClick="onClick_Back"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/ic_back"
+            tools:ignore="TouchTargetSizeCheck" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvLeaderBoard"
+            style="@style/LearnHeadingBig"
+            android:layout_marginStart="@dimen/learn_spacing_standard_new"
+            android:layout_marginTop="@dimen/learn_spacing_middle"
+            android:text="@string/board_leader_board"
+            android:textSize="@dimen/font_size_xxxlarge"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/tabModes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/learn_spacing_standard_new"
+        android:layout_marginTop="@dimen/learn_spacing_standard_new">
+
+        <TextView
+            android:id="@+id/tvAll"
+            style="@style/TabTextStyle"
+            android:onClick="onClick_All"
+            android:text="@string/board_find_all"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTen"
+            style="@style/TabTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="@dimen/learn_spacing_large"
+            android:onClick="onClick_Ten"
+            android:text="@string/board_find_ten"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/tvAll"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TouchTargetSizeCheck" />
+
+
+        <View
+            android:id="@+id/tab"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_3sdp"
+            app:layout_constraintTop_toBottomOf="@id/tvAll"
+            app:layout_constraintStart_toStartOf="@id/tvAll"
+            app:layout_constraintEnd_toEndOf="@id/tvAll"
+            android:background="@color/colorPrimary" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvBoard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/learn_spacing_standard_new"
+        android:paddingBottom="@dimen/learn_spacing_standard_new"
+        android:paddingStart="@dimen/learn_spacing_middle"
+        android:paddingEnd="@dimen/learn_spacing_middle"
+        android:overScrollMode="never"
+        android:clipToPadding="false" />
+
+
+</LinearLayout>
