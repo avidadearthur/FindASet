@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/learn_bg_gradient_grey"
-    android:onClick="onClick_Join"
+    android:background="@drawable/bg_gradient_grey"
     tools:context=".activities.LoginActivity">
 
     <ImageView
@@ -14,8 +13,11 @@
         android:layout_height="@dimen/_30sdp"
         android:layout_marginStart="@dimen/learn_spacing_standard_new"
         android:layout_marginTop="@dimen/learn_spacing_standard_new"
+        android:contentDescription="@string/back"
+        android:onClick="onClick_Back"
         android:padding="@dimen/_5sdp"
-        android:src="@drawable/learn_ic_back" />
+        android:src="@drawable/ic_back"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,7 +39,7 @@
             android:layout_marginStart="@dimen/learn_spacing_xlarge"
             android:layout_marginEnd="@dimen/learn_spacing_xlarge"
             android:layout_marginBottom="@dimen/learn_spacing_xlarge"
-            android:background="@drawable/learn_shadow_edittext"
+            android:background="@drawable/shadow_edittext"
             android:paddingStart="@dimen/learn_spacing_large"
             android:paddingTop="@dimen/learn_spacing_standard_new"
             android:paddingEnd="@dimen/learn_spacing_standard"
@@ -49,9 +51,10 @@
                 android:background="@null"
                 android:hint="@string/hint_password"
                 android:maxEms="7"
-                android:textColor="@color/learn_textColorPrimary"
+                android:textColor="@color/textColorPrimary"
                 android:textSize="@dimen/font_size_normal"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <TextView
                 android:id="@+id/tvForget"
@@ -61,7 +64,7 @@
                 android:layout_marginEnd="@dimen/learn_spacing_standard_new"
                 android:background="@null"
                 android:text="@string/login_forget"
-                android:textColor="@color/learn_colorPrimary"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/font_size_normal"
                 android:textStyle="bold" />
 
@@ -94,7 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login_don_t_joined_yet"
-            android:textColor="@color/learn_textColorPrimary"
+            android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/font_size_medium" />
 
         <TextView
@@ -106,7 +109,7 @@
             android:onClick="onClick_Join"
             android:padding="@dimen/learn_spacing_control"
             android:text="@string/login_join"
-            android:textColor="@color/learn_colorPrimary"
+            android:textColor="@color/colorPrimary"
             android:textSize="@dimen/font_size_medium"
             android:textStyle="bold" />
     </LinearLayout>

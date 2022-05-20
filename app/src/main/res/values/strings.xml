@@ -13,15 +13,20 @@
 
     <string name="btn_play_as_guest">play as guest</string>
 
+    <string name="back">back</string>
     <string name="find_all_mode">Find All Mode</string>
     <string name="find_ten_mode">Find Ten Mode</string>
     <string name="tutorial_mode">Learning Mode</string>
+    <string name="leader_board">Leader Board</string>
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="login_forget">Forget!</string>
     <string name="login_enter">Enter</string>
     <string name="login_don_t_joined_yet">Don\'t Joined Yet !</string>
     <string name="login_join">Join</string>
+    <string name="board_leader_board">Leader Board</string>
+    <string name="board_find_all">Find ALL</string>
+    <string name="board_find_ten">Find TEN</string>
 
 
 

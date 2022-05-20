@@ -1,5 +1,6 @@
 package be.kuleuven.findaset.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +20,7 @@ import org.json.JSONObject;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
 
 import be.kuleuven.findaset.R;
 
@@ -31,7 +33,6 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        getSupportActionBar().hide();
     }
 
     public void onBtnRegister_Clicked(View caller) throws NoSuchAlgorithmException {
@@ -93,5 +94,10 @@ public class RegisterActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return generatedPassword;
+    }
+
+    public void onClick_Back(View caller) {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 }

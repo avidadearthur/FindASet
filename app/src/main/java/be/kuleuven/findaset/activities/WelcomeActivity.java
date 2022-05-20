@@ -3,6 +3,7 @@ package be.kuleuven.findaset.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,7 +15,6 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-        getSupportActionBar().hide();
     }
 
     public void onClick_FindAll(View caller) {
@@ -27,7 +27,7 @@ public class WelcomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onClick_FindLearning(View caller) {
+    public void onClick_Learning(View caller) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
@@ -37,4 +37,8 @@ public class WelcomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void onClick_Board(View caller) {
+        Intent intent = new Intent(this, LeaderBoardActivity.class);
+        startActivity(intent);
+    }
 }

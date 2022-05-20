@@ -20,6 +20,7 @@ import be.kuleuven.findaset.model.FindASet;
 import be.kuleuven.findaset.model.TestableFindASet;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    //todo: stop rotation
 
     private final Integer[] cardPicturesIds = {
             R.drawable.ovaal1groen, R.drawable.ovaal2groen, R.drawable.ovaal3groen,
@@ -121,17 +122,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             cardImages[i].setVisibility(View.VISIBLE);
             notifyCard(i);
         }
-
-        //Init chronometer
-        chronometer.setBase(SystemClock.elapsedRealtime());
-        chronometer.start();
-
+        notifyNewTime();
         //JUST for TEST
         String str = "SET cards position: "
                 + (gameModel.getJustForTest()[0] + 1) + " "
                 + (gameModel.getJustForTest()[1] + 1) + " "
                 + (gameModel.getJustForTest()[2] + 1) + " ";
         testTxt.setText(str);
+    }
+
+    public void notifyNewTime() {
+        //Init chronometer
+        chronometer.setBase(SystemClock.elapsedRealtime());
+        chronometer.start();
     }
 
     /**
@@ -167,6 +170,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             gameModel.unselect(gameModel.getSelectedCardsIndex().get(i));
         }
         gameModel.startNewGame();
+        notifyNewTime();
     }
 
 

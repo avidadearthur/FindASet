@@ -32,7 +32,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        getSupportActionBar().hide();
     }
 
     public void onClick_Join(View caller) {
@@ -106,5 +105,10 @@ public class LoginActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return generatedPassword;
+    }
+
+    public void onClick_Back(View caller) {
+        Intent intent = new Intent(this, WelcomeActivity.class);
+        startActivity(intent);
     }
 }
