@@ -3,6 +3,7 @@ package be.kuleuven.findaset.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,6 +21,7 @@ import java.util.Random;
 import be.kuleuven.findaset.R;
 
 public class WelcomeActivity extends AppCompatActivity {
+    private TextView testTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,12 @@ public class WelcomeActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        testTv = findViewById(R.id.testTxt);
+    }
+
+    private void setTest(String str) {
+        testTv.setText(str);
     }
 
     private void readCredentials() throws IOException {
@@ -59,7 +67,7 @@ public class WelcomeActivity extends AppCompatActivity {
             //handle object
             JSONArray device = object.getJSONArray("device");
             String deviceId = device.getJSONObject(0).getString("thisDevice");
-
+            setTest(deviceId);
         } catch (JSONException e) {
             e.printStackTrace();
         }
