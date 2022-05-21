@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -37,17 +38,17 @@ public class WelcomeActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        testTv = findViewById(R.id.testTxt);
     }
 
     private void setTest(String str) {
+        TextView testTv = (TextView) findViewById(R.id.testTextWelcome);
         testTv.setText(str);
     }
 
     private void readCredentials() throws IOException {
+        String s = getFilesDir() + "/" + "credentials";
         //https://stackoverflow.com/questions/33638765/how-to-read-json-data-from-txt-file-in-java
-        BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("credentials")));
+        BufferedReader reader = new BufferedReader(new FileReader(s));
         String json = "";
         try {
             StringBuilder sb = new StringBuilder();
@@ -105,7 +106,8 @@ public class WelcomeActivity extends AppCompatActivity {
         }
     }
     private void updateCredentials(JSONObject object) throws IOException {
-        BufferedWriter output = new BufferedWriter(new FileWriter(getFilesDir() + "credentials"));
+        String s = getFilesDir() + "/" + "credentials";
+        BufferedWriter output = new BufferedWriter(new FileWriter(s));
         output.write(object.toString());
         output.close();
     }
