@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -37,17 +38,18 @@ public class WelcomeActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        testTv = findViewById(R.id.testTxt);
     }
 
-    private void setTest(String str) {
-        testTv.setText(str);
+    private void checkCredentials() throws IOException {
+        String s = getFilesDir() + "/" + "credentials";
+        try{
+            new BufferedReader(new FileReader(s));
+        }
+        catch (Exception e){
+            generateCredentials();
+        }
     }
-
-    private void readCredentials() throws IOException {
-        //https://stackoverflow.com/questions/33638765/how-to-read-json-data-from-txt-file-in-java
-        BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("credentials")));
+    private String getJSONString(BufferedReader reader) throws IOException {
         String json = "";
         try {
             StringBuilder sb = new StringBuilder();
@@ -62,52 +64,56 @@ public class WelcomeActivity extends AppCompatActivity {
         } finally {
             reader.close();
         }
+
+        return json;
+    }
+
+    private void generateCredentials() throws IOException {
+        //https://stackoverflow.com/questions/33638765/how-to-read-json-data-from-txt-file-in-java
+        BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("credentials")));
+        String json = "";
+        json = getJSONString(reader);
+
         try {
             JSONObject object = new JSONObject(json); // this will get you the entire JSON node
             //handle object
+            JSONArray device = object.getJSONArray("device");
+            Random rd = new Random();
+            int id = rd.nextInt(9000) + 1000;
+            object.getJSONArray("device").getJSONObject(0).put("thisDevice",Integer.toString(id));
+            updateCredentials(object);
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void updateCredentials(JSONObject object) throws IOException {
+        String s = getFilesDir() + "/" + "credentials";
+        BufferedWriter output = new BufferedWriter(new FileWriter(s));
+        output.write(object.toString());
+        output.close();
+    }
+
+    private void setTest(String str) {
+        TextView testTv = (TextView) findViewById(R.id.testTextWelcome);
+        testTv.setText(str);
+    }
+
+    private void readCredentials() throws IOException {
+        String s = getFilesDir() + "/" + "credentials";
+        //https://stackoverflow.com/questions/33638765/how-to-read-json-data-from-txt-file-in-java
+        BufferedReader reader = new BufferedReader(new FileReader(s));
+        String json = "";
+        json = getJSONString(reader);
+        try {
+            JSONObject object = new JSONObject(json);
             JSONArray device = object.getJSONArray("device");
             String deviceId = device.getJSONObject(0).getString("thisDevice");
             setTest(deviceId);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
-
-    private void checkCredentials() throws IOException {
-        //https://stackoverflow.com/questions/33638765/how-to-read-json-data-from-txt-file-in-java
-        BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("credentials")));
-        String json = "";
-        try {
-            StringBuilder sb = new StringBuilder();
-            String line = reader.readLine();
-
-            while (line != null) {
-                sb.append(line);
-                sb.append("\n");
-                line = reader.readLine();
-            }
-            json = sb.toString();
-        } finally {
-            reader.close();
-        }
-        try {
-            JSONObject object = new JSONObject(json); // this will get you the entire JSON node
-            //handle object
-            JSONArray device = object.getJSONArray("device");
-            if(device.getJSONObject(0).getString("thisDevice").equals(" ")){
-                Random rd = new Random();
-                int id = rd.nextInt(9000) + 1000;
-                object.getJSONArray("device").getJSONObject(0).put("thisDevice",Integer.toString(id));
-                updateCredentials(object);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-    private void updateCredentials(JSONObject object) throws IOException {
-        BufferedWriter output = new BufferedWriter(new FileWriter(getFilesDir() + "credentials"));
-        output.write(object.toString());
-        output.close();
     }
 
     public void onClick_FindAll(View caller) {

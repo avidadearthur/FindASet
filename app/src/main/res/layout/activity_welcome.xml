@@ -154,6 +154,7 @@
         android:layout_marginEnd="194dp"
         android:layout_marginBottom="315dp"
         android:text="TextView"
+        android:textColor="#0C0C0C"
         app:layout_constraintBottom_toBottomOf="@+id/imgWalk"
         app:layout_constraintEnd_toEndOf="@+id/imgWalk"
         app:layout_constraintStart_toStartOf="@+id/imgWalk"
