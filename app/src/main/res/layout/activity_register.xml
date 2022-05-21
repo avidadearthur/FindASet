@@ -27,7 +27,7 @@
             android:id="@+id/etUsername"
             style="@style/LearnEditTextStyleRound"
             android:layout_marginTop="@dimen/learn_spacing_large"
-            android:hint="@string/learn_hint_fisrnamelastname" />
+            android:hint="@string/learn_hint_username" />
 
         <EditText
             android:id="@+id/etPassword"
