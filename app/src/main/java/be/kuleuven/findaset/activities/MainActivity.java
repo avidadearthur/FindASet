@@ -21,7 +21,6 @@ import be.kuleuven.findaset.model.FindASet;
 import be.kuleuven.findaset.model.TestableFindASet;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    //todo: stop rotation
 
     private final Integer[] cardPicturesIds = {
             R.drawable.ovaal1groen, R.drawable.ovaal2groen, R.drawable.ovaal3groen,

@@ -18,7 +18,7 @@
         android:layout_height="48dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tvLeaderBoardNumber"
+        app:layout_constraintEnd_toStartOf="@+id/tvNumber"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.75">
@@ -44,7 +44,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tvLeaderBoardNumber"
+        android:id="@+id/tvNumber"
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"
         android:background="@drawable/bg_circle_stroked"

@@ -27,7 +27,9 @@ public class LeaderBoardActivity extends AppCompatActivity {
     private TextView tvTen;
     private ConstraintLayout tabModes;
     private RecyclerViewAdapter boardAdapter;
-    private String[] dateSet;
+    private String[] names;
+    private String[] times;
+    private int[] rankings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +40,12 @@ public class LeaderBoardActivity extends AppCompatActivity {
         tvTen = findViewById(R.id.tvTen);
         tabModes = findViewById(R.id.tabModes);
 
-        dateSet = new String[]{"Sandro", "1.30"};
+        names = new String[]{"Sandro", "Arthur","Koen"};
+        times = new String[]{"1'30", "2'30","3'30"};
+        rankings = new int[]{1,2,5};
         RecyclerView recyclerView = findViewById(R.id.rvBoard);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        boardAdapter = new RecyclerViewAdapter(dateSet);
+        boardAdapter = new RecyclerViewAdapter(names,times,rankings);
         recyclerView.setAdapter(boardAdapter);
     }
 
