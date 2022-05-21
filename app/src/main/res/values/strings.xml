@@ -19,7 +19,6 @@
     <string name="find_ten_mode">Find TEN Mode</string>
     <string name="tutorial_mode">Learning Mode</string>
     <string name="leader_board">Leader Board</string>
-    <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="login_forget">Forget!</string>
     <string name="login_enter">Enter</string>
@@ -29,6 +28,7 @@
     <string name="board_find_all">Find ALL</string>
     <string name="board_find_ten">Find TEN</string>
     <string name="hint_username">User Name</string>
+    <string name="hint_confirm_password">Confirm Password</string>
 
 
 
@@ -38,7 +38,7 @@
     <string name="learn_short_text">Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit</string>
     <string name="learn_hint_password">password</string>
     <string name="learn_txt_email">username</string>
-    <string name="learn_hint_confirm_password">confirm password</string>
+
     <string name="learn_hint_username">username</string>
     <string name="learn_register_note">By Pressing \'Join\' you agree to our</string>
     <string name="learn_txt_terms_condition"><u>Terms &amp; Condition</u></string>

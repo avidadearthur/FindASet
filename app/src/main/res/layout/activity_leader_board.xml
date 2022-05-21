@@ -31,7 +31,7 @@
 
         <TextView
             android:id="@+id/tvLeaderBoard"
-            style="@style/LearnHeadingBig"
+            style="@style/HeadingBig"
             android:layout_marginStart="@dimen/learn_spacing_standard_new"
             android:layout_marginTop="@dimen/learn_spacing_middle"
             android:text="@string/board_leader_board"

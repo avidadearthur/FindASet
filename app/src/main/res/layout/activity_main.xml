@@ -34,7 +34,7 @@
 
     <Chronometer
         android:id="@+id/chronometer"
-        style="@style/LearnHeadingBig"
+        style="@style/HeadingBig"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -46,7 +46,7 @@
 
     <TextView
         android:id="@+id/userText"
-        style="@style/LearnHeadingBig"
+        style="@style/HeadingBig"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"

@@ -16,42 +16,44 @@
         android:contentDescription="@string/back"
         android:onClick="onClick_Back"
         android:padding="@dimen/_5sdp"
-        android:src="@drawable/ic_back" />
+        android:src="@drawable/ic_back"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_centerVertical="true"
         android:orientation="vertical">
 
         <EditText
             android:id="@+id/etUsername"
-            style="@style/LearnEditTextStyleRound"
+            style="@style/EditTextStyleRound"
             android:layout_marginTop="@dimen/learn_spacing_large"
             android:hint="@string/hint_username"
             android:textColorHint="@color/metal_grey"
             android:textStyle="bold" />
-            android:hint="@string/learn_hint_username" />
+        android:hint="@string/learn_hint_username" />
 
         <EditText
             android:id="@+id/etPassword"
-            style="@style/LearnEditTextStyleRound"
-            android:hint="@string/hint_email"
+            style="@style/EditTextStyleRound"
+            android:hint="@string/hint_password"
             android:textColorHint="@color/metal_grey"
             android:textStyle="bold" />
-            android:hint="@string/learn_hint_password" />
+        android:hint="@string/learn_hint_password" />
 
         <EditText
             android:id="@+id/etConfirmPassword"
-            style="@style/LearnEditTextStyleRound"
+            style="@style/EditTextStyleRound"
             android:layout_marginBottom="@dimen/learn_spacing_xlarge"
-            android:hint="@string/learn_hint_confirm_password"
-            android:inputType="textPassword" />
-            android:hint="@string/hint_password"
+            android:hint="@string/hint_confirm_password"
             android:inputType="textPassword"
             android:textColorHint="@color/metal_grey"
             android:textStyle="bold" />
+        android:hint="@string/hint_password"
+        android:inputType="textPassword"
+        android:textColorHint="@color/metal_grey"
+        android:textStyle="bold" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnJoin"

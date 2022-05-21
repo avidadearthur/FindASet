@@ -27,19 +27,19 @@
 
         <EditText
             android:id="@+id/etUsernameLogin"
-            style="@style/LearnEditTextStyleRound"
+            style="@style/EditTextStyleRound"
             android:layout_marginTop="@dimen/learn_spacing_large"
-            android:hint="@string/hint_email"
-            android:text="@string/learn_txt_johndoe_gmail_com"
+            android:hint="@string/hint_username"
             android:textColorHint="@color/metal_grey"
             android:textStyle="bold" />
-            android:autofillHints=""
-            android:hint="@string/learn_hint_username"
-            android:inputType="text"
-            android:text="@string/learn_txt_email" />
+        android:autofillHints=""
+        android:hint="@string/learn_hint_username"
+        android:inputType="text"
+        android:text="@string/learn_txt_email" />
 
 
         <RelativeLayout
+            style="@style/EditTextStyleRound"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/learn_spacing_xlarge"
@@ -55,21 +55,21 @@
                 android:id="@+id/etPasswordLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autofillHints=""
                 android:background="@null"
-                android:hint="@string/learn_lbl_password"
-                android:inputType="textPassword"
                 android:hint="@string/hint_password"
+                android:inputType="textPassword"
                 android:maxEms="7"
-                android:textAppearance="@style/LearnerFontSemiBold"
-                android:textColor="@color/learn_textColorPrimary"
-                android:textColorHint="#757575"
-                android:textSize="@dimen/learn_font_size_normal"
-                android:autofillHints="" />
                 android:textColor="@color/textColorPrimary"
                 android:textColorHint="@color/metal_grey"
-                android:textSize="@dimen/font_size_normal"
+                android:textSize="@dimen/font_size_large"
                 android:textStyle="bold"
                 tools:ignore="TouchTargetSizeCheck" />
+            android:textColor="@color/textColorPrimary"
+            android:textColorHint="@color/metal_grey"
+            android:textSize="@dimen/font_size_normal"
+            android:textStyle="bold"
+            tools:ignore="TouchTargetSizeCheck" />
 
             <TextView
                 android:id="@+id/tvForget"
@@ -80,7 +80,7 @@
                 android:background="@null"
                 android:text="@string/login_forget"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/font_size_normal"
+                android:textSize="@dimen/font_size_large"
                 android:textStyle="bold" />
 
 

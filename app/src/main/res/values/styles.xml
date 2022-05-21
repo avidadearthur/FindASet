@@ -30,7 +30,7 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
-    <style name="LearnEditTextStyleRound">
+    <style name="EditTextStyleRound">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@drawable/shadow_edittext</item>
@@ -45,7 +45,7 @@
         <item name="android:textColor">@color/textColorPrimary</item>
     </style>
 
-    <style name="LearnHeadingBig">
+    <style name="HeadingBig">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/font_size_xxlarge</item>
