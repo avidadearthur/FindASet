@@ -3,6 +3,7 @@ package be.kuleuven.findaset.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -75,20 +76,19 @@ public class WelcomeActivity extends AppCompatActivity {
         json = getJSONString(reader);
 
         try {
-            JSONObject object = new JSONObject(json); // this will get you the entire JSON node
-            //handle object
-            JSONArray device = object.getJSONArray("device");
+            JSONObject object = new JSONObject(json);
             Random rd = new Random();
             int id = rd.nextInt(9000) + 1000;
-            object.getJSONArray("device").getJSONObject(0).put("thisDevice",Integer.toString(id));
-            updateCredentials(object);
+            JSONArray device = object.getJSONArray("device");
+            device.getJSONObject(0).put("thisDevice",Integer.toString(id));
+            writeCredentials(object);
         }
         catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    private void updateCredentials(JSONObject object) throws IOException {
+    private void writeCredentials(JSONObject object) throws IOException {
         String s = getFilesDir() + "/" + "credentials";
         BufferedWriter output = new BufferedWriter(new FileWriter(s));
         output.write(object.toString());
@@ -108,9 +108,19 @@ public class WelcomeActivity extends AppCompatActivity {
         json = getJSONString(reader);
         try {
             JSONObject object = new JSONObject(json);
+
             JSONArray device = object.getJSONArray("device");
             String deviceId = device.getJSONObject(0).getString("thisDevice");
             setTest(deviceId);
+
+            JSONArray session = object.getJSONArray("session");
+            String username = session.getJSONObject(0).getString("username");
+            TextView helloNote = (TextView) findViewById(R.id.tvHelloNote);
+            helloNote.setText("Hello "+username+"! ");
+            LinearLayout layout = findViewById(R.id.helloLayout);
+            layout.setVisibility(View.VISIBLE);
+
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -134,6 +144,10 @@ public class WelcomeActivity extends AppCompatActivity {
     public void onClick_Login(View caller) {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
+    }
+
+    public void onClick_Logout(View caller) {
+
     }
 
     public void onClick_Board(View caller) {

@@ -18,9 +18,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.FileNotFoundException;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -52,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue( this );
         String requestURL = baseURL + "login" + "/" + username;
 
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, WelcomeActivity.class);
 
         StringRequest submitRequest = new StringRequest(Request.Method.GET, requestURL,
 
@@ -74,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                         intent.putExtra("LoginInfo",responseString);
                         startActivity(intent);
                     }
-                    catch(JSONException | FileNotFoundException e )
+                    catch(JSONException | IOException e )
                     {
                         Log.e( "Database", e.getMessage(), e );
                     }
@@ -107,18 +109,48 @@ public class LoginActivity extends AppCompatActivity {
         return generatedPassword;
     }
 
-    private void updateCredentials(String username, String hash) throws FileNotFoundException {
-        JSONObject json = new JSONObject();
+    private String getJSONString(BufferedReader reader) throws IOException {
+        String json = "";
         try {
-            json.put("loginCredentials", new String[]{username, hash});
-        } catch (JSONException e) {
+            StringBuilder sb = new StringBuilder();
+            String line = reader.readLine();
+
+            while (line != null) {
+                sb.append(line);
+                sb.append("\n");
+                line = reader.readLine();
+            }
+            json = sb.toString();
+        } finally {
+            reader.close();
+        }
+
+        return json;
+    }
+
+    private void updateCredentials(String username, String hash) throws IOException {
+        //https://stackoverflow.com/questions/33638765/how-to-read-json-data-from-txt-file-in-java
+        BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("credentials")));
+        String json = "";
+        json = getJSONString(reader);
+
+        try {
+            JSONObject object = new JSONObject(json);
+            JSONArray session = object.getJSONArray("session");
+            session.getJSONObject(0).put("username",username);
+            session.getJSONObject(0).put("hash",username);
+            writeCredentials(object);
+        }
+        catch (JSONException e) {
             e.printStackTrace();
         }
-        try (PrintWriter out = new PrintWriter(new FileWriter("credentials.txt"))) {
-            out.write(json.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    }
+
+    private void writeCredentials(JSONObject object) throws IOException {
+        String s = getFilesDir() + "/" + "credentials";
+        BufferedWriter output = new BufferedWriter(new FileWriter(s));
+        output.write(object.toString());
+        output.close();
     }
 
     public void onClick_Back(View caller) {

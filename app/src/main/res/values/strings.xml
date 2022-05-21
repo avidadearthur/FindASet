@@ -23,6 +23,7 @@
     <string name="login_forget">Forget!</string>
     <string name="login_enter">Enter</string>
     <string name="login_don_t_joined_yet">Don\'t Joined Yet !</string>
+    <string name="helloNote">Hello Username! </string>
     <string name="login_join">Join</string>
     <string name="board_leader_board">Leader Board</string>
     <string name="board_find_all">Find ALL</string>
@@ -34,6 +35,7 @@
 
     <string name="learn_pref_name">LearnAppPreferences</string>
     <string name="learn_lbl_login_underlined"><u>Login</u></string>
+    <string name="learn_lbl_logout"><u>Log out</u></string>
     <string name="learn_samplelong_text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.dummy text of the printing and typesetting </string>
     <string name="learn_short_text">Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit</string>
     <string name="learn_hint_password">password</string>

@@ -8,6 +8,44 @@
     android:fitsSystemWindows="true"
     tools:context=".activities.WelcomeActivity">
 
+    <LinearLayout
+        android:id="@+id/helloLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/tvHelloNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/helloNote"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/font_size_medium" />
+        android:text="@string/learn_lbl_don_t_joined_yet"
+        android:textAppearance="@style/LearnerFontMedium"
+        android:textColor="@color/learn_textColorPrimary"
+        android:textSize="@dimen/learn_font_size_medium" />
+
+        <TextView
+            android:id="@+id/tvLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/learn_spacing_standard_new"
+            android:clickable="false"
+            android:onClick="onClick_Logout"
+            android:padding="@dimen/learn_spacing_control"
+            android:text="@string/learn_lbl_logout"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/font_size_medium"
+            android:textStyle="bold" />
+    </LinearLayout>
+
     <ImageView
         android:id="@+id/imgWalk"
         android:layout_width="match_parent"

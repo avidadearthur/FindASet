@@ -112,19 +112,19 @@
         android:layout_centerHorizontal="true">
 
         <TextView
-            android:id="@+id/tvNote"
+            android:id="@+id/tvHelloNote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login_don_t_joined_yet"
             android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/font_size_medium" />
-            android:text="@string/learn_lbl_don_t_joined_yet"
-            android:textAppearance="@style/LearnerFontMedium"
-            android:textColor="@color/learn_textColorPrimary"
-            android:textSize="@dimen/learn_font_size_medium" />
+        android:text="@string/learn_lbl_don_t_joined_yet"
+        android:textAppearance="@style/LearnerFontMedium"
+        android:textColor="@color/learn_textColorPrimary"
+        android:textSize="@dimen/learn_font_size_medium" />
 
         <TextView
-            android:id="@+id/tvJoin"
+            android:id="@+id/tvLogout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/learn_spacing_standard_new"
