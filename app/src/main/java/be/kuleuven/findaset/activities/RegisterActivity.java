@@ -36,9 +36,9 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void onBtnRegister_Clicked(View caller) throws NoSuchAlgorithmException {
-        EditText registeredUsername = (EditText) findViewById(R.id.editTextTextPersonNameRegister);
-        EditText registeredPassword = (EditText) findViewById(R.id.editTextTextPasswordRegister);
-        EditText registeredConfirmPassword = (EditText) findViewById(R.id.editTextTextPasswordConfirm);
+        EditText registeredUsername = (EditText) findViewById(R.id.etUsername);
+        EditText registeredPassword = (EditText) findViewById(R.id.etPassword);
+        EditText registeredConfirmPassword = (EditText) findViewById(R.id.etConfirmPassword);
 
         String username = registeredUsername.getText().toString();
         String pass = registeredPassword.getText().toString();

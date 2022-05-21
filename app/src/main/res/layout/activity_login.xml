@@ -26,12 +26,17 @@
         android:orientation="vertical">
 
         <EditText
+            android:id="@+id/etUsernameLogin"
             style="@style/LearnEditTextStyleRound"
             android:layout_marginTop="@dimen/learn_spacing_large"
             android:hint="@string/hint_email"
             android:text="@string/learn_txt_johndoe_gmail_com"
             android:textColorHint="@color/metal_grey"
             android:textStyle="bold" />
+            android:autofillHints=""
+            android:hint="@string/learn_hint_username"
+            android:inputType="text"
+            android:text="@string/learn_txt_email" />
 
 
         <RelativeLayout
@@ -47,11 +52,19 @@
             android:paddingBottom="@dimen/learn_spacing_standard_new">
 
             <EditText
+                android:id="@+id/etPasswordLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
+                android:hint="@string/learn_lbl_password"
+                android:inputType="textPassword"
                 android:hint="@string/hint_password"
                 android:maxEms="7"
+                android:textAppearance="@style/LearnerFontSemiBold"
+                android:textColor="@color/learn_textColorPrimary"
+                android:textColorHint="#757575"
+                android:textSize="@dimen/learn_font_size_normal"
+                android:autofillHints="" />
                 android:textColor="@color/textColorPrimary"
                 android:textColorHint="@color/metal_grey"
                 android:textSize="@dimen/font_size_normal"
@@ -79,6 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:onClick="onBtnEnter_Clicked"
             android:paddingStart="@dimen/learn_spacing_xlarge"
             android:paddingEnd="@dimen/learn_spacing_xlarge"
             android:text="@string/login_enter"
@@ -102,6 +116,10 @@
             android:text="@string/login_don_t_joined_yet"
             android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/font_size_medium" />
+            android:text="@string/learn_lbl_don_t_joined_yet"
+            android:textAppearance="@style/LearnerFontMedium"
+            android:textColor="@color/learn_textColorPrimary"
+            android:textSize="@dimen/learn_font_size_medium" />
 
         <TextView
             android:id="@+id/tvJoin"

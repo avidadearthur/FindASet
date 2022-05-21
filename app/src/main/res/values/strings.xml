@@ -36,9 +36,10 @@
     <string name="learn_lbl_login_underlined"><u>Login</u></string>
     <string name="learn_samplelong_text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.dummy text of the printing and typesetting </string>
     <string name="learn_short_text">Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit</string>
-
-    <string name="learn_txt_johndoe_gmail_com">johndoe@gmail.com</string>
-
+    <string name="learn_hint_password">password</string>
+    <string name="learn_txt_email">username</string>
+    <string name="learn_hint_confirm_password">confirm password</string>
+    <string name="learn_hint_username">username</string>
     <string name="learn_register_note">By Pressing \'Join\' you agree to our</string>
     <string name="learn_txt_terms_condition"><u>Terms &amp; Condition</u></string>
     <string name="learn_lblget_started">Get Started</string>
@@ -185,6 +186,11 @@
     <string name="learn_lbl_ranks">Ranks</string>
     <string name="learn_lbl_follow">Follow</string>
     <string name="learn_lbl_ratings">Ratings</string>
+    <string name="learn_lbl_password">password</string>
+    <string name="learn_lbl_forget">Forget!</string>
+    <string name="learn_lbl_enter">Enter</string>
+    <string name="learn_lbl_don_t_joined_yet">Don\'t Joined Yet !</string>
+    <string name="learn_lbl_join">Join</string>
     <string name="learn_lbl_my_friends">My Friends</string>
     <string name="learn_lbl_accepted">Accepted</string>
     <string name="learn_lbl_pending">Pending</string>

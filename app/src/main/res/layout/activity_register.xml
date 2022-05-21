@@ -26,21 +26,28 @@
         android:orientation="vertical">
 
         <EditText
+            android:id="@+id/etUsername"
             style="@style/LearnEditTextStyleRound"
             android:layout_marginTop="@dimen/learn_spacing_large"
             android:hint="@string/hint_username"
             android:textColorHint="@color/metal_grey"
             android:textStyle="bold" />
+            android:hint="@string/learn_hint_username" />
 
         <EditText
+            android:id="@+id/etPassword"
             style="@style/LearnEditTextStyleRound"
             android:hint="@string/hint_email"
             android:textColorHint="@color/metal_grey"
             android:textStyle="bold" />
+            android:hint="@string/learn_hint_password" />
 
         <EditText
+            android:id="@+id/etConfirmPassword"
             style="@style/LearnEditTextStyleRound"
             android:layout_marginBottom="@dimen/learn_spacing_xlarge"
+            android:hint="@string/learn_hint_confirm_password"
+            android:inputType="textPassword" />
             android:hint="@string/hint_password"
             android:inputType="textPassword"
             android:textColorHint="@color/metal_grey"
@@ -52,6 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:onClick="onBtnRegister_Clicked"
             android:paddingStart="@dimen/learn_spacing_xlarge"
             android:paddingEnd="@dimen/learn_spacing_xlarge"
             android:text="@string/login_join"
