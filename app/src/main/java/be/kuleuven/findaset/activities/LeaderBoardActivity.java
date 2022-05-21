@@ -3,6 +3,8 @@ package be.kuleuven.findaset.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,11 +20,14 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.Objects;
 
 import be.kuleuven.findaset.R;
+import be.kuleuven.findaset.base.RecyclerViewAdapter;
 
 public class LeaderBoardActivity extends AppCompatActivity {
     private TextView tvAll;
     private TextView tvTen;
     private ConstraintLayout tabModes;
+    private RecyclerViewAdapter boardAdapter;
+    private String[] dateSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,12 @@ public class LeaderBoardActivity extends AppCompatActivity {
         tvAll = findViewById(R.id.tvAll);
         tvTen = findViewById(R.id.tvTen);
         tabModes = findViewById(R.id.tabModes);
+
+        dateSet = new String[]{"Sandro", "1.30"};
+        RecyclerView recyclerView = findViewById(R.id.rvBoard);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        boardAdapter = new RecyclerViewAdapter(dateSet);
+        recyclerView.setAdapter(boardAdapter);
     }
 
     public void onClick_Back(View caller) {
@@ -97,4 +108,35 @@ public class LeaderBoardActivity extends AppCompatActivity {
             });
         }
     }
+
+    /*
+    private var mLeaderBoard = LearnerRecyclerViewAdapter<LearnPeople>(R.layout.learn_item_leaderboard
+            , onBind = { view: View, people: LearnPeople, i: Int ->
+            view.ivUser.loadImageFromResources(this,people.img)
+    view.tvUserName.text = people.name
+    view.tvPoints.text = "${Random().nextInt(200000)} Points"
+    view.tvLeaderBoardNumber.text = (i + 1).toString()
+            if (i == 0) {
+        view.rlContent.setBackgroundColor(learnAppColor(R.color.learn_color_light_yellow))
+        view.tvLeaderBoardNumber.learAapplyStrokedBackground(learnAppColor(R.color.learn_color_musturd_yellow))
+        view.tvLeaderBoardNumber.setTextColor(learnAppColor(R.color.learn_white))
+    } else {
+        if (i == 1 || i == 2) {
+            view.tvLeaderBoardNumber.learAapplyStrokedBackground(
+                    learnAppColor(R.color.learn_transparent),
+                    learnAppColor(R.color.learn_color_musturd_yellow)
+            )
+            view.tvLeaderBoardNumber.setTextColor(learnAppColor(R.color.learn_color_musturd_yellow))
+        } else {
+            view.tvLeaderBoardNumber.learAapplyStrokedBackground(
+                    learnAppColor(R.color.learn_transparent),
+                    learnAppColor(R.color.learn_mettal_grey)
+            )
+            view.tvLeaderBoardNumber.setTextColor(learnAppColor(R.color.learn_textColorSecondary))
+        }
+        view.rlContent.setBackgroundColor(Color.TRANSPARENT)
+    }
+})
+
+     */
 }

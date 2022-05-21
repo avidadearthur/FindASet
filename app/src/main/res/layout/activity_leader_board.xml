@@ -55,7 +55,8 @@
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <TextView
             android:id="@+id/tvTen"
@@ -85,13 +86,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvBoard"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/learn_spacing_standard_new"
-        android:paddingBottom="@dimen/learn_spacing_standard_new"
-        android:paddingStart="@dimen/learn_spacing_middle"
-        android:paddingEnd="@dimen/learn_spacing_middle"
+        android:layout_height="574dp"
+        android:clipToPadding="false"
         android:overScrollMode="never"
-        android:clipToPadding="false" />
+        android:paddingStart="@dimen/learn_spacing_middle"
+        android:paddingTop="@dimen/learn_spacing_standard_new"
+        android:paddingEnd="@dimen/learn_spacing_middle"
+        android:paddingBottom="@dimen/learn_spacing_standard_new" />
 
 
 </LinearLayout>
