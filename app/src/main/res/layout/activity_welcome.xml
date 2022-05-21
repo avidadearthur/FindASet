@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.54" />
+        app:layout_constraintGuide_percent="0.5" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/findAllModeBtn"
@@ -38,25 +38,28 @@
         android:paddingEnd="@dimen/learn_spacing_standard_new"
         android:paddingBottom="@dimen/learn_spacing_middle"
         android:text="@string/find_all_mode"
+        android:textSize="@dimen/font_size_large"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/tutorialModeBtn"
-        app:layout_constraintStart_toStartOf="@+id/tutorialModeBtn"
+        app:layout_constraintEnd_toEndOf="@+id/findTenModeBtn"
+        app:layout_constraintStart_toStartOf="@+id/findTenModeBtn"
         app:layout_constraintTop_toBottomOf="@id/guideline2" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/findTenModeBtn"
         style="@style/ModeButton.Filled"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:layout_marginTop="16dp"
         android:onClick="onClick_FindTen"
         android:paddingStart="@dimen/learn_spacing_standard_new"
         android:paddingTop="@dimen/learn_spacing_middle"
         android:paddingEnd="@dimen/learn_spacing_standard_new"
         android:paddingBottom="@dimen/learn_spacing_middle"
         android:text="@string/find_ten_mode"
+        android:textSize="@dimen/font_size_large"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/tutorialModeBtn"
-        app:layout_constraintStart_toStartOf="@+id/tutorialModeBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/findAllModeBtn" />
 
     <com.google.android.material.button.MaterialButton
@@ -64,15 +67,17 @@
         style="@style/ModeButton.Filled"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:onClick="onClick_Learning"
         android:paddingStart="@dimen/learn_spacing_standard_new"
         android:paddingTop="@dimen/learn_spacing_middle"
         android:paddingEnd="@dimen/learn_spacing_standard_new"
         android:paddingBottom="@dimen/learn_spacing_middle"
         android:text="@string/tutorial_mode"
+        android:textSize="@dimen/font_size_large"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/findTenModeBtn"
+        app:layout_constraintStart_toStartOf="@+id/findTenModeBtn"
         app:layout_constraintTop_toBottomOf="@+id/findTenModeBtn" />
 
     <com.google.android.material.button.MaterialButton
@@ -80,16 +85,17 @@
         style="@style/ModeButton.Filled"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:onClick="onClick_Board"
         android:paddingStart="@dimen/learn_spacing_standard_new"
         android:paddingTop="@dimen/learn_spacing_middle"
         android:paddingEnd="@dimen/learn_spacing_standard_new"
         android:paddingBottom="@dimen/learn_spacing_middle"
         android:text="@string/leader_board"
+        android:textSize="@dimen/font_size_large"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/tutorialModeBtn"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="@+id/tutorialModeBtn"
+        app:layout_constraintEnd_toEndOf="@+id/findTenModeBtn"
+        app:layout_constraintStart_toStartOf="@+id/findTenModeBtn"
         app:layout_constraintTop_toBottomOf="@+id/tutorialModeBtn" />
 
     <TextView

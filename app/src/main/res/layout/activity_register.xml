@@ -28,12 +28,14 @@
         <EditText
             style="@style/LearnEditTextStyleRound"
             android:layout_marginTop="@dimen/learn_spacing_large"
-            android:hint="@string/learn_hint_fisrnamelastname"
+            android:hint="@string/hint_username"
+            android:textColorHint="@color/metal_grey"
             android:textStyle="bold" />
 
         <EditText
             style="@style/LearnEditTextStyleRound"
             android:hint="@string/hint_email"
+            android:textColorHint="@color/metal_grey"
             android:textStyle="bold" />
 
         <EditText
@@ -41,6 +43,7 @@
             android:layout_marginBottom="@dimen/learn_spacing_xlarge"
             android:hint="@string/hint_password"
             android:inputType="textPassword"
+            android:textColorHint="@color/metal_grey"
             android:textStyle="bold" />
 
         <com.google.android.material.button.MaterialButton
@@ -52,6 +55,7 @@
             android:paddingStart="@dimen/learn_spacing_xlarge"
             android:paddingEnd="@dimen/learn_spacing_xlarge"
             android:text="@string/login_join"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

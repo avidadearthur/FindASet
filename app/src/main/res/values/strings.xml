@@ -14,8 +14,9 @@
     <string name="btn_play_as_guest">play as guest</string>
 
     <string name="back">back</string>
-    <string name="find_all_mode">Find All Mode</string>
-    <string name="find_ten_mode">Find Ten Mode</string>
+    <string name="main_refresh">REFRESH</string>
+    <string name="find_all_mode">Find ALL Mode</string>
+    <string name="find_ten_mode">Find TEN Mode</string>
     <string name="tutorial_mode">Learning Mode</string>
     <string name="leader_board">Leader Board</string>
     <string name="hint_email">Email</string>
@@ -27,6 +28,7 @@
     <string name="board_leader_board">Leader Board</string>
     <string name="board_find_all">Find ALL</string>
     <string name="board_find_ten">Find TEN</string>
+    <string name="hint_username">User Name</string>
 
 
 
@@ -36,7 +38,7 @@
     <string name="learn_short_text">Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit</string>
 
     <string name="learn_txt_johndoe_gmail_com">johndoe@gmail.com</string>
-    <string name="learn_hint_fisrnamelastname">Full Name</string>
+
     <string name="learn_register_note">By Pressing \'Join\' you agree to our</string>
     <string name="learn_txt_terms_condition"><u>Terms &amp; Condition</u></string>
     <string name="learn_lblget_started">Get Started</string>

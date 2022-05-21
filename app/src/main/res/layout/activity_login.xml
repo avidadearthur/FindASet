@@ -30,6 +30,7 @@
             android:layout_marginTop="@dimen/learn_spacing_large"
             android:hint="@string/hint_email"
             android:text="@string/learn_txt_johndoe_gmail_com"
+            android:textColorHint="@color/metal_grey"
             android:textStyle="bold" />
 
 
@@ -52,6 +53,7 @@
                 android:hint="@string/hint_password"
                 android:maxEms="7"
                 android:textColor="@color/textColorPrimary"
+                android:textColorHint="@color/metal_grey"
                 android:textSize="@dimen/font_size_normal"
                 android:textStyle="bold"
                 tools:ignore="TouchTargetSizeCheck" />
@@ -80,6 +82,7 @@
             android:paddingStart="@dimen/learn_spacing_xlarge"
             android:paddingEnd="@dimen/learn_spacing_xlarge"
             android:text="@string/login_enter"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/guideline2" />

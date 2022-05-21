@@ -1,5 +1,6 @@
 package be.kuleuven.findaset.activities;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         // testing register and login
-        TextView txtInfo = (TextView) findViewById(R.id.textView2);
+        TextView txtInfo = (TextView) findViewById(R.id.userText);
         String loginInfo;
         try{
             Bundle extras = getIntent().getExtras();
@@ -100,7 +101,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         for (int i = 0; i < 12; i++) {
             cardImages[i].setOnClickListener(this);
-            cardImages[i].setBackgroundColor(getColor(R.color.white));
+            //cardImages[i].setBackgroundColor(getColor(R.color.transparent));
+            cardImages[i].setBackground(getDrawable(R.drawable.imageview_shadow));
         }
 
         TestableFindASet findASet = new FindASet();
@@ -111,6 +113,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void setGameModel(TestableFindASet newGameModel) {
         this.gameModel = newGameModel;
         this.gameModel.setUI(this);
+    }
+
+    public void onClick_Back(View caller) {
+        Intent intent = new Intent(this, WelcomeActivity.class);
+        startActivity(intent);
     }
 
     /**
@@ -183,7 +190,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void notifyUnselect(int index) {
-        cardImages[index].setBackgroundColor(getColor(R.color.white));
+        //cardImages[index].setBackgroundColor(getColor(R.color.transparent));
+        cardImages[index].setBackground(getDrawable(R.drawable.imageview_shadow));
     }
 
     public void notifyUnavailable(int index) {
