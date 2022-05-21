@@ -30,6 +30,39 @@ public class WelcomeActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        try {
+            readCredentials();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void readCredentials() throws IOException {
+        //https://stackoverflow.com/questions/33638765/how-to-read-json-data-from-txt-file-in-java
+        BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("credentials")));
+        String json = "";
+        try {
+            StringBuilder sb = new StringBuilder();
+            String line = reader.readLine();
+
+            while (line != null) {
+                sb.append(line);
+                sb.append("\n");
+                line = reader.readLine();
+            }
+            json = sb.toString();
+        } finally {
+            reader.close();
+        }
+        try {
+            JSONObject object = new JSONObject(json); // this will get you the entire JSON node
+            //handle object
+            JSONArray device = object.getJSONArray("device");
+            String deviceId = device.getJSONObject(0).getString("thisDevice");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     private void checkCredentials() throws IOException {
@@ -62,7 +95,6 @@ public class WelcomeActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
     private void updateCredentials(JSONObject object) throws IOException {
         BufferedWriter output = new BufferedWriter(new FileWriter(getFilesDir() + "credentials"));
