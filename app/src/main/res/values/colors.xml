@@ -29,14 +29,13 @@
     <color name="light_pink">#FC66E4</color>
     <color name="light_red">#FD6C7C</color>
     <color name="yellow">#FBC02D</color>
-    <color name="mustard">#FFA000</color>
-    <color name="light_sky_blue">#549AFC</color>
-    <color name="_light_yellow">#fff1c2</color>
+    <color name="mustard_yellow">#FFD75A</color>
+    <color name="light_sky_blue">#8CBCFF</color>
     <color name="metal_grey">#ccd5e1</color>
     <color name="colorPrimary_light">#6C8BFA</color>
     <color name="orange_light">#FE9778</color>
     <color name="orange_dark">#Fd6f6D</color>
     <color name="purple">#cd34fa</color>
-    <color name="star_yellow">#FFA000</color>
+    <color name="light_yellow">#FFF1C2</color>
     <color name="white_trans">#51FFFFFF</color>
 </resources>

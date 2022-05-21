@@ -3,6 +3,7 @@ package be.kuleuven.findaset.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,11 +14,9 @@ import android.transition.Fade;
 import android.transition.TransitionManager;
 import android.transition.TransitionSet;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.TextView;
-
-import com.google.android.material.tabs.TabLayout;
-
-import java.util.Objects;
 
 import be.kuleuven.findaset.R;
 import be.kuleuven.findaset.base.RecyclerViewAdapter;
@@ -26,10 +25,15 @@ public class LeaderBoardActivity extends AppCompatActivity {
     private TextView tvAll;
     private TextView tvTen;
     private ConstraintLayout tabModes;
-    private RecyclerViewAdapter boardAdapter;
-    private String[] names;
-    private String[] times;
-    private int[] rankings;
+    private RecyclerView recyclerView;
+    private RecyclerViewAdapter allAdapter;
+    private RecyclerViewAdapter tenAdapter;
+    private String[] namesAll;
+    private String[] timesAll;
+    private String[] rankingsAll;
+    private String[] namesTen;
+    private String[] timesTen;
+    private String[] rankingsTen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +43,25 @@ public class LeaderBoardActivity extends AppCompatActivity {
         tvAll = findViewById(R.id.tvAll);
         tvTen = findViewById(R.id.tvTen);
         tabModes = findViewById(R.id.tabModes);
+        recyclerView = findViewById(R.id.rvBoard);
 
-        names = new String[]{"Sandro", "Arthur","Koen"};
-        times = new String[]{"1'30", "2'30","3'30"};
-        rankings = new int[]{1,2,5};
-        RecyclerView recyclerView = findViewById(R.id.rvBoard);
+        namesAll = new String[]{"Sandro", "Arthur","Koen"};
+        timesAll = new String[]{"1'30", "2'30","3'30"};
+        rankingsAll = new String[]{"1","2","5"};
+        namesTen = new String[]{"Sandro2", "Arthur","Koen"};
+        timesTen = new String[]{"1'30", "2'30","3'30"};
+        rankingsTen = new String[]{"1","2","5"};
+
+        recyclerView = findViewById(R.id.rvBoard);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        boardAdapter = new RecyclerViewAdapter(names,times,rankings);
-        recyclerView.setAdapter(boardAdapter);
+        allAdapter = new RecyclerViewAdapter(namesAll, timesAll, rankingsAll);
+        tenAdapter = new RecyclerViewAdapter(namesTen, timesTen, rankingsTen);
+
+        recyclerView.setAdapter(allAdapter);
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        rvSetAnimation();
     }
 
     public void onClick_Back(View caller) {
@@ -56,10 +71,21 @@ public class LeaderBoardActivity extends AppCompatActivity {
 
     public void onClick_All(View caller) {
         setConstraintGravity(R.id.tvAll);
+
+        recyclerView.setAdapter(allAdapter);
+        rvSetAnimation();
     }
 
     public void onClick_Ten(View caller) {
         setConstraintGravity(R.id.tvTen);
+
+        recyclerView.setAdapter(tenAdapter);
+        rvSetAnimation();
+    }
+
+    private void rvSetAnimation() {
+        LayoutAnimationController anim = AnimationUtils.loadLayoutAnimation(this, R.anim.layout_animation_fall_down);
+        recyclerView.setLayoutAnimation(anim);
     }
 
     private void setConstraintGravity(int viewId) {
@@ -112,35 +138,4 @@ public class LeaderBoardActivity extends AppCompatActivity {
             });
         }
     }
-
-    /*
-    private var mLeaderBoard = LearnerRecyclerViewAdapter<LearnPeople>(R.layout.learn_item_leaderboard
-            , onBind = { view: View, people: LearnPeople, i: Int ->
-            view.ivUser.loadImageFromResources(this,people.img)
-    view.tvUserName.text = people.name
-    view.tvPoints.text = "${Random().nextInt(200000)} Points"
-    view.tvLeaderBoardNumber.text = (i + 1).toString()
-            if (i == 0) {
-        view.rlContent.setBackgroundColor(learnAppColor(R.color.learn_color_light_yellow))
-        view.tvLeaderBoardNumber.learAapplyStrokedBackground(learnAppColor(R.color.learn_color_musturd_yellow))
-        view.tvLeaderBoardNumber.setTextColor(learnAppColor(R.color.learn_white))
-    } else {
-        if (i == 1 || i == 2) {
-            view.tvLeaderBoardNumber.learAapplyStrokedBackground(
-                    learnAppColor(R.color.learn_transparent),
-                    learnAppColor(R.color.learn_color_musturd_yellow)
-            )
-            view.tvLeaderBoardNumber.setTextColor(learnAppColor(R.color.learn_color_musturd_yellow))
-        } else {
-            view.tvLeaderBoardNumber.learAapplyStrokedBackground(
-                    learnAppColor(R.color.learn_transparent),
-                    learnAppColor(R.color.learn_mettal_grey)
-            )
-            view.tvLeaderBoardNumber.setTextColor(learnAppColor(R.color.learn_textColorSecondary))
-        }
-        view.rlContent.setBackgroundColor(Color.TRANSPARENT)
-    }
-})
-
-     */
 }
