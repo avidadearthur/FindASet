@@ -30,6 +30,7 @@
             style="@style/EditTextStyleRound"
             android:layout_marginTop="@dimen/learn_spacing_large"
             android:hint="@string/hint_username"
+            android:maxLength="12"
             android:textColorHint="@color/metal_grey"
             android:textStyle="bold" />
         android:hint="@string/learn_hint_username" />
@@ -38,6 +39,8 @@
             android:id="@+id/etPassword"
             style="@style/EditTextStyleRound"
             android:hint="@string/hint_password"
+            android:inputType="textPassword"
+            android:maxLength="12"
             android:textColorHint="@color/metal_grey"
             android:textStyle="bold" />
         android:hint="@string/learn_hint_password" />
@@ -48,6 +51,7 @@
             android:layout_marginBottom="@dimen/learn_spacing_xlarge"
             android:hint="@string/hint_confirm_password"
             android:inputType="textPassword"
+            android:maxLength="12"
             android:textColorHint="@color/metal_grey"
             android:textStyle="bold" />
         android:hint="@string/hint_password"
