@@ -13,6 +13,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -58,17 +65,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // testing register and login
         TextView txtInfo = (TextView) findViewById(R.id.userText);
-        String loginInfo;
-        try{
-            Bundle extras = getIntent().getExtras();
-            loginInfo = extras.getString("LoginInfo");
-        }
-        catch (Exception e){
-            loginInfo = "guest";
+        String loginInfo = null;
+
+        try {
+            loginInfo = getUsername();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         txtInfo.setText(loginInfo);
-
         testTxt = findViewById(R.id.testTxt);
 
         cardImages = new ImageView[12];
@@ -108,6 +113,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TestableFindASet findASet = new FindASet();
         setGameModel(findASet);
         gameModel.startNewGame();
+    }
+
+    private String getJSONString(BufferedReader reader) throws IOException {
+        String json = "";
+        try {
+            StringBuilder sb = new StringBuilder();
+            String line = reader.readLine();
+
+            while (line != null) {
+                sb.append(line);
+                sb.append("\n");
+                line = reader.readLine();
+            }
+            json = sb.toString();
+        } finally {
+            reader.close();
+        }
+
+        return json;
+    }
+
+    private String getUsername() throws IOException {
+        String s = getFilesDir() + "/" + "credentials";
+        //https://stackoverflow.com/questions/33638765/how-to-read-json-data-from-txt-file-in-java
+        BufferedReader reader = new BufferedReader(new FileReader(s));
+        String json = "";
+        String username = "";
+        json = getJSONString(reader);
+        try {
+            JSONObject object = new JSONObject(json);
+
+            JSONArray session = object.getJSONArray("session");
+            username = session.getJSONObject(0).getString("username");
+            if(username.equals(" ")){
+                username = "guest";
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return username;
     }
 
     public void setGameModel(TestableFindASet newGameModel) {

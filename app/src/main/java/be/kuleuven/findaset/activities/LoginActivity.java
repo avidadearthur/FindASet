@@ -20,9 +20,9 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -72,8 +72,6 @@ public class LoginActivity extends AppCompatActivity {
                             updateCredentials(username,hash);
                             responseString = curObject.getString( "username" );
                         }
-
-                        intent.putExtra("LoginInfo",responseString);
                         startActivity(intent);
                     }
                     catch(JSONException | IOException e )
@@ -129,8 +127,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void updateCredentials(String username, String hash) throws IOException {
+        String s = getFilesDir() + "/" + "credentials";
         //https://stackoverflow.com/questions/33638765/how-to-read-json-data-from-txt-file-in-java
-        BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("credentials")));
+        BufferedReader reader = new BufferedReader(new FileReader(s));
         String json = "";
         json = getJSONString(reader);
 
@@ -138,7 +137,7 @@ public class LoginActivity extends AppCompatActivity {
             JSONObject object = new JSONObject(json);
             JSONArray session = object.getJSONArray("session");
             session.getJSONObject(0).put("username",username);
-            session.getJSONObject(0).put("hash",username);
+            session.getJSONObject(0).put("hash",hash);
             writeCredentials(object);
         }
         catch (JSONException e) {

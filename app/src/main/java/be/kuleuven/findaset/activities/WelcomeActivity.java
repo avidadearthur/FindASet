@@ -100,6 +100,25 @@ public class WelcomeActivity extends AppCompatActivity {
         testTv.setText(str);
     }
 
+    private void updateCredentials(String username, String hash) throws IOException {
+        String s = getFilesDir() + "/" + "credentials";
+        //https://stackoverflow.com/questions/33638765/how-to-read-json-data-from-txt-file-in-java
+        BufferedReader reader = new BufferedReader(new FileReader(s));
+        String json = "";
+        json = getJSONString(reader);
+
+        try {
+            JSONObject object = new JSONObject(json);
+            JSONArray session = object.getJSONArray("session");
+            session.getJSONObject(0).put("username",username);
+            session.getJSONObject(0).put("hash",hash);
+            writeCredentials(object);
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void readCredentials() throws IOException {
         String s = getFilesDir() + "/" + "credentials";
         //https://stackoverflow.com/questions/33638765/how-to-read-json-data-from-txt-file-in-java
@@ -115,12 +134,16 @@ public class WelcomeActivity extends AppCompatActivity {
 
             JSONArray session = object.getJSONArray("session");
             String username = session.getJSONObject(0).getString("username");
-            TextView helloNote = (TextView) findViewById(R.id.tvHelloNote);
-            helloNote.setText("Hello "+username+"! ");
-            LinearLayout layout = findViewById(R.id.helloLayout);
-            layout.setVisibility(View.VISIBLE);
+            if(!username.equals(" ")){
 
+                TextView helloNote = (TextView) findViewById(R.id.tvHelloNote);
+                helloNote.setText("Hello "+username+"! ");
+                LinearLayout layout = findViewById(R.id.helloLayout);
+                layout.setVisibility(View.VISIBLE);
 
+                TextView tvLogin = (TextView) findViewById(R.id.tvLogin);
+                tvLogin.setVisibility(View.GONE);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -147,7 +170,13 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     public void onClick_Logout(View caller) {
-
+        try {
+            updateCredentials(" ", " ");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Intent intent = new Intent(this, WelcomeActivity.class);
+        startActivity(intent);
     }
 
     public void onClick_Board(View caller) {
