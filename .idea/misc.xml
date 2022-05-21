@@ -6,8 +6,10 @@
         <entry key="..\:/Users/arthu/AndroidStudioProjects/FindASet/app/src/main/res/layout/activity_main.xml" value="0.3233695652173913" />
         <entry key="..\:/Users/arthu/AndroidStudioProjects/FindASet/app/src/main/res/layout/activity_register_login.xml" value="0.22" />
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/drawable-hdpi/imageview_shadow.xml" value="0.176" />
+        <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/drawable-mdpi/bg_circle_stroked.xml" value="0.132" />
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/drawable-v24/bg_gradient_grey.xml" value="0.1115" />
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/drawable-v24/card_background.xml" value="0.115" />
+        <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.132" />
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/drawable-v24/imageview_shadow.xml" value="0.264" />
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/drawable-v24/learn_bg_bottom_shadow.xml" value="0.1115" />
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/drawable-v24/learn_bg_chat.xml" value="0.1115" />
@@ -18,6 +20,9 @@
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/drawable-v24/learn_bg_circle_trans.xml" value="0.1115" />
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/drawable-v24/learn_bg_circle_white.xml" value="0.1115" />
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/drawable-v24/learn_shadow_edittext.xml" value="0.132" />
+        <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/drawable/bg_gradient_grey.xml" value="0.132" />
+        <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/drawable/ic_back.xml" value="0.132" />
+        <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/drawable/ic_launcher_background.xml" value="0.132" />
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/drawable/selected_card.xml" value="0.1115" />
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/font/font_family.xml" value="0.25925925925925924" />
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/layout/activity_leader_board.xml" value="0.2" />
@@ -28,6 +33,7 @@
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/layout/activity_register.xml" value="0.152" />
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/layout/activity_register_login.xml" value="0.13541666666666666" />
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/layout/activity_welcome.xml" value="0.24114583333333334" />
+        <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/layout/item_leaderboard.xml" value="0.23596014492753623" />
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/layout/learn_activity_login.xml" value="0.264" />
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/layout/learn_activity_register.xml" value="0.264" />
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/layout/learner_activity_walk_through_new.xml" value="0.264" />
