@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import be.kuleuven.findaset.R;
-import be.kuleuven.findaset.model.FindLearning;
+import be.kuleuven.findaset.model.FindAll;
 import be.kuleuven.findaset.model.InterfaceFindASet;
 
 public class LearningActivity extends AppCompatActivity implements View.OnClickListener{
@@ -117,7 +117,7 @@ public class LearningActivity extends AppCompatActivity implements View.OnClickL
             cardImages[i].setBackground(getDrawable(R.drawable.imageview_shadow));
         }
 
-        InterfaceFindASet findLearning = new FindLearning();
+        InterfaceFindASet findLearning = new FindAll();
         setGameModel(findLearning);
         gameModel.startNewGame();
     }
