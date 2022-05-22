@@ -1,7 +1,5 @@
 package be.kuleuven.findaset.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,6 +12,8 @@ import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,9 +25,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import be.kuleuven.findaset.R;
-import be.kuleuven.findaset.model.FindASet;
 import be.kuleuven.findaset.model.FindLearning;
-import be.kuleuven.findaset.model.TestableFindASet;
+import be.kuleuven.findaset.model.InterfaceFindASet;
 
 public class LearningActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -41,7 +40,7 @@ public class LearningActivity extends AppCompatActivity implements View.OnClickL
             R.drawable.tilde1groen, R.drawable.tilde2groen, R.drawable.tilde3groen,
             R.drawable.tilde1rood, R.drawable.tilde2rood, R.drawable.tilde3rood,
             R.drawable.tilde1paars, R.drawable.tilde2paars, R.drawable.tilde3paars};
-    private TestableFindASet gameModel;
+    private InterfaceFindASet gameModel;
     private ImageView[] cardImages;
     private TextView[] cardTexts;
     private TextView testTxt;
@@ -118,7 +117,7 @@ public class LearningActivity extends AppCompatActivity implements View.OnClickL
             cardImages[i].setBackground(getDrawable(R.drawable.imageview_shadow));
         }
 
-        TestableFindASet findLearning = new FindLearning();
+        InterfaceFindASet findLearning = new FindLearning();
         setGameModel(findLearning);
         gameModel.startNewGame();
     }
@@ -163,7 +162,7 @@ public class LearningActivity extends AppCompatActivity implements View.OnClickL
         return username;
     }
 
-    public void setGameModel(TestableFindASet newGameModel) {
+    public void setGameModel(InterfaceFindASet newGameModel) {
         this.gameModel = newGameModel;
         this.gameModel.setUILearning(this);
     }

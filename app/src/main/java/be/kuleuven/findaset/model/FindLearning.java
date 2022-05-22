@@ -267,7 +267,7 @@ public class FindLearning extends AbstractFindASet{
      * ArrayList<Integer> of indexes (0 - 11) of selected cards
      */
     @Override
-    public void alternativeUpdateTable(ArrayList<Integer> selectedCardsIndex) {
+    public void updateTable(ArrayList<Integer> selectedCardsIndex) {
         Random rd = new Random();
         for (int i = 0; i < 3; i++) {
             //1.
@@ -390,7 +390,7 @@ public class FindLearning extends AbstractFindASet{
             if (selectedCardsIndex.size() == 3) {
                 if (checkSet(selectedCardsIndex)) {
                     learningActivity.setTestTxt("set Found");
-                    alternativeUpdateTable(selectedCardsIndex);
+                    this.updateTable(selectedCardsIndex);
                     learningActivity.notifyFeatureBox();
                     selectedCardsIndex.clear();
                 }

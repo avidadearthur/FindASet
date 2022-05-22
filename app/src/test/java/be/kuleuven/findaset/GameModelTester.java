@@ -11,7 +11,6 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 
 import be.kuleuven.findaset.model.FindASet;
-import be.kuleuven.findaset.model.TestableFindASet;
 
 public class GameModelTester {
     private TestableFindASet gameBoard;

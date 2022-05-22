@@ -25,7 +25,7 @@ import java.util.Arrays;
 
 import be.kuleuven.findaset.R;
 import be.kuleuven.findaset.model.FindASet;
-import be.kuleuven.findaset.model.TestableFindASet;
+import be.kuleuven.findaset.model.InterfaceFindASet;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             R.drawable.tilde1groen, R.drawable.tilde2groen, R.drawable.tilde3groen,
             R.drawable.tilde1rood, R.drawable.tilde2rood, R.drawable.tilde3rood,
             R.drawable.tilde1paars, R.drawable.tilde2paars, R.drawable.tilde3paars};
-    private TestableFindASet gameModel;
+    private InterfaceFindASet gameModel;
     private ImageView[] cardImages;
     private TextView[] cardTexts;
     private TextView testTxt;
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             cardImages[i].setBackground(getDrawable(R.drawable.imageview_shadow));
         }
 
-        TestableFindASet findASet = new FindASet();
+        InterfaceFindASet findASet = new FindASet();
         setGameModel(findASet);
         gameModel.startNewGame();
     }
@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return username;
     }
 
-    public void setGameModel(TestableFindASet newGameModel) {
+    public void setGameModel(InterfaceFindASet newGameModel) {
         this.gameModel = newGameModel;
         this.gameModel.setUI(this);
     }
