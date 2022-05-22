@@ -13,10 +13,22 @@ import android.transition.ChangeBounds;
 import android.transition.Fade;
 import android.transition.TransitionManager;
 import android.transition.TransitionSet;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import be.kuleuven.findaset.R;
 import be.kuleuven.findaset.base.RecyclerViewAdapter;
@@ -34,6 +46,8 @@ public class LeaderBoardActivity extends AppCompatActivity {
     private String[] namesTen;
     private String[] timesTen;
     private String[] rankingsTen;
+    private RequestQueue requestQueue;
+    private String baseURL = "https://studev.groept.be/api/a21pt113/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,24 +58,77 @@ public class LeaderBoardActivity extends AppCompatActivity {
         tvTen = findViewById(R.id.tvTen);
         tabModes = findViewById(R.id.tabModes);
         recyclerView = findViewById(R.id.rvBoard);
+        requestQueue = Volley.newRequestQueue( this );
 
-        namesAll = new String[]{"Sandro", "Arthur","Koen"};
-        timesAll = new String[]{"1'30", "2'30","3'30"};
-        rankingsAll = new String[]{"1","2","5"};
-        namesTen = new String[]{"Sandro2", "Arthur","Koen"};
-        timesTen = new String[]{"1'30", "2'30","3'30"};
-        rankingsTen = new String[]{"1","2","5"};
-
+        getRankingsAll();
+        getRankingsTen();
         recyclerView = findViewById(R.id.rvBoard);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        allAdapter = new RecyclerViewAdapter(namesAll, timesAll, rankingsAll);
-        tenAdapter = new RecyclerViewAdapter(namesTen, timesTen, rankingsTen);
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+    }
 
-        recyclerView.setAdapter(allAdapter);
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        rvSetAnimation();
+    private void getRankingsAll() {
+        String allSetsUrl = baseURL + "boardFindAll";
+        JsonArrayRequest rankingRequestAll = new JsonArrayRequest(Request.Method.GET, allSetsUrl, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                namesAll = new String[response.length()];
+                timesAll = new String[response.length()];
+                rankingsAll = new String[response.length()];
+                for (int i=0; i<response.length(); i++) {
+                    JSONObject o = null;
+                    try {
+                        o = response.getJSONObject(i);
+                        namesAll[i] = (String) o.get("username");
+                        timesAll[i] = (String) o.get("allSetsRecord");
+                        rankingsAll[i] = String.valueOf(i+1);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                allAdapter = new RecyclerViewAdapter(namesAll, timesAll, rankingsAll);
+                recyclerView.setAdapter(allAdapter);
+                rvSetAnimation();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Database", "onErrorResponse: " + error);
+            }
+        });
+        requestQueue.add(rankingRequestAll);
+    }
+
+    private void getRankingsTen() {
+        String tenSetsUrl = baseURL + "boardFindTen";
+        JsonArrayRequest rankingRequestTen = new JsonArrayRequest(Request.Method.GET, tenSetsUrl, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                namesTen = new String[response.length()];
+                timesTen = new String[response.length()];
+                rankingsTen = new String[response.length()];
+                for (int i=0; i<response.length(); i++) {
+                    JSONObject o = null;
+                    try {
+                        o = response.getJSONObject(i);
+                        namesTen[i] = (String) o.get("username");
+                        timesTen[i] = (String) o.get("tenSetsRecord");
+                        rankingsTen[i] = String.valueOf(i+1);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                tenAdapter = new RecyclerViewAdapter(namesTen, timesTen, rankingsTen);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Database", "onErrorResponse: " + error);
+            }
+        });
+        requestQueue.add(rankingRequestTen);
     }
 
     public void onClick_Back(View caller) {
