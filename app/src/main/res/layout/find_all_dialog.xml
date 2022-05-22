@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 <!--    https://stackoverflow.com/questions/64102748/android-add-icon-to-the-edge-of-custom-alert-dialog-->
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/block"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/dialog_custom_borders"
@@ -18,7 +19,7 @@
         android:paddingBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
@@ -30,18 +31,26 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
-            android:visibility="visible" />
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/dialogText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/dialogText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="@string/dialog_FindAll_summary"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             android:textColor="@color/colorPrimaryDark"
-            android:visibility="visible" />
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dialogTitle" />
 
         <!--  <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_done"
@@ -57,7 +66,7 @@
             app:shapeAppearance="@style/ShapeAppearance.Capsule" />-->
 
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

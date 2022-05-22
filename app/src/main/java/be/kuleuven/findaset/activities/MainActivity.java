@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ import java.util.Arrays;
 
 import be.kuleuven.findaset.R;
 import be.kuleuven.findaset.model.FindAll;
+import be.kuleuven.findaset.model.FindLearning;
 import be.kuleuven.findaset.model.FindTen;
 import be.kuleuven.findaset.model.InterfaceFindASet;
 
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private InterfaceFindASet gameModel;
     private ImageView[] cardImages;
     private TextView[] cardTexts;
+    private Button[] featureBoxes;
     private TextView testTxt;
     private Chronometer stopWatch;
 
@@ -57,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_learning);
 
         //Init stopWatch
         stopWatch = findViewById(R.id.stopWatch);
@@ -104,6 +107,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cardTexts[10] = findViewById(R.id.card11Text);
         cardTexts[11] = findViewById(R.id.card12Text);
 
+        featureBoxes = new Button[4];
+        featureBoxes[0] = findViewById(R.id.sizeBtn);
+        featureBoxes[1] = findViewById(R.id.colorBtn);
+        featureBoxes[2] = findViewById(R.id.shadingBtn);
+        featureBoxes[3] = findViewById(R.id.typeBtn);
+
         for (int i = 0; i < 12; i++) {
             cardImages[i].setOnClickListener(this);
             //cardImages[i].setBackgroundColor(getColor(R.color.transparent));
@@ -117,10 +126,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if(mode == 1){
             findASet = new FindAll();
+            notifyFeatureBoxGone();
         }
         else if(mode == 2){
             findASet = new FindTen();
+            notifyFeatureBoxGone();
         }
+        else if(mode == 3){
+            findASet = new FindLearning();
+            notifyFeatureBoxGrey();
+        }
+
 
         setGameModel(findASet);
         gameModel.startNewGame();
@@ -322,5 +338,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void notifyWin() {
         setTestTxt("YOU WIN!!!" );
+    }
+
+    public void notifyFeatureSame(int index) {
+        featureBoxes[index].setBackgroundColor(getColor(R.color.colorPrimary_light));
+    }
+
+    public void notifyFeatureDifferent(int index) {
+        featureBoxes[index].setBackgroundColor(getColor(R.color.light_yellow));
+    }
+
+    public void notifyFeatureBoxGrey() {
+        for (Button box : featureBoxes) {
+            box.setVisibility(View.VISIBLE);
+            box.setBackgroundColor(getColor(R.color.metal_grey));
+        }
+    }
+
+    public void notifyFeatureBoxGone() {
+        for (Button box : featureBoxes) {
+            box.setVisibility(View.INVISIBLE);
+        }
     }
 }

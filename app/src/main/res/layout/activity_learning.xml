@@ -10,13 +10,6 @@
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="61dp">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineTop3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="541dp" />
-
     <ImageView
         android:id="@+id/ivBack2"
         android:layout_width="@dimen/_30sdp"
@@ -39,18 +32,6 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.08" />
 
-    <Chronometer
-        android:id="@+id/stopWatch"
-        style="@style/HeadingBig"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guidelineTop2" />
-
     <TextView
         android:id="@+id/userText"
         style="@style/HeadingBig"
@@ -62,6 +43,18 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guidelineTop2" />
+
+    <Chronometer
+        android:id="@+id/stopWatch"
+        style="@style/HeadingBig"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guidelineTop2" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -323,63 +316,68 @@
         app:layout_constraintTop_toTopOf="@+id/card12"
         app:layout_constraintVertical_bias="0.265" />
 
-    <Button
-        android:id="@+id/sizeBtn"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.73" />
+
+    <Button
+        android:id="@+id/sizeBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/textColorGrey"
         android:clickable="false"
         android:fadeScrollbars="false"
         android:text="@string/feature_size"
-        android:textColor="#757575"
-        android:textSize="20sp"
+        android:textColor="#616161"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/colorBtn"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guidelineTop3" />
+        app:layout_constraintTop_toTopOf="@+id/guidelineBottom" />
 
     <Button
         android:id="@+id/colorBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
+        android:background="@color/textColorGrey"
         android:clickable="false"
         android:text="@string/feature_color"
-        android:textColor="#757575"
-        android:textSize="20sp"
+        android:textColor="#616161"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/shadingBtn"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/sizeBtn"
-        app:layout_constraintTop_toTopOf="@+id/guidelineTop3" />
+        app:layout_constraintTop_toTopOf="@+id/guidelineBottom" />
 
     <Button
         android:id="@+id/shadingBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:clickable="false"
         android:text="@string/feature_shading"
         android:textColor="#757575"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/typeBtn"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/colorBtn"
-        app:layout_constraintTop_toTopOf="@+id/guidelineTop3" />
+        app:layout_constraintTop_toTopOf="@+id/guidelineBottom" />
 
     <Button
         android:id="@+id/typeBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:clickable="false"
         android:text="@string/feature_type"
         android:textColor="#757575"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/shadingBtn"
-        app:layout_constraintTop_toTopOf="@+id/guidelineTop3" />
+        app:layout_constraintTop_toTopOf="@+id/guidelineBottom" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/refreshBtn"

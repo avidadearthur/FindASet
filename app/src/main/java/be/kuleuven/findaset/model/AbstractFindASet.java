@@ -3,34 +3,28 @@ package be.kuleuven.findaset.model;
 import java.util.ArrayList;
 import java.util.Random;
 
-import be.kuleuven.findaset.activities.LearningActivity;
 import be.kuleuven.findaset.activities.MainActivity;
 
 public abstract class AbstractFindASet implements InterfaceFindASet {
-    private ArrayList<Integer> cardsIdTable;
+    protected ArrayList<Integer> cardsIdTable;
     protected int[] justForTest;
-    private ArrayList<Integer> selectedCardsIndex;
-    private ArrayList<Boolean> isCardSelected;
+    protected ArrayList<Integer> selectedCardsIndex;
+    protected ArrayList<Boolean> isCardSelected;
     protected ArrayList<Integer> foundedSetCardsIds;
-    private ArrayList<Integer> remainingCardsIds;
+    protected ArrayList<Integer> remainingCardsIds;
     protected boolean win;
 
     protected MainActivity mainActivity;
-    protected LearningActivity learningActivity;
 
     @Override
     public final void setUI(MainActivity mainActivity){
         this.mainActivity = mainActivity;
     }
-    @Override
-    public final void setUILearning(LearningActivity learningActivity){
-        this.learningActivity = learningActivity;
-    }
 
     public AbstractFindASet() {
     }
 
-    private void generateAllCardsIdsList() {
+    protected void generateAllCardsIdsList() {
         remainingCardsIds = new ArrayList<>(81);
         for (int size = 1; size < 4; size++) {
             for (int color = 1; color < 4; color++) {
@@ -83,14 +77,14 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
 
         // chooses which column will have equal features
         int sum = 0;
-        isEqual = chooseEqualFeatures(rd, isEqual, sum);
+        chooseEqualFeatures(rd, isEqual, sum);
         // add numbers based on the Features that should be equal
         addFeatureNumbers(rd, featureMatrix, isEqual);
 
         return featureMatrix;
     }
 
-    private int[] chooseEqualFeatures(Random rd, int[] isEqual, int sum) {
+    private void chooseEqualFeatures(Random rd, int[] isEqual, int sum) {
         for (int i = 0; i < 4; i++) {
             isEqual[i] = rd.nextInt(2);
             sum += isEqual[i];
@@ -98,7 +92,6 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
                 isEqual[i] = 0;
             }
         }
-        return isEqual;
     }
 
     private void addFeatureNumbers(Random rd, int[][] featureMatrix, int[] isEqual) {
@@ -231,7 +224,22 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
         return isSet;
     }
 
-    private boolean checkFeatureMatrix(int[][] featureMatrix, boolean isSet) {
+    private void getTestFeatureMatrix(ArrayList<Integer> testedCardsIndex, int[][] featureMatrix) {
+        for (int i = 0; i < 3; i++) {
+            int nextCardId = cardsIdTable.get(testedCardsIndex.get(i));
+            int size = nextCardId/1000;
+            int color = (nextCardId%1000)/100;
+            int shading = (nextCardId%100)/10;
+            int type = nextCardId%10;
+            featureMatrix[i][0] = size;
+            featureMatrix[i][1] = color;
+            featureMatrix[i][2] = shading;
+            featureMatrix[i][3] = type;
+        }
+    }
+
+    @Override
+    public boolean checkFeatureMatrix(int[][] featureMatrix, boolean isSet) {
         for (int col = 0; col < 4; col++) {
             // Compares the features of the first of the first two cards
             // if the first two are the same -> check the third one
@@ -251,20 +259,6 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
             }
         }
         return isSet;
-    }
-
-    private void getTestFeatureMatrix(ArrayList<Integer> testedCardsIndex, int[][] featureMatrix) {
-        for (int i = 0; i < 3; i++) {
-            int nextCardId = cardsIdTable.get(testedCardsIndex.get(i));
-            int size = nextCardId/1000;
-            int color = (nextCardId%1000)/100;
-            int shading = (nextCardId%100)/10;
-            int type = nextCardId%10;
-            featureMatrix[i][0] = size;
-            featureMatrix[i][1] = color;
-            featureMatrix[i][2] = shading;
-            featureMatrix[i][3] = type;
-        }
     }
     //////////////////END OF CHECK FOR SET////////////////////////////////////////////////
 
