@@ -12,8 +12,8 @@
 
     <ImageView
         android:id="@+id/ivBack2"
-        android:layout_width="@dimen/_50sdp"
-        android:layout_height="@dimen/_50sdp"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         android:contentDescription="@string/back"
@@ -32,18 +32,6 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.08" />
 
-    <Chronometer
-        android:id="@+id/stopWatch"
-        style="@style/HeadingBig"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guidelineTop2" />
-
     <TextView
         android:id="@+id/userText"
         style="@style/HeadingBig"
@@ -55,6 +43,18 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guidelineTop2" />
+
+    <Chronometer
+        android:id="@+id/stopWatch"
+        style="@style/HeadingBig"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guidelineTop2" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -316,6 +316,71 @@
         app:layout_constraintTop_toTopOf="@+id/card12"
         app:layout_constraintVertical_bias="0.265" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.76" />
+
+    <Button
+        android:id="@+id/sizeBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/textColorGrey"
+        android:clickable="false"
+        android:fadeScrollbars="false"
+        android:text="@string/feature_size"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/colorBtn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guidelineBottom" />
+
+    <Button
+        android:id="@+id/colorBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/textColorGrey"
+        android:clickable="false"
+        android:text="@string/feature_color"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/shadingBtn"
+        app:layout_constraintStart_toEndOf="@+id/sizeBtn"
+        app:layout_constraintTop_toTopOf="@+id/guidelineBottom" />
+
+    <Button
+        android:id="@+id/shadingBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/textColorGrey"
+        android:clickable="false"
+        android:text="@string/feature_shading"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/typeBtn"
+        app:layout_constraintStart_toEndOf="@+id/colorBtn"
+        app:layout_constraintTop_toTopOf="@+id/guidelineBottom" />
+
+    <Button
+        android:id="@+id/typeBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/textColorGrey"
+        android:clickable="false"
+        android:text="@string/feature_type"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/shadingBtn"
+        app:layout_constraintTop_toTopOf="@+id/guidelineBottom" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/refreshBtn"
         style="@style/ModeButton.Filled"
@@ -324,7 +389,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="32dp"
-        android:onClick="refreshBtn_Clicked"
+        android:onClick="onClick_refreshBtn"
         android:text="@string/main_refresh"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -335,12 +400,26 @@
         android:id="@+id/testTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="68dp"
+        android:layout_marginBottom="8dp"
         android:text="just for test"
         android:textColor="#131212"
         app:layout_constraintBottom_toTopOf="@+id/refreshBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvLearningModeContinue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:onClick="onClick_continueLearningMode"
+        android:text="@string/main_continue"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="@dimen/font_size_medium"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineBottom"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
