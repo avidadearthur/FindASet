@@ -51,6 +51,8 @@
         android:src="@drawable/welcome_bg"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ivRandomCard1"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -59,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
+        app:layout_constraintGuide_percent="0.44" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/findAllModeBtn"
@@ -152,7 +154,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_12sdp"
-        android:layout_marginTop="310dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="@dimen/_12sdp"
         android:gravity="center_horizontal"
         android:text="@string/welcome_heading"
@@ -193,32 +195,38 @@
 
     <ImageView
         android:id="@+id/ivRandomCard1"
-        android:layout_width="180dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="170dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivRandomCard2"
+        app:layout_constraintEnd_toStartOf="@+id/ivRandomCard2"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivRandomCard2"
         app:srcCompat="@drawable/card_primary" />
 
     <ImageView
         android:id="@+id/ivRandomCard2"
-        android:layout_width="180dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="-80dp"
-        app:layout_constraintEnd_toStartOf="@+id/ivRandomCard1"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="190dp"
+        app:layout_constraintEnd_toStartOf="@+id/ivRandomCard3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ivRandomCard1"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/card_primary" />
 
     <ImageView
         android:id="@+id/ivRandomCard3"
-        android:layout_width="180dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="-80dp"
-        android:layout_marginTop="80dp"
-        app:layout_constraintStart_toEndOf="@+id/ivRandomCard1"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="8dp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/ivRandomCard2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ivRandomCard2"
+        app:layout_constraintTop_toTopOf="@+id/ivRandomCard2"
         app:srcCompat="@drawable/card_primary" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
