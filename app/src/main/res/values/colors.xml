@@ -25,7 +25,7 @@
     <color name="gradient_grey_2">#F7F8FA</color>
     <color name="layout_background">#F6F7FA</color>
     <color name="green">#18CF18</color>
-    <color name="light_green">#62EE7A</color>
+    <color name="light_green">#4EE668</color>
     <color name="light_pink">#FC66E4</color>
     <color name="light_red">#FD6C7C</color>
     <color name="yellow">#FBC02D</color>
@@ -36,6 +36,6 @@
     <color name="orange_light">#FE9778</color>
     <color name="orange_dark">#Fd6f6D</color>
     <color name="purple">#cd34fa</color>
-    <color name="light_yellow">#FFF1C2</color>
+    <color name="light_yellow">#FFEB3B</color>
     <color name="white_trans">#51FFFFFF</color>
 </resources>

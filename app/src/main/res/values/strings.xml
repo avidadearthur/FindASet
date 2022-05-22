@@ -15,6 +15,7 @@
 
     <string name="back">back</string>
     <string name="main_refresh">REFRESH</string>
+    <string name="main_continue">Find A Set! Continue!</string>
     <string name="find_all_mode">Find ALL Mode</string>
     <string name="find_ten_mode">Find TEN Mode</string>
     <string name="tutorial_mode">Learning Mode</string>
@@ -38,7 +39,7 @@
     <string name="feature_type">type</string>
     <string name="feature_box_explanation_title">Eliminate Grey!!</string>
     <string name="feature_box_explanation_content">Yellow means this feature is all different for three cards.
-        \nBlue means this feature is all same for three cards.
+        \nGreen means this feature is all same for three cards.
         \nAny combinations of yellow and blue can make a set.
         \nTry it now!!</string>
 

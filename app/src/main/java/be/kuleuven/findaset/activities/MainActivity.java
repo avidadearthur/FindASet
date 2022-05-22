@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView[] cardTexts;
     private Button[] featureBoxes;
     private TextView testTxt;
+    private TextView learningContinue;
     private Chronometer stopWatch;
 
     /**
@@ -66,19 +67,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Init stopWatch
         stopWatch = findViewById(R.id.stopWatch);
 
-
         // testing register and login
         TextView txtInfo = (TextView) findViewById(R.id.userText);
         String loginInfo = null;
-
         try {
             loginInfo = getUsername();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         txtInfo.setText(loginInfo);
+
         testTxt = findViewById(R.id.testTxt);
+        learningContinue = findViewById(R.id.tvLearningModeContinue);
+        learningContinue.setVisibility(View.INVISIBLE);
 
         cardImages = new ImageView[12];
         cardImages[0] = findViewById(R.id.card1);
@@ -121,10 +122,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         InterfaceFindASet findASet = null;
-
         Bundle extras = getIntent().getExtras();
         int mode = extras.getInt("mode");
-
         if(mode == 1){
             findASet = new FindAll();
             notifyFeatureBoxGone();
@@ -136,8 +135,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else if(mode == 3){
             findASet = new FindLearning();
             notifyFeatureBoxGrey();
+            showFeatureBoxRuleDialog();
+            stopWatch.setVisibility(View.INVISIBLE);
+            //TODO IN learning mode, wining not display or push time
         }
-
 
         setGameModel(findASet);
         gameModel.startNewGame();
@@ -188,6 +189,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.gameModel.setUI(this);
     }
 
+    /**
+     * First get the index of which call the method.
+     * <p>
+     * If there are already 3 selected cards, remove the first.
+     * <p>
+     * After that, call checkSet() to check if there is set.
+     * <p>
+     * If there is, call updateTable().
+     */
+    @Override
+    public void onClick(View clickedView) {
+        int index = Arrays.asList(cardImages).indexOf(clickedView);
+        gameModel.toggle(index);
+    }
+
+    public void onClick_refreshBtn (View caller) {
+        for (int i = 0; i < gameModel.getSelectedCardsIndex().size(); i++) {
+            gameModel.unselect(gameModel.getSelectedCardsIndex().get(i));
+        }
+        gameModel.startNewGame();
+        notifyStartStopWatch();
+    }
+
+    public void onClick_continueLearningMode (View caller) {
+        gameModel.updateTable(gameModel.getSelectedCardsIndex());
+        notifyFeatureBoxGrey();
+        gameModel.getSelectedCardsIndex().clear();
+        for (ImageView cards : cardImages) {
+            cards.setClickable(true);
+        }
+        learningContinue.setVisibility(View.INVISIBLE);
+    }
+
     public void onClick_Back(View caller) {
         finish();
         Intent intent = new Intent(this, WelcomeActivity.class);
@@ -230,30 +264,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //cardTexts[index].setText(nextCard.toString());
         cardTexts[index].setText("");
     }
-
-    /**
-     * First get the index of which call the method.
-     * <p>
-     * If there are already 3 selected cards, remove the first.
-     * <p>
-     * After that, call checkSet() to check if there is set.
-     * <p>
-     * If there is, call updateTable().
-     */
-    @Override
-    public void onClick(View clickedView) {
-        int index = Arrays.asList(cardImages).indexOf(clickedView);
-        gameModel.toggle(index);
-    }
-
-    public void refreshBtn_Clicked(View caller) {
-        for (int i = 0; i < gameModel.getSelectedCardsIndex().size(); i++) {
-            gameModel.unselect(gameModel.getSelectedCardsIndex().get(i));
-        }
-        gameModel.startNewGame();
-        notifyStartStopWatch();
-    }
-
 
     /**
      * If there is no green border, add one.
@@ -343,7 +353,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void notifyFeatureSame(int index) {
-        featureBoxes[index].setBackgroundColor(getColor(R.color.colorPrimary_light));
+        featureBoxes[index].setBackgroundColor(getColor(R.color.light_green));
     }
 
     public void notifyFeatureDifferent(int index) {
@@ -363,21 +373,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void notifyLearningModeRule() {
-
+    public void notifyLearningModeFindASet() {
+        learningContinue.setVisibility(View.VISIBLE);
+        for (ImageView cards : cardImages) {
+            cards.setClickable(false);
+        }
     }
 
-    public void notifyLearningModeDialog() {
-
-    }
-
-    private void showLearningModeDialog() {
+    private void showFeatureBoxRuleDialog() {
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_main);
-        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_custom_borders);
+        //dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_custom_borders);
         TextView dialogTitle = (TextView) dialog.findViewById(R.id.dialogTitle);
         dialogTitle.setText(R.string.feature_box_explanation_title);
         TextView dialogText = (TextView) dialog.findViewById(R.id.dialogText);
         dialogText.setText(R.string.feature_box_explanation_content);
+        dialog.show();
     }
 }

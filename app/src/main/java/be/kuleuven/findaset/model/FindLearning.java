@@ -106,13 +106,14 @@ public class FindLearning extends AbstractFindASet implements InterfaceFindASet{
             if (selectedCardsIndex.size() == 4) {
                 unselect(selectedCardsIndex.get(0));
                 selectedCardsIndex.remove(selectedCardsIndex.get(0));
+                mainActivity.notifyFeatureBoxGrey();
             }
             if (selectedCardsIndex.size() == 3) {
                 if (checkSet(selectedCardsIndex)) {
                     mainActivity.setTestTxt("set Found");
-                    updateTable(selectedCardsIndex);
-                    mainActivity.notifyFeatureBoxGrey();
-                    selectedCardsIndex.clear();
+                    //updateTable(selectedCardsIndex);
+                    //mainActivity.notifyFeatureBoxGrey();
+                    mainActivity.notifyLearningModeFindASet();
                 }
             }
         } else {
