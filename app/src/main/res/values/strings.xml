@@ -36,7 +36,11 @@
     <string name="feature_color">color</string>
     <string name="feature_shading">shading</string>
     <string name="feature_type">type</string>
-
+    <string name="feature_box_explanation_title">Eliminate Grey!!</string>
+    <string name="feature_box_explanation_content">Yellow means this feature is all different for three cards.
+        \nBlue means this feature is all same for three cards.
+        \nAny combinations of yellow and blue can make a set.
+        \nTry it now!!</string>
 
     <string name="learn_pref_name">LearnAppPreferences</string>
     <string name="learn_lbl_login_underlined"><u>Login</u></string>

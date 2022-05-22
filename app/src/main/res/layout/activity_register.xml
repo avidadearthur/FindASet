@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/ivBack"
-        android:layout_width="@dimen/_30sdp"
-        android:layout_height="@dimen/_30sdp"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
         android:layout_marginStart="@dimen/learn_spacing_standard_new"
         android:layout_marginTop="@dimen/learn_spacing_standard_new"
         android:contentDescription="@string/back"

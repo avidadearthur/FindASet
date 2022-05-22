@@ -371,32 +371,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void showLearningModeDialog(int dialogIndex) {
+    private void showLearningModeDialog() {
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_main);
         dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_custom_borders);
-        if (dialogIndex == 0){
-            TextView dialogTitle = (TextView) dialog.findViewById(R.id.dialogTitle);
-            dialogTitle.setText("Find All");
-            TextView dialogText = (TextView) dialog.findViewById(R.id.dialogText);
-            dialogText.setText("In Find All mode the player has to find all possible sets\n" +
-                    "        within the 81 cards generated throughout the game.");
-
-        }
-        else if (dialogIndex == 1){
-            TextView dialogTitle = (TextView) dialog.findViewById(R.id.dialogTitle);
-            dialogTitle.setText("Something else");
-            TextView dialogText = (TextView) dialog.findViewById(R.id.dialogText);
-            dialogText.setText("Lorem Ipsum");
-
-        }
-        else if (dialogIndex == 2){
-            TextView dialogTitle = (TextView) dialog.findViewById(R.id.dialogTitle);
-            dialogTitle.setText("Bla Bla");
-            TextView dialogText = (TextView) dialog.findViewById(R.id.dialogText);
-            dialogText.setText("Dolor sit amet");
-
-        }
-        dialog.show();
+        TextView dialogTitle = (TextView) dialog.findViewById(R.id.dialogTitle);
+        dialogTitle.setText(R.string.feature_box_explanation_title);
+        TextView dialogText = (TextView) dialog.findViewById(R.id.dialogText);
+        dialogText.setText(R.string.feature_box_explanation_content);
     }
 }
