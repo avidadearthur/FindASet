@@ -1,5 +1,6 @@
 package be.kuleuven.findaset.activities;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -188,6 +189,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void onClick_Back(View caller) {
+        finish();
         Intent intent = new Intent(this, WelcomeActivity.class);
         startActivity(intent);
     }
@@ -359,5 +361,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         for (Button box : featureBoxes) {
             box.setVisibility(View.INVISIBLE);
         }
+    }
+
+    public void notifyLearningModeRule() {
+
+    }
+
+    public void notifyLearningModeDialog() {
+
+    }
+
+    private void showLearningModeDialog(int dialogIndex) {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_main);
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_custom_borders);
+        if (dialogIndex == 0){
+            TextView dialogTitle = (TextView) dialog.findViewById(R.id.dialogTitle);
+            dialogTitle.setText("Find All");
+            TextView dialogText = (TextView) dialog.findViewById(R.id.dialogText);
+            dialogText.setText("In Find All mode the player has to find all possible sets\n" +
+                    "        within the 81 cards generated throughout the game.");
+
+        }
+        else if (dialogIndex == 1){
+            TextView dialogTitle = (TextView) dialog.findViewById(R.id.dialogTitle);
+            dialogTitle.setText("Something else");
+            TextView dialogText = (TextView) dialog.findViewById(R.id.dialogText);
+            dialogText.setText("Lorem Ipsum");
+
+        }
+        else if (dialogIndex == 2){
+            TextView dialogTitle = (TextView) dialog.findViewById(R.id.dialogTitle);
+            dialogTitle.setText("Bla Bla");
+            TextView dialogText = (TextView) dialog.findViewById(R.id.dialogText);
+            dialogText.setText("Dolor sit amet");
+
+        }
+        dialog.show();
     }
 }

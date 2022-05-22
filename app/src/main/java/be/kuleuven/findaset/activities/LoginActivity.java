@@ -40,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onClick_Join(View caller) {
+        finish();
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
@@ -72,6 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                             updateCredentials(username,hash);
                             responseString = curObject.getString( "username" );
                         }
+                        finish();
                         startActivity(intent);
                     }
                     catch(JSONException | IOException e )
@@ -153,6 +155,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onClick_Back(View caller) {
+        finish();
         Intent intent = new Intent(this, WelcomeActivity.class);
         startActivity(intent);
     }

@@ -34,6 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
     }
 
+    // TODO after register successfully, return to login page
     public void onBtnRegister_Clicked(View caller) throws NoSuchAlgorithmException {
         EditText registeredUsername = (EditText) findViewById(R.id.etUsername);
         EditText registeredPassword = (EditText) findViewById(R.id.etPassword);
@@ -100,6 +101,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void onClick_Back(View caller) {
+        finish();
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
