@@ -83,7 +83,7 @@ public class WelcomeActivity extends AppCompatActivity {
             TextView dialogTitle = (TextView) dialog.findViewById(R.id.dialogTitle);
             dialogTitle.setText("Find All");
             TextView dialogText = (TextView) dialog.findViewById(R.id.dialogText);
-            dialogTitle.setText("In Find All mode the player has to find all possible sets\n" +
+            dialogText.setText("In Find All mode the player has to find all possible sets\n" +
                     "        within the 81 cards generated throughout the game.");
 
         }
