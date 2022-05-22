@@ -55,7 +55,8 @@ public class LoginActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue( this );
         String requestURL = baseURL + "login" + "/" + username;
 
-        Intent intent = new Intent(this, WelcomeActivity.class);
+        Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         StringRequest submitRequest = new StringRequest(Request.Method.GET, requestURL,
 

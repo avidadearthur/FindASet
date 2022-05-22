@@ -191,28 +191,24 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     public void onClick_FindAll(View caller) {
-        finish();
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("mode", 1);
         startActivity(intent);
     }
 
     public void onClick_FindTen(View caller) {
-        finish();
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("mode", 2);
         startActivity(intent);
     }
 
     public void onClick_Learning(View caller) {
-        finish();
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("mode", 3);
         startActivity(intent);
     }
 
     public void onClick_Login(View caller) {
-        finish();
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
@@ -229,7 +225,6 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     public void onClick_Board(View caller) {
-        finish();
         Intent intent = new Intent(this, LeaderBoardActivity.class);
         startActivity(intent);
     }
