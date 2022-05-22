@@ -3,10 +3,12 @@ package be.kuleuven.findaset.model;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import be.kuleuven.findaset.activities.LearningActivity;
 import be.kuleuven.findaset.activities.MainActivity;
 
 public interface TestableFindASet {
     void setUI(MainActivity mainActivity);
+    void setUILearning(LearningActivity learningActivity);
 
     void startNewGame();
     void initializeTable(int sizeOfCards);

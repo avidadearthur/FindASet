@@ -160,7 +160,7 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     public void onClick_Learning(View caller) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, LearningActivity.class);
         startActivity(intent);
     }
 

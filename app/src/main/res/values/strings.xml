@@ -30,7 +30,10 @@
     <string name="board_find_ten">Find TEN</string>
     <string name="hint_username">User Name</string>
     <string name="hint_confirm_password">Confirm Password</string>
-
+    <string name="feature_size">size</string>
+    <string name="feature_color">color</string>
+    <string name="feature_shading">shading</string>
+    <string name="feature_type">type</string>
 
 
     <string name="learn_pref_name">LearnAppPreferences</string>
