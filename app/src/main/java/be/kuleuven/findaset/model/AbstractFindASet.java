@@ -272,6 +272,7 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
     @Override
     public void updateTable(ArrayList<Integer> selectedCardsIndex) {
         Random rd = new Random();
+
         for (int i = 0; i < 3; i++) {
             //1.
             int selectedIndex = selectedCardsIndex.get(i);
@@ -291,8 +292,6 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
             mainActivity.setTestTxt("YOU WIN!!!");
         }
     }
-
-
 
     private void replace3Cards(Random rd, int selectedIndex) {
         if (foundedSetCardsIds.size() <= 69) {
@@ -352,7 +351,7 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
         return setExisted;
     }
 
-    protected void ifNoSet(boolean setExisted) {
+    protected void updateWholeTable(boolean setExisted) {
         if (!setExisted) {
             initializeTable(12);
             setCardsTable(12);

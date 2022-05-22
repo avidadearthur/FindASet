@@ -3,12 +3,12 @@ package be.kuleuven.findaset.model;
 public class FindAll extends AbstractFindASet implements InterfaceFindASet{
     public FindAll() {
     }
-    
+
     @Override
     public void checkWin() {
         // check if there's still a set after updating
         if (foundedSetCardsIds.size() <= 69) {
-            ifNoSet(checkAllSetOnPage());
+            updateWholeTable(checkAllSetOnPage());
         }
         // the player ha already found 24 sets or more
         // so they win the find All game

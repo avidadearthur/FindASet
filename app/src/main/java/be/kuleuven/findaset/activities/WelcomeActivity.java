@@ -214,16 +214,19 @@ public class WelcomeActivity extends AppCompatActivity {
 
     public void onClick_FindAll(View caller) {
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("mode", 1);
         startActivity(intent);
     }
 
     public void onClick_FindTen(View caller) {
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("mode", 2);
         startActivity(intent);
     }
 
     public void onClick_Learning(View caller) {
-        Intent intent = new Intent(this, LearningActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("mode", 3);
         startActivity(intent);
     }
 
