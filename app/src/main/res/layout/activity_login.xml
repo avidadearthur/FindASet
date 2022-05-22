@@ -11,8 +11,8 @@
         android:id="@+id/ivBack"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
-        android:layout_marginStart="@dimen/learn_spacing_standard_new"
-        android:layout_marginTop="@dimen/learn_spacing_standard_new"
+        android:layout_marginStart="@dimen/spacing_standard_new"
+        android:layout_marginTop="@dimen/spacing_standard_new"
         android:contentDescription="@string/back"
         android:onClick="onClick_Back"
         android:padding="@dimen/_5sdp"
@@ -28,29 +28,24 @@
         <EditText
             android:id="@+id/etUsernameLogin"
             style="@style/EditTextStyleRound"
-            android:layout_marginTop="@dimen/learn_spacing_large"
+            android:layout_marginTop="@dimen/spacing_large"
             android:hint="@string/hint_username"
             android:maxLength="12"
             android:textColorHint="@color/metal_grey"
             android:textStyle="bold" />
-        android:autofillHints=""
-        android:hint="@string/learn_hint_username"
-        android:inputType="text"
-        android:text="@string/learn_txt_email" />
-
 
         <RelativeLayout
             style="@style/EditTextStyleRound"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/learn_spacing_xlarge"
-            android:layout_marginEnd="@dimen/learn_spacing_xlarge"
-            android:layout_marginBottom="@dimen/learn_spacing_xlarge"
+            android:layout_marginStart="@dimen/spacing_xlarge"
+            android:layout_marginEnd="@dimen/spacing_xlarge"
+            android:layout_marginBottom="@dimen/spacing_xlarge"
             android:background="@drawable/shadow_edittext"
-            android:paddingStart="@dimen/learn_spacing_large"
-            android:paddingTop="@dimen/learn_spacing_standard_new"
-            android:paddingEnd="@dimen/learn_spacing_standard"
-            android:paddingBottom="@dimen/learn_spacing_standard_new">
+            android:paddingStart="@dimen/spacing_large"
+            android:paddingTop="@dimen/spacing_standard_new"
+            android:paddingEnd="@dimen/spacing_standard"
+            android:paddingBottom="@dimen/spacing_standard_new">
 
             <EditText
                 android:id="@+id/etPasswordLogin"
@@ -67,18 +62,13 @@
                 android:textSize="@dimen/font_size_large"
                 android:textStyle="bold"
                 tools:ignore="TouchTargetSizeCheck" />
-            android:textColor="@color/textColorPrimary"
-            android:textColorHint="@color/metal_grey"
-            android:textSize="@dimen/font_size_normal"
-            android:textStyle="bold"
-            tools:ignore="TouchTargetSizeCheck" />
 
             <TextView
                 android:id="@+id/tvForget"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="@dimen/learn_spacing_standard_new"
+                android:layout_marginEnd="@dimen/spacing_standard_new"
                 android:background="@null"
                 android:text="@string/login_forget"
                 android:textColor="@color/colorPrimary"
@@ -95,8 +85,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:onClick="onBtnEnter_Clicked"
-            android:paddingStart="@dimen/learn_spacing_xlarge"
-            android:paddingEnd="@dimen/learn_spacing_xlarge"
+            android:paddingStart="@dimen/spacing_xlarge"
+            android:paddingEnd="@dimen/spacing_xlarge"
             android:text="@string/login_enter"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -118,19 +108,15 @@
             android:text="@string/login_don_t_joined_yet"
             android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/font_size_medium" />
-        android:text="@string/learn_lbl_don_t_joined_yet"
-        android:textAppearance="@style/LearnerFontMedium"
-        android:textColor="@color/learn_textColorPrimary"
-        android:textSize="@dimen/learn_font_size_medium" />
 
         <TextView
             android:id="@+id/tvLogout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/learn_spacing_standard_new"
+            android:layout_marginBottom="@dimen/spacing_standard_new"
             android:clickable="false"
             android:onClick="onClick_Join"
-            android:padding="@dimen/learn_spacing_control"
+            android:padding="@dimen/spacing_control"
             android:text="@string/login_join"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/font_size_medium"

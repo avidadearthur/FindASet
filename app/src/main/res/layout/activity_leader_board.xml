@@ -16,8 +16,8 @@
             android:id="@+id/ivBack"
             android:layout_width="@dimen/_40sdp"
             android:layout_height="@dimen/_40sdp"
-            android:layout_marginStart="@dimen/learn_spacing_standard_new"
-            android:layout_marginTop="@dimen/learn_spacing_standard_new"
+            android:layout_marginStart="@dimen/spacing_standard_new"
+            android:layout_marginTop="@dimen/spacing_standard_new"
             android:contentDescription="@string/back"
             android:onClick="onClick_Back"
             android:padding="@dimen/_5sdp"
@@ -32,8 +32,8 @@
         <TextView
             android:id="@+id/tvLeaderBoard"
             style="@style/HeadingBig"
-            android:layout_marginStart="@dimen/learn_spacing_standard_new"
-            android:layout_marginTop="@dimen/learn_spacing_middle"
+            android:layout_marginStart="@dimen/spacing_standard_new"
+            android:layout_marginTop="@dimen/spacing_middle"
             android:text="@string/board_leader_board"
             android:textSize="@dimen/font_size_xxxlarge"
             android:textStyle="bold" />
@@ -44,8 +44,8 @@
         android:id="@+id/tabModes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/learn_spacing_standard_new"
-        android:layout_marginTop="@dimen/learn_spacing_standard_new">
+        android:layout_marginStart="@dimen/spacing_standard_new"
+        android:layout_marginTop="@dimen/spacing_standard_new">
 
         <TextView
             android:id="@+id/tvAll"
@@ -62,7 +62,7 @@
             android:id="@+id/tvTen"
             style="@style/TabTextStyle"
             android:layout_width="wrap_content"
-            android:layout_marginStart="@dimen/learn_spacing_large"
+            android:layout_marginStart="@dimen/spacing_large"
             android:onClick="onClick_Ten"
             android:text="@string/board_find_ten"
             android:textStyle="bold"
@@ -75,7 +75,7 @@
             style="@style/TabTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/learn_spacing_large"
+            android:layout_marginStart="@dimen/spacing_large"
             android:onClick="onClick_HighScore"
             android:text="@string/board_high_score"
             android:textStyle="bold"
@@ -101,10 +101,10 @@
         android:layout_height="574dp"
         android:clipToPadding="false"
         android:overScrollMode="never"
-        android:paddingStart="@dimen/learn_spacing_middle"
-        android:paddingTop="@dimen/learn_spacing_standard_new"
-        android:paddingEnd="@dimen/learn_spacing_middle"
-        android:paddingBottom="@dimen/learn_spacing_standard_new"
+        android:paddingStart="@dimen/spacing_middle"
+        android:paddingTop="@dimen/spacing_standard_new"
+        android:paddingEnd="@dimen/spacing_middle"
+        android:paddingBottom="@dimen/spacing_standard_new"
         >
 
     </androidx.recyclerview.widget.RecyclerView>

@@ -23,7 +23,10 @@
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/drawable-v24/learn_shadow_edittext.xml" value="0.132" />
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/drawable-v24/shadow_edittext.xml" value="0.132" />
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/drawable/bg_circle_stroked.xml" value="0.132" />
+        <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/drawable/bg_gradient_grey.xml" value="0.132" />
+        <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/drawable/circle_rounded_filled.xml" value="0.132" />
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/drawable/dialog_custom_borders.xml" value="0.132" />
+        <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/drawable/ic_back.xml" value="0.132" />
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/drawable/ic_more.xml" value="0.132" />
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/drawable/imageview_shadow.xml" value="0.132" />
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/drawable/selected_card.xml" value="0.1115" />
@@ -36,6 +39,7 @@
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/layout/activity_welcome.xml" value="0.24114583333333334" />
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/layout/dialog_main.xml" value="0.23596014492753623" />
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/layout/find_all_dialog.xml" value="0.23596014492753623" />
+        <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/layout/item_high_score.xml" value="0.23596014492753623" />
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/layout/item_leaderboard.xml" value="0.264" />
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/layout/learn_activity_login.xml" value="0.264" />
         <entry key="..\:/Users/dell/Desktop/AndroidDevelopment/FindASet/app/src/main/res/layout/learn_activity_register.xml" value="0.264" />

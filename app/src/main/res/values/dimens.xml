@@ -11,22 +11,22 @@
     <dimen name="font_size_xxxlarge">30sp</dimen>
     <dimen name="font_size_splash">40sp</dimen>
 
-    <dimen name="learn_spacing_control_half">@dimen/_2sdp</dimen>
-    <dimen name="learn_spacing_control">@dimen/_4sdp</dimen>
-    <dimen name="learn_spacing_standard">@dimen/_8sdp</dimen>
-    <dimen name="learn_spacing_standard_new">@dimen/_16sdp</dimen>
-    <dimen name="learn_spacing_large">@dimen/_24sdp</dimen>
-    <dimen name="learn_spacing_xlarge">@dimen/_32sdp</dimen>
-    <dimen name="learn_spacing_xxlarge">@dimen/_40sdp</dimen>
+    <dimen name="spacing_control_half">@dimen/_2sdp</dimen>
+    <dimen name="spacing_control">@dimen/_4sdp</dimen>
+    <dimen name="spacing_standard">@dimen/_8sdp</dimen>
+    <dimen name="spacing_standard_new">@dimen/_16sdp</dimen>
+    <dimen name="spacing_large">@dimen/_24sdp</dimen>
+    <dimen name="spacing_xlarge">@dimen/_32sdp</dimen>
+    <dimen name="spacing_xxlarge">@dimen/_40sdp</dimen>
 
-    <dimen name="learn_spacing_small">@dimen/_3sdp</dimen>
-    <dimen name="learn_spacing_medium">@dimen/_5sdp</dimen>
-    <dimen name="learn_spacing_xmedium">@dimen/_7sdp</dimen>
-    <dimen name="learn_spacing_middle">@dimen/_10sdp</dimen>
-    <dimen name="learn_spacing_smlarge">@dimen/_18sdp</dimen>
-    <dimen name="learn_spacing_mlarge">@dimen/_20sdp</dimen>
-    <dimen name="learn_spacing_mxlarge">@dimen/_25sdp</dimen>
-    <dimen name="learn_spacing_xxxlarge">@dimen/_55sdp</dimen>
+    <dimen name="spacing_small">@dimen/_3sdp</dimen>
+    <dimen name="spacing_medium">@dimen/_5sdp</dimen>
+    <dimen name="spacing_xmedium">@dimen/_7sdp</dimen>
+    <dimen name="spacing_middle">@dimen/_10sdp</dimen>
+    <dimen name="spacing_smlarge">@dimen/_18sdp</dimen>
+    <dimen name="spacing_mlarge">@dimen/_20sdp</dimen>
+    <dimen name="spacing_mxlarge">@dimen/_25sdp</dimen>
+    <dimen name="spacing_xxxlarge">@dimen/_55sdp</dimen>
     <dimen name="app_bar_height">180dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
