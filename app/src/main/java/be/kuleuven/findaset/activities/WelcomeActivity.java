@@ -91,14 +91,14 @@ public class WelcomeActivity extends AppCompatActivity {
             TextView dialogTitle = (TextView) dialog.findViewById(R.id.dialogTitle);
             dialogTitle.setText("Something else");
             TextView dialogText = (TextView) dialog.findViewById(R.id.dialogText);
-            dialogTitle.setText("Lorem Ipsum");
+            dialogText.setText("Lorem Ipsum");
 
         }
         else if (dialogIndex == 2){
             TextView dialogTitle = (TextView) dialog.findViewById(R.id.dialogTitle);
             dialogTitle.setText("Bla Bla");
             TextView dialogText = (TextView) dialog.findViewById(R.id.dialogText);
-            dialogTitle.setText("Dolor sit amet");
+            dialogText.setText("Dolor sit amet");
 
         }
         dialog.show();
