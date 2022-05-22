@@ -40,7 +40,7 @@
         app:layout_constraintGuide_percent="0.08" />
 
     <Chronometer
-        android:id="@+id/chronometer"
+        android:id="@+id/stopWatch"
         style="@style/HeadingBig"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

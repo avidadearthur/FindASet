@@ -61,7 +61,7 @@ public class LearningActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_learning);
 
         //Init chronometer
-        chronometer = findViewById(R.id.chronometer);
+        chronometer = findViewById(R.id.stopWatch);
 
 
         // testing register and login

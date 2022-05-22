@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView[] cardImages;
     private TextView[] cardTexts;
     private TextView testTxt;
-    private Chronometer chronometer;
+    private Chronometer stopWatch;
 
     /**
      * Firstly bound all fields with UI components.
@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Init chronometer
-        chronometer = findViewById(R.id.chronometer);
+        //Init stopWatch
+        stopWatch = findViewById(R.id.stopWatch);
 
 
         // testing register and login
@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             cardImages[i].setVisibility(View.VISIBLE);
             notifyCard(i);
         }
-        notifyNewTime();
+        notifyStartStopWatch();
         //JUST for TEST
         String str = "SET cards position: "
                 + (gameModel.getJustForTest()[0] + 1) + " "
@@ -194,10 +194,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         testTxt.setText(str);
     }
 
-    public void notifyNewTime() {
-        //Init chronometer
-        chronometer.setBase(SystemClock.elapsedRealtime());
-        chronometer.start();
+    public void notifyStartStopWatch() {
+        //Init stopWatch
+        stopWatch.setBase(SystemClock.elapsedRealtime());
+        stopWatch.start();
     }
 
     /**
@@ -233,7 +233,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             gameModel.unselect(gameModel.getSelectedCardsIndex().get(i));
         }
         gameModel.startNewGame();
-        notifyNewTime();
+        notifyStartStopWatch();
     }
 
 
@@ -256,6 +256,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void setTestTxt(String str) {
+
         testTxt.setText(str);
     }
 
@@ -317,5 +318,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         return temp;
+    }
+
+    public void notifyWin() {
+        setTestTxt("YOU WIN!!!" );
     }
 }
