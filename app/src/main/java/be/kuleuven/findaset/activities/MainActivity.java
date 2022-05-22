@@ -49,7 +49,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button[] featureBoxes;
     private TextView testTxt;
     private TextView learningContinue;
+    private TextView foundedNumber;
     private Chronometer stopWatch;
+    private String dialogTitleStr;
+    private String dialogContentStr;
+    private Button refreshBtn;
 
     /**
      * Firstly bound all fields with UI components.
@@ -77,9 +81,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         txtInfo.setText(loginInfo);
 
+        foundedNumber = findViewById(R.id.foundedCards);
         testTxt = findViewById(R.id.testTxt);
         learningContinue = findViewById(R.id.tvLearningModeContinue);
         learningContinue.setVisibility(View.INVISIBLE);
+        refreshBtn = findViewById(R.id.refreshBtn);
 
         cardImages = new ImageView[12];
         cardImages[0] = findViewById(R.id.card1);
@@ -127,15 +133,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(mode == 1){
             findASet = new FindAll();
             notifyFeatureBoxGone();
+            dialogTitleStr = getString(R.string.main_more_findAll_title);
+            dialogContentStr = getString(R.string.main_more_findAll_content);
         }
         else if(mode == 2){
             findASet = new FindTen();
             notifyFeatureBoxGone();
+            dialogTitleStr = getString(R.string.main_more_findTen_title);
+            dialogContentStr = getString(R.string.main_more_findTen_content);
         }
         else if(mode == 3){
             findASet = new FindLearning();
             notifyFeatureBoxGrey();
-            showFeatureBoxRuleDialog();
+            dialogTitleStr = getString(R.string.feature_box_explanation_title);
+            dialogContentStr = getString(R.string.feature_box_explanation_content);
             stopWatch.setVisibility(View.INVISIBLE);
             //TODO IN learning mode, wining not display or push time
         }
@@ -210,16 +221,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         gameModel.startNewGame();
         notifyStartStopWatch();
+        notifyFoundedCardsChange(0);
     }
 
-    public void onClick_continueLearningMode (View caller) {
-        gameModel.updateTable(gameModel.getSelectedCardsIndex());
-        notifyFeatureBoxGrey();
-        gameModel.getSelectedCardsIndex().clear();
-        for (ImageView cards : cardImages) {
-            cards.setClickable(true);
-        }
-        learningContinue.setVisibility(View.INVISIBLE);
+    public void onClick_More (View caller) {
+        showDialog();
     }
 
     public void onClick_Back(View caller) {
@@ -276,6 +282,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void notifyUnselect(int index) {
         //cardImages[index].setBackgroundColor(getColor(R.color.transparent));
         cardImages[index].setBackground(getDrawable(R.drawable.imageview_shadow));
+    }
+
+    public void notifyFoundedCardsChange(int newNumber) {
+        String number = "";
+        if (newNumber < 10)
+            number = "0" + newNumber;
+        else
+            number = String.valueOf(newNumber);
+        foundedNumber.setText(number);
     }
 
     public void notifyUnavailable(int index) {
@@ -378,16 +393,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         for (ImageView cards : cardImages) {
             cards.setClickable(false);
         }
+        refreshBtn.setEnabled(false);
     }
 
-    private void showFeatureBoxRuleDialog() {
+    public void onClick_continueLearningMode (View caller) {
+        gameModel.updateTable(gameModel.getSelectedCardsIndex());
+        notifyFeatureBoxGrey();
+        gameModel.getSelectedCardsIndex().clear();
+        for (ImageView cards : cardImages) {
+            cards.setClickable(true);
+        }
+        learningContinue.setVisibility(View.INVISIBLE);
+        refreshBtn.setEnabled(true);
+    }
+
+    private void showDialog() {
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_main);
         //dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_custom_borders);
         TextView dialogTitle = (TextView) dialog.findViewById(R.id.dialogTitle);
-        dialogTitle.setText(R.string.feature_box_explanation_title);
+        dialogTitle.setText(dialogTitleStr);
         TextView dialogText = (TextView) dialog.findViewById(R.id.dialogText);
-        dialogText.setText(R.string.feature_box_explanation_content);
+        dialogText.setText(dialogContentStr);
         dialog.show();
     }
 }

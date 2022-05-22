@@ -270,10 +270,9 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
         for (int i = 0; i < 3; i++) {
             //1.
             int selectedIndex = selectedCardsIndex.get(i);
-
             unselect(selectedIndex);
             foundedSetCardsIds.add(cardsIdTable.get(selectedIndex));
-
+            mainActivity.notifyFoundedCardsChange(foundedSetCardsIds.size());
             replace3Cards(rd, selectedIndex);
         }
 

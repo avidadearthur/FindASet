@@ -42,6 +42,10 @@
         \nGreen means this feature is all same for three cards.
         \nAny combinations of yellow and blue can make a set.
         \nTry it now!!</string>
+    <string name="main_more_findAll_title">Find ALL</string>
+    <string name="main_more_findAll_content">Rule of Find ALL</string>
+    <string name="main_more_findTen_title">Find TEN</string>
+    <string name="main_more_findTen_content">Rule of Find TEN</string>
 
     <string name="learn_pref_name">LearnAppPreferences</string>
     <string name="learn_lbl_login_underlined"><u>Login</u></string>
