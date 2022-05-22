@@ -1,8 +1,10 @@
 package be.kuleuven.findaset.activities;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,11 +26,43 @@ import be.kuleuven.findaset.R;
 
 public class WelcomeActivity extends AppCompatActivity {
     private TextView testTv;
+    private ImageButton infoFindAllDialog;
+    private ImageButton infoFindTen;
+    private ImageButton infoFindLearning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+
+        infoFindAllDialog = findViewById(R.id.infoFindAll);
+        infoFindTen = findViewById(R.id.infoFindTen);
+        infoFindLearning = findViewById(R.id.infoFindLearning);
+
+        infoFindAllDialog.setOnClickListener(new View.OnClickListener() {
+            int dialogIndex = 0;
+            @Override
+            public void onClick(View view) {
+                showFindAllDialog(dialogIndex);
+            }
+        });
+
+        infoFindTen.setOnClickListener(new View.OnClickListener() {
+            int dialogIndex = 1;
+            @Override
+            public void onClick(View view) {
+                showFindAllDialog(dialogIndex);
+            }
+        });
+
+        infoFindLearning.setOnClickListener(new View.OnClickListener() {
+            int dialogIndex = 2;
+            @Override
+            public void onClick(View view) {
+                showFindAllDialog(dialogIndex);
+            }
+        });
+
         try {
             checkCredentials();
         } catch (IOException e) {
@@ -39,6 +73,35 @@ public class WelcomeActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void showFindAllDialog(int dialogIndex) {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.find_all_dialog);
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_custom_borders);
+        if (dialogIndex == 0){
+            TextView dialogTitle = (TextView) dialog.findViewById(R.id.dialogTitle);
+            dialogTitle.setText("Find All");
+            TextView dialogText = (TextView) dialog.findViewById(R.id.dialogText);
+            dialogTitle.setText("In Find All mode the player has to find all possible sets\n" +
+                    "        within the 81 cards generated throughout the game.");
+
+        }
+        else if (dialogIndex == 1){
+            TextView dialogTitle = (TextView) dialog.findViewById(R.id.dialogTitle);
+            dialogTitle.setText("Something else");
+            TextView dialogText = (TextView) dialog.findViewById(R.id.dialogText);
+            dialogTitle.setText("Lorem Ipsum");
+
+        }
+        else if (dialogIndex == 2){
+            TextView dialogTitle = (TextView) dialog.findViewById(R.id.dialogTitle);
+            dialogTitle.setText("Bla Bla");
+            TextView dialogText = (TextView) dialog.findViewById(R.id.dialogText);
+            dialogTitle.setText("Dolor sit amet");
+
+        }
+        dialog.show();
     }
 
     private void checkCredentials() throws IOException {
