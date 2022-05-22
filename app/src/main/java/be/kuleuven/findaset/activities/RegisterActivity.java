@@ -20,7 +20,6 @@ import org.json.JSONObject;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Objects;
 
 import be.kuleuven.findaset.R;
 
@@ -42,8 +41,9 @@ public class RegisterActivity extends AppCompatActivity {
 
         String username = registeredUsername.getText().toString();
         String pass = registeredPassword.getText().toString();
-        String passConfirm = registeredPassword.getText().toString();
+        String passConfirm = registeredConfirmPassword.getText().toString();
 
+        // check if any of the fields are empty
         if(pass.equals(passConfirm)){
             String hash = get_SHA_1_SecurePassword(pass);
             String requestURL = baseURL + "register" + "/" + username + "/" + hash;
@@ -75,6 +75,9 @@ public class RegisterActivity extends AppCompatActivity {
                     }
             );
             requestQueue.add(submitRequest);
+        }
+        else {
+            // display error message
         }
     }
 
