@@ -61,4 +61,10 @@
         <item name="android:textSize">@dimen/font_size_large</item>
         <item name="android:textColor">@color/textColorSecondary</item>
     </style>
+
+    <style name="ShapeAppearance.Capsule" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
 </resources>
