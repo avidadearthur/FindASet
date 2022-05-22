@@ -1,14 +1,9 @@
 package be.kuleuven.findaset.base;
 
-import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.DrawableWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -16,12 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import be.kuleuven.findaset.R;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+public class RVAdapterNormal extends RecyclerView.Adapter<RVAdapterNormal.ViewHolder> {
     private String[] userNames;
     private String[] userTimes;
     private String[] userRankings;
 
-    public RecyclerViewAdapter(String[] userNames, String[] userTimes, String[] userRankings) {
+    public RVAdapterNormal(String[] userNames, String[] userTimes, String[] userRankings) {
         this.userNames = userNames;
         this.userTimes = userTimes;
         this.userRankings = userRankings;

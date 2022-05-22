@@ -1,12 +1,5 @@
 package be.kuleuven.findaset.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.transition.ChangeBounds;
@@ -18,6 +11,13 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -31,21 +31,28 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import be.kuleuven.findaset.R;
-import be.kuleuven.findaset.base.RecyclerViewAdapter;
+import be.kuleuven.findaset.base.RVAdapterHighScore;
+import be.kuleuven.findaset.base.RVAdapterNormal;
 
 public class LeaderBoardActivity extends AppCompatActivity {
     private TextView tvAll;
     private TextView tvTen;
+    private TextView tvHighScore;
     private ConstraintLayout tabModes;
     private RecyclerView recyclerView;
-    private RecyclerViewAdapter allAdapter;
-    private RecyclerViewAdapter tenAdapter;
+    private RVAdapterNormal allAdapter;
+    private RVAdapterNormal tenAdapter;
+    private RVAdapterHighScore highScoreAdapter;
     private String[] namesAll;
     private String[] timesAll;
     private String[] rankingsAll;
     private String[] namesTen;
     private String[] timesTen;
     private String[] rankingsTen;
+    private String[] modes;
+    private String[] scores;
+    private String [] dates;
+    private String [] rankingsHighScore;
     private RequestQueue requestQueue;
     private String baseURL = "https://studev.groept.be/api/a21pt113/";
 
@@ -56,6 +63,7 @@ public class LeaderBoardActivity extends AppCompatActivity {
 
         tvAll = findViewById(R.id.tvAll);
         tvTen = findViewById(R.id.tvTen);
+        tvHighScore = findViewById(R.id.tvHighScore);
         tabModes = findViewById(R.id.tabModes);
         recyclerView = findViewById(R.id.rvBoard);
         requestQueue = Volley.newRequestQueue( this );
@@ -67,6 +75,12 @@ public class LeaderBoardActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
+        modes = new String[]{"Find All", "Find Ten"};
+        scores = new String[]{"1'30", "0'30"};
+        dates = new String[]{"22 May 2022", "21 May 2022"};
+        rankingsHighScore = new String[]{"1", "2"};
+        highScoreAdapter = new RVAdapterHighScore(modes, scores, dates, rankingsHighScore);
     }
 
     private void getRankingsAll() {
@@ -88,7 +102,7 @@ public class LeaderBoardActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-                allAdapter = new RecyclerViewAdapter(namesAll, timesAll, rankingsAll);
+                allAdapter = new RVAdapterNormal(namesAll, timesAll, rankingsAll);
                 recyclerView.setAdapter(allAdapter);
                 rvSetAnimation();
             }
@@ -120,7 +134,7 @@ public class LeaderBoardActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-                tenAdapter = new RecyclerViewAdapter(namesTen, timesTen, rankingsTen);
+                tenAdapter = new RVAdapterNormal(namesTen, timesTen, rankingsTen);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -150,6 +164,13 @@ public class LeaderBoardActivity extends AppCompatActivity {
         rvSetAnimation();
     }
 
+    public void onClick_HighScore(View caller) {
+        setConstraintGravity(R.id.tvHighScore);
+
+        recyclerView.setAdapter(highScoreAdapter);
+        rvSetAnimation();
+    }
+
     private void rvSetAnimation() {
         LayoutAnimationController anim = AnimationUtils.loadLayoutAnimation(this, R.anim.layout_animation_fall_down);
         recyclerView.setLayoutAnimation(anim);
@@ -158,6 +179,7 @@ public class LeaderBoardActivity extends AppCompatActivity {
     private void setConstraintGravity(int viewId) {
         tvAll.setTextColor(getColor(R.color.textColorSecondary));
         tvTen.setTextColor(getColor(R.color.textColorSecondary));
+        tvHighScore.setTextColor(getColor(R.color.textColorSecondary));
 
         ConstraintSet tabCons = new ConstraintSet();
         tabCons.clone(tabModes);

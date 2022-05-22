@@ -70,6 +70,18 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="TouchTargetSizeCheck" />
 
+        <TextView
+            android:id="@+id/tvHighScore"
+            style="@style/TabTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/learn_spacing_large"
+            android:onClick="onClick_HighScore"
+            android:text="@string/board_high_score"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/tvTen"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <View
             android:id="@+id/tab"
@@ -93,7 +105,9 @@
         android:paddingTop="@dimen/learn_spacing_standard_new"
         android:paddingEnd="@dimen/learn_spacing_middle"
         android:paddingBottom="@dimen/learn_spacing_standard_new"
-        />
+        >
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 
 </LinearLayout>
