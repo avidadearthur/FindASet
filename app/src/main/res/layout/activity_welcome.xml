@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/bg_gradient_grey"
     android:fitsSystemWindows="true"
     tools:context=".activities.WelcomeActivity">
 
@@ -152,7 +152,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_12sdp"
-        android:layout_marginTop="292dp"
+        android:layout_marginTop="310dp"
         android:layout_marginEnd="@dimen/_12sdp"
         android:gravity="center_horizontal"
         android:text="@string/welcome_heading"
@@ -190,5 +190,35 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_more"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <ImageView
+        android:id="@+id/ivRandomCard1"
+        android:layout_width="180dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="170dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/card_primary" />
+
+    <ImageView
+        android:id="@+id/ivRandomCard2"
+        android:layout_width="180dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="-80dp"
+        app:layout_constraintEnd_toStartOf="@+id/ivRandomCard1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/card_primary" />
+
+    <ImageView
+        android:id="@+id/ivRandomCard3"
+        android:layout_width="180dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="-80dp"
+        android:layout_marginTop="80dp"
+        app:layout_constraintStart_toEndOf="@+id/ivRandomCard1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/card_primary" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
