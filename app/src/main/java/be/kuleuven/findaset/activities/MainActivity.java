@@ -410,7 +410,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void showDialog() {
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_main);
-        //dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_custom_borders);
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_custom_borders);
         TextView dialogTitle = (TextView) dialog.findViewById(R.id.dialogTitle);
         dialogTitle.setText(dialogTitleStr);
         TextView dialogText = (TextView) dialog.findViewById(R.id.dialogText);

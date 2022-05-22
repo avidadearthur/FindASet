@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -25,20 +26,13 @@ import java.util.Random;
 import be.kuleuven.findaset.R;
 
 public class WelcomeActivity extends AppCompatActivity {
-    private TextView testTv;
-    private ImageButton infoFindAllDialog;
-    private ImageButton infoFindTen;
-    private ImageButton infoFindLearning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-        infoFindAllDialog = findViewById(R.id.infoFindAll);
-        infoFindTen = findViewById(R.id.infoFindTen);
-        infoFindLearning = findViewById(R.id.infoFindLearning);
-
+        /*
         infoFindAllDialog.setOnClickListener(new View.OnClickListener() {
             int dialogIndex = 0;
             @Override
@@ -62,6 +56,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 showFindAllDialog(dialogIndex);
             }
         });
+         */
 
         try {
             checkCredentials();
@@ -75,6 +70,7 @@ public class WelcomeActivity extends AppCompatActivity {
         }
     }
 
+    /*
     private void showFindAllDialog(int dialogIndex) {
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_main);
@@ -103,6 +99,7 @@ public class WelcomeActivity extends AppCompatActivity {
         }
         dialog.show();
     }
+     */
 
     private void checkCredentials() throws IOException {
         String s = getFilesDir() + "/" + "credentials";
@@ -210,6 +207,21 @@ public class WelcomeActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public void onClick_Info(View caller) {
+        showInfoDialog();
+    }
+
+    private void showInfoDialog() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_main);
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_custom_borders);
+        TextView dialogTitle = (TextView) dialog.findViewById(R.id.dialogTitle);
+        dialogTitle.setText(getString(R.string.welcome_info_title));
+        TextView dialogText = (TextView) dialog.findViewById(R.id.dialogText);
+        dialogText.setText(getString(R.string.welcome_info_content));
+        dialog.show();
     }
 
     public void onClick_FindAll(View caller) {
