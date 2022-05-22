@@ -147,8 +147,6 @@ public class LeaderBoardActivity extends AppCompatActivity {
 
     public void onClick_Back(View caller) {
         finish();
-        Intent intent = new Intent(this, WelcomeActivity.class);
-        startActivity(intent);
     }
 
     public void onClick_All(View caller) {

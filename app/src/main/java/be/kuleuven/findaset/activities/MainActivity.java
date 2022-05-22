@@ -230,8 +230,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void onClick_Back(View caller) {
         finish();
-        Intent intent = new Intent(this, WelcomeActivity.class);
-        startActivity(intent);
     }
 
     /**
