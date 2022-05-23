@@ -439,6 +439,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             // TODO - First time of guest player
             if(highScoreHints == -1){
+                highscore[0] = (int) elapsedMillis;
+                highscore[1] = gameModel.getHints();
                 setNewHighscore((int) elapsedMillis, gameModel.getHints());
             }
             // TODO - compare millis with credentials and update if lower
@@ -570,6 +572,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             newArray = "["+highScoreTime+","+highScoreHints+","+"2022-01-01"+"]";
 
             device.getJSONObject(0).put("FindAllScore", newArray);
+            //TODO FOR BOTH MODES
             writeCredentials(object);
         }
         catch (JSONException e) {
