@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                         if(hash.equals(responseString)){
                             //Login success
                             //Save the username and the hash in the credentials
-                            updateCredentials(username,hash);
+                            updateCredentials(username);
                             //responseString = curObject.getString( "username" );
                             loginError.setVisibility(View.INVISIBLE);
                             finish();
