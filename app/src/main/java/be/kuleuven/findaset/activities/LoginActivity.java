@@ -31,7 +31,6 @@ import be.kuleuven.findaset.R;
 public class LoginActivity extends AppCompatActivity {
     private TextView usernameRegister;
     private RequestQueue requestQueue;
-    private String baseURL = "https://studev.groept.be/api/a21pt113/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         String pass = loginPassword.getText().toString();
 
         requestQueue = Volley.newRequestQueue( this );
+        String baseURL = "https://studev.groept.be/api/a21pt113/";
         String requestURL = baseURL + "login" + "/" + username;
 
         Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
