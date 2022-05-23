@@ -438,7 +438,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             int highScoreTime = highscore[0];
             int highScoreHints = highscore[1];
 
-            // First time of a guest player
+            // First time of a player
             if(highScoreHints == -1){
                 highscore[0] = (int) elapsedMillis;
                 highscore[1] = gameModel.getHints();
@@ -457,7 +457,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setNewHighscore(int highScoreTime, int highScoreHints) throws IOException {
         if(isLogged()){
-            // TODO - update table
+            // TODO - update query doesn't work for first time user
             String baseURL = "https://studev.groept.be/api/a21pt113/";
             String requestURL = null;
 
@@ -638,19 +638,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     response -> {
                         try {
                             JSONArray responseArray = new JSONArray(response);
-                            JSONObject curObject = responseArray.getJSONObject( 0 );
-
-                            if (mode == 1){
-                                highscore[0] = Integer.parseInt(curObject.getString("allSetsRecord"));
-                                highscore[1] = Integer.parseInt(curObject.getString("hintsAllSets"));
+                            if (response.equals("[]")){
+                                highscore[0] = -1;
+                                highscore[1] = -1;
+                                // testing register and login
+                                txtInfo.setText(username + Integer.toString(highscore[0]) + Integer.toString(highscore[1]));
                             }
-                            else if (mode == 2) {
-                                highscore[0] = Integer.parseInt(curObject.getString("tenSetsRecord"));
-                                highscore[1] = Integer.parseInt(curObject.getString("hintsTenSets"));
-                            }
-                            // testing register and login
+                            else{
+                                JSONObject curObject = responseArray.getJSONObject( 0 );
 
-                            txtInfo.setText(username + Integer.toString(highscore[0]) + Integer.toString(highscore[1]));
+                                if (mode == 1){
+                                    highscore[0] = Integer.parseInt(curObject.getString("allSetsRecord"));
+                                    highscore[1] = Integer.parseInt(curObject.getString("hintsAllSets"));
+                                }
+                                else if (mode == 2) {
+                                    highscore[0] = Integer.parseInt(curObject.getString("tenSetsRecord"));
+                                    highscore[1] = Integer.parseInt(curObject.getString("hintsTenSets"));
+                                }
+                                // testing register and login
+                                txtInfo.setText(username + Integer.toString(highscore[0]) + Integer.toString(highscore[1]));
+                            }
                         }
                         catch(JSONException e )
                         {
