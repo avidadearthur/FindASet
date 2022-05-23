@@ -182,6 +182,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         setGameModel(findASet);
         gameModel.startNewGame();
+        notifyStartStopWatch();
     }
 
     private String getJSONString(BufferedReader reader) throws IOException {
@@ -261,7 +262,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             cardImages[i].setVisibility(View.VISIBLE);
             notifyCard(i);
         }
-        notifyStartStopWatch();
         //JUST for TEST
         String str = "SET cards position: "
                 + (gameModel.getJustForTest()[0] + 1) + " "
