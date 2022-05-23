@@ -41,7 +41,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_xlarge"
             android:layout_marginEnd="@dimen/spacing_xlarge"
-            android:layout_marginBottom="@dimen/spacing_xlarge"
             android:background="@drawable/shadow_edittext"
             android:paddingStart="@dimen/spacing_large"
             android:paddingTop="@dimen/spacing_standard_new"
@@ -80,6 +79,19 @@
 
 
         </RelativeLayout>
+
+        <TextView
+            android:id="@+id/failureLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_xxxlarge"
+            android:layout_marginEnd="@dimen/spacing_xxxlarge"
+            android:layout_marginBottom="@dimen/spacing_middle"
+            android:fontFamily="@font/poppins_regular"
+            android:text="TextView"
+            android:textColor="@color/light_red"
+            android:textSize="@dimen/font_size_medium"
+            android:textStyle="bold" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnEnter"
