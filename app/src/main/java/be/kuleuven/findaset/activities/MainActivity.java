@@ -241,6 +241,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void onClick_hintBtn (View caller) {
         notifyHint();
+        gameModel.showSet();
     }
 
     public void onClick_More (View caller) {
@@ -491,7 +492,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         else{
             updateDeviceCredentials();
-
         }
 
     }
@@ -516,7 +516,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if(mode == 1){
                 JSONArray findAllScore = device.getJSONObject(0).getJSONArray("FindAllScore");
                 String time = findAllScore.getString(0);
-                String hintNum = findAllScore.getString(0);
+                String hintNum = findAllScore.getString(1);
                 if(time.equals(" ")){
                     highscore[0] = -1;
                     if(hintNum.equals(" ")){
@@ -525,13 +525,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 else{
                     highscore[0] = Integer.parseInt(time);
-                    highscore[1] = Integer.parseInt(time);
+                    highscore[1] = Integer.parseInt(hintNum);
                 }
             }
             else if(mode == 2){
                 JSONArray findTenScore = device.getJSONObject(0).getJSONArray("FindTenScore");
                 String time = findTenScore.getString(0);
-                String hintNum = findTenScore.getString(0);
+                String hintNum = findTenScore.getString(1);
                 if(time.equals(" ")){
                     highscore[0] = -1;
                     if(hintNum.equals(" ")){
@@ -540,7 +540,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 else{
                     highscore[0] = Integer.parseInt(time);
-                    highscore[1] = Integer.parseInt(time);
+                    highscore[1] = Integer.parseInt(hintNum);
                 }
             }
         }
@@ -566,14 +566,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         try {
             JSONObject object = new JSONObject(json);
             JSONArray device = object.getJSONArray("device");
+            JSONArray newArray = new JSONArray();
 
-            String newArray;
-            //TODO - Add current date to record instead of hardcoded date
-            newArray = "["+highScoreTime+","+highScoreHints+","+"2022-01-01"+"]";
+            if(mode == 1){
+                //TODO - Add current date to record instead of hardcoded date
+                newArray.put(highScoreTime);
+                newArray.put(highScoreHints);
+                newArray.put("2022-01-01");
 
-            device.getJSONObject(0).put("FindAllScore", newArray);
-            //TODO FOR BOTH MODES
-            writeCredentials(object);
+                device.getJSONObject(0).put("FindAllScore", newArray);
+
+                writeCredentials(object);
+            }
+            else if (mode == 2){
+
+                newArray.put(highScoreTime);
+                newArray.put(highScoreHints);
+                newArray.put("2022-01-01");
+
+                device.getJSONObject(0).put("FindTenScore", newArray);
+
+                writeCredentials(object);
+            }
+
         }
         catch (JSONException e) {
             e.printStackTrace();
