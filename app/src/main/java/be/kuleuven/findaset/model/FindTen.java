@@ -15,9 +15,4 @@ public class FindTen extends AbstractFindASet implements InterfaceFindASet {
             win = true;
         }
     }
-
-    @Override
-    public int getHints() {
-        return 0;
-    }
 }
