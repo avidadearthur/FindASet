@@ -6,7 +6,7 @@
     <string name="register_password">password</string>
     <string name="register_confirm_password">password</string>
     <string name="back">back</string>
-    <string name="main_refresh">REFRESH</string>
+    <string name="main_refresh">RESTART</string>
     <string name="main_continue">Find A Set! Continue!</string>
     <string name="find_all_mode">Find ALL Mode</string>
     <string name="find_ten_mode">Find TEN Mode</string>
@@ -17,7 +17,6 @@
     <string name="login_enter">Enter</string>
     <string name="login_don_t_joined_yet">Don\'t Joined Yet !</string>
     <string name="helloNote">Hello Username! </string>
-    <string name="Info">i </string>
     <string name="login_join">Join</string>
     <string name="board_leader_board">Leader Board</string>
     <string name="board_find_all">Find ALL</string>

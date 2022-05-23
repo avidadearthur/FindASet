@@ -46,21 +46,6 @@
         app:layout_constraintTop_toTopOf="@+id/guidelineTop2"
         app:layout_constraintVertical_bias="0.541" />
 
-    <TextView
-        android:id="@+id/foundedCards"
-        style="@style/HeadingBig"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="140dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="00"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/ivCardMain"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.065"
-        app:layout_constraintStart_toEndOf="@+id/ivCardMain"
-        app:layout_constraintTop_toTopOf="@+id/ivCardMain" />
-
     <Chronometer
         android:id="@+id/stopWatch"
         style="@style/HeadingBig"
@@ -458,14 +443,34 @@
         app:srcCompat="@drawable/ic_more"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
-    <ImageView
-        android:id="@+id/ivCardMain"
-        android:layout_width="46dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="170dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/guidelineTop"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guidelineTop2"
-        app:srcCompat="@drawable/card_primary" />
+        app:layout_constraintTop_toTopOf="@+id/guidelineTop2">
+
+        <ImageView
+            android:id="@+id/ivCardMain"
+            android:layout_width="46dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center|center_horizontal|center_vertical"
+            android:layout_marginStart="170dp"
+            app:srcCompat="@drawable/card_primary" />
+
+        <TextView
+            android:id="@+id/foundedCards"
+            style="@style/HeadingBig"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center_horizontal|center_vertical"
+            android:layout_marginEnd="140dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="00"
+            android:textSize="20sp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
