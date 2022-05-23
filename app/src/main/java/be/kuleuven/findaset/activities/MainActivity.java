@@ -438,13 +438,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             int highScoreTime = highscore[0];
             int highScoreHints = highscore[1];
 
-            // TODO - First time of guest player
+            // First time of a guest player
             if(highScoreHints == -1){
                 highscore[0] = (int) elapsedMillis;
                 highscore[1] = gameModel.getHints();
                 setNewHighscore((int) elapsedMillis, gameModel.getHints());
             }
-            // TODO - compare millis with credentials and update if lower
+            // compare millis with credentials and update if lower
             else if (gameModel.getHints() < highScoreHints){
                 if(elapsedMillis < highScoreTime){
                     highscore[0] = (int) elapsedMillis;
@@ -493,7 +493,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else{
             updateDeviceCredentials();
         }
-
     }
 
     private void writeCredentials(JSONObject object) throws IOException {
