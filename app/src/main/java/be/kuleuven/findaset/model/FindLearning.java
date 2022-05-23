@@ -122,4 +122,9 @@ public class FindLearning extends AbstractFindASet implements InterfaceFindASet{
             mainActivity.notifyFeatureBoxGrey();
         }
     }
+
+    @Override
+    public int getHints() {
+        return 0;
+    }
 }

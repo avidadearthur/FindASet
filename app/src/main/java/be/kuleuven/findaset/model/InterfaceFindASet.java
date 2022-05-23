@@ -40,4 +40,6 @@ public interface InterfaceFindASet {
 
     //JUST for TEST
     int[] getJustForTest();
+
+    int getHints();
 }

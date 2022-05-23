@@ -45,4 +45,9 @@ public class FindAll extends AbstractFindASet implements InterfaceFindASet{
             }
         }
     }
+
+    @Override
+    public int getHints() {
+        return 0;
+    }
 }

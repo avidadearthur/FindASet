@@ -1,5 +1,6 @@
 package be.kuleuven.findaset.model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -282,7 +283,11 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
             for (int l = 0; l < cardsIdTable.size(); l++) {
                 mainActivity.notifyUnavailable(l);
             }
-            mainActivity.notifyWin();
+            try {
+                mainActivity.notifyWin();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

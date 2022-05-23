@@ -1,12 +1,12 @@
 package be.kuleuven.findaset.activities;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
@@ -15,12 +15,19 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,6 +61,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String dialogTitleStr;
     private String dialogContentStr;
     private Button refreshBtn;
+    private String username;
+    private int[] highscore; // {best time, hints}
+    private TextView txtInfo;
+    private int mode;
 
     /**
      * Firstly bound all fields with UI components.
@@ -70,16 +81,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //Init stopWatch
         stopWatch = findViewById(R.id.stopWatch);
-
-        // testing register and login
-        TextView txtInfo = (TextView) findViewById(R.id.userText);
-        String loginInfo = null;
-        try {
-            loginInfo = getUsername();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        txtInfo.setText(loginInfo);
 
         foundedNumber = findViewById(R.id.foundedCards);
         testTxt = findViewById(R.id.testTxt);
@@ -127,23 +128,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             cardImages[i].setBackground(getDrawable(R.drawable.imageview_shadow));
         }
 
+        try {
+            username = getUsername();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        this.txtInfo = (TextView) findViewById(R.id.userText);
+
         InterfaceFindASet findASet = null;
         Bundle extras = getIntent().getExtras();
-        int mode = extras.getInt("mode");
+        this.mode = extras.getInt("mode");
+
+        this.highscore = new int[2];
+
         if(mode == 1){
             findASet = new FindAll();
+            try {
+                getHighscore();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             notifyFeatureBoxGone();
             dialogTitleStr = getString(R.string.main_more_findAll_title);
             dialogContentStr = getString(R.string.main_more_findAll_content);
         }
         else if(mode == 2){
             findASet = new FindTen();
+            try {
+                getHighscore();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             notifyFeatureBoxGone();
             dialogTitleStr = getString(R.string.main_more_findTen_title);
             dialogContentStr = getString(R.string.main_more_findTen_content);
         }
         else if(mode == 3){
             findASet = new FindLearning();
+            try {
+                getHighscore();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             notifyFeatureBoxGrey();
             dialogTitleStr = getString(R.string.feature_box_explanation_title);
             dialogContentStr = getString(R.string.feature_box_explanation_content);
@@ -200,21 +227,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.gameModel.setUI(this);
     }
 
-    /**
-     * First get the index of which call the method.
-     * <p>
-     * If there are already 3 selected cards, remove the first.
-     * <p>
-     * After that, call checkSet() to check if there is set.
-     * <p>
-     * If there is, call updateTable().
-     */
-    @Override
-    public void onClick(View clickedView) {
-        int index = Arrays.asList(cardImages).indexOf(clickedView);
-        gameModel.toggle(index);
-    }
-
     public void onClick_refreshBtn (View caller) {
         for (int i = 0; i < gameModel.getSelectedCardsIndex().size(); i++) {
             gameModel.unselect(gameModel.getSelectedCardsIndex().get(i));
@@ -267,16 +279,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cardImages[index].setImageBitmap(combineImageIntoOne(setBitmaps(nextCardId)));
         //cardTexts[index].setText(nextCard.toString());
         cardTexts[index].setText("");
-    }
-
-    public void notifyWin() {
-        stopWatch.stop();
-        long elapsedMillis = SystemClock.elapsedRealtime() - stopWatch.getBase();
-        // TODO - compare millis with credentials and update if lower
-        long minutes = (elapsedMillis / 1000)  / 60;
-        int seconds = (int)((elapsedMillis / 1000) % 60);
-        setTestTxt("You won!! Elapsed time" + Long.toString(minutes) + "'" +
-                Integer.toString(seconds)  + "''");
     }
 
     /**
@@ -395,8 +397,222 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return temp;
     }
 
-    public void notifyWin() {
-        setTestTxt("YOU WIN!!!" );
+    public void notifyWin() throws IOException {
+        stopWatch.stop();
+        long elapsedMillis = SystemClock.elapsedRealtime() - stopWatch.getBase();
+
+
+        long minutes = (elapsedMillis / 1000)  / 60;
+        int seconds = (int)((elapsedMillis / 1000) % 60);
+        setTestTxt("You won!! Elapsed time" + Long.toString(minutes) + "'" +
+                Integer.toString(seconds)  + "''");
+
+        int highScoreTime = highscore[0];
+        int highScoreHints = highscore[1];
+
+        // TODO - compare millis with credentials and update if lower
+
+        if (gameModel.getHints() < highScoreHints){
+            if(elapsedMillis < highScoreTime){
+                setNewHighscore(highScoreTime, highScoreHints);
+            }
+        }
+
+    }
+
+    private void setNewHighscore(int highScoreTime, int highScoreHints) throws IOException {
+        if(isLogged()){
+            // TODO - update table
+            String baseURL = "https://studev.groept.be/api/a21pt113/";
+            String requestURL = null;
+
+            if (mode == 2) {
+                requestURL = baseURL + "updateFindTenRecord" + "/" + highScoreTime + "/" + highScoreHints + "/" + username;
+            }
+            else if (mode == 1){
+                requestURL = baseURL + "updateFindAllRecord" + "/" + highScoreTime + "/" + highScoreHints + "/" + username;
+            }
+
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+            StringRequest submitRequest = new StringRequest(Request.Method.GET, requestURL,
+
+                    response -> {
+                        try {
+                            JSONArray responseArray = new JSONArray(response);
+                        }
+                        catch(JSONException e )
+                        {
+                            Log.e( "Database", e.getMessage(), e );
+                        }
+                    },
+
+                    error -> {
+                        Throwable e = new Throwable();
+                        Log.e( "Database", e.getMessage(), e );
+                    }
+            );
+
+            requestQueue.add(submitRequest);
+        }
+        else{
+            String s = getFilesDir() + "/" + "credentials";
+            //https://stackoverflow.com/questions/33638765/how-to-read-json-data-from-txt-file-in-java
+            BufferedReader reader = new BufferedReader(new FileReader(s));
+            String json = "";
+            json = getJSONString(reader);
+
+            try {
+                JSONObject object = new JSONObject(json);
+                JSONArray device = object.getJSONArray("device");
+
+                String newArray;
+                //TODO - Add current date to record instead of hardcoded date
+                newArray = "["+highScoreTime+","+highScoreHints+","+"2022-01-01"+"]";
+
+                device.getJSONObject(0).put("FindAllScore", newArray);
+                writeCredentials(object);
+            }
+            catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
+    private void writeCredentials(JSONObject object) throws IOException {
+        String s = getFilesDir() + "/" + "credentials";
+        BufferedWriter output = new BufferedWriter(new FileWriter(s));
+        output.write(object.toString());
+        output.close();
+    }
+
+    private void getDeviceCredentials() throws IOException {
+        String s = getFilesDir() + "/" + "credentials";
+        //https://stackoverflow.com/questions/33638765/how-to-read-json-data-from-txt-file-in-java
+        BufferedReader reader = new BufferedReader(new FileReader(s));
+        String json = "";
+        json = getJSONString(reader);
+
+        try {
+            JSONObject object = new JSONObject(json);
+            JSONArray device = object.getJSONArray("device");
+            if(mode == 1){
+                JSONArray findAllScore = device.getJSONObject(0).getJSONArray("FindAllScore");
+                String time = findAllScore.getString(0);
+                String hintNum = findAllScore.getString(0);
+                if(time.equals(" ")){
+                    highscore[0] = 0;
+                    if(hintNum.equals(" ")){
+                        highscore[1] = 0;
+                    }
+                }
+                else{
+                    highscore[0] = Integer.parseInt(time);
+                    highscore[1] = Integer.parseInt(time);
+                }
+            }
+            else if(mode == 2){
+                JSONArray findTenScore = device.getJSONObject(0).getJSONArray("FindTenScore");
+                String time = findTenScore.getString(0);
+                String hintNum = findTenScore.getString(0);
+                if(time.equals(" ")){
+                    highscore[0] = 0;
+                    if(hintNum.equals(" ")){
+                        highscore[1] = 0;
+                    }
+                }
+                else{
+                    highscore[0] = Integer.parseInt(time);
+                    highscore[1] = Integer.parseInt(time);
+                }
+            }
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+        // testing register and login
+
+        txtInfo.setText(username +" "+ Integer.toString(highscore[0]) +" "+ Integer.toString(highscore[1]));
+
+    }
+
+    private void updateDeviceCredentials() {
+    }
+
+    private boolean isLogged() throws IOException {
+        String s = getFilesDir() + "/" + "credentials";
+        //https://stackoverflow.com/questions/33638765/how-to-read-json-data-from-txt-file-in-java
+        BufferedReader reader = new BufferedReader(new FileReader(s));
+        String json = "";
+        json = getJSONString(reader);
+
+        try {
+            JSONObject object = new JSONObject(json);
+            JSONArray session = object.getJSONArray("session");
+            String user = session.getJSONObject(0).getString("username");
+            if(user.equals(" ")){
+                return false;
+            }
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    private void getHighscore() throws IOException {
+
+        if(!isLogged()) {
+            getDeviceCredentials(); // and sets the field highscore
+        }
+        else {
+            String baseURL = "https://studev.groept.be/api/a21pt113/";
+            String requestURL = null;
+
+            if (mode == 2) {
+                requestURL = baseURL + "findTenRecord" + "/" + username;
+            }
+            else if (mode == 1){
+                requestURL = baseURL + "findAllRecord" + "/" + username;
+            }
+
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+            StringRequest submitRequest = new StringRequest(Request.Method.GET, requestURL,
+
+                    response -> {
+                        try {
+                            JSONArray responseArray = new JSONArray(response);
+                            JSONObject curObject = responseArray.getJSONObject( 0 );
+
+                            if (mode == 1){
+                                highscore[0] = Integer.parseInt(curObject.getString("allSetsRecord"));
+                                highscore[1] = Integer.parseInt(curObject.getString("hintsAllSets"));
+                            }
+                            else if (mode == 2) {
+                                highscore[0] = Integer.parseInt(curObject.getString("tenSetsRecord"));
+                                highscore[1] = Integer.parseInt(curObject.getString("hintsTenSets"));
+                            }
+                            // testing register and login
+
+                            txtInfo.setText(username + Integer.toString(highscore[0]) + Integer.toString(highscore[1]));
+                        }
+                        catch(JSONException e )
+                        {
+                            Log.e( "Database", e.getMessage(), e );
+                        }
+                    },
+
+                    error -> {
+                        Throwable e = new Throwable();
+                        Log.e( "Database", e.getMessage(), e );
+                    }
+            );
+
+            requestQueue.add(submitRequest);
+        }
     }
 
     public void notifyFeatureSame(int index) {
