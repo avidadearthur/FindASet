@@ -50,7 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
         String passConfirm = registeredConfirmPassword.getText().toString();
 
         // check if any of the fields are empty
-        if(username.equals("") || pass.equals(passConfirm)){
+        if(!username.equals("") && pass.equals(passConfirm)){
             String hash = get_SHA_1_SecurePassword(pass);
             String queryURL = baseURL + "userNameExisted/" + username;
             String requestURL = baseURL + "register" + "/" + username + "/" + hash;
@@ -74,8 +74,6 @@ public class RegisterActivity extends AppCompatActivity {
                         catch( JSONException e )
                         {
                             Log.e( "Database", e.getMessage(), e );
-                            registerError.setText(getString(R.string.error_database));
-                            registerError.setVisibility(View.VISIBLE);
                         }
                     },
                     error -> {
@@ -86,27 +84,21 @@ public class RegisterActivity extends AppCompatActivity {
                     }
             );
 
-            StringRequest submitRequest = new StringRequest(Request.Method.GET, requestURL,
+            StringRequest submitRequest = new StringRequest(Request.Method.GET, queryURL,
                     response -> {
-                        try {
-                            JSONArray responseArray = new JSONArray(response);
-
-                            if (responseArray.getJSONObject(0) == null) {
+                            if (response.equals("[]")) {
                                 requestQueue.add(registerRequest);
                             }
                             else {
                                 registerError.setText(getString(R.string.register_name_existed));
                                 registerError.setVisibility(View.VISIBLE);
                             }
-                        }
-                        catch(JSONException e )
-                        {
-                            Log.e( "Database", e.getMessage(), e );
-                        }
                     },
                     error -> {
                         JSONException e = null;
                         Log.e( "Database", e.getMessage(), e );
+                        registerError.setText(getString(R.string.register_name_existed));
+                        registerError.setVisibility(View.VISIBLE);
                     }
             );
 

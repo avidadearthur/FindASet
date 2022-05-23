@@ -5,7 +5,7 @@
     <string name="register_username">username</string>
     <string name="register_password">password</string>
     <string name="register_confirm_password">password</string>
-    <string name="register_error">Please input the password again!</string>
+    <string name="register_error">Try again!</string>
     <string name="register_name_existed">User name existed!</string>
     <string name="back">back</string>
     <string name="main_refresh">RESTART</string>

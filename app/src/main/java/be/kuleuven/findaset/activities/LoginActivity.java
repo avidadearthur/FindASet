@@ -93,6 +93,8 @@ public class LoginActivity extends AppCompatActivity {
                 error -> {
                     JSONException e = null;
                     Log.e( "Database", e.getMessage(), e );
+                    loginError.setText(getString(R.string.error_database));
+                    loginError.setVisibility(View.VISIBLE);
                 }
         );
 
