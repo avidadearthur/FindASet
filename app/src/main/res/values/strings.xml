@@ -7,6 +7,7 @@
     <string name="register_confirm_password">password</string>
     <string name="back">back</string>
     <string name="main_refresh">RESTART</string>
+    <string name="main_hint">HINT</string>
     <string name="main_continue">Find A Set! Continue!</string>
     <string name="find_all_mode">Find ALL Mode</string>
     <string name="find_ten_mode">Find TEN Mode</string>

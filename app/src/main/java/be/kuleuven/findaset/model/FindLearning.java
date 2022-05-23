@@ -12,6 +12,7 @@ public class FindLearning extends AbstractFindASet implements InterfaceFindASet{
 
         // init class fields
         this.win = false;
+        this.hints = 0;
         this.justForTest = new int[3];
         this.selectedCardsIndex = new ArrayList<>(3);
         this.foundedSetCardsIds = new ArrayList<>();
@@ -20,12 +21,17 @@ public class FindLearning extends AbstractFindASet implements InterfaceFindASet{
         for (int i = 0; i < 12; i++) {
             this.isCardSelected.add(false);
         }
+        this.firstSetOnPage = new ArrayList<>(3);
+        for (int i = 0; i < 12; i++) {
+            this.firstSetOnPage.add(9999);
+        }
 
         initializeTable(12);
         setCardsTable(12);
 
         mainActivity.notifyNewGame(12);
         mainActivity.notifyFeatureBoxGrey();
+        generateAllCardsIdsList();
     }
 
 
@@ -111,6 +117,7 @@ public class FindLearning extends AbstractFindASet implements InterfaceFindASet{
             if (selectedCardsIndex.size() == 3) {
                 if (checkSet(selectedCardsIndex)) {
                     mainActivity.setTestTxt("set Found");
+                    mainActivity.notifyDisableHint();
                     //updateTable(selectedCardsIndex);
                     //mainActivity.notifyFeatureBoxGrey();
                     mainActivity.notifyLearningModeFindASet();

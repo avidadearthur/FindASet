@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String dialogTitleStr;
     private String dialogContentStr;
     private Button refreshBtn;
+    private Button hintBtn;
 
     /**
      * Firstly bound all fields with UI components.
@@ -86,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         learningContinue = findViewById(R.id.tvLearningModeContinue);
         learningContinue.setVisibility(View.INVISIBLE);
         refreshBtn = findViewById(R.id.refreshBtn);
+        hintBtn = findViewById(R.id.hintBtn);
 
         cardImages = new ImageView[12];
         cardImages[0] = findViewById(R.id.card1);
@@ -219,9 +221,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         for (int i = 0; i < gameModel.getSelectedCardsIndex().size(); i++) {
             gameModel.unselect(gameModel.getSelectedCardsIndex().get(i));
         }
+        notifyDisableHint();
         gameModel.startNewGame();
         notifyStartStopWatch();
         notifyFoundedCardsChange(0);
+    }
+
+    public void onClick_hintBtn (View caller) {
+        notifyHint();
     }
 
     public void onClick_More (View caller) {
@@ -280,6 +287,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void notifyUnselect(int index) {
         //cardImages[index].setBackgroundColor(getColor(R.color.transparent));
         cardImages[index].setBackground(getDrawable(R.drawable.imageview_shadow));
+    }
+
+    public void notifyHint() {
+        ArrayList<Integer> set = gameModel.getFirstSetOnPage();
+        for (int i=0; i<3; i++) {
+            int index = set.get(i);
+            if(!gameModel.getIsCardSelected(index))
+                gameModel.unselect(set.get(i));
+            cardImages[index].setBackground(getDrawable(R.drawable.show_set));
+        }
+    }
+
+    public void notifyDisableHint() {
+        ArrayList<Integer> set = gameModel.getFirstSetOnPage();
+        for (int i=0; i<3; i++) {
+            int index = set.get(i);
+            cardImages[index].setBackground(getDrawable(R.drawable.imageview_shadow));
+            if(gameModel.getIsCardSelected(index))
+                gameModel.select(set.get(i));
+        }
     }
 
     public void notifyFoundedCardsChange(int newNumber) {
@@ -392,6 +419,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             cards.setClickable(false);
         }
         refreshBtn.setEnabled(false);
+        hintBtn.setEnabled(false);
     }
 
     public void onClick_continueLearningMode (View caller) {
@@ -403,6 +431,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         learningContinue.setVisibility(View.INVISIBLE);
         refreshBtn.setEnabled(true);
+        hintBtn.setEnabled(true);
     }
 
     private void showDialog() {

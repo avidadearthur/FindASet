@@ -12,6 +12,8 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
     protected ArrayList<Boolean> isCardSelected;
     protected ArrayList<Integer> foundedSetCardsIds;
     protected ArrayList<Integer> remainingCardsIds;
+    protected ArrayList<Integer> firstSetOnPage;
+    protected int hints;
     protected boolean win;
 
     protected MainActivity mainActivity;
@@ -44,6 +46,7 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
 
         // init class fields
         this.win = false;
+        this.hints = 0;
         this.justForTest = new int[3];
         this.selectedCardsIndex = new ArrayList<>(3);
         this.foundedSetCardsIds = new ArrayList<>();
@@ -51,6 +54,10 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
         this.isCardSelected = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             this.isCardSelected.add(false);
+        }
+        this.firstSetOnPage = new ArrayList<>(3);
+        for (int i = 0; i < 12; i++) {
+            this.firstSetOnPage.add(9999);
         }
 
         initializeTable(12);
@@ -178,6 +185,7 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
             // 9999 = no card
             while (cardsIdTable.get(randomIndex) != 9999);
             cardsIdTable.set(randomIndex, set.get(i));
+            firstSetOnPage.set(i,randomIndex);
             justForTest[i] = randomIndex;
         }
     }
@@ -307,7 +315,8 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
     }
     //////////////////End of Update Table////////////////////////////////////////////////
 
-    protected boolean checkAllSetOnPage() {
+    @Override
+    public boolean checkAllSetOnPage() {
         //Loop over all the possible card combinations
         ArrayList<Integer> setCandidates = new ArrayList<>(3);
         setCandidates.add(99);
@@ -327,6 +336,9 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
                         testSetMessage.add(setCandidates.get(0));
                         testSetMessage.add(setCandidates.get(1));
                         testSetMessage.add(setCandidates.get(2));
+                        firstSetOnPage.set(0,setCandidates.get(0));
+                        firstSetOnPage.set(1,setCandidates.get(1));
+                        firstSetOnPage.set(2,setCandidates.get(2));
                         setExisted = true;
                         //break;
                     }
@@ -365,6 +377,7 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
             if (selectedCardsIndex.size() == 3) {
                 if (checkSet(selectedCardsIndex)) {
                     mainActivity.setTestTxt("set Found");
+                    mainActivity.notifyDisableHint();
                     updateTable(selectedCardsIndex);
                     selectedCardsIndex.clear();
                 }
@@ -388,13 +401,18 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
     }
 
     @Override
+    public void showSet() {
+        hints += 1;
+    }
+
+    @Override
     public ArrayList<Integer> getCardsIdTable() {
         return cardsIdTable;
     }
 
     @Override
-    public ArrayList<Boolean> getIsCardSelected() {
-        return isCardSelected;
+    public Boolean getIsCardSelected(int index) {
+        return isCardSelected.get(index);
     }
 
     @Override
@@ -402,9 +420,19 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
         return selectedCardsIndex;
     }
 
+    @Override
+    public ArrayList<Integer> getFirstSetOnPage() {
+        return firstSetOnPage;
+    }
+
     //JUST for TEST
     @Override
     public int[] getJustForTest() {
         return justForTest;
+    }
+
+    @Override
+    public int getHints() {
+        return hints;
     }
 }
