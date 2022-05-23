@@ -4,34 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/bg_gradient_grey"
     android:fitsSystemWindows="true"
     tools:context=".activities.WelcomeActivity">
-
-    <ImageButton
-        android:id="@+id/infoFindLearning"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/tutorialModeBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.528"
-        app:layout_constraintStart_toEndOf="@+id/tutorialModeBtn"
-        app:layout_constraintTop_toTopOf="@+id/tutorialModeBtn"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@android:drawable/ic_menu_info_details" />
-
-    <ImageButton
-        android:id="@+id/infoFindTen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/findTenModeBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.305"
-        app:layout_constraintStart_toEndOf="@+id/findTenModeBtn"
-        app:layout_constraintTop_toTopOf="@+id/findTenModeBtn"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@android:drawable/ic_menu_info_details" />
 
     <LinearLayout
         android:id="@+id/helloLayout"
@@ -52,20 +27,16 @@
             android:text="@string/helloNote"
             android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/font_size_medium" />
-        android:text="@string/learn_lbl_don_t_joined_yet"
-        android:textAppearance="@style/LearnerFontMedium"
-        android:textColor="@color/learn_textColorPrimary"
-        android:textSize="@dimen/learn_font_size_medium" />
 
         <TextView
             android:id="@+id/tvLogout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/learn_spacing_standard_new"
+            android:layout_marginBottom="@dimen/spacing_standard_new"
             android:clickable="false"
             android:onClick="onClick_Logout"
-            android:padding="@dimen/learn_spacing_control"
-            android:text="@string/learn_lbl_logout"
+            android:padding="@dimen/spacing_control"
+            android:text="@string/welcome_logout"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/font_size_medium"
             android:textStyle="bold" />
@@ -80,6 +51,8 @@
         android:src="@drawable/welcome_bg"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ivRandomCard1"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -88,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
+        app:layout_constraintGuide_percent="0.44" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/findAllModeBtn"
@@ -96,10 +69,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:onClick="onClick_FindAll"
-        android:paddingStart="@dimen/learn_spacing_standard_new"
-        android:paddingTop="@dimen/learn_spacing_middle"
-        android:paddingEnd="@dimen/learn_spacing_standard_new"
-        android:paddingBottom="@dimen/learn_spacing_middle"
+        android:paddingStart="@dimen/spacing_standard_new"
+        android:paddingTop="@dimen/spacing_middle"
+        android:paddingEnd="@dimen/spacing_standard_new"
+        android:paddingBottom="@dimen/spacing_middle"
         android:text="@string/find_all_mode"
         android:textSize="@dimen/font_size_large"
         android:textStyle="bold"
@@ -111,13 +84,13 @@
         android:id="@+id/findTenModeBtn"
         style="@style/ModeButton.Filled"
         android:layout_width="wrap_content"
-        android:layout_height="55dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:onClick="onClick_FindTen"
-        android:paddingStart="@dimen/learn_spacing_standard_new"
-        android:paddingTop="@dimen/learn_spacing_middle"
-        android:paddingEnd="@dimen/learn_spacing_standard_new"
-        android:paddingBottom="@dimen/learn_spacing_middle"
+        android:paddingStart="@dimen/spacing_standard_new"
+        android:paddingTop="@dimen/spacing_middle"
+        android:paddingEnd="@dimen/spacing_standard_new"
+        android:paddingBottom="@dimen/spacing_middle"
         android:text="@string/find_ten_mode"
         android:textSize="@dimen/font_size_large"
         android:textStyle="bold"
@@ -132,10 +105,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:onClick="onClick_Learning"
-        android:paddingStart="@dimen/learn_spacing_standard_new"
-        android:paddingTop="@dimen/learn_spacing_middle"
-        android:paddingEnd="@dimen/learn_spacing_standard_new"
-        android:paddingBottom="@dimen/learn_spacing_middle"
+        android:paddingStart="@dimen/spacing_standard_new"
+        android:paddingTop="@dimen/spacing_middle"
+        android:paddingEnd="@dimen/spacing_standard_new"
+        android:paddingBottom="@dimen/spacing_middle"
         android:text="@string/tutorial_mode"
         android:textSize="@dimen/font_size_large"
         android:textStyle="bold"
@@ -150,10 +123,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:onClick="onClick_Board"
-        android:paddingStart="@dimen/learn_spacing_standard_new"
-        android:paddingTop="@dimen/learn_spacing_middle"
-        android:paddingEnd="@dimen/learn_spacing_standard_new"
-        android:paddingBottom="@dimen/learn_spacing_middle"
+        android:paddingStart="@dimen/spacing_standard_new"
+        android:paddingTop="@dimen/spacing_middle"
+        android:paddingEnd="@dimen/spacing_standard_new"
+        android:paddingBottom="@dimen/spacing_middle"
         android:text="@string/leader_board"
         android:textSize="@dimen/font_size_large"
         android:textStyle="bold"
@@ -165,10 +138,10 @@
         android:id="@+id/tvLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/learn_spacing_large"
+        android:layout_marginBottom="@dimen/spacing_large"
         android:minHeight="48dp"
         android:onClick="onClick_Login"
-        android:text="@string/learn_lbl_login_underlined"
+        android:text="@string/welcome_login_underlined"
         android:textColor="@color/textColorSecondary"
         android:textSize="@dimen/font_size_large"
         android:textStyle="bold"
@@ -181,10 +154,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_12sdp"
-        android:layout_marginTop="248dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="@dimen/_12sdp"
         android:gravity="center_horizontal"
-        android:text="@string/learn_lbl_welcome"
+        android:text="@string/welcome_heading"
         android:textColor="@color/textColorPrimary"
         android:textSize="@dimen/font_size_xxxlarge"
         android:textStyle="bold"
@@ -192,21 +165,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvSubHeading"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="304dp"
-        android:gravity="center_horizontal"
-        android:lineSpacingExtra="@dimen/learn_spacing_control"
-        android:lines="3"
-        android:text="@string/learn_short_text"
-        android:textColor="@color/textColorSecondary"
-        android:textSize="@dimen/font_size_large"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="-12dp" />
 
     <TextView
         android:id="@+id/testTextWelcome"
@@ -223,14 +181,52 @@
         app:layout_constraintStart_toStartOf="@+id/imgWalk"
         app:layout_constraintTop_toTopOf="@+id/imgWalk" />
 
-    <ImageButton
-        android:id="@+id/infoFindAll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/findAllModeBtn"
+    <ImageView
+        android:id="@+id/ivInfo"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:onClick="onClick_Info"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/findAllModeBtn"
-        app:layout_constraintTop_toBottomOf="@+id/imgWalk"
-        app:srcCompat="@android:drawable/ic_menu_info_details" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_more"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <ImageView
+        android:id="@+id/ivRandomCard1"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivRandomCard2"
+        app:layout_constraintEnd_toStartOf="@+id/ivRandomCard2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivRandomCard2"
+        app:srcCompat="@drawable/card_primary" />
+
+    <ImageView
+        android:id="@+id/ivRandomCard2"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="190dp"
+        app:layout_constraintEnd_toStartOf="@+id/ivRandomCard3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ivRandomCard1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/card_primary" />
+
+    <ImageView
+        android:id="@+id/ivRandomCard3"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="8dp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/ivRandomCard2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ivRandomCard2"
+        app:layout_constraintTop_toTopOf="@+id/ivRandomCard2"
+        app:srcCompat="@drawable/card_primary" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,10 +9,10 @@
 
     <ImageView
         android:id="@+id/ivBack"
-        android:layout_width="@dimen/_30sdp"
-        android:layout_height="@dimen/_30sdp"
-        android:layout_marginStart="@dimen/learn_spacing_standard_new"
-        android:layout_marginTop="@dimen/learn_spacing_standard_new"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginStart="@dimen/spacing_standard_new"
+        android:layout_marginTop="@dimen/spacing_standard_new"
         android:contentDescription="@string/back"
         android:onClick="onClick_Back"
         android:padding="@dimen/_5sdp"
@@ -28,12 +28,11 @@
         <EditText
             android:id="@+id/etUsername"
             style="@style/EditTextStyleRound"
-            android:layout_marginTop="@dimen/learn_spacing_large"
+            android:layout_marginTop="@dimen/spacing_large"
             android:hint="@string/hint_username"
             android:maxLength="12"
             android:textColorHint="@color/metal_grey"
             android:textStyle="bold" />
-        android:hint="@string/learn_hint_username" />
 
         <EditText
             android:id="@+id/etPassword"
@@ -43,21 +42,16 @@
             android:maxLength="12"
             android:textColorHint="@color/metal_grey"
             android:textStyle="bold" />
-        android:hint="@string/learn_hint_password" />
 
         <EditText
             android:id="@+id/etConfirmPassword"
             style="@style/EditTextStyleRound"
-            android:layout_marginBottom="@dimen/learn_spacing_xlarge"
+            android:layout_marginBottom="@dimen/spacing_xlarge"
             android:hint="@string/hint_confirm_password"
             android:inputType="textPassword"
             android:maxLength="12"
             android:textColorHint="@color/metal_grey"
             android:textStyle="bold" />
-        android:hint="@string/hint_password"
-        android:inputType="textPassword"
-        android:textColorHint="@color/metal_grey"
-        android:textStyle="bold" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnJoin"
@@ -66,8 +60,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:onClick="onBtnRegister_Clicked"
-            android:paddingStart="@dimen/learn_spacing_xlarge"
-            android:paddingEnd="@dimen/learn_spacing_xlarge"
+            android:paddingStart="@dimen/spacing_xlarge"
+            android:paddingEnd="@dimen/spacing_xlarge"
             android:text="@string/login_join"
             android:textSize="20sp"
             android:textStyle="bold"

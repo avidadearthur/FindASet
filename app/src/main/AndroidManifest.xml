@@ -14,9 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FindASet">
         <activity
-            android:name=".activities.LearningActivity"
-            android:exported="false" />
-        <activity
             android:name=".activities.WelcomeActivity"
             android:exported="true"
             android:screenOrientation="portrait"

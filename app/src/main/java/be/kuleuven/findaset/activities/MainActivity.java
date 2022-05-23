@@ -1,5 +1,6 @@
 package be.kuleuven.findaset.activities;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -7,6 +8,7 @@ import android.graphics.Canvas;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,6 +27,7 @@ import java.util.Arrays;
 
 import be.kuleuven.findaset.R;
 import be.kuleuven.findaset.model.FindAll;
+import be.kuleuven.findaset.model.FindLearning;
 import be.kuleuven.findaset.model.FindTen;
 import be.kuleuven.findaset.model.InterfaceFindASet;
 
@@ -43,8 +46,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private InterfaceFindASet gameModel;
     private ImageView[] cardImages;
     private TextView[] cardTexts;
+    private Button[] featureBoxes;
     private TextView testTxt;
+    private TextView learningContinue;
+    private TextView foundedNumber;
     private Chronometer stopWatch;
+    private String dialogTitleStr;
+    private String dialogContentStr;
+    private Button refreshBtn;
 
     /**
      * Firstly bound all fields with UI components.
@@ -62,19 +71,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Init stopWatch
         stopWatch = findViewById(R.id.stopWatch);
 
-
         // testing register and login
         TextView txtInfo = (TextView) findViewById(R.id.userText);
         String loginInfo = null;
-
         try {
             loginInfo = getUsername();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         txtInfo.setText(loginInfo);
+
+        foundedNumber = findViewById(R.id.foundedCards);
         testTxt = findViewById(R.id.testTxt);
+        learningContinue = findViewById(R.id.tvLearningModeContinue);
+        learningContinue.setVisibility(View.INVISIBLE);
+        refreshBtn = findViewById(R.id.refreshBtn);
 
         cardImages = new ImageView[12];
         cardImages[0] = findViewById(R.id.card1);
@@ -104,6 +115,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cardTexts[10] = findViewById(R.id.card11Text);
         cardTexts[11] = findViewById(R.id.card12Text);
 
+        featureBoxes = new Button[4];
+        featureBoxes[0] = findViewById(R.id.sizeBtn);
+        featureBoxes[1] = findViewById(R.id.colorBtn);
+        featureBoxes[2] = findViewById(R.id.shadingBtn);
+        featureBoxes[3] = findViewById(R.id.typeBtn);
+
         for (int i = 0; i < 12; i++) {
             cardImages[i].setOnClickListener(this);
             //cardImages[i].setBackgroundColor(getColor(R.color.transparent));
@@ -111,15 +128,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         InterfaceFindASet findASet = null;
-
         Bundle extras = getIntent().getExtras();
         int mode = extras.getInt("mode");
-
         if(mode == 1){
             findASet = new FindAll();
+            notifyFeatureBoxGone();
+            dialogTitleStr = getString(R.string.main_more_findAll_title);
+            dialogContentStr = getString(R.string.main_more_findAll_content);
         }
         else if(mode == 2){
             findASet = new FindTen();
+            notifyFeatureBoxGone();
+            dialogTitleStr = getString(R.string.main_more_findTen_title);
+            dialogContentStr = getString(R.string.main_more_findTen_content);
+        }
+        else if(mode == 3){
+            findASet = new FindLearning();
+            notifyFeatureBoxGrey();
+            dialogTitleStr = getString(R.string.feature_box_explanation_title);
+            dialogContentStr = getString(R.string.feature_box_explanation_content);
+            stopWatch.setVisibility(View.INVISIBLE);
+            //TODO IN learning mode, wining not display or push time
         }
 
         setGameModel(findASet);
@@ -171,9 +200,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.gameModel.setUI(this);
     }
 
+    /**
+     * First get the index of which call the method.
+     * <p>
+     * If there are already 3 selected cards, remove the first.
+     * <p>
+     * After that, call checkSet() to check if there is set.
+     * <p>
+     * If there is, call updateTable().
+     */
+    @Override
+    public void onClick(View clickedView) {
+        int index = Arrays.asList(cardImages).indexOf(clickedView);
+        gameModel.toggle(index);
+    }
+
+    public void onClick_refreshBtn (View caller) {
+        for (int i = 0; i < gameModel.getSelectedCardsIndex().size(); i++) {
+            gameModel.unselect(gameModel.getSelectedCardsIndex().get(i));
+        }
+        gameModel.startNewGame();
+        notifyStartStopWatch();
+        notifyFoundedCardsChange(0);
+    }
+
+    public void onClick_More (View caller) {
+        showDialog();
+    }
+
     public void onClick_Back(View caller) {
-        Intent intent = new Intent(this, WelcomeActivity.class);
-        startActivity(intent);
+        finish();
     }
 
     /**
@@ -260,6 +316,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cardImages[index].setBackground(getDrawable(R.drawable.imageview_shadow));
     }
 
+    public void notifyFoundedCardsChange(int newNumber) {
+        String number = "";
+        if (newNumber < 10)
+            number = "0" + newNumber;
+        else
+            number = String.valueOf(newNumber);
+        foundedNumber.setText(number);
+    }
+
     public void notifyUnavailable(int index) {
         cardImages[index].setEnabled(false);
         cardImages[index].setVisibility(View.INVISIBLE);
@@ -328,5 +393,60 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         return temp;
+    }
+
+    public void notifyWin() {
+        setTestTxt("YOU WIN!!!" );
+    }
+
+    public void notifyFeatureSame(int index) {
+        featureBoxes[index].setBackgroundColor(getColor(R.color.light_green));
+    }
+
+    public void notifyFeatureDifferent(int index) {
+        featureBoxes[index].setBackgroundColor(getColor(R.color.light_yellow));
+    }
+
+    public void notifyFeatureBoxGrey() {
+        for (Button box : featureBoxes) {
+            box.setVisibility(View.VISIBLE);
+            box.setBackgroundColor(getColor(R.color.metal_grey));
+        }
+    }
+
+    public void notifyFeatureBoxGone() {
+        for (Button box : featureBoxes) {
+            box.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    public void notifyLearningModeFindASet() {
+        learningContinue.setVisibility(View.VISIBLE);
+        for (ImageView cards : cardImages) {
+            cards.setClickable(false);
+        }
+        refreshBtn.setEnabled(false);
+    }
+
+    public void onClick_continueLearningMode (View caller) {
+        gameModel.updateTable(gameModel.getSelectedCardsIndex());
+        notifyFeatureBoxGrey();
+        gameModel.getSelectedCardsIndex().clear();
+        for (ImageView cards : cardImages) {
+            cards.setClickable(true);
+        }
+        learningContinue.setVisibility(View.INVISIBLE);
+        refreshBtn.setEnabled(true);
+    }
+
+    private void showDialog() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_main);
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_custom_borders);
+        TextView dialogTitle = (TextView) dialog.findViewById(R.id.dialogTitle);
+        dialogTitle.setText(dialogTitleStr);
+        TextView dialogText = (TextView) dialog.findViewById(R.id.dialogText);
+        dialogText.setText(dialogContentStr);
+        dialog.show();
     }
 }
