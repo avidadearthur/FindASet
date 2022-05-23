@@ -213,6 +213,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cardTexts[index].setText("");
     }
 
+    public void notifyWin() {
+        stopWatch.stop();
+        long elapsedMillis = SystemClock.elapsedRealtime() - stopWatch.getBase();
+        // TODO - compare millis with credentials and update if lower
+        long minutes = (elapsedMillis / 1000)  / 60;
+        int seconds = (int)((elapsedMillis / 1000) % 60);
+        setTestTxt("You won!! Elapsed time" + Long.toString(minutes) + "'" +
+                Integer.toString(seconds)  + "''");
+    }
+
     /**
      * First get the index of which call the method.
      * <p>
@@ -318,9 +328,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         return temp;
-    }
-
-    public void notifyWin() {
-        setTestTxt("YOU WIN!!!" );
     }
 }

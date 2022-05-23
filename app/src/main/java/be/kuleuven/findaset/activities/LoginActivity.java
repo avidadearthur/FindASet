@@ -67,10 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                         String hash = get_SHA_1_SecurePassword(pass);
 
                         if(hash.equals(responseString)){
-                            //Login success
-                            //Save the username and the hash in the credentials
-                            updateCredentials(username,hash);
-                            responseString = curObject.getString( "username" );
+                            updateCredentials(username);
                         }
                         startActivity(intent);
                     }
@@ -126,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
         return json;
     }
 
-    private void updateCredentials(String username, String hash) throws IOException {
+    private void updateCredentials(String username) throws IOException {
         String s = getFilesDir() + "/" + "credentials";
         //https://stackoverflow.com/questions/33638765/how-to-read-json-data-from-txt-file-in-java
         BufferedReader reader = new BufferedReader(new FileReader(s));
@@ -137,7 +134,6 @@ public class LoginActivity extends AppCompatActivity {
             JSONObject object = new JSONObject(json);
             JSONArray session = object.getJSONArray("session");
             session.getJSONObject(0).put("username",username);
-            session.getJSONObject(0).put("hash",hash);
             writeCredentials(object);
         }
         catch (JSONException e) {

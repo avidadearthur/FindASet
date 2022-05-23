@@ -30,6 +30,7 @@ public class WelcomeActivity extends AppCompatActivity {
     private ImageButton infoFindTen;
     private ImageButton infoFindLearning;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

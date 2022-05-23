@@ -76,6 +76,7 @@ public class LeaderBoardActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
+        // TODO - bind data from credentials to ranking
         modes = new String[]{"Find All", "Find Ten"};
         scores = new String[]{"1'30", "0'30"};
         dates = new String[]{"22 May 2022", "21 May 2022"};
