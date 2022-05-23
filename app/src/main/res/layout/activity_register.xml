@@ -63,7 +63,7 @@
             android:layout_marginEnd="@dimen/spacing_xxxlarge"
             android:layout_marginBottom="@dimen/spacing_middle"
             android:fontFamily="@font/poppins_regular"
-            android:text="TextView"
+            android:text="@string/register_error"
             android:textColor="@color/light_red"
             android:textSize="@dimen/font_size_medium"
             android:textStyle="bold" />

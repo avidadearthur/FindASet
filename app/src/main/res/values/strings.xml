@@ -5,6 +5,8 @@
     <string name="register_username">username</string>
     <string name="register_password">password</string>
     <string name="register_confirm_password">password</string>
+    <string name="register_error">Please input the password again!</string>
+    <string name="register_name_existed">User name existed!</string>
     <string name="back">back</string>
     <string name="main_refresh">RESTART</string>
     <string name="main_hint">HINT</string>
@@ -17,6 +19,8 @@
     <string name="login_forget">Forget!</string>
     <string name="login_enter">Enter</string>
     <string name="login_don_t_joined_yet">Don\'t Joined Yet !</string>
+    <string name="login_error">The username doesn\'t exist or password is wrong!</string>
+    <string name="error_database">There is error connecting to database.</string>
     <string name="helloNote">Hello Username! </string>
     <string name="login_join">Join</string>
     <string name="board_leader_board">Leader Board</string>
@@ -29,17 +33,19 @@
     <string name="feature_color">color</string>
     <string name="feature_shading">shading</string>
     <string name="feature_type">type</string>
+    <!--    TODO THINGS TO WRITE START-->
+    <string name="welcome_info_title">Find A Set</string>
+    <string name="welcome_info_content">Introduction of Game</string>
+    <string name="main_more_findAll_title">Find ALL</string>
+    <string name="main_more_findAll_content">Rule of Find ALL</string>
+    <string name="main_more_findTen_title">Find TEN</string>
+    <string name="main_more_findTen_content">Rule of Find TEN</string>
     <string name="feature_box_explanation_title">Eliminate Grey!!</string>
     <string name="feature_box_explanation_content">Yellow means this feature is all different for three cards.
         \nGreen means this feature is all same for three cards.
         \nAny combinations of yellow and blue can make a set.
         \nTry it now!!</string>
-    <string name="main_more_findAll_title">Find ALL</string>
-    <string name="main_more_findAll_content">Rule of Find ALL</string>
-    <string name="main_more_findTen_title">Find TEN</string>
-    <string name="main_more_findTen_content">Rule of Find TEN</string>
-    <string name="welcome_info_title">Find A Set</string>
-    <string name="welcome_info_content">Introduction of Game</string>
+    <!--    TODO THINGS TO WRITE END-->
     <string name="welcome_login_underlined"><u>Login</u></string>
     <string name="welcome_logout"><u>Log out</u></string>
     <string name="welcome_heading">Welcome</string>
