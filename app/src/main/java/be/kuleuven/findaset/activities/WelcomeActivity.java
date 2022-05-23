@@ -229,6 +229,10 @@ public class WelcomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void onClick_RandomCards(View caller) {
+        setRandomCards();
+    }
+
     public void setRandomCards() {
         InterfaceFindASet findASet = new FindAll();
         int[][] featureMatrix = findASet.getFeatureMatrix();

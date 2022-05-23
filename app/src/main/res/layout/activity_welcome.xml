@@ -206,23 +206,27 @@
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginStart="8dp"
+        android:onClick="onClick_RandomCards"
         app:layout_constraintBottom_toBottomOf="@+id/ivRandomCard2"
         app:layout_constraintEnd_toStartOf="@+id/ivRandomCard2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/ivRandomCard2"
-        app:srcCompat="@drawable/card_primary" />
+        app:srcCompat="@drawable/card_primary"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageView
         android:id="@+id/ivRandomCard2"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginTop="190dp"
+        android:onClick="onClick_RandomCards"
         app:layout_constraintEnd_toStartOf="@+id/ivRandomCard3"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/ivRandomCard1"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/card_primary" />
+        app:srcCompat="@drawable/card_primary"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageView
         android:id="@+id/ivRandomCard3"
@@ -230,11 +234,13 @@
         android:layout_height="100dp"
         android:layout_marginEnd="8dp"
 
+        android:onClick="onClick_RandomCards"
         app:layout_constraintBottom_toBottomOf="@+id/ivRandomCard2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/ivRandomCard2"
         app:layout_constraintTop_toTopOf="@+id/ivRandomCard2"
-        app:srcCompat="@drawable/card_primary" />
+        app:srcCompat="@drawable/card_primary"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
