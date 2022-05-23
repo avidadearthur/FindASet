@@ -426,25 +426,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void notifyWin() throws IOException {
         stopWatch.stop();
-        long elapsedMillis = SystemClock.elapsedRealtime() - stopWatch.getBase();
+        if (mode != 3){
+            long elapsedMillis = SystemClock.elapsedRealtime() - stopWatch.getBase();
 
+            long minutes = (elapsedMillis / 1000)  / 60;
+            int seconds = (int)((elapsedMillis / 1000) % 60);
+            setTestTxt("You won!! Elapsed time" + Long.toString(minutes) + "'" +
+                    Integer.toString(seconds)  + "''");
 
-        long minutes = (elapsedMillis / 1000)  / 60;
-        int seconds = (int)((elapsedMillis / 1000) % 60);
-        setTestTxt("You won!! Elapsed time" + Long.toString(minutes) + "'" +
-                Integer.toString(seconds)  + "''");
+            int highScoreTime = highscore[0];
+            int highScoreHints = highscore[1];
 
-        int highScoreTime = highscore[0];
-        int highScoreHints = highscore[1];
-
-        // TODO - compare millis with credentials and update if lower
-
-        if (gameModel.getHints() < highScoreHints){
-            if(elapsedMillis < highScoreTime){
-                setNewHighscore(highScoreTime, highScoreHints);
+            // TODO - First time of guest player
+            if(highScoreHints == -1){
+                setNewHighscore((int) elapsedMillis, gameModel.getHints());
+            }
+            // TODO - compare millis with credentials and update if lower
+            else if (gameModel.getHints() < highScoreHints){
+                if(elapsedMillis < highScoreTime){
+                    highscore[0] = (int) elapsedMillis;
+                    highscore[1] = gameModel.getHints();
+                    setNewHighscore((int) elapsedMillis, gameModel.getHints());
+                }
             }
         }
-
     }
 
     private void setNewHighscore(int highScoreTime, int highScoreHints) throws IOException {
@@ -483,26 +488,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             requestQueue.add(submitRequest);
         }
         else{
-            String s = getFilesDir() + "/" + "credentials";
-            //https://stackoverflow.com/questions/33638765/how-to-read-json-data-from-txt-file-in-java
-            BufferedReader reader = new BufferedReader(new FileReader(s));
-            String json = "";
-            json = getJSONString(reader);
-
-            try {
-                JSONObject object = new JSONObject(json);
-                JSONArray device = object.getJSONArray("device");
-
-                String newArray;
-                //TODO - Add current date to record instead of hardcoded date
-                newArray = "["+highScoreTime+","+highScoreHints+","+"2022-01-01"+"]";
-
-                device.getJSONObject(0).put("FindAllScore", newArray);
-                writeCredentials(object);
-            }
-            catch (JSONException e) {
-                e.printStackTrace();
-            }
+            updateDeviceCredentials();
 
         }
 
@@ -530,9 +516,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String time = findAllScore.getString(0);
                 String hintNum = findAllScore.getString(0);
                 if(time.equals(" ")){
-                    highscore[0] = 0;
+                    highscore[0] = -1;
                     if(hintNum.equals(" ")){
-                        highscore[1] = 0;
+                        highscore[1] = -1;
                     }
                 }
                 else{
@@ -545,9 +531,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String time = findTenScore.getString(0);
                 String hintNum = findTenScore.getString(0);
                 if(time.equals(" ")){
-                    highscore[0] = 0;
+                    highscore[0] = -1;
                     if(hintNum.equals(" ")){
-                        highscore[1] = 0;
+                        highscore[1] = -1;
                     }
                 }
                 else{
@@ -560,12 +546,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             e.printStackTrace();
         }
         // testing register and login
-
         txtInfo.setText(username +" "+ Integer.toString(highscore[0]) +" "+ Integer.toString(highscore[1]));
 
     }
 
-    private void updateDeviceCredentials() {
+    private void updateDeviceCredentials() throws IOException {
+
+        int highScoreTime = highscore[0];
+        int highScoreHints = highscore[1];
+
+        String s = getFilesDir() + "/" + "credentials";
+        //https://stackoverflow.com/questions/33638765/how-to-read-json-data-from-txt-file-in-java
+        BufferedReader reader = new BufferedReader(new FileReader(s));
+        String json = "";
+        json = getJSONString(reader);
+
+        try {
+            JSONObject object = new JSONObject(json);
+            JSONArray device = object.getJSONArray("device");
+
+            String newArray;
+            //TODO - Add current date to record instead of hardcoded date
+            newArray = "["+highScoreTime+","+highScoreHints+","+"2022-01-01"+"]";
+
+            device.getJSONObject(0).put("FindAllScore", newArray);
+            writeCredentials(object);
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     private boolean isLogged() throws IOException {
