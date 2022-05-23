@@ -106,6 +106,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
         else {
             // display error message
+            registerError.setText(R.string.register_error);
             registerError.setVisibility(View.VISIBLE);
         }
     }
