@@ -15,9 +15,9 @@
     <LinearLayout
         android:id="@+id/userInfo"
         android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="14dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tvRanking"
@@ -29,6 +29,7 @@
             android:id="@+id/tvUserName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
             android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/font_size_large"
             android:textStyle="bold"
@@ -39,6 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_control_half"
+            android:fontFamily="@font/poppins_regular"
             android:textColor="#3949AB"
             android:textSize="@dimen/font_size_normal"
             tools:text="1'30''" />

@@ -29,6 +29,7 @@
             android:id="@+id/etUsernameLogin"
             style="@style/EditTextStyleRound"
             android:layout_marginTop="@dimen/spacing_large"
+            android:fontFamily="@font/poppins_medium"
             android:hint="@string/hint_username"
             android:maxLength="12"
             android:textColorHint="@color/metal_grey"
@@ -40,7 +41,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_xlarge"
             android:layout_marginEnd="@dimen/spacing_xlarge"
-            android:layout_marginBottom="@dimen/spacing_xlarge"
             android:background="@drawable/shadow_edittext"
             android:paddingStart="@dimen/spacing_large"
             android:paddingTop="@dimen/spacing_standard_new"
@@ -53,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:autofillHints=""
                 android:background="@null"
+                android:fontFamily="@font/poppins_medium"
                 android:hint="@string/hint_password"
                 android:inputType="textPassword"
                 android:maxEms="7"
@@ -70,6 +71,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="@dimen/spacing_standard_new"
                 android:background="@null"
+                android:fontFamily="@font/poppins_medium"
                 android:text="@string/login_forget"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/font_size_large"
@@ -78,12 +80,26 @@
 
         </RelativeLayout>
 
+        <TextView
+            android:id="@+id/failureLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_xxlarge"
+            android:layout_marginEnd="@dimen/spacing_xxlarge"
+            android:layout_marginBottom="@dimen/spacing_middle"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/login_error"
+            android:textColor="@color/light_red"
+            android:textSize="@dimen/font_size_medium"
+            android:textStyle="bold" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnEnter"
             style="@style/ModeButton.Filled"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/poppins_bold"
             android:onClick="onBtnEnter_Clicked"
             android:paddingStart="@dimen/spacing_xlarge"
             android:paddingEnd="@dimen/spacing_xlarge"
@@ -105,6 +121,7 @@
             android:id="@+id/tvHelloNote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
             android:text="@string/login_don_t_joined_yet"
             android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/font_size_medium" />
@@ -115,6 +132,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_standard_new"
             android:clickable="false"
+            android:fontFamily="@font/poppins_medium"
             android:onClick="onClick_Join"
             android:padding="@dimen/spacing_control"
             android:text="@string/login_join"

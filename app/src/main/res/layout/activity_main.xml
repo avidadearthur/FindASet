@@ -37,29 +37,14 @@
         style="@style/HeadingBig"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/poppins_semibold"
         android:text="TextView"
         android:textSize="20sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guidelineTop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guidelineTop2"
         app:layout_constraintVertical_bias="0.541" />
-
-    <TextView
-        android:id="@+id/foundedCards"
-        style="@style/HeadingBig"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="140dp"
-        android:text="00"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/ivCardMain"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.065"
-        app:layout_constraintStart_toEndOf="@+id/ivCardMain"
-        app:layout_constraintTop_toTopOf="@+id/ivCardMain" />
 
     <Chronometer
         android:id="@+id/stopWatch"
@@ -67,6 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        android:fontFamily="@font/poppins_semibold"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guidelineTop"
@@ -346,6 +332,7 @@
         android:background="@color/textColorGrey"
         android:clickable="false"
         android:fadeScrollbars="false"
+        android:fontFamily="@font/poppins_medium"
         android:text="@string/feature_size"
         android:textColor="@color/textColorPrimary"
         android:textSize="16sp"
@@ -361,6 +348,7 @@
         android:layout_height="wrap_content"
         android:background="@color/textColorGrey"
         android:clickable="false"
+        android:fontFamily="@font/poppins_medium"
         android:text="@string/feature_color"
         android:textColor="@color/textColorPrimary"
         android:textSize="16sp"
@@ -375,6 +363,7 @@
         android:layout_height="wrap_content"
         android:background="@color/textColorGrey"
         android:clickable="false"
+        android:fontFamily="@font/poppins_medium"
         android:text="@string/feature_shading"
         android:textColor="@color/textColorPrimary"
         android:textSize="16sp"
@@ -389,6 +378,7 @@
         android:layout_height="wrap_content"
         android:background="@color/textColorGrey"
         android:clickable="false"
+        android:fontFamily="@font/poppins_medium"
         android:text="@string/feature_type"
         android:textColor="@color/textColorPrimary"
         android:textSize="16sp"
@@ -402,14 +392,32 @@
         style="@style/ModeButton.Filled"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="@font/poppins_bold"
         android:onClick="onClick_refreshBtn"
         android:text="@string/main_refresh"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/hintBtn" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/hintBtn"
+        style="@style/ModeButton.Filled"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="@font/poppins_bold"
+        android:onClick="onClick_hintBtn"
+        android:text="@string/main_hint"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/refreshBtn"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -428,6 +436,7 @@
         android:id="@+id/tvLearningModeContinue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
         android:minHeight="48dp"
         android:onClick="onClick_continueLearningMode"
         android:text="@string/main_continue"
@@ -451,14 +460,34 @@
         app:srcCompat="@drawable/ic_more"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
-    <ImageView
-        android:id="@+id/ivCardMain"
-        android:layout_width="46dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="170dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/guidelineTop"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guidelineTop2"
-        app:srcCompat="@drawable/card_primary" />
+        app:layout_constraintTop_toTopOf="@+id/guidelineTop2">
+
+        <ImageView
+            android:id="@+id/ivCardMain"
+            android:layout_width="46dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center|center_horizontal|center_vertical"
+            android:layout_marginStart="170dp"
+            app:srcCompat="@drawable/card_primary" />
+
+        <TextView
+            android:id="@+id/foundedCards"
+            style="@style/HeadingBig"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center_horizontal|center_vertical"
+            android:layout_marginEnd="140dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="00"
+            android:textSize="20sp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

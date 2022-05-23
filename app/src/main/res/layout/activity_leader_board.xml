@@ -34,6 +34,7 @@
             style="@style/HeadingBig"
             android:layout_marginStart="@dimen/spacing_standard_new"
             android:layout_marginTop="@dimen/spacing_middle"
+            android:fontFamily="@font/poppins_bold"
             android:text="@string/board_leader_board"
             android:textSize="@dimen/font_size_xxxlarge"
             android:textStyle="bold" />
@@ -50,6 +51,7 @@
         <TextView
             android:id="@+id/tvAll"
             style="@style/TabTextStyle"
+            android:fontFamily="@font/poppins_semibold"
             android:onClick="onClick_All"
             android:text="@string/board_find_all"
             android:textColor="@color/colorPrimary"
@@ -63,6 +65,7 @@
             style="@style/TabTextStyle"
             android:layout_width="wrap_content"
             android:layout_marginStart="@dimen/spacing_large"
+            android:fontFamily="@font/poppins_semibold"
             android:onClick="onClick_Ten"
             android:text="@string/board_find_ten"
             android:textStyle="bold"
@@ -76,6 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_large"
+            android:fontFamily="@font/poppins_semibold"
             android:onClick="onClick_HighScore"
             android:text="@string/board_high_score"
             android:textStyle="bold"

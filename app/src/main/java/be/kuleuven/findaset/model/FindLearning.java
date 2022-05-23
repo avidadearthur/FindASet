@@ -12,6 +12,7 @@ public class FindLearning extends AbstractFindASet implements InterfaceFindASet{
 
         // init class fields
         this.win = false;
+        this.hints = 0;
         this.justForTest = new int[3];
         this.selectedCardsIndex = new ArrayList<>(3);
         this.foundedSetCardsIds = new ArrayList<>();
@@ -20,12 +21,17 @@ public class FindLearning extends AbstractFindASet implements InterfaceFindASet{
         for (int i = 0; i < 12; i++) {
             this.isCardSelected.add(false);
         }
+        this.firstSetOnPage = new ArrayList<>(3);
+        for (int i = 0; i < 12; i++) {
+            this.firstSetOnPage.add(9999);
+        }
 
         initializeTable(12);
         setCardsTable(12);
 
         mainActivity.notifyNewGame(12);
         mainActivity.notifyFeatureBoxGrey();
+        generateAllCardsIdsList();
     }
 
 
@@ -71,7 +77,6 @@ public class FindLearning extends AbstractFindASet implements InterfaceFindASet{
         }
     }
 
-
     @Override
     public boolean checkFeatureMatrix(int[][] featureMatrix, boolean isSet) {
         for (int col = 0; col < 4; col++) {
@@ -103,6 +108,7 @@ public class FindLearning extends AbstractFindASet implements InterfaceFindASet{
         if (!isSelected) {
             select(index);
             selectedCardsIndex.add(index);
+            mainActivity.notifyFeatureBoxGrey();
             if (selectedCardsIndex.size() == 4) {
                 unselect(selectedCardsIndex.get(0));
                 selectedCardsIndex.remove(selectedCardsIndex.get(0));
@@ -111,15 +117,47 @@ public class FindLearning extends AbstractFindASet implements InterfaceFindASet{
             if (selectedCardsIndex.size() == 3) {
                 if (checkSet(selectedCardsIndex)) {
                     mainActivity.setTestTxt("set Found");
-                    //updateTable(selectedCardsIndex);
-                    //mainActivity.notifyFeatureBoxGrey();
+                    mainActivity.notifyDisableHint();
                     mainActivity.notifyLearningModeFindASet();
                 }
+            }
+            else if (selectedCardsIndex.size() == 2) {
+                checkFeatureMatrixForTwo(generateFeatureMatrixForTwo());
             }
         } else {
             unselect(index);
             selectedCardsIndex.remove((Integer) index);
             mainActivity.notifyFeatureBoxGrey();
+            if (selectedCardsIndex.size() == 2) {
+                checkFeatureMatrixForTwo(generateFeatureMatrixForTwo());
+            }
+        }
+    }
+
+    private int[][] generateFeatureMatrixForTwo() {
+        int[][] featureMatrix = new int[2][4];
+        for (int i = 0; i < 2; i++) {
+            int nextCardId = cardsIdTable.get(getSelectedCardsIndex().get(i));
+            int size = nextCardId/1000;
+            int color = (nextCardId%1000)/100;
+            int shading = (nextCardId%100)/10;
+            int type = nextCardId%10;
+            featureMatrix[i][0] = size;
+            featureMatrix[i][1] = color;
+            featureMatrix[i][2] = shading;
+            featureMatrix[i][3] = type;
+        }
+        return featureMatrix;
+    }
+
+    public void checkFeatureMatrixForTwo(int[][] featureMatrix) {
+        for (int col = 0; col < 4; col++) {
+            if (featureMatrix[0][col] == featureMatrix[1][col]) {
+                mainActivity.notifyFeatureSame(col);
+            }
+            else {
+                mainActivity.notifyFeatureDifferent(col);
+            }
         }
     }
 

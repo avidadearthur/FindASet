@@ -24,6 +24,8 @@ public interface InterfaceFindASet {
     //////////////////Update Table////////////////////////////////////////////////
     void updateTable(ArrayList<Integer> selectedCardsIndex);
 
+    boolean checkAllSetOnPage();
+
     void checkWin();
 
     void toggle(int index);
@@ -32,11 +34,15 @@ public interface InterfaceFindASet {
 
     void unselect(int index);
 
+    void showSet();
+
     ArrayList<Integer> getCardsIdTable();
 
-    ArrayList<Boolean> getIsCardSelected();
+    Boolean getIsCardSelected(int index);
 
     ArrayList<Integer> getSelectedCardsIndex();
+
+    ArrayList<Integer> getFirstSetOnPage();
 
     //JUST for TEST
     int[] getJustForTest();

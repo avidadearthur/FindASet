@@ -29,17 +29,21 @@ import java.security.NoSuchAlgorithmException;
 import be.kuleuven.findaset.R;
 
 public class LoginActivity extends AppCompatActivity {
-    private TextView usernameRegister;
+    private TextView loginError;
     private RequestQueue requestQueue;
+    private String baseURL = "https://studev.groept.be/api/a21pt113/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        loginError = findViewById(R.id.failureLogin);
+        loginError.setVisibility(View.INVISIBLE);
     }
 
     public void onClick_Join(View caller) {
-        finish();
+        //finish();
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
@@ -52,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
         String pass = loginPassword.getText().toString();
 
         requestQueue = Volley.newRequestQueue( this );
-        String baseURL = "https://studev.groept.be/api/a21pt113/";
         String requestURL = baseURL + "login" + "/" + username;
 
         Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
@@ -69,14 +72,21 @@ public class LoginActivity extends AppCompatActivity {
                         String hash = get_SHA_1_SecurePassword(pass);
 
                         if(hash.equals(responseString)){
-                            updateCredentials(username);
+                            //Login success
+                            //Save the username and the hash in the credentials
+                            updateCredentials(username,hash);
+                            //responseString = curObject.getString( "username" );
+                            loginError.setVisibility(View.INVISIBLE);
+                            finish();
+                            startActivity(intent);
                         }
-                        finish();
-                        startActivity(intent);
+                        else
+                            loginError.setVisibility(View.VISIBLE);
                     }
                     catch(JSONException | IOException e )
                     {
                         Log.e( "Database", e.getMessage(), e );
+                        loginError.setVisibility(View.VISIBLE);
                     }
                 },
 

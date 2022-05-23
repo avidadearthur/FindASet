@@ -18,20 +18,25 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import be.kuleuven.findaset.R;
 
 public class RegisterActivity extends AppCompatActivity {
-    private TextView usernameRegister;
+    private TextView registerError;
     private RequestQueue requestQueue;
     private String baseURL = "https://studev.groept.be/api/a21pt113/";
+    //https://studev.groept.be/api/a21pt113/userNameExisted/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        registerError = findViewById(R.id.failureRegister);
+        registerError.setVisibility(View.INVISIBLE);
     }
 
     // TODO after register successfully, return to login page
@@ -45,14 +50,15 @@ public class RegisterActivity extends AppCompatActivity {
         String passConfirm = registeredConfirmPassword.getText().toString();
 
         // check if any of the fields are empty
-        if(pass.equals(passConfirm)){
+        if(username.equals("") || pass.equals(passConfirm)){
             String hash = get_SHA_1_SecurePassword(pass);
+            String queryURL = baseURL + "userNameExisted/" + username;
             String requestURL = baseURL + "register" + "/" + username + "/" + hash;
+            Boolean nameExisted = false;
 
             requestQueue = Volley.newRequestQueue( this );
 
-            StringRequest submitRequest = new StringRequest(Request.Method.GET, requestURL,
-
+            StringRequest registerRequest = new StringRequest(Request.Method.GET, requestURL,
                     response -> {
                         try {
                             JSONArray responseArray = new JSONArray(response);
@@ -62,23 +68,53 @@ public class RegisterActivity extends AppCompatActivity {
                                 JSONObject curObject = responseArray.getJSONObject( i );
                                 Log.e( "Database", responseString);
                             }
-
+                            registerError.setVisibility(View.INVISIBLE);
+                            finish();
                         }
                         catch( JSONException e )
                         {
                             Log.e( "Database", e.getMessage(), e );
+                            registerError.setText(getString(R.string.error_database));
+                            registerError.setVisibility(View.VISIBLE);
                         }
                     },
+                    error -> {
+                        JSONException e = null;
+                        Log.e( "Database", e.getMessage(), e );
+                        registerError.setText(getString(R.string.error_database));
+                        registerError.setVisibility(View.VISIBLE);
+                    }
+            );
 
+            StringRequest submitRequest = new StringRequest(Request.Method.GET, requestURL,
+                    response -> {
+                        try {
+                            JSONArray responseArray = new JSONArray(response);
+
+                            if (responseArray.getJSONObject(0) == null) {
+                                requestQueue.add(registerRequest);
+                            }
+                            else {
+                                registerError.setText(getString(R.string.register_name_existed));
+                                registerError.setVisibility(View.VISIBLE);
+                            }
+                        }
+                        catch(JSONException e )
+                        {
+                            Log.e( "Database", e.getMessage(), e );
+                        }
+                    },
                     error -> {
                         JSONException e = null;
                         Log.e( "Database", e.getMessage(), e );
                     }
             );
+
             requestQueue.add(submitRequest);
         }
         else {
             // display error message
+            registerError.setVisibility(View.VISIBLE);
         }
     }
 

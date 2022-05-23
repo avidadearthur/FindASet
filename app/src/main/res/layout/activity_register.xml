@@ -29,6 +29,7 @@
             android:id="@+id/etUsername"
             style="@style/EditTextStyleRound"
             android:layout_marginTop="@dimen/spacing_large"
+            android:fontFamily="@font/poppins_medium"
             android:hint="@string/hint_username"
             android:maxLength="12"
             android:textColorHint="@color/metal_grey"
@@ -37,6 +38,7 @@
         <EditText
             android:id="@+id/etPassword"
             style="@style/EditTextStyleRound"
+            android:fontFamily="@font/poppins_medium"
             android:hint="@string/hint_password"
             android:inputType="textPassword"
             android:maxLength="12"
@@ -46,11 +48,24 @@
         <EditText
             android:id="@+id/etConfirmPassword"
             style="@style/EditTextStyleRound"
-            android:layout_marginBottom="@dimen/spacing_xlarge"
+            android:fontFamily="@font/poppins_medium"
             android:hint="@string/hint_confirm_password"
             android:inputType="textPassword"
             android:maxLength="12"
             android:textColorHint="@color/metal_grey"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/failureRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_xxxlarge"
+            android:layout_marginEnd="@dimen/spacing_xxxlarge"
+            android:layout_marginBottom="@dimen/spacing_middle"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/register_error"
+            android:textColor="@color/light_red"
+            android:textSize="@dimen/font_size_medium"
             android:textStyle="bold" />
 
         <com.google.android.material.button.MaterialButton
@@ -59,6 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/poppins_bold"
             android:onClick="onBtnRegister_Clicked"
             android:paddingStart="@dimen/spacing_xlarge"
             android:paddingEnd="@dimen/spacing_xlarge"
