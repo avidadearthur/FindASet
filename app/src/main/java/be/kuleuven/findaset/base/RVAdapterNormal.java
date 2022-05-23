@@ -1,6 +1,7 @@
 package be.kuleuven.findaset.base;
 
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,9 +39,11 @@ public class RVAdapterNormal extends RecyclerView.Adapter<RVAdapterNormal.ViewHo
 
         String ranking = userRankings[position];
         if (ranking.equals("1") || ranking.equals("2") || ranking.equals("3")) {
-            viewHolder.layoutBoard.setBackgroundColor(Color.rgb(140, 188, 255));
+            //viewHolder.layoutBoard.setBackgroundColor(Color.rgb(140, 188, 255));
+            viewHolder.layoutBoard.setBackground(viewHolder.bg_blue);
         } else {
-            viewHolder.layoutBoard.setBackgroundColor(Color.TRANSPARENT);
+            //viewHolder.layoutBoard.setBackgroundColor(Color.TRANSPARENT);
+            viewHolder.layoutBoard.setBackground(viewHolder.bg_white);
         }
     }
 
@@ -54,6 +57,7 @@ public class RVAdapterNormal extends RecyclerView.Adapter<RVAdapterNormal.ViewHo
         TextView tvTimes;
         TextView tvRanking;
         ConstraintLayout layoutBoard;
+        Drawable bg_white, bg_blue;
 
         public ViewHolder(View view) {
             super(view);
@@ -61,6 +65,8 @@ public class RVAdapterNormal extends RecyclerView.Adapter<RVAdapterNormal.ViewHo
             tvTimes = (TextView) view.findViewById(R.id.tvTimes);
             tvRanking = (TextView) view.findViewById(R.id.tvRanking);
             layoutBoard = (ConstraintLayout) view.findViewById(R.id.rlContent);
+            bg_white = view.getContext().getDrawable(R.drawable.imageview_shadow);
+            bg_blue = view.getContext().getDrawable(R.drawable.imageview_shadow_blue);
         }
     }
 }

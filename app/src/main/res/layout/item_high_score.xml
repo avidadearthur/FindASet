@@ -29,6 +29,7 @@
             android:id="@+id/tvMode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
             android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/font_size_large"
             android:textStyle="bold"
@@ -39,6 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_control_half"
+            android:fontFamily="@font/poppins_regular"
             android:textColor="#3949AB"
             android:textSize="@dimen/font_size_normal"
             tools:text="1'30''" />
@@ -47,6 +49,7 @@
             android:id="@+id/tvDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
             android:textColor="#3949AB"
             android:textSize="@dimen/font_size_normal"
             app:layout_constraintTop_toTopOf="@id/tvHigScore"

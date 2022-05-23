@@ -26,6 +26,7 @@
     <color name="layout_background">#F6F7FA</color>
     <color name="green">#18CF18</color>
     <color name="light_green">#4EE668</color>
+    <color name="light_blue">#8CBCFF</color>
     <color name="light_pink">#FC66E4</color>
     <color name="light_red">#FD6C7C</color>
     <color name="yellow">#FBC02D</color>
