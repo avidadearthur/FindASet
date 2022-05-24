@@ -82,7 +82,7 @@ public class LeaderBoardActivity extends AppCompatActivity {
         //recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         // TODO - bind data from credentials to ranking
-        data = new String[2][2];
+        data = new String[2][3];
         try {
             readCredentials();
         } catch (IOException e) {
@@ -90,8 +90,8 @@ public class LeaderBoardActivity extends AppCompatActivity {
         }
 
         modes = new String[]{"Find All", "Find Ten"};
-        scores = new String[]{"1'30", "0'30"};
-        dates = new String[]{"22 May 2022", "21 May 2022"};
+        scores = new String[]{data[0][0], data[1][0]};
+        dates = new String[]{data[0][2], data[1][2]};
         rankingsHighScore = new String[]{"1", "2"};
         highScoreAdapter = new RVAdapterHighScore(modes, scores, dates, rankingsHighScore);
     }
@@ -108,8 +108,25 @@ public class LeaderBoardActivity extends AppCompatActivity {
             JSONArray session = object.getJSONArray("session");
             String username = session.getJSONObject(0).getString("username");
             if(username.equals(" ")){
+                JSONArray device = object.getJSONArray("device");
 
+                JSONArray findAllScore = device.getJSONObject(0).getJSONArray("FindAllScore");
+                String timeAll = findAllScore.getString(0);
+                String hintNumAll = findAllScore.getString(1);
+                String dateAll = findAllScore.getString(2);
 
+                data[0][0] = timeAll;
+                data[0][1] = hintNumAll;
+                data[0][2] = dateAll;
+
+                JSONArray findTenScore = device.getJSONObject(0).getJSONArray("FindTenScore");
+                String timeTen = findTenScore.getString(0);
+                String hintNumTen = findTenScore.getString(1);
+                String dateTen = findTenScore.getString(2);
+
+                data[1][0] = timeTen;
+                data[1][1] = hintNumTen;
+                data[1][2] = dateTen;
             }
             else {
                 getRankingsLoggedUser(username);
