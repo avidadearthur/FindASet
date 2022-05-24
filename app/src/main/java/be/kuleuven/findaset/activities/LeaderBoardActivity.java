@@ -121,7 +121,7 @@ public class LeaderBoardActivity extends AppCompatActivity {
                 JSONArray findTenScore = device.getJSONObject(0).getJSONArray("FindTenScore");
                 String timeTen = findTenScore.getString(0);
                 String hintNumTen = findTenScore.getString(1);
-                String dateTen = findAllScore.getString(2);
+                String dateTen = findTenScore.getString(2);
 
                 data[1][0] = timeTen;
                 data[1][1] = hintNumTen;
