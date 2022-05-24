@@ -11,12 +11,12 @@ Project done for the class of Programming techniques @ Group T - Faculty of Engi
 
 Set (stylized as SET) is a real-time card game designed by Marsha Falco in 1974 and published by Set Enterprises in 1991. 
 The deck consists of 81 unique cards that vary in four features across three possibilities for each kind of feature: number of shapes (one, two, or three),
-shape (diamond, squiggle, oval), shading (solid, striped, or open), and color (red, green, or purple).[1](https://en.wikipedia.org/wiki/Set_(card_game))
+shape (diamond, squiggle, oval), shading (solid, striped, or open), and color (red, green, or purple).[[1]](https://en.wikipedia.org/wiki/Set_(card_game))
 
 In the game, certain combinations of three cards are said to make up a set. For each one of the four categories of features — 
 color, number, shape, and shading — the three cards must display that feature as either a) all the same, or b) all different. 
 Put another way: the number of features that are all the same and the number of features that are all different may break down as 0 the same + 4 different;
-or 1 the same + 3 different; or 2 the same + 2 different; or 3 the same + 1 different.[1](https://en.wikipedia.org/wiki/Set_(card_game))
+or 1 the same + 3 different; or 2 the same + 2 different; or 3 the same + 1 different.[[1]](https://en.wikipedia.org/wiki/Set_(card_game))
 
 The aim of our project is to create an Android app implementation of Set game.
 
