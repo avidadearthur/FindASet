@@ -297,7 +297,7 @@
         android:onClick="onClick_continueLearningMode"
         android:text="@string/main_continue"
         android:textColor="@color/textColorPrimary"
-        android:textSize="@dimen/font_size_medium"
+        android:textSize="@dimen/font_size_large"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toTopOf="@+id/guidelineBottom"
         app:layout_constraintEnd_toEndOf="parent"
@@ -336,7 +336,7 @@
         <TextView
             android:id="@+id/foundedCards"
             style="@style/HeadingBig"
-            android:layout_width="wrap_content"
+            android:layout_width="46dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center|center_horizontal|center_vertical"
             android:layout_marginEnd="140dp"
