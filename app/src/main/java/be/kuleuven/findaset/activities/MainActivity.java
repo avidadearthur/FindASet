@@ -29,8 +29,10 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 import be.kuleuven.findaset.R;
 import be.kuleuven.findaset.model.FindAll;
@@ -733,5 +735,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         learningContinue.setVisibility(View.INVISIBLE);
         refreshBtn.setEnabled(true);
         hintBtn.setEnabled(true);
+    }
+
+    /**
+     * Generate all ids for 81 cards.
+     */
+    public ArrayList<Integer> notifyAllCardsIds() throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("cards")));
+        ArrayList<Integer> allIds = new ArrayList(81);
+        for (int i = 0; i < 81; i++) {
+            allIds.add(Integer.parseInt(reader.readLine()));
+        }
+        return allIds;
     }
 }
