@@ -336,7 +336,7 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
                         firstSetOnPage.set(1,setCandidates.get(1));
                         firstSetOnPage.set(2,setCandidates.get(2));
                         setExisted = true;
-                        break;
+                        //break;
                     }
                 }
         }

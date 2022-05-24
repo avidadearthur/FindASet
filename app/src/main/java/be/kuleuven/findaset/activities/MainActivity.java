@@ -211,6 +211,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void onClick_refreshBtn (View caller) {
+        hintBtn.setEnabled(true);
         for (int i = 0; i < gameModel.getSelectedCardsIndex().size(); i++) {
             gameModel.unselect(gameModel.getSelectedCardsIndex().get(i));
         }
@@ -275,15 +276,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int index = Arrays.asList(cardImages).indexOf(clickedView);
         gameModel.toggle(index);
     }
-
-    public void refreshBtn_Clicked(View caller) {
-        for (int i = 0; i < gameModel.getSelectedCardsIndex().size(); i++) {
-            gameModel.unselect(gameModel.getSelectedCardsIndex().get(i));
-        }
-        gameModel.startNewGame();
-        notifyStartStopWatch();
-    }
-
 
     /**
      * If there is no green border, add one.
