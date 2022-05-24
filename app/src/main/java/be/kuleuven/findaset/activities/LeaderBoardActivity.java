@@ -137,6 +137,37 @@ public class LeaderBoardActivity extends AppCompatActivity {
     }
 
     private void getRankingsLoggedUser(String username) {
+        String allSetsUrl = baseURL + "boardFindAll";
+        JsonArrayRequest rankingRequestAll = new JsonArrayRequest(Request.Method.GET, allSetsUrl, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                namesAll = new String[response.length()];
+                hintsAll = new String[response.length()];
+                timesAll = new String[response.length()];
+                rankingsAll = new String[response.length()];
+                for (int i=0; i<response.length(); i++) {
+                    JSONObject o = null;
+                    try {
+                        o = response.getJSONObject(i);
+                        namesAll[i] = (String) o.get("username");
+                        hintsAll[i] = (String) o.get("hintsAllSets");
+                        timesAll[i] = (String) o.get("allSetsRecord");
+                        rankingsAll[i] = (String) o.get("rankingAll");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                allAdapter = new RVAdapterNormal(namesAll, hintsAll, timesAll, rankingsAll);
+                recyclerView.setAdapter(allAdapter);
+                rvSetAnimation();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Database", "onErrorResponse: " + error);
+            }
+        });
+        requestQueue.add(rankingRequestAll);
     }
 
     private void getRankingsLoggedUser() {
@@ -178,7 +209,7 @@ public class LeaderBoardActivity extends AppCompatActivity {
                         namesAll[i] = (String) o.get("username");
                         hintsAll[i] = (String) o.get("hintsAllSets");
                         timesAll[i] = (String) o.get("allSetsRecord");
-                        rankingsAll[i] = String.valueOf(i+1);
+                        rankingsAll[i] = (String) o.get("rankingAll");
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -212,7 +243,7 @@ public class LeaderBoardActivity extends AppCompatActivity {
                         namesTen[i] = (String) o.get("username");
                         hintsTen[i] = (String) o.get("hintsTenSets");
                         timesTen[i] = (String) o.get("tenSetsRecord");
-                        rankingsTen[i] = String.valueOf(i+1);
+                        rankingsTen[i] = (String) o.get("rankingTen");
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
