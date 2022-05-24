@@ -14,11 +14,13 @@ import be.kuleuven.findaset.R;
 
 public class RVAdapterNormal extends RecyclerView.Adapter<RVAdapterNormal.ViewHolder> {
     private String[] userNames;
+    private String[] userHints;
     private String[] userTimes;
     private String[] userRankings;
 
-    public RVAdapterNormal(String[] userNames, String[] userTimes, String[] userRankings) {
+    public RVAdapterNormal(String[] userNames, String[] userHints, String[] userTimes, String[] userRankings) {
         this.userNames = userNames;
+        this.userHints = userHints;
         this.userTimes = userTimes;
         this.userRankings = userRankings;
     }
@@ -34,7 +36,8 @@ public class RVAdapterNormal extends RecyclerView.Adapter<RVAdapterNormal.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         viewHolder.tvUserName.setText(userNames[position]);
-        viewHolder.tvTimes.setText(userTimes[position]);
+        viewHolder.tvHints.setText("Hints:" + userHints[position]);
+        viewHolder.tvTimes.setText("Times:" + userTimes[position]);
         viewHolder.tvRanking.setText(userRankings[position]);
 
         String ranking = userRankings[position];
@@ -54,6 +57,7 @@ public class RVAdapterNormal extends RecyclerView.Adapter<RVAdapterNormal.ViewHo
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvUserName;
+        TextView tvHints;
         TextView tvTimes;
         TextView tvRanking;
         ConstraintLayout layoutBoard;
@@ -62,6 +66,7 @@ public class RVAdapterNormal extends RecyclerView.Adapter<RVAdapterNormal.ViewHo
         public ViewHolder(View view) {
             super(view);
             tvUserName = (TextView) view.findViewById(R.id.tvUserName);
+            tvHints = (TextView) view.findViewById(R.id.tvHints);
             tvTimes = (TextView) view.findViewById(R.id.tvTimes);
             tvRanking = (TextView) view.findViewById(R.id.tvRanking);
             layoutBoard = (ConstraintLayout) view.findViewById(R.id.rlContent);
