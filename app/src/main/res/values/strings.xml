@@ -50,7 +50,7 @@
     <!--    TODO THINGS TO WRITE END-->
     <string name="welcome_login_underlined"><u>Login</u></string>
     <string name="welcome_logout"><u>Log out</u></string>
-    <string name="welcome_heading">Welcome</string>
+    <string name="welcome_heading">FIND A SET</string>
     <string name="dialog_FindAll_title">Title</string>
     <string name="dialog_FindAll_summary">Summary</string>
 </resources>

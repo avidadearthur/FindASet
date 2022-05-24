@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/block"
         android:layout_width="400dp"
-        android:layout_height="200dp"
+        android:layout_height="250dp"
         android:background="@drawable/dialog_custom_borders"
         android:orientation="vertical"
         android:paddingStart="16dp"

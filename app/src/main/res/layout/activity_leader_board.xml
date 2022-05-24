@@ -116,14 +116,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvBoard"
         android:layout_width="match_parent"
-        android:layout_height="574dp"
+        android:layout_height="match_parent"
         android:clipToPadding="false"
         android:overScrollMode="never"
         android:paddingStart="@dimen/spacing_middle"
         android:paddingTop="@dimen/spacing_standard_new"
         android:paddingEnd="@dimen/spacing_middle"
-        android:paddingBottom="@dimen/spacing_standard_new"
-        >
+        android:paddingBottom="@dimen/spacing_standard_new">
 
     </androidx.recyclerview.widget.RecyclerView>
 

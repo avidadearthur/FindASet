@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -77,15 +78,12 @@ public class LeaderBoardActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.rvBoard);
         requestQueue = Volley.newRequestQueue( this );
 
-        getRankingsAll();
-        getRankingsTen();
         recyclerView = findViewById(R.id.rvBoard);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        //recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        //recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
-        // TODO - bind data from credentials to ranking
+        getRankingsAll();
+        getRankingsTen();
+
         data = new String[2][3];
         rankingsHighScore = new String[2];
         try {
@@ -93,8 +91,6 @@ public class LeaderBoardActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
     private void readCredentials() throws IOException {
@@ -302,6 +298,8 @@ public class LeaderBoardActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(allAdapter);
         rvSetAnimation();
+
+
     }
 
     public void onClick_Ten(View caller) {
