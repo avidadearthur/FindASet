@@ -52,12 +52,14 @@ public class LeaderBoardActivity extends AppCompatActivity {
     private String[] timesTen;
     private String[] rankingsTen;
     private String[] modes;
+    private String[] hints;
     private String[] scores;
     private String [] dates;
     private String [] rankingsHighScore;
     private RequestQueue requestQueue;
     private String baseURL = "https://studev.groept.be/api/a21pt113/";
     private String [][] data;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,8 +83,9 @@ public class LeaderBoardActivity extends AppCompatActivity {
 
         // TODO - bind data from credentials to ranking
         data = new String[2][3];
+        boolean offline = false;
         try {
-            readCredentials();
+            offline = readCredentials();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -90,12 +93,14 @@ public class LeaderBoardActivity extends AppCompatActivity {
 
         modes = new String[]{"Find All", "Find Ten"};
         scores = new String[]{data[0][0], data[1][0]};
+        hints = new String[]{data[0][1], data[1][1]};
         dates = new String[]{data[0][2], data[1][2]};
         rankingsHighScore = new String[]{"1", "2"};
-        highScoreAdapter = new RVAdapterHighScore(modes, scores, dates, rankingsHighScore);
+        highScoreAdapter = new RVAdapterHighScore(modes,hints, scores, dates, rankingsHighScore, offline);
     }
 
-    private void readCredentials() throws IOException {
+    private Boolean readCredentials() throws IOException {
+        boolean offline = false;
         String s = getFilesDir() + "/" + "credentials";
         //https://stackoverflow.com/questions/33638765/how-to-read-json-data-from-txt-file-in-java
         BufferedReader reader = new BufferedReader(new FileReader(s));
@@ -107,6 +112,8 @@ public class LeaderBoardActivity extends AppCompatActivity {
             JSONArray session = object.getJSONArray("session");
             String username = session.getJSONObject(0).getString("username");
             if(username.equals(" ")){
+                offline = true;
+                
                 JSONArray device = object.getJSONArray("device");
 
                 JSONArray findAllScore = device.getJSONObject(0).getJSONArray("FindAllScore");
@@ -133,6 +140,7 @@ public class LeaderBoardActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        return offline;
     }
 
     private void getRankingsLoggedUser(String username) {
