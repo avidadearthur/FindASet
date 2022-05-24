@@ -2,8 +2,7 @@
 
 Project done for the class of Programming techniques @ Group T - Faculty of Engineering Technology / academic year 2021-22
 
-### Authors
-
+### Authors:
 * [@avidadearthur](https://github.com/avidadearthur)
 * [@SandroLyu65](https://github.com/SandroLyu65)
 
@@ -37,28 +36,24 @@ Add screenshots
 
 An in-depth paragraph about your software structure, android versions supported etc.
 
-### Features
-#### Register and login
+## Features:
+### Register and login
+	Add info about the Register and login 
 
-Add info about the Register and login 
+### Offline vesion
+	Add info about the how the credentials cookie works
 
-##### Offline vesion
+### Online Ranking
+	Add info about the how the online ranking works
 
-Add info about the how the credentials cookie works
-
-#### Online Ranking
-
-Add info about the how the online ranking works
-
-#### Three playing modes
-##### Find Learning
-
+### Three playing modes:
+#### Find Learning
 Add info about the how the learning mode works
 
-##### Find all sets
+#### Find all sets
 Add info about the find 10 mode
 
-##### Find 10 sets
+#### Find 10 sets
 Add info about the find 10 mode
 
 ### Dependencies
