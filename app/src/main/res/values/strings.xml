@@ -33,21 +33,31 @@
     <string name="feature_color">color</string>
     <string name="feature_shading">shading</string>
     <string name="feature_type">type</string>
-    <!--    TODO THINGS TO WRITE START-->
-    <string name="welcome_info_title">Find A Set</string>
-    <string name="welcome_info_content">Introduction of Game</string>
+
+    <string name="welcome_info_title">Can you find a SET?</string>
+    <string name="welcome_info_content">For each one of the four categories of features
+        — color, number, shape, and shading — the three cards must display that feature as either
+        a) all the same, or b) all different.</string>
     <string name="main_more_findAll_title">Find ALL</string>
-    <string name="main_more_findAll_content">Rule of Find ALL</string>
+    <string name="main_more_findAll_content">Try to find all possible sets among the
+        81 cards of the game.
+        \nBe fast and go up on the leaderboard!
+        \n\nPress hint if you need some help.</string>
     <string name="main_more_findTen_title">Find TEN</string>
-    <string name="main_more_findTen_content">Rule of Find TEN</string>
-    <string name="feature_box_explanation_title">Eliminate Grey!!</string>
-    <string name="feature_box_explanation_content">Yellow means this feature is all different for three cards.
-        \nGreen means this feature is all same for three cards.
-        \nAny combinations of yellow and blue can make a set.
-        \nTry it now!!</string>
-    <string name="board_explanation_title">Board</string>
-    <string name="board_explanation_content">Explanation</string>
-    <!--    TODO THINGS TO WRITE END-->
+    <string name="main_more_findTen_content">Do you want a quick game? Find the 10 first sets among
+    the displayed cards.
+        \nBe fast and go up on the leaderboard!
+        \n\nPress hint if you need some help. </string>
+    <string name="feature_box_explanation_title">Learn the game!</string>
+    <string name="feature_box_explanation_content">Click on two cards and watch the features light
+    up:\nYellow = 3rd card should have different feature
+    \nGreen = 3rd card should share that feature
+    \n\nPress hint if you need some help.</string>
+    <string name="board_explanation_title">Leader Board</string>
+    <string name="board_explanation_content">Here you find the ranking of the best players
+        for each mode and your best scores.
+        \n\nLog in to see your position in the ranking.</string>
+
     <string name="welcome_login_underlined"><u>Login</u></string>
     <string name="welcome_logout"><u>Log out</u></string>
     <string name="welcome_heading">FIND A SET</string>
