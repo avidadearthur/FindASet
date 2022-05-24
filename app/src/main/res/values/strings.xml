@@ -33,18 +33,20 @@
     <string name="feature_color">color</string>
     <string name="feature_shading">shading</string>
     <string name="feature_type">type</string>
-    <!--    TODO THINGS TO WRITE START-->
-    <string name="welcome_info_title">Find A Set</string>
-    <string name="welcome_info_content">Introduction of Game</string>
+    <string name="welcome_info_title">Can you find a SET?</string>
+    <string name="welcome_info_content">For each one of the four categories of features
+        — color, number, shape, and shading — the three cards must display that feature as either
+        a) all the same, or b) all different.</string>
     <string name="main_more_findAll_title">Find ALL</string>
-    <string name="main_more_findAll_content">Rule of Find ALL</string>
+    <string name="main_more_findAll_content">Try to find all possible sets among the
+        81 cards of the game. Be fast and go up on the leaderboard!\nPress hint if you need some help.</string>
     <string name="main_more_findTen_title">Find TEN</string>
-    <string name="main_more_findTen_content">Rule of Find TEN</string>
-    <string name="feature_box_explanation_title">Eliminate Grey!!</string>
-    <string name="feature_box_explanation_content">Yellow means this feature is all different for three cards.
-        \nGreen means this feature is all same for three cards.
-        \nAny combinations of yellow and blue can make a set.
-        \nTry it now!!</string>
+    <string name="main_more_findTen_content">Do you want a quick game? Find the 10 first sets among
+    the displayed cards.Be fast and go up on the leaderboard!\nPress hint if you need some help. </string>
+    <string name="feature_box_explanation_title">Learn the game!</string>
+    <string name="feature_box_explanation_content">Click on two cards and watch the features light
+    up:\nYellow = third card should have different feature
+    \nGreen = third card should have share that feature in common</string>
     <string name="board_explanation_title">Board</string>
     <string name="board_explanation_content">Explanation</string>
     <!--    TODO THINGS TO WRITE END-->
