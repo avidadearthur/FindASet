@@ -1,26 +1,32 @@
 # FindASet
 
-Project done for the  class of Programming techniques @ Group T - Faculty of Engineering Technology - academic year 2021-22
+Project done for the class of Programming techniques @ Group T - Faculty of Engineering Technology / academic year 2021-22
+
+### Authors:
+* [@avidadearthur](https://github.com/avidadearthur)
+* [@SandroLyu65](https://github.com/SandroLyu65)
+
+## About the Game
 
 Set (stylized as SET) is a real-time card game designed by Marsha Falco in 1974 and published by Set Enterprises in 1991. 
 The deck consists of 81 unique cards that vary in four features across three possibilities for each kind of feature: number of shapes (one, two, or three),
-shape (diamond, squiggle, oval), shading (solid, striped, or open), and color (red, green, or purple).[1](https://en.wikipedia.org/wiki/Set_(card_game))
+shape (diamond, squiggle, oval), shading (solid, striped, or open), and color (red, green, or purple).[[1]](https://en.wikipedia.org/wiki/Set_(card_game))
 
 In the game, certain combinations of three cards are said to make up a set. For each one of the four categories of features — 
 color, number, shape, and shading — the three cards must display that feature as either a) all the same, or b) all different. 
 Put another way: the number of features that are all the same and the number of features that are all different may break down as 0 the same + 4 different;
-or 1 the same + 3 different; or 2 the same + 2 different; or 3 the same + 1 different.[1](https://en.wikipedia.org/wiki/Set_(card_game))
+or 1 the same + 3 different; or 2 the same + 2 different; or 3 the same + 1 different.[[1]](https://en.wikipedia.org/wiki/Set_(card_game))
 
 The aim of our project is to create an Android app implementation of Set game.
 
 The current version of this app includes:
 
-- Register and login feature that allows users to see their best scores 
-- Ranking with other users scores 
-- Different playing modes:
-		. Learning
-		. Find 10 sets
-		. Find all sets
+* Register and login 
+* Ranking with other users scores 
+* Different playing modes:
+	* Learning
+	* Find 10 sets
+	* Find all sets
     
 ## UI activities
 
@@ -30,26 +36,24 @@ Add screenshots
 
 An in-depth paragraph about your software structure, android versions supported etc.
 
-### Features
-#### Register and login
+## Features:
+### Register and login
+	Add info about the Register and login 
 
-Add info about the Register and login 
+### Offline vesion
+	Add info about the how the credentials cookie works
 
-##### Offline vesion
+### Online Ranking
+	Add info about the how the online ranking works
 
-Add info about the how the credentials cookie works
+### Three playing modes:
+#### Find Learning
+Add info about the how the learning mode works
 
-#### Online Ranking
-
-Add info about the how the online ranking works
-
-#### Three laying modes
-##### Find 10 sets
-
+#### Find all sets
 Add info about the find 10 mode
 
-##### Find all sets
-
+#### Find 10 sets
 Add info about the find 10 mode
 
 ### Dependencies
@@ -67,11 +71,6 @@ Add info about the find 10 mode
 ```
 code blocks for commands
 ```
-
-## Authors
-
-@avidadearthur 
-@SandroLyu65
 
 ## Version History
 
