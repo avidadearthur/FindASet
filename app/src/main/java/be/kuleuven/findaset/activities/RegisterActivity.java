@@ -49,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
         String passConfirm = registeredConfirmPassword.getText().toString();
 
         // check if any of the fields are empty
-        if(!username.equals("") && pass.equals(passConfirm)){
+        if(!username.equals("") && !pass.equals("") && !passConfirm.equals("") && pass.equals(passConfirm)){
             String hash = get_SHA_1_SecurePassword(pass);
             String queryURL = baseURL + "userNameExisted/" + username;
             String requestURL = baseURL + "register" + "/" + username + "/" + hash + "/" + username;
@@ -73,11 +73,11 @@ public class RegisterActivity extends AppCompatActivity {
                         catch( JSONException e )
                         {
                             Log.e( "Database", e.getMessage(), e );
+                            registerError.setText(getString(R.string.error_database));
+                            registerError.setVisibility(View.VISIBLE);
                         }
                     },
                     error -> {
-                        JSONException e = null;
-                        Log.e( "Database", e.getMessage(), e );
                         registerError.setText(getString(R.string.error_database));
                         registerError.setVisibility(View.VISIBLE);
                     }
@@ -94,9 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                     },
                     error -> {
-                        JSONException e = null;
-                        Log.e( "Database", e.getMessage(), e );
-                        registerError.setText(getString(R.string.register_name_existed));
+                        registerError.setText(getString(R.string.error_database));
                         registerError.setVisibility(View.VISIBLE);
                     }
             );
@@ -104,7 +102,6 @@ public class RegisterActivity extends AppCompatActivity {
             requestQueue.add(submitRequest);
         }
         else {
-            // display error message
             registerError.setText(R.string.register_error);
             registerError.setVisibility(View.VISIBLE);
         }
@@ -130,7 +127,5 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void onClick_Back(View caller) {
         finish();
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
     }
 }

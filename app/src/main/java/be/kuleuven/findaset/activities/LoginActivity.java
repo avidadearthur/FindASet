@@ -63,7 +63,6 @@ public class LoginActivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         StringRequest submitRequest = new StringRequest(Request.Method.GET, requestURL,
-
                 response -> {
                     try {
                         JSONArray responseArray = new JSONArray(response);
@@ -95,8 +94,6 @@ public class LoginActivity extends AppCompatActivity {
                 },
 
                 error -> {
-                    JSONException e = null;
-                    Log.e( "Database", e.getMessage(), e );
                     loginError.setText(getString(R.string.error_database));
                     loginError.setVisibility(View.VISIBLE);
                 }

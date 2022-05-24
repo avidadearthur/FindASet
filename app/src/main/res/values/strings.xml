@@ -5,7 +5,7 @@
     <string name="register_username">username</string>
     <string name="register_password">password</string>
     <string name="register_confirm_password">password</string>
-    <string name="register_error">Try again!</string>
+    <string name="register_error">Please check your input!</string>
     <string name="register_name_existed">User name existed!</string>
     <string name="back">back</string>
     <string name="main_refresh">RESTART</string>
@@ -20,7 +20,7 @@
     <string name="login_enter">Enter</string>
     <string name="login_don_t_joined_yet">Don\'t Joined Yet !</string>
     <string name="login_error">The username doesn\'t exist or password is wrong!</string>
-    <string name="error_database">There is error connecting to database.</string>
+    <string name="error_database">Can\'t connect to database.</string>
     <string name="helloNote">Hello Username! </string>
     <string name="login_join">Join</string>
     <string name="board_leader_board">Leader Board</string>
