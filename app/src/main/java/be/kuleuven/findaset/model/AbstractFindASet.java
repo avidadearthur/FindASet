@@ -8,7 +8,6 @@ import be.kuleuven.findaset.activities.MainActivity;
 
 public abstract class AbstractFindASet implements InterfaceFindASet {
     protected ArrayList<Integer> cardsIdTable;
-    protected int[] justForTest;
     protected ArrayList<Integer> selectedCardsIndex;
     protected ArrayList<Boolean> isCardSelected;
     protected ArrayList<Integer> foundedSetCardsIds;
@@ -48,7 +47,6 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
         // init class fields
         this.win = false;
         this.hints = 0;
-        this.justForTest = new int[3];
         this.selectedCardsIndex = new ArrayList<>(3);
         this.foundedSetCardsIds = new ArrayList<>();
 
@@ -73,7 +71,6 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
         for (int i = 0; i < sizeOfCards; i++) {
             cardsIdTable.add(9999);
         }
-        this.justForTest = new int[3]; //JUST for TEST
     }
 
     //////////////////FEATURE MATRIX GENERATION/////////////////////////////////////////
@@ -187,7 +184,6 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
             while (cardsIdTable.get(randomIndex) != 9999);
             cardsIdTable.set(randomIndex, set.get(i));
             firstSetOnPage.set(i,randomIndex);
-            justForTest[i] = randomIndex;
         }
     }
 
@@ -327,7 +323,6 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
         setCandidates.add(99);
         setCandidates.add(99);
         setCandidates.add(99);
-        ArrayList<Integer> testSetMessage = new ArrayList<>(); // JUST for test
         int cardsIdTableSize = cardsIdTable.size();
         boolean setExisted = false;
         for (int i = 0; i < cardsIdTableSize - 2; i++) {
@@ -337,27 +332,14 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
                     setCandidates.set(1, j);
                     setCandidates.set(2, k);
                     if (checkSet(setCandidates)) {
-                        //JUST for test
-                        testSetMessage.add(setCandidates.get(0));
-                        testSetMessage.add(setCandidates.get(1));
-                        testSetMessage.add(setCandidates.get(2));
                         firstSetOnPage.set(0,setCandidates.get(0));
                         firstSetOnPage.set(1,setCandidates.get(1));
                         firstSetOnPage.set(2,setCandidates.get(2));
                         setExisted = true;
-                        //break;
+                        break;
                     }
                 }
         }
-        //JUST for test
-        StringBuilder testMessage = new StringBuilder("Set in this screen: \n");
-        for (int i : testSetMessage) {
-            int j = i + 1;
-            testMessage.append(j).append(" ");
-        }
-        testMessage.append("\n Founded").append(foundedSetCardsIds.size());
-        mainActivity.setTestTxt(testMessage.toString());
-        // Return if there are sets existed in the screen
         return setExisted;
     }
 
@@ -381,7 +363,6 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
             }
             if (selectedCardsIndex.size() == 3) {
                 if (checkSet(selectedCardsIndex)) {
-                    mainActivity.setTestTxt("set Found");
                     mainActivity.notifyDisableHint();
                     updateTable(selectedCardsIndex);
                     selectedCardsIndex.clear();
@@ -428,12 +409,6 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
     @Override
     public ArrayList<Integer> getFirstSetOnPage() {
         return firstSetOnPage;
-    }
-
-    //JUST for TEST
-    @Override
-    public int[] getJustForTest() {
-        return justForTest;
     }
 
     @Override

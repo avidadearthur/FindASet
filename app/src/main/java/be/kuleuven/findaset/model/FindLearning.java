@@ -13,7 +13,6 @@ public class FindLearning extends AbstractFindASet implements InterfaceFindASet{
         // init class fields
         this.win = false;
         this.hints = 0;
-        this.justForTest = new int[3];
         this.selectedCardsIndex = new ArrayList<>(3);
         this.foundedSetCardsIds = new ArrayList<>();
 
@@ -50,10 +49,8 @@ public class FindLearning extends AbstractFindASet implements InterfaceFindASet{
             }
             // display last 9 cards
             initializeTable(9);
-            justForTest = new int[3];
             setCardsTable(9);
             mainActivity.notifyNewGame(9);
-
             // If there's no set remaining in the 9 cards the player wins the game
             if (!checkAllSetOnPage()) {
                 win = true;
@@ -64,12 +61,9 @@ public class FindLearning extends AbstractFindASet implements InterfaceFindASet{
             for (int k = 6; k < 9; k++) {
                 mainActivity.notifyUnavailable(k);
             }
-
             initializeTable(6);
-            justForTest = new int[3];
             setCardsTable(6);
             mainActivity.notifyNewGame(6);
-
             // If there's no set remaining in the 6 cards the player wins the game
             if (!checkAllSetOnPage()) {
                 win = true;
@@ -116,7 +110,6 @@ public class FindLearning extends AbstractFindASet implements InterfaceFindASet{
             }
             if (selectedCardsIndex.size() == 3) {
                 if (checkSet(selectedCardsIndex)) {
-                    mainActivity.setTestTxt("set Found");
                     mainActivity.notifyDisableHint();
                     mainActivity.notifyLearningModeFindASet();
                 }

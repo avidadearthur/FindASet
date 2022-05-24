@@ -174,21 +174,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/testTextWelcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="194dp"
-        android:layout_marginBottom="315dp"
-        android:text="TextView"
-        android:textColor="#0C0C0C"
-        app:layout_constraintBottom_toBottomOf="@+id/imgWalk"
-        app:layout_constraintEnd_toEndOf="@+id/imgWalk"
-        app:layout_constraintStart_toStartOf="@+id/imgWalk"
-        app:layout_constraintTop_toTopOf="@+id/imgWalk" />
-
     <ImageView
         android:id="@+id/ivInfo"
         android:layout_width="36dp"

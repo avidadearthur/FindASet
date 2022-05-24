@@ -39,7 +39,6 @@ public class RegisterActivity extends AppCompatActivity {
         registerError.setVisibility(View.INVISIBLE);
     }
 
-    // TODO after register successfully, return to login page
     public void onBtnRegister_Clicked(View caller) throws NoSuchAlgorithmException {
         EditText registeredUsername = (EditText) findViewById(R.id.etUsername);
         EditText registeredPassword = (EditText) findViewById(R.id.etPassword);

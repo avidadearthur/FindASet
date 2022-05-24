@@ -44,8 +44,5 @@ public interface InterfaceFindASet {
 
     ArrayList<Integer> getFirstSetOnPage();
 
-    //JUST for TEST
-    int[] getJustForTest();
-
     int getHints();
 }

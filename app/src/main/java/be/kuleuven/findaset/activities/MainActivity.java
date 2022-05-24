@@ -52,9 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             R.drawable.tilde1paars, R.drawable.tilde2paars, R.drawable.tilde3paars};
     private InterfaceFindASet gameModel;
     private ImageView[] cardImages;
-    private TextView[] cardTexts;
     private Button[] featureBoxes;
-    private TextView testTxt;
     private TextView learningContinue;
     private TextView foundedNumber;
     private Chronometer stopWatch;
@@ -84,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         stopWatch = findViewById(R.id.stopWatch);
 
         foundedNumber = findViewById(R.id.foundedCards);
-        testTxt = findViewById(R.id.testTxt);
         learningContinue = findViewById(R.id.tvLearningModeContinue);
         learningContinue.setVisibility(View.INVISIBLE);
         refreshBtn = findViewById(R.id.refreshBtn);
@@ -104,20 +101,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cardImages[10] = findViewById(R.id.card11);
         cardImages[11] = findViewById(R.id.card12);
 
-        cardTexts = new TextView[12];
-        cardTexts[0] = findViewById(R.id.card1Text);
-        cardTexts[1] = findViewById(R.id.card2Text);
-        cardTexts[2] = findViewById(R.id.card3Text);
-        cardTexts[3] = findViewById(R.id.card4Text);
-        cardTexts[4] = findViewById(R.id.card5Text);
-        cardTexts[5] = findViewById(R.id.card6Text);
-        cardTexts[6] = findViewById(R.id.card7Text);
-        cardTexts[7] = findViewById(R.id.card8Text);
-        cardTexts[8] = findViewById(R.id.card9Text);
-        cardTexts[9] = findViewById(R.id.card10Text);
-        cardTexts[10] = findViewById(R.id.card11Text);
-        cardTexts[11] = findViewById(R.id.card12Text);
-
         featureBoxes = new Button[4];
         featureBoxes[0] = findViewById(R.id.sizeBtn);
         featureBoxes[1] = findViewById(R.id.colorBtn);
@@ -126,7 +109,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         for (int i = 0; i < 12; i++) {
             cardImages[i].setOnClickListener(this);
-            //cardImages[i].setBackgroundColor(getColor(R.color.transparent));
             cardImages[i].setBackground(getDrawable(R.drawable.imageview_shadow));
         }
 
@@ -177,7 +159,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             dialogTitleStr = getString(R.string.feature_box_explanation_title);
             dialogContentStr = getString(R.string.feature_box_explanation_content);
             stopWatch.setVisibility(View.INVISIBLE);
-            //TODO IN learning mode, wining not display or push time
         }
 
         setGameModel(findASet);
@@ -206,7 +187,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private String getUsername() throws IOException {
         String s = getFilesDir() + "/" + "credentials";
-        //https://stackoverflow.com/questions/33638765/how-to-read-json-data-from-txt-file-in-java
         BufferedReader reader = new BufferedReader(new FileReader(s));
         String json = "";
         String username = "";
@@ -262,12 +242,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             cardImages[i].setVisibility(View.VISIBLE);
             notifyCard(i);
         }
-        //JUST for TEST
-        String str = "SET cards position: "
-                + (gameModel.getJustForTest()[0] + 1) + " "
-                + (gameModel.getJustForTest()[1] + 1) + " "
-                + (gameModel.getJustForTest()[2] + 1) + " ";
-        testTxt.setText(str);
     }
 
     public void notifyStartStopWatch() {
@@ -280,13 +254,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * Display images of one card according to index.
      * 1. Gets the cards created on init
      * 2. Creates Image bitmap based on the card images
-     * 3.Set card text for test
      */
     public void notifyCard(int index) {
         int nextCardId = gameModel.getCardsIdTable().get(index);
         cardImages[index].setImageBitmap(combineImageIntoOne(setBitmaps(nextCardId)));
         //cardTexts[index].setText(nextCard.toString());
-        cardTexts[index].setText("");
     }
 
     /**
@@ -364,11 +336,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cardImages[index].setEnabled(false);
     }
 
-    public void setTestTxt(String str) {
-
-        testTxt.setText(str);
-    }
-
     /**
      * Retrieves the shape
      * cardPicturesIds[] is an array that stores all Ids of basic components drawables.
@@ -385,10 +352,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int shading = (card%100)/10 - 1;
         int shape = card%10 - 1;
         int index = shape * 9 + color * 3 + shading;
-        Bitmap test = BitmapFactory.decodeResource(getResources(), cardPicturesIds[index]);
+        Bitmap component = BitmapFactory.decodeResource(getResources(), cardPicturesIds[index]);
         ArrayList<Bitmap> newBitMap = new ArrayList<>();
         for (int i = 0; i < card/1000; i++) {
-            newBitMap.add(test);
+            newBitMap.add(component);
         }
         return newBitMap;
     }
@@ -434,12 +401,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         stopWatch.stop();
         if (mode != 3){
             long elapsedMillis = SystemClock.elapsedRealtime() - stopWatch.getBase();
-
             long minutes = (elapsedMillis / 1000)  / 60;
             int seconds = (int)((elapsedMillis / 1000) % 60);
             String winMessage = "You won!! Elapsed time" + Long.toString(minutes) + "'" + Integer.toString(seconds) + "''";
-            setTestTxt(winMessage);
-
 
             int highScoreTime = highscore[0];
             int highScoreHints = highscore[1];
@@ -480,7 +444,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setNewHighscore(int highScoreTime, int highScoreHints) throws IOException {
         if(isLogged()){
-            // TODO - update query doesn't work for first time user
             String baseURL = "https://studev.groept.be/api/a21pt113/";
             String requestURL = null;
 
@@ -569,8 +532,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         catch (JSONException e) {
             e.printStackTrace();
         }
-        // testing register and login
-        txtInfo.setText(username +" "+ Integer.toString(highscore[0]) +" "+ Integer.toString(highscore[1]));
+        txtInfo.setText(username);
 
     }
 
@@ -589,28 +551,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             JSONObject object = new JSONObject(json);
             JSONArray device = object.getJSONArray("device");
             JSONArray newArray = new JSONArray();
-
             if(mode == 1){
-                //TODO - Add current date to record instead of hardcoded date
                 newArray.put(highScoreTime);
                 newArray.put(highScoreHints);
                 newArray.put("2022-01-01");
-
                 device.getJSONObject(0).put("FindAllScore", newArray);
-
                 writeCredentials(object);
             }
             else if (mode == 2){
-
                 newArray.put(highScoreTime);
                 newArray.put(highScoreHints);
                 newArray.put("2022-01-01");
-
                 device.getJSONObject(0).put("FindTenScore", newArray);
-
                 writeCredentials(object);
             }
-
         }
         catch (JSONException e) {
             e.printStackTrace();
@@ -672,8 +626,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 highscore[1] = Integer.parseInt(curObject.getString("hintsTenSets"));
                             }
                             // testing register and login
-                            txtInfo.setText(username + Integer.toString(highscore[0]) + Integer.toString(highscore[1]));
-
+                            txtInfo.setText(username);
                         }
                         catch(JSONException e )
                         {

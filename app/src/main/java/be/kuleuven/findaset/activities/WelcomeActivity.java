@@ -121,11 +121,6 @@ public class WelcomeActivity extends AppCompatActivity {
         output.close();
     }
 
-    private void setTest(String str) {
-        TextView testTv = (TextView) findViewById(R.id.testTextWelcome);
-        testTv.setText(str);
-    }
-
     private void updateCredentials(String username, String hash) throws IOException {
         String s = getFilesDir() + "/" + "credentials";
         //https://stackoverflow.com/questions/33638765/how-to-read-json-data-from-txt-file-in-java
@@ -155,7 +150,6 @@ public class WelcomeActivity extends AppCompatActivity {
 
             JSONArray device = object.getJSONArray("device");
             String deviceId = device.getJSONObject(0).getString("thisDevice");
-            setTest(deviceId);
 
             JSONArray session = object.getJSONArray("session");
             String username = session.getJSONObject(0).getString("username");
@@ -225,7 +219,6 @@ public class WelcomeActivity extends AppCompatActivity {
 
     public void onClick_Board(View caller) {
         Intent intent = new Intent(this, LeaderBoardActivity.class);
-        // TODO - put intent to indicate logged in
         startActivity(intent);
     }
 
@@ -243,16 +236,15 @@ public class WelcomeActivity extends AppCompatActivity {
         }
     }
 
-    // TODO refactor to a new class
     private ArrayList<Bitmap> setBitmaps(int card) {
         int color = (card%1000)/100 - 1;
         int shading = (card%100)/10 - 1;
         int shape = card%10 - 1;
         int index = shape * 9 + color * 3 + shading;
-        Bitmap test = BitmapFactory.decodeResource(getResources(), cardPicturesIds[index]);
+        Bitmap component = BitmapFactory.decodeResource(getResources(), cardPicturesIds[index]);
         ArrayList<Bitmap> newBitMap = new ArrayList<>();
         for (int i = 0; i < card/1000; i++) {
-            newBitMap.add(test);
+            newBitMap.add(component);
         }
         return newBitMap;
     }
