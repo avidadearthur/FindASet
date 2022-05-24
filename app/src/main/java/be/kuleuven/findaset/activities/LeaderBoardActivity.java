@@ -1,5 +1,6 @@
 package be.kuleuven.findaset.activities;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.transition.ChangeBounds;
 import android.transition.Fade;
@@ -372,5 +373,20 @@ public class LeaderBoardActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    public void onClick_More(View caller) {
+        showDialog();
+    }
+
+    private void showDialog() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_main);
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_custom_borders);
+        TextView dialogTitle = (TextView) dialog.findViewById(R.id.dialogTitle);
+        dialogTitle.setText(R.string.board_explanation_title);
+        TextView dialogText = (TextView) dialog.findViewById(R.id.dialogText);
+        dialogText.setText(R.string.board_explanation_content);
+        dialog.show();
     }
 }

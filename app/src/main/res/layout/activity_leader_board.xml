@@ -23,6 +23,20 @@
             android:padding="@dimen/_5sdp"
             android:src="@drawable/ic_back"
             tools:ignore="TouchTargetSizeCheck" />
+
+        <ImageView
+            android:id="@+id/ivBack2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/spacing_standard_new"
+            android:layout_marginEnd="@dimen/spacing_standard_new"
+            android:contentDescription="@string/back"
+            android:onClick="onClick_More"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/ic_more"
+            tools:ignore="TouchTargetSizeCheck" />
+
     </RelativeLayout>
 
     <RelativeLayout

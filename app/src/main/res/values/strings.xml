@@ -45,6 +45,8 @@
         \nGreen means this feature is all same for three cards.
         \nAny combinations of yellow and blue can make a set.
         \nTry it now!!</string>
+    <string name="board_explanation_title">Board</string>
+    <string name="board_explanation_content">Explanation</string>
     <!--    TODO THINGS TO WRITE END-->
     <string name="welcome_login_underlined"><u>Login</u></string>
     <string name="welcome_logout"><u>Log out</u></string>
