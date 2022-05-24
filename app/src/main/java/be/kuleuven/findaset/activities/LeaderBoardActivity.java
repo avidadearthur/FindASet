@@ -150,7 +150,7 @@ public class LeaderBoardActivity extends AppCompatActivity {
 
     private String formatTime(String timeAll) {
 
-        int elapsedMillis = Integer.parseInt(timeAll);
+        int elapsedMillis = Integer.valueOf(timeAll);
         int minutes = (elapsedMillis / 1000)  / 60;
         int seconds = (int)((elapsedMillis / 1000) % 60);
 
