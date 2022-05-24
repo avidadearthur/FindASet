@@ -122,7 +122,7 @@ public class LeaderBoardActivity extends AppCompatActivity {
                 String hintNumAll = findAllScore.getString(1);
                 String dateAll = findAllScore.getString(2);
 
-                timeAll = formatTime(timeAll);
+                //timeAll = formatTime(timeAll);
 
                 data[0][0] = "Best Time: " + timeAll;
                 data[0][1] = "Hints Number: " + hintNumAll;
@@ -133,7 +133,7 @@ public class LeaderBoardActivity extends AppCompatActivity {
                 String hintNumTen = findTenScore.getString(1);
                 String dateTen = findTenScore.getString(2);
 
-                timeTen = formatTime(timeTen);
+                //timeTen = formatTime(timeTen);
 
                 data[1][0] = "Best Time: " + timeTen;
                 data[1][1] = "Hints Number: " + hintNumTen;
@@ -223,6 +223,7 @@ public class LeaderBoardActivity extends AppCompatActivity {
                         hintsAll[i] = (String) o.get("hintsAllSets");
                         timesAll[i] = (String) o.get("allSetsRecord");
                         rankingsAll[i] = (String) o.get("rankingAll");
+                        //Log.d("rankingsAll", "onResponse: " + rankingsAll[i]);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
