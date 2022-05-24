@@ -1,6 +1,13 @@
 package be.kuleuven.findaset.model;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -56,17 +63,12 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
     public AbstractFindASet() {
     }
 
-    //TODO - replace by file reading
     protected void generateAllCardsIdsList() {
-        remainingCardsIds = new ArrayList<>(81);
-        for (int size = 1; size < 4; size++) {
-            for (int color = 1; color < 4; color++) {
-                for (int shading = 1; shading < 4; shading++) {
-                    for (int type = 1; type < 4; type++) {
-                        remainingCardsIds.add(size * 1000 + color * 100 + shading * 10 + type);
-                    }
-                }
-            }
+        try {
+            remainingCardsIds = mainActivity.notifyAllCardsIds();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
