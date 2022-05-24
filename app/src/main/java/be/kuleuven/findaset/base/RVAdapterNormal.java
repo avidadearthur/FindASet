@@ -36,8 +36,8 @@ public class RVAdapterNormal extends RecyclerView.Adapter<RVAdapterNormal.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         viewHolder.tvUserName.setText(userNames[position]);
-        viewHolder.tvHints.setText("Hints:" + userHints[position]);
-        viewHolder.tvTimes.setText("Times:" + userTimes[position]);
+        viewHolder.tvHints.setText("Hints Number: " + userHints[position]);
+        viewHolder.tvTimes.setText("Best Time: " + userTimes[position]);
         viewHolder.tvRanking.setText(userRankings[position]);
 
         String ranking = userRankings[position];

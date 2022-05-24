@@ -31,6 +31,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Objects;
 
 import be.kuleuven.findaset.R;
 import be.kuleuven.findaset.base.RVAdapterHighScore;
@@ -85,23 +86,17 @@ public class LeaderBoardActivity extends AppCompatActivity {
 
         // TODO - bind data from credentials to ranking
         data = new String[2][3];
-        boolean offline = false;
+        rankingsHighScore = new String[2];
         try {
-            offline = readCredentials();
+            readCredentials();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        modes = new String[]{"Find All", "Find Ten"};
-        scores = new String[]{data[0][0], data[1][0]};
-        hints = new String[]{data[0][1], data[1][1]};
-        dates = new String[]{data[0][2], data[1][2]};
-        rankingsHighScore = new String[]{"1", "2"};
-        highScoreAdapter = new RVAdapterHighScore(modes,hints, scores, dates, rankingsHighScore, offline);
+
     }
 
-    private Boolean readCredentials() throws IOException {
-        boolean offline = false;
+    private void readCredentials() throws IOException {
         String s = getFilesDir() + "/" + "credentials";
         //https://stackoverflow.com/questions/33638765/how-to-read-json-data-from-txt-file-in-java
         BufferedReader reader = new BufferedReader(new FileReader(s));
@@ -113,8 +108,6 @@ public class LeaderBoardActivity extends AppCompatActivity {
             JSONArray session = object.getJSONArray("session");
             String username = session.getJSONObject(0).getString("username");
             if(username.equals(" ")){
-                offline = true;
-                
                 JSONArray device = object.getJSONArray("device");
 
                 JSONArray findAllScore = device.getJSONObject(0).getJSONArray("FindAllScore");
@@ -122,10 +115,10 @@ public class LeaderBoardActivity extends AppCompatActivity {
                 String hintNumAll = findAllScore.getString(1);
                 String dateAll = findAllScore.getString(2);
 
-                //timeAll = formatTime(timeAll);
+                timeAll = formatTime(timeAll);
 
-                data[0][0] = "Best Time: " + timeAll;
-                data[0][1] = "Hints Number: " + hintNumAll;
+                data[0][0] = timeAll;
+                data[0][1] = hintNumAll;
                 data[0][2] = dateAll;
 
                 JSONArray findTenScore = device.getJSONObject(0).getJSONArray("FindTenScore");
@@ -133,11 +126,19 @@ public class LeaderBoardActivity extends AppCompatActivity {
                 String hintNumTen = findTenScore.getString(1);
                 String dateTen = findTenScore.getString(2);
 
-                //timeTen = formatTime(timeTen);
+                timeTen = formatTime(timeTen);
 
-                data[1][0] = "Best Time: " + timeTen;
-                data[1][1] = "Hints Number: " + hintNumTen;
+                data[1][0] = timeTen;
+                data[1][1] = hintNumTen;
                 data[1][2] = dateTen;
+
+                rankingsHighScore = new String[]{"1","2"};
+
+                modes = new String[]{"Find All", "Find Ten"};
+                scores = new String[]{data[0][0], data[1][0]};
+                hints = new String[]{data[0][1], data[1][1]};
+                dates = new String[]{data[0][2], data[1][2]};
+                highScoreAdapter = new RVAdapterHighScore(modes, hints, scores, dates, rankingsHighScore, true);
             }
             else {
                 getRankingsLoggedUser(username);
@@ -145,31 +146,54 @@ public class LeaderBoardActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return offline;
     }
 
     private String formatTime(String timeAll) {
+        int elapsedMillis;
+        if (timeAll.equals(" ") || timeAll.equals("-1")) {
+            return "";
+        }
+        elapsedMillis = Integer.valueOf(timeAll);
+        int minutes = (elapsedMillis / 1000) / 60;
+        int seconds = (int) ((elapsedMillis / 1000) % 60);
 
-        int elapsedMillis = Integer.valueOf(timeAll);
-        int minutes = (elapsedMillis / 1000)  / 60;
-        int seconds = (int)((elapsedMillis / 1000) % 60);
-
-        return Integer.toString(minutes) + "'" + Integer.toString(seconds)  + "''";
+        return Integer.toString(minutes) + "'" + Integer.toString(seconds) + "''";
     }
 
     private void getRankingsLoggedUser(String username) {
-        String allSetsUrl = baseURL + "highScoreRecord/" + username;
-        JsonArrayRequest rankingRequestAll = new JsonArrayRequest(Request.Method.GET, allSetsUrl, null, new Response.Listener<JSONArray>() {
+        String recordsUrl = baseURL + "highScoreRecord/" + username;
+        JsonArrayRequest recordAll = new JsonArrayRequest(Request.Method.GET, recordsUrl, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {
                     JSONObject o = response.getJSONObject(0);
-                    data[0][0] = (String) o.get("allSetsRecord");
-                    data[1][0] = (String) o.get("tenSetsRecord");
-                    data[0][1] = (String) o.get("hintAllSets");
+
+                    data[0][0] = formatTime(o.getString("allSetsRecord"));
+                    data[1][0] = formatTime(o.getString("tenSetsRecord"));
+                    data[0][1] = (String) o.get("hintsAllSets");
                     data[1][1] = (String) o.get("hintsTenSets");
                     data[0][2] = (String) o.get("dateAllSetsRecord");
                     data[1][2] = (String) o.get("dateTenSetsRecord");
+                    rankingsHighScore[0] = (String) o.get("rankingAll");
+                    rankingsHighScore[1] = (String) o.get("rankingTen");
+                    if (data[0][1].equals("-1")) {
+                        data[0][0] = "";
+                        data[0][1] = "";
+                        data[0][2] = "";
+                        rankingsHighScore[0] = "";
+                    }
+                    if (data[1][1].equals("-1")) {
+                        data[1][0] = "";
+                        data[1][1] = "";
+                        data[1][2] = "";
+                        rankingsHighScore[1] = "";
+                    }
+
+                    modes = new String[]{"Find All", "Find Ten"};
+                    scores = new String[]{data[0][0], data[1][0]};
+                    hints = new String[]{data[0][1], data[1][1]};
+                    dates = new String[]{data[0][2], data[1][2]};
+                    highScoreAdapter = new RVAdapterHighScore(modes, hints, scores, dates, rankingsHighScore, false);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -180,11 +204,7 @@ public class LeaderBoardActivity extends AppCompatActivity {
                 Log.d("Database", "onErrorResponse: " + error);
             }
         });
-        requestQueue.add(rankingRequestAll);
-    }
-
-    private void getRankingsLoggedUser() {
-        // TODO - query to get only user's high score info from DB
+        requestQueue.add(recordAll);
     }
 
     private String getJSONString(BufferedReader reader) throws IOException {
@@ -221,9 +241,8 @@ public class LeaderBoardActivity extends AppCompatActivity {
                         o = response.getJSONObject(i);
                         namesAll[i] = (String) o.get("username");
                         hintsAll[i] = (String) o.get("hintsAllSets");
-                        timesAll[i] = (String) o.get("allSetsRecord");
+                        timesAll[i] = formatTime((String) o.get("allSetsRecord"));
                         rankingsAll[i] = (String) o.get("rankingAll");
-                        //Log.d("rankingsAll", "onResponse: " + rankingsAll[i]);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -256,7 +275,7 @@ public class LeaderBoardActivity extends AppCompatActivity {
                         o = response.getJSONObject(i);
                         namesTen[i] = (String) o.get("username");
                         hintsTen[i] = (String) o.get("hintsTenSets");
-                        timesTen[i] = (String) o.get("tenSetsRecord");
+                        timesTen[i] = formatTime((String) o.get("tenSetsRecord"));
                         rankingsTen[i] = (String) o.get("rankingTen");
                     } catch (JSONException e) {
                         e.printStackTrace();

@@ -38,8 +38,8 @@ public class RVAdapterHighScore extends RecyclerView.Adapter<RVAdapterHighScore.
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         viewHolder.tvMode.setText(modes[position]);
-        viewHolder.tvHints.setText(hints[position]);
-        viewHolder.tvScore.setText(scores[position]);
+        viewHolder.tvHints.setText("Hints Number: " + hints[position]);
+        viewHolder.tvScore.setText("Best Time: " + scores[position]);
         viewHolder.tvDate.setText(dates[position]);
         viewHolder.tvRanking.setText(rankings[position]);
 
