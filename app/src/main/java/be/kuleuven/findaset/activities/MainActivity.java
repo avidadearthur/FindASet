@@ -357,7 +357,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void notifyUnavailable(int index) {
         cardImages[index].setEnabled(false);
-        cardImages[index].setVisibility(View.INVISIBLE);
+        //cardImages[index].setVisibility(View.INVISIBLE);
     }
 
     public void setTestTxt(String str) {
@@ -432,8 +432,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             long minutes = (elapsedMillis / 1000)  / 60;
             int seconds = (int)((elapsedMillis / 1000) % 60);
-            setTestTxt("You won!! Elapsed time" + Long.toString(minutes) + "'" +
-                    Integer.toString(seconds)  + "''");
+            String winMessage = "You won!! Elapsed time" + Long.toString(minutes) + "'" + Integer.toString(seconds) + "''";
+            setTestTxt(winMessage);
+
 
             int highScoreTime = highscore[0];
             int highScoreHints = highscore[1];
@@ -452,8 +453,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     setNewHighscore((int) elapsedMillis, gameModel.getHints());
                 }
             }
+            notifyWinDialog(winMessage);
+        }
+        else {
+            String winMessage = "You found all possible sets in 81 cards";
+            notifyWinDialog(winMessage);
         }
     }
+
+    private void notifyWinDialog(String winMessage) {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_main);
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_custom_borders);
+        TextView dialogTitle = (TextView) dialog.findViewById(R.id.dialogTitle);
+        dialogTitle.setText("Congrats!");
+        TextView dialogText = (TextView) dialog.findViewById(R.id.dialogText);
+        dialogText.setText(winMessage);
+        dialog.show();
+    }
+
 
     private void setNewHighscore(int highScoreTime, int highScoreHints) throws IOException {
         if(isLogged()){
