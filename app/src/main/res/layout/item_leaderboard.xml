@@ -10,7 +10,8 @@
     android:paddingStart="@dimen/spacing_standard_new"
     android:paddingTop="@dimen/spacing_middle"
     android:paddingEnd="@dimen/spacing_standard_new"
-    android:paddingBottom="@dimen/spacing_middle">
+    android:paddingBottom="@dimen/spacing_middle"
+    app:layout_constraintDimensionRatio="1:1">
 
     <LinearLayout
         android:id="@+id/userInfo"
@@ -59,16 +60,18 @@
 
     <TextView
         android:id="@+id/tvRanking"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/bg_circle_stroked"
         android:gravity="center"
+        android:padding="2dp"
         android:textColor="@color/white"
         android:textSize="@dimen/font_size_large"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
