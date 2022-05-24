@@ -4,8 +4,8 @@ Project done for the class of Programming techniques @ Group T - Faculty of Engi
 
 ### Authors
 
-[@avidadearthur](https://github.com/avidadearthur)
-[@SandroLyu65](https://github.com/SandroLyu65)
+* [@avidadearthur](https://github.com/avidadearthur)
+* [@SandroLyu65](https://github.com/SandroLyu65)
 
 ## About the Game
 
@@ -25,9 +25,9 @@ The current version of this app includes:
 * Register and login 
 * Ranking with other users scores 
 * Different playing modes:
-	. Learning
-	. Find 10 sets
-	. Find all sets
+	* Learning
+	* Find 10 sets
+	* Find all sets
     
 ## UI activities
 
