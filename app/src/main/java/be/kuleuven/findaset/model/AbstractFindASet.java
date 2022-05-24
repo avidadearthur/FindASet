@@ -6,6 +6,36 @@ import java.util.Random;
 
 import be.kuleuven.findaset.activities.MainActivity;
 
+/**
+ * Parent class of the set Find All , Find learning and Find Ten game extensions.
+ * It contains the main logic common to all games.
+ *
+ * For description of the methods refer to InterfaceFindASet
+ *
+ * Description of the fields:
+ *
+ *      cardsIdTable - Array of 12 4-digit numbers that represent the
+ *                     features contained on each card currently displayed
+ *
+ *      selectedCardsIndex - Array that keeps track of the index of the cards
+ *                          that are selected.
+ *
+ *      isCardSelected -  Array that keeps track of whether cards are selected
+ *                        or not.
+ *
+ *      foundedSetCardsIds - Array that stores which card Ids have already been
+ *                         found and should not be put on the board again.
+ *
+ *      remainingCardsIds - Array of card Ids that can still be added to the table
+ *
+ *      firstSetOnPage - Stores last set generated (Indexes of the cards) on
+ *                      the table to be used when the user wants a hint.
+ *
+ *      hints - Count of how many hints have been given
+ *
+ *      win - Self-explanatory
+ *
+ */
 public abstract class AbstractFindASet implements InterfaceFindASet {
     protected ArrayList<Integer> cardsIdTable;
     protected ArrayList<Integer> selectedCardsIndex;
@@ -26,6 +56,7 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
     public AbstractFindASet() {
     }
 
+    //TODO - replace by file reading
     protected void generateAllCardsIdsList() {
         remainingCardsIds = new ArrayList<>(81);
         for (int size = 1; size < 4; size++) {
@@ -41,10 +72,8 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
 
     @Override
     public void startNewGame() {
-        //TODO replace by file reading
         generateAllCardsIdsList();
 
-        // init class fields
         this.win = false;
         this.hints = 0;
         this.selectedCardsIndex = new ArrayList<>(3);
@@ -66,31 +95,30 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
     }
 
     @Override
-    public void initializeTable(int sizeOfCards) {
+    public void initializeTable(int numOfCardsOnTable) {
         this.cardsIdTable = new ArrayList<>(12);
-        for (int i = 0; i < sizeOfCards; i++) {
+        for (int i = 0; i < numOfCardsOnTable; i++) {
             cardsIdTable.add(9999);
         }
     }
 
-    //////////////////FEATURE MATRIX GENERATION/////////////////////////////////////////
+    //START OF FEATURE MATRIX GENERATION
     @Override
     public int[][] getFeatureMatrix() {
         Random rd = new Random();
         int[][] featureMatrix = new int[3][4];
         int[] isEqual = new int[4];
-
-        // chooses which column will have equal features
         int sum = 0;
-        chooseEqualFeatures(rd, isEqual, sum);
-        // add numbers based on the Features that should be equal
+
+        chooseEqualFeaturesCol(rd, isEqual, sum);
         addFeatureNumbers(rd, featureMatrix, isEqual);
 
         return featureMatrix;
     }
 
-    private void chooseEqualFeatures(Random rd, int[] isEqual, int sum) {
+    private void chooseEqualFeaturesCol(Random rd, int[] isEqual, int sum) {
         for (int i = 0; i < 4; i++) {
+
             isEqual[i] = rd.nextInt(2);
             sum += isEqual[i];
             if (sum == 4) {
@@ -101,7 +129,7 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
 
     private void addFeatureNumbers(Random rd, int[][] featureMatrix, int[] isEqual) {
         for (int col = 0; col < 4; col++) {
-            // choose feature that will be equal
+
             if (isEqual[col] == 1) getEqualFeatureNumber(rd, featureMatrix, col);
             else {
                 getDifferentFeatureNumber(rd, featureMatrix, col);
@@ -130,10 +158,11 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
             featureMatrix[row][col] = differentFeaturesNumbers.get(row);
         }
     }
-    /////////////////////END OF FEATURE MATRIX GENERATION///////////////////////////////////////
+    //END OF FEATURE MATRIX GENERATION
 
-    //////////////////SET GENERATION///////////////////////////////////////////////////////////
-    private ArrayList<Integer> generateSet() {
+    //START OF SET GENERATION
+    @Override
+    public ArrayList<Integer> generateSet() {
         boolean isFound;
         ArrayList<Integer> set = new ArrayList<>();
 
@@ -155,11 +184,11 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
 
         return set;
     }
-    /////////////////////END OF SET GENERATION///////////////////////////////////////
+    //END OF FEATURE SET GENERATION
 
-    //////////////////SET CARDS TABLE (Find All)////////////////////////////////////
+    //START SET CARDS TABLE (Find All)
     @Override
-    public void setCardsTable(int sizeOfCards) {
+    public void setCardsTable(int numOfCardsOnTable) {
         Random rd = new Random();
 
         if (foundedSetCardsIds.size() <= 69) {
@@ -213,11 +242,9 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
             cardsIdTable.set(randomIndex, remainingCardsIds.get(i));
         }
     }
-    //////////////////END OF SET CARDS TABLE////////////////////////////////////////////////
+    //END SET CARDS TABLE (Find All)
 
-
-
-    //////////////////CHECK FOR SET////////////////////////////////////////////////
+    //START OF CHECK FOR SET
     @Override
     public boolean checkSet(ArrayList<Integer> testedCardsIndex) {
         int[][] featureMatrix = new int[3][4];
@@ -265,9 +292,9 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
         }
         return isSet;
     }
-    //////////////////END OF CHECK FOR SET////////////////////////////////////////////////
+    //END OF CHECK FOR SET
 
-    //////////////////Update Table////////////////////////////////////////////////
+    //START OF UPDATE TABLE
     @Override
     public void updateTable(ArrayList<Integer> selectedCardsIndex) {
         Random rd = new Random();
@@ -298,7 +325,7 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
     private void replace3Cards(Random rd, int selectedIndex) {
         if (foundedSetCardsIds.size() <= 69) {
             int newCardId;
-            //2.
+
             do {
                 int nr = rd.nextInt(3) + 1;
                 int color = rd.nextInt(3) + 1;
@@ -308,13 +335,12 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
                 newCardId = nr * 1000 + color * 100 + shading * 10 + type;
             }
             while (cardsIdTable.contains(newCardId) || foundedSetCardsIds.contains(newCardId));
-            //3.
+
             cardsIdTable.set(selectedIndex, newCardId);
-            // 4.
             mainActivity.notifyCard(selectedIndex);
         }
     }
-    //////////////////End of Update Table////////////////////////////////////////////////
+    //END OF UPDATE TABLE
 
     @Override
     public boolean checkAllSetOnPage() {
