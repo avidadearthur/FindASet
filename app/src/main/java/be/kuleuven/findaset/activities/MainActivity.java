@@ -395,7 +395,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             long elapsedMillis = SystemClock.elapsedRealtime() - stopWatch.getBase();
             long minutes = (elapsedMillis / 1000)  / 60;
             int seconds = (int)((elapsedMillis / 1000) % 60);
-            String winMessage = "You won!! Elapsed time" + Long.toString(minutes) + "'" + Integer.toString(seconds) + "''";
+            String winMessage = "You won!! \nElapsed time" + Long.toString(minutes) + "'" + Integer.toString(seconds) + "''";
 
             int highScoreTime = highscore[0];
             int highScoreHints = highscore[1];
@@ -424,7 +424,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void notifyWinDialog(String winMessage) {
         Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.dialog_main);
+        dialog.setContentView(R.layout.dialog_win);
         dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_custom_borders);
         TextView dialogTitle = (TextView) dialog.findViewById(R.id.dialogTitle);
         dialogTitle.setText("Congrats!");
