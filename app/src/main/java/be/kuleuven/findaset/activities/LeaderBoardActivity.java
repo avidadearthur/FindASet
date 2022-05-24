@@ -122,8 +122,10 @@ public class LeaderBoardActivity extends AppCompatActivity {
                 String hintNumAll = findAllScore.getString(1);
                 String dateAll = findAllScore.getString(2);
 
-                data[0][0] = timeAll;
-                data[0][1] = hintNumAll;
+                timeAll = formatTime(timeAll);
+
+                data[0][0] = "Best Time: " + timeAll;
+                data[0][1] = "Hints Number: " + hintNumAll;
                 data[0][2] = dateAll;
 
                 JSONArray findTenScore = device.getJSONObject(0).getJSONArray("FindTenScore");
@@ -131,8 +133,10 @@ public class LeaderBoardActivity extends AppCompatActivity {
                 String hintNumTen = findTenScore.getString(1);
                 String dateTen = findTenScore.getString(2);
 
-                data[1][0] = timeTen;
-                data[1][1] = hintNumTen;
+                timeTen = formatTime(timeTen);
+
+                data[1][0] = "Best Time: " + timeTen;
+                data[1][1] = "Hints Number: " + hintNumTen;
                 data[1][2] = dateTen;
             }
             else {
@@ -142,6 +146,15 @@ public class LeaderBoardActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return offline;
+    }
+
+    private String formatTime(String timeAll) {
+
+        int elapsedMillis = Integer.parseInt(timeAll);
+        int minutes = (elapsedMillis / 1000)  / 60;
+        int seconds = (int)((elapsedMillis / 1000) % 60);
+
+        return Integer.toString(minutes) + "'" + Integer.toString(seconds)  + "''";
     }
 
     private void getRankingsLoggedUser(String username) {
