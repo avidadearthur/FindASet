@@ -1,6 +1,5 @@
 package be.kuleuven.findaset.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.transition.ChangeBounds;
 import android.transition.Fade;
@@ -15,7 +14,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,6 +27,10 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 import be.kuleuven.findaset.R;
 import be.kuleuven.findaset.base.RVAdapterHighScore;
@@ -55,6 +57,7 @@ public class LeaderBoardActivity extends AppCompatActivity {
     private String [] rankingsHighScore;
     private RequestQueue requestQueue;
     private String baseURL = "https://studev.groept.be/api/a21pt113/";
+    private String [][] data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,11 +80,65 @@ public class LeaderBoardActivity extends AppCompatActivity {
         //recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         // TODO - bind data from credentials to ranking
+        data = new String[2][2];
+        try {
+            readCredentials();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        getRankingsAll();
+
         modes = new String[]{"Find All", "Find Ten"};
         scores = new String[]{"1'30", "0'30"};
         dates = new String[]{"22 May 2022", "21 May 2022"};
         rankingsHighScore = new String[]{"1", "2"};
         highScoreAdapter = new RVAdapterHighScore(modes, scores, dates, rankingsHighScore);
+    }
+
+    private void readCredentials() throws IOException {
+        String s = getFilesDir() + "/" + "credentials";
+        //https://stackoverflow.com/questions/33638765/how-to-read-json-data-from-txt-file-in-java
+        BufferedReader reader = new BufferedReader(new FileReader(s));
+        String json = "";
+        json = getJSONString(reader);
+        try {
+            JSONObject object = new JSONObject(json);
+
+            JSONArray session = object.getJSONArray("session");
+            String username = session.getJSONObject(0).getString("username");
+            if(username.equals(" ")){
+
+
+            }
+            else {
+                getRankingsLoggedUser();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getRankingsLoggedUser() {
+        // TODO - query to get only user's high score info from DB
+    }
+
+    private String getJSONString(BufferedReader reader) throws IOException {
+        String json = "";
+        try {
+            StringBuilder sb = new StringBuilder();
+            String line = reader.readLine();
+
+            while (line != null) {
+                sb.append(line);
+                sb.append("\n");
+                line = reader.readLine();
+            }
+            json = sb.toString();
+        } finally {
+            reader.close();
+        }
+
+        return json;
     }
 
     private void getRankingsAll() {

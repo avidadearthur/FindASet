@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -138,7 +137,6 @@ public class WelcomeActivity extends AppCompatActivity {
             JSONObject object = new JSONObject(json);
             JSONArray session = object.getJSONArray("session");
             session.getJSONObject(0).put("username",username);
-            session.getJSONObject(0).put("hash",hash);
             writeCredentials(object);
         }
         catch (JSONException e) {
@@ -227,6 +225,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     public void onClick_Board(View caller) {
         Intent intent = new Intent(this, LeaderBoardActivity.class);
+        // TODO - put intent to indicate logged in
         startActivity(intent);
     }
 
