@@ -111,11 +111,14 @@ public class LeaderBoardActivity extends AppCompatActivity {
 
             }
             else {
-                getRankingsLoggedUser();
+                getRankingsLoggedUser(username);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private void getRankingsLoggedUser(String username) {
     }
 
     private void getRankingsLoggedUser() {
