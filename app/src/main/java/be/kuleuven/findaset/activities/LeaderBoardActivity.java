@@ -46,9 +46,11 @@ public class LeaderBoardActivity extends AppCompatActivity {
     private RVAdapterNormal tenAdapter;
     private RVAdapterHighScore highScoreAdapter;
     private String[] namesAll;
+    private String[] hintsAll;
     private String[] timesAll;
     private String[] rankingsAll;
     private String[] namesTen;
+    private String[] hintsTen;
     private String[] timesTen;
     private String[] rankingsTen;
     private String[] modes;
@@ -89,7 +91,6 @@ public class LeaderBoardActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        getRankingsAll();
 
         modes = new String[]{"Find All", "Find Ten"};
         scores = new String[]{data[0][0], data[1][0]};
@@ -175,6 +176,7 @@ public class LeaderBoardActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONArray response) {
                 namesAll = new String[response.length()];
+                hintsAll = new String[response.length()];
                 timesAll = new String[response.length()];
                 rankingsAll = new String[response.length()];
                 for (int i=0; i<response.length(); i++) {
@@ -182,13 +184,14 @@ public class LeaderBoardActivity extends AppCompatActivity {
                     try {
                         o = response.getJSONObject(i);
                         namesAll[i] = (String) o.get("username");
+                        hintsAll[i] = (String) o.get("hintsAllSets");
                         timesAll[i] = (String) o.get("allSetsRecord");
                         rankingsAll[i] = String.valueOf(i+1);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
-                allAdapter = new RVAdapterNormal(namesAll, timesAll, rankingsAll);
+                allAdapter = new RVAdapterNormal(namesAll, hintsAll, timesAll, rankingsAll);
                 recyclerView.setAdapter(allAdapter);
                 rvSetAnimation();
             }
@@ -207,6 +210,7 @@ public class LeaderBoardActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONArray response) {
                 namesTen = new String[response.length()];
+                hintsTen = new String[response.length()];
                 timesTen = new String[response.length()];
                 rankingsTen = new String[response.length()];
                 for (int i=0; i<response.length(); i++) {
@@ -214,13 +218,14 @@ public class LeaderBoardActivity extends AppCompatActivity {
                     try {
                         o = response.getJSONObject(i);
                         namesTen[i] = (String) o.get("username");
+                        hintsTen[i] = (String) o.get("hintsTenSets");
                         timesTen[i] = (String) o.get("tenSetsRecord");
                         rankingsTen[i] = String.valueOf(i+1);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
-                tenAdapter = new RVAdapterNormal(namesTen, timesTen, rankingsTen);
+                tenAdapter = new RVAdapterNormal(namesTen, hintsTen, timesTen, rankingsTen);
             }
         }, new Response.ErrorListener() {
             @Override
