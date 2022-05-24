@@ -357,7 +357,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void notifyUnavailable(int index) {
         cardImages[index].setEnabled(false);
-        //cardImages[index].setVisibility(View.INVISIBLE);
+        cardImages[index].setVisibility(View.INVISIBLE);
+    }
+
+    public void notifyDisabled(int index) {
+        cardImages[index].setEnabled(false);
     }
 
     public void setTestTxt(String str) {
@@ -426,6 +430,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void notifyWin() throws IOException {
+        hintBtn.setEnabled(false);
         stopWatch.stop();
         if (mode != 3){
             long elapsedMillis = SystemClock.elapsedRealtime() - stopWatch.getBase();

@@ -289,7 +289,7 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
 
         if (win) {
             for (int l = 0; l < cardsIdTable.size(); l++) {
-                mainActivity.notifyUnavailable(l);
+                mainActivity.notifyDisabled(l);
             }
             try {
                 mainActivity.notifyWin();
