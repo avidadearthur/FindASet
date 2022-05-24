@@ -4,8 +4,8 @@ Project done for the class of Programming techniques @ Group T - Faculty of Engi
 
 ### Authors
 
-@avidadearthur(https://github.com/avidadearthur)
-@SandroLyu65(https://github.com/SandroLyu65)
+[@avidadearthur](https://github.com/avidadearthur)
+[@SandroLyu65](https://github.com/SandroLyu65)
 
 ## About the Game
 
