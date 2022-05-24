@@ -158,6 +158,29 @@ public class LeaderBoardActivity extends AppCompatActivity {
     }
 
     private void getRankingsLoggedUser(String username) {
+        String allSetsUrl = baseURL + "highScoreRecord/" + username;
+        JsonArrayRequest rankingRequestAll = new JsonArrayRequest(Request.Method.GET, allSetsUrl, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    JSONObject o = response.getJSONObject(0);
+                    data[0][0] = (String) o.get("allSetsRecord");
+                    data[1][0] = (String) o.get("tenSetsRecord");
+                    data[0][1] = (String) o.get("hintAllSets");
+                    data[1][1] = (String) o.get("hintsTenSets");
+                    data[0][2] = (String) o.get("dateAllSetsRecord");
+                    data[1][2] = (String) o.get("dateTenSetsRecord");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Database", "onErrorResponse: " + error);
+            }
+        });
+        requestQueue.add(rankingRequestAll);
     }
 
     private void getRankingsLoggedUser() {
@@ -199,7 +222,7 @@ public class LeaderBoardActivity extends AppCompatActivity {
                         namesAll[i] = (String) o.get("username");
                         hintsAll[i] = (String) o.get("hintsAllSets");
                         timesAll[i] = (String) o.get("allSetsRecord");
-                        rankingsAll[i] = String.valueOf(i+1);
+                        rankingsAll[i] = (String) o.get("rankingAll");
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -233,7 +256,7 @@ public class LeaderBoardActivity extends AppCompatActivity {
                         namesTen[i] = (String) o.get("username");
                         hintsTen[i] = (String) o.get("hintsTenSets");
                         timesTen[i] = (String) o.get("tenSetsRecord");
-                        rankingsTen[i] = String.valueOf(i+1);
+                        rankingsTen[i] = (String) o.get("rankingTen");
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
