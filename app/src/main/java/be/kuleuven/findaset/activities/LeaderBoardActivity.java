@@ -145,29 +145,21 @@ public class LeaderBoardActivity extends AppCompatActivity {
     }
 
     private void getRankingsLoggedUser(String username) {
-        String allSetsUrl = baseURL + "boardFindAll";
+        String allSetsUrl = baseURL + "highScoreRecord/" + username;
         JsonArrayRequest rankingRequestAll = new JsonArrayRequest(Request.Method.GET, allSetsUrl, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                namesAll = new String[response.length()];
-                hintsAll = new String[response.length()];
-                timesAll = new String[response.length()];
-                rankingsAll = new String[response.length()];
-                for (int i=0; i<response.length(); i++) {
-                    JSONObject o = null;
-                    try {
-                        o = response.getJSONObject(i);
-                        namesAll[i] = (String) o.get("username");
-                        hintsAll[i] = (String) o.get("hintsAllSets");
-                        timesAll[i] = (String) o.get("allSetsRecord");
-                        rankingsAll[i] = (String) o.get("rankingAll");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                try {
+                    JSONObject o = response.getJSONObject(0);
+                    data[0][0] = (String) o.get("allSetsRecord");
+                    data[1][0] = (String) o.get("tenSetsRecord");
+                    data[0][1] = (String) o.get("hintAllSets");
+                    data[1][1] = (String) o.get("hintsTenSets");
+                    data[0][2] = (String) o.get("dateAllSetsRecord");
+                    data[1][2] = (String) o.get("dateTenSetsRecord");
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-                allAdapter = new RVAdapterNormal(namesAll, hintsAll, timesAll, rankingsAll);
-                recyclerView.setAdapter(allAdapter);
-                rvSetAnimation();
             }
         }, new Response.ErrorListener() {
             @Override
