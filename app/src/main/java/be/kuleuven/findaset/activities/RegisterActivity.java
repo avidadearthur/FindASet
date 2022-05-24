@@ -18,7 +18,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -53,7 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
         if(!username.equals("") && pass.equals(passConfirm)){
             String hash = get_SHA_1_SecurePassword(pass);
             String queryURL = baseURL + "userNameExisted/" + username;
-            String requestURL = baseURL + "register" + "/" + username + "/" + hash;
+            String requestURL = baseURL + "register" + "/" + username + "/" + hash + "/" + username;
             Boolean nameExisted = false;
 
             requestQueue = Volley.newRequestQueue( this );
@@ -106,6 +105,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
         else {
             // display error message
+            registerError.setText(R.string.register_error);
             registerError.setVisibility(View.VISIBLE);
         }
     }
