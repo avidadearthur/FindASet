@@ -1,13 +1,6 @@
 package be.kuleuven.findaset.model;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -250,10 +243,10 @@ public abstract class AbstractFindASet implements InterfaceFindASet {
     @Override
     public boolean checkSet(ArrayList<Integer> testedCardsIndex) {
         int[][] featureMatrix = new int[3][4];
-        // Create feature matrix of the three selected cards
+        boolean isSet = true;
+
         getTestFeatureMatrix(testedCardsIndex, featureMatrix);
 
-        boolean isSet = true;
         isSet = checkFeatureMatrix(featureMatrix, isSet);
         return isSet;
     }

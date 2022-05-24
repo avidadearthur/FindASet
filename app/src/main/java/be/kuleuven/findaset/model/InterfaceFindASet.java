@@ -101,31 +101,52 @@ public interface InterfaceFindASet {
 
 
     /**
-     * @param testedCardsIndex
-     * @return
+     * Checks if the the three selected cards form a set.
+     *
+     * @param testedCardsIndex - indexes of the selected cards
+     * @return isSet - boolean
      */
     boolean checkSet(ArrayList<Integer> testedCardsIndex);
 
     /**
-     * @param featureMatrix
-     * @param isSet
-     * @return
+     * Helper method that evaluates if the test feature matrix forms a set.
+     *
+     * @param featureMatrix - test feature matrix of the 3 selected cards
+     * @param isSet - boolean
+     * @return isSet - boolean
      */
     boolean checkFeatureMatrix(int[][] featureMatrix, boolean isSet);
 
 
     /**
-     * @param selectedCardsIndex
+     * After a set is found, this method removes the three cards
+     * that formed a set and keeps trying to add new cards until
+     * a set shows up at the new screen.
+     *
+     * It might be that the user won the game an no new sets can be
+     * generated so the method must call checkWin after a certain
+     * number of cards found in the Find All mode.
+     *
+     * @param selectedCardsIndex - indexes of last three selected cards
      */
     void updateTable(ArrayList<Integer> selectedCardsIndex);
 
     /**
-     * @return
+     * Iterates over the table and returns false if no sets are
+     * found. It serves as test condition to check if player won the game
+     * in the find All mode.
+     *
+     * @return - Boolean
      */
     boolean checkAllSetOnPage();
 
     /**
+     * Check whether the user has:
+     * found 10 cards in the implementation of FindAll
+     * found 69, 72 or 75 cards that formed a set among the 81 cards that
+     * compose the game.
      *
+     * Refer to the child classes for the specific implementation.
      */
     void checkWin();
 
