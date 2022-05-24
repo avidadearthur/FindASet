@@ -80,12 +80,15 @@ public class LoginActivity extends AppCompatActivity {
                             finish();
                             startActivity(intent);
                         }
-                        else
+                        else {
+                            loginError.setText(R.string.login_error);
                             loginError.setVisibility(View.VISIBLE);
+                        }
                     }
                     catch(JSONException | IOException e )
                     {
                         Log.e( "Database", e.getMessage(), e );
+                        loginError.setText(R.string.login_error);
                         loginError.setVisibility(View.VISIBLE);
                     }
                 },
