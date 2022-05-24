@@ -12,15 +12,19 @@ import be.kuleuven.findaset.R;
 
 public class RVAdapterHighScore extends RecyclerView.Adapter<RVAdapterHighScore.ViewHolder> {
     private String[] modes;
+    private String[] hints;
     private String[] scores;
     private String[] dates;
     private String[] rankings;
+    private boolean offline;
 
-    public RVAdapterHighScore(String[] modes, String[] scores, String[] dates, String[] rankings) {
+    public RVAdapterHighScore(String[] modes, String[] hints, String[] scores, String[] dates, String[] rankings, Boolean offline) {
+        this.hints = hints;
         this.modes = modes;
         this.scores = scores;
         this.dates = dates;
         this.rankings = rankings;
+        this.offline = offline;
     }
 
     @Override
@@ -34,11 +38,14 @@ public class RVAdapterHighScore extends RecyclerView.Adapter<RVAdapterHighScore.
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         viewHolder.tvMode.setText(modes[position]);
+        viewHolder.tvHints.setText(hints[position]);
         viewHolder.tvScore.setText(scores[position]);
         viewHolder.tvDate.setText(dates[position]);
         viewHolder.tvRanking.setText(rankings[position]);
 
-        viewHolder.tvRanking.setVisibility(View.INVISIBLE);
+        if(offline){
+            viewHolder.tvRanking.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
@@ -48,6 +55,7 @@ public class RVAdapterHighScore extends RecyclerView.Adapter<RVAdapterHighScore.
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvMode;
+        TextView tvHints;
         TextView tvScore;
         TextView tvDate;
         TextView tvRanking;
@@ -56,6 +64,7 @@ public class RVAdapterHighScore extends RecyclerView.Adapter<RVAdapterHighScore.
         public ViewHolder(View view) {
             super(view);
             tvMode = (TextView) view.findViewById(R.id.tvMode);
+            tvHints = (TextView) view.findViewById(R.id.tvHintsHighScore);
             tvScore = (TextView) view.findViewById(R.id.tvHigScore);
             tvDate = (TextView) view.findViewById(R.id.tvDate);
             tvRanking = (TextView) view.findViewById(R.id.tvRankingHighScore);
