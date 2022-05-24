@@ -25,6 +25,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Locale;
 
 import be.kuleuven.findaset.R;
 
@@ -52,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         EditText loginUsername = (EditText) findViewById(R.id.etUsernameLogin);
         EditText loginPassword = (EditText) findViewById(R.id.etPasswordLogin);
 
-        String username = loginUsername.getText().toString();
+        String username = loginUsername.getText().toString().toLowerCase(Locale.ROOT);
         String pass = loginPassword.getText().toString();
 
         requestQueue = Volley.newRequestQueue( this );

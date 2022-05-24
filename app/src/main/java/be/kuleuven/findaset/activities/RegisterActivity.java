@@ -20,6 +20,7 @@ import org.json.JSONObject;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Locale;
 
 import be.kuleuven.findaset.R;
 
@@ -44,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
         EditText registeredPassword = (EditText) findViewById(R.id.etPassword);
         EditText registeredConfirmPassword = (EditText) findViewById(R.id.etConfirmPassword);
 
-        String username = registeredUsername.getText().toString();
+        String username = registeredUsername.getText().toString().toLowerCase(Locale.ROOT);
         String pass = registeredPassword.getText().toString();
         String passConfirm = registeredConfirmPassword.getText().toString();
 
