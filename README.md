@@ -26,25 +26,38 @@ The current version of this app includes:
 * Different playing modes:
 	* Learning
 	* Find 10 sets
-	* Find all sets
-    
-## UI activities
-
-Add screenshots
+	* Find all sets    
 
 ## Description
-
 An in-depth paragraph about your software structure, android versions supported etc.
+
+### Code
+	• Use a Model: create classes that implement a single abstraction and use instances all over your
+	app (see: “Android Tutorial refactoring”); provide the UML diagram of your model
+	• Make use of the Java and Android API documentation; finding your way through the
+	documentation is one of the goals of this course
+	• Choose the right collections
+	• Make use of lambda expressions
+	• Apply clean code principles: naming of classes, methods and variables should be as selfexplanatory as possible, find and apply design patterns, refactor 	your code (small methods,
+	small classes, …) often
+	• If possible, add something ”special” or “new” (in the sense of: “something where we did not
+	offer an introduction for”) in your app (for instance: a map, an API that makes use of specific
+	hardware in your mobile device, ...)
+### Database
+	short description of the 
+	
+### RESTful service
+The app communicatio to the database is done through a RESTful api service and the queries used can be found [here]()
 
 ## Features:
 ### Register and login
-	Add info about the Register and login 
+Add info about the Register and login 
 
 ### Offline vesion
-	Add info about the how the credentials cookie works
+Add info about the how the credentials cookie works
 
 ### Online Ranking
-	Add info about the how the online ranking works
+Add info about the how the online ranking works
 
 ### Three playing modes:
 #### Find Learning
@@ -63,14 +76,7 @@ Add info about the find 10 mode
 
 ### Installing and Executing program
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
-
-* How to run the program
-* Step-by-step bullets
-```
-code blocks for commands
-```
+Go to [release](https://github.com/avidadearthur/FindASet/tree/master/app/release) with your android device and download the apk!
 
 ## Version History
 
