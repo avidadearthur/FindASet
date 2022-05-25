@@ -157,6 +157,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            txtInfo.setText(username);
             notifyFeatureBoxGrey();
             dialogTitleStr = getString(R.string.feature_box_explanation_title);
             dialogContentStr = getString(R.string.feature_box_explanation_content);
