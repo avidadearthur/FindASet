@@ -559,7 +559,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             long elapsedMillis = SystemClock.elapsedRealtime() - stopWatch.getBase();
             long minutes = (elapsedMillis / 1000)  / 60;
             int seconds = (int)((elapsedMillis / 1000) % 60);
-            String winMessage = "You won!! \nElapsed time " + Long.toString(minutes) + "'" + Integer.toString(seconds) + "''";
+            String winMessage = getString(R.string.win_normal) + Long.toString(minutes) + "'" + Integer.toString(seconds) + "''";
 
             int highScoreTime = highscore[0];
             int highScoreHints = highscore[1];
@@ -581,7 +581,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             notifyWinDialog(winMessage);
         }
         else {
-            String winMessage = "You found all possible sets in 81 cards";
+            String winMessage = getString(R.string.win_learning);
             notifyWinDialog(winMessage);
         }
     }

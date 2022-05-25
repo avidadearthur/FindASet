@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FindASet</string>
+    <string name="app_name" translatable="false">FindASet</string>
     <string name="login_username">username</string>
     <string name="login_password">password</string>
     <string name="register_username">username</string>
@@ -35,9 +35,7 @@
     <string name="feature_type">type</string>
 
     <string name="welcome_info_title">Can you find a SET?</string>
-    <string name="welcome_info_content">For each one of the four categories of features
-        — color, number, shape, and shading — the three cards must display that feature as either
-        a) all the same, or b) all different.</string>
+    <string name="welcome_info_content">For each one of the four categories of features         — color, number, shape, and shading — the three cards must display that feature as either         a) all the same, or b) all different.</string>
     <string name="main_more_findAll_title">Find ALL</string>
     <string name="main_more_findAll_content">Try to find all possible sets among the
         81 cards of the game.
@@ -60,7 +58,9 @@
 
     <string name="welcome_login_underlined"><u>Login</u></string>
     <string name="welcome_logout"><u>Log out</u></string>
-    <string name="welcome_heading">FIND A SET</string>
+    <string name="welcome_heading" translatable="false">FIND A SET</string>
     <string name="dialog_FindAll_title">Title</string>
     <string name="dialog_FindAll_summary">Summary</string>
+    <string name="win_learning">You found all possible sets in 81 cards</string>
+    <string name="win_normal">You won!! \nElapsed time </string>
 </resources>
