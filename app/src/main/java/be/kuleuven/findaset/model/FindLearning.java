@@ -37,8 +37,13 @@ public class FindLearning extends AbstractFindASet implements InterfaceFindASet{
     @Override
     public void checkWin() {
         // check if there's still a set after updating
-        if (foundedSetCardsIds.size() <= 69) {
+        if (foundedSetCardsIds.size() < 69) {
             updateWholeTable(checkAllSetOnPage());
+        }
+        else if (foundedSetCardsIds.size() == 69) {
+            if (!checkAllSetOnPage()) {
+                win = true;
+            }
         }
         // the player ha already found 24 sets or more
         // so they win the find All game
