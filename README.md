@@ -144,12 +144,14 @@ Go to [release](https://github.com/avidadearthur/FindASet/tree/master/app/releas
 
 * 0.0
     * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
+    * README.md
 
 
 ## License
 
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
+The SET! game is copyright protected. Any textual or graphic material you copy, print, or download is licensed to you by Set Enterprises, Inc. ("Set Enterprises") for your personal, non-commercial home use only, provided that you do not change or delete any copyright, trademark or other proprietary notices.
+
+See the LICENSE.md file for details
 
 ## Acknowledgments
 
