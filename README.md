@@ -40,15 +40,18 @@ AbstractFindASet is the parent class of the set Find All , Find learning and Fin
 
 The RV adapters stand for the recycler view adapters that carry out the leaderboard display. This might become disfunctional when the campus deletes our database for the next group students' projects.
 
-### Code
-	
+### UML
+
+![alt text](https://github.com/avidadearthur/FindASet/blob/master/screenshots/uml.png)
+
+
 ### Database and RESTful service
 
 The MySQL database architecture is very simple and consists of only two tables here's the ERD diagram:
 
 ![alt text](https://github.com/avidadearthur/FindASet/blob/master/screenshots/ERD.png)
 
-The app communication to the database is done through a RESTful api service and the queries used can be found [here](ToDo)
+The app communication to the database is done through a RESTful api service and the queries used can be found [here](https://github.com/avidadearthur/FindASet/blob/master/queries.txt)
 
 
 ## Features:
