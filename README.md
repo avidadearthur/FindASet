@@ -55,31 +55,10 @@ The app communication to the database is done through a RESTful api service and 
 ### Register and login
 The register and login functions use SHA-1 (Secure Hash Algorithm 1) just for illustration purposes. Since 2005, SHA-1 has not been considered secure against well-funded opponents. It also doesn't use cryptographic salt.
 
-<table>
-  <tr>
-    <td>Unlogged first screen page</td>
-    <td>Login page with error message</td>
-  </tr>
-  <tr>
-    <td><img src="https://github.com/avidadearthur/FindASet/blob/master/screenshots/welcome_guest.jpeg" width=90% height=90%></td>
-    <td><img src="https://github.com/avidadearthur/FindASet/blob/master/screenshots/login.jpeg" width=74% height=74%></td>
-  </tr>
- </table>
- 
- <table>
-  <tr>
-    <td>Register page with error message</td>
-    <td>Logged first screen page</td>
-  </tr>
-  <tr>
-    <td><img src="https://github.com/avidadearthur/FindASet/blob/master/screenshots/register.jpeg" width=74% height=74%></td>
-    <td><img src="https://github.com/avidadearthur/FindASet/blob/master/screenshots/Welcome_logged.jpeg" width=90% height=90%></td>
-  </tr>
- </table>
+<img src="https://github.com/avidadearthur/FindASet/blob/master/screenshots/welcome_guest.jpeg" width=24% height=24%>	<img src="https://github.com/avidadearthur/FindASet/blob/master/screenshots/login.jpeg" width=24% height=24%>	<img src="https://github.com/avidadearthur/FindASet/blob/master/screenshots/Welcome_logged.jpeg" width=24% height=24%>		<img src="https://github.com/avidadearthur/FindASet/blob/master/screenshots/register.jpeg" width=24% height=24%>
 
-### Offline vesion
-Add info about the how the credentials cookie works
-
+### Offline version
+When the app is first downloaded it creates a text file that will store the device's best scores so that the player can keep track of their performance offline. Here's the format of the JSON array stored:
 ```
 {
 	"device": [{
@@ -98,19 +77,12 @@ Add info about the how the credentials cookie works
 When you click on two cards and watch the features at the bottom light up: Yellow means that this feature should differ in the 3rd card; Green means that the 3rd card should have this feature in common; if you press hint the a set shows up in blue on the screen.
 The cards icon in the top-center of the screen indicates how many cards that form a set have been found.
 
-<table>
-  <tr>
-    <td>Learning mode with two cards selected</td>
-    <td>Learning mode with set found</td>
-  </tr>
-  <tr>
-    <td><img src="https://github.com/avidadearthur/FindASet/blob/master/screenshots/learning_mode.jpeg" width=90% height=90%></td>
-    <td><img src="https://github.com/avidadearthur/FindASet/blob/master/screenshots/learning_mode_set.jpeg" width=90% height=90%></td>
-  </tr>
- </table>
+<img src="https://github.com/avidadearthur/FindASet/blob/master/screenshots/learning_mode.jpeg" width=24% height=24%>	<img src="https://github.com/avidadearthur/FindASet/blob/master/screenshots/learning_mode_set.jpeg" width=24% height=24%>	<img src="https://github.com/avidadearthur/FindASet/blob/master/screenshots/normal_mode.jpeg" width=24% height=24%>	
 
 #### Find all sets
 The game has 81 unique cards and as you find sets of three cards, you eliminate other groups of possible sets. Throughout the game development we observed that other mobile versions of this game flag a win after the player has selected 23, 24, 25. Hence in the Find all mode, after the player has found 69, 72 or 75 cards that formed a set the check win method looks for a set in the current table of cards. If no sets are found the player wins the game.
+
+The third screen above shows the Find all activity screen. Notice that there's no user logged in (indicated by 'guest') and that the stopwatch is running on the top-right corner. The player can click on hint to reveal one set or on restart to reset the game.
 
 Here's the overriden method:
 
@@ -126,7 +98,7 @@ Here's the overriden method:
                 win = true;
             }
         }
-        // the player ha already found 24 sets or more
+        // the player has already found 24 sets or more
         // so they win the find All game
         else if (foundedSetCardsIds.size() == 72) {
             // No need to display to display 12 cards
@@ -157,40 +129,12 @@ Here's the overriden method:
         }
     }
 ```
-Here's the Find all activity screen. Notice that there's no user logged in (indicated by 'guest') and that the stopwatch is running on the top-right corner. The player can click on hint to reveal one set or on restart to reset the game.
-
-<table>
-  <tr>
-    <td>Find all mode with two cards selected</td>
-  </tr>
-  <tr>
-    <td><img src="https://github.com/avidadearthur/FindASet/blob/master/screenshots/normal_mode.jpeg" width=270 height=480></td>
-  </tr>
- </table>
-
-#### Find 10 sets
 The find 10 mode works the same way as the Find All but flags the win after the player has found 30 cards that form a set (10 sets).
 
 ### Online Ranking
 Add info about the how the online ranking works
-<table>
-  <tr>
-    <td>Leaderboard</td>
-    <td>Empty high-score board</td>
-    <td>Logged high-score board</td>
-  </tr>
-  <tr>
-    <td><img src="https://github.com/avidadearthur/FindASet/blob/master/screenshots/leader_board.jpeg" width=270 height=480></td>
-    <td><img src="https://github.com/avidadearthur/FindASet/blob/master/screenshots/high_score_guest.jpeg" width=270 height=480></td>
-    <td><img src="https://github.com/avidadearthur/FindASet/blob/master/screenshots/high_score_logged.jpeg" width=270 height=480></td>
-  </tr>
- </table>
 
-
-### Dependencies
-
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
+<img src="https://github.com/avidadearthur/FindASet/blob/master/screenshots/leader_board.jpeg" width=24% height=24%>	<img src="https://github.com/avidadearthur/FindASet/blob/master/screenshots/high_score_logged.jpeg" width=24% height=24%>
 
 ### Installing and Executing program
 
@@ -209,8 +153,6 @@ This project is licensed under the [NAME HERE] License - see the LICENSE.md file
 
 ## Acknowledgments
 
-Add reference to the UI stuff that we had to reverse engineer and add reference to the find a set app we got the icons from.
-
 Inspiration, code snippets, etc.
 * [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
+* [UI inspiration](https://www.behance.net/gallery/52633383/Learnr-Online-Courses-Educational-App-UI-Kit)
