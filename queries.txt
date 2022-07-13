@@ -1,0 +1,83 @@
+register
+
+INSERT INTO users (username, hash)
+VALUES (:username, :hash);
+
+INSERT INTO leaderBoard (userId, dateTenSetsRecord, dateAllSetsRecord)
+VALUES ((SELECT id FROM users WHERE username = :username),curdate(),curdate());
+
+
+
+
+login
+
+SELECT username, hash FROM users WHERE username = :input
+
+
+
+
+boardFindAll
+
+SELECT username, hintsAllSets, allSetsRecord, dateAllSetsRecord, 
+       ROW_NUMBER() OVER(ORDER BY hintsAllSets,allSetsRecord) AS rankingAll
+FROM leaderBoard INNER JOIN users ON userId = id
+WHERE hintsAllSets <> -1 AND hintsTenSets <> -1;
+
+
+
+boardFindTen
+
+
+SELECT username, hintsTenSets, tenSetsRecord, dateTenSetsRecord, 
+       ROW_NUMBER() OVER(ORDER BY hintsTenSets,tenSetsRecord) AS rankingTen
+FROM leaderBoard INNER JOIN users ON userId = id
+WHERE hintsAllSets <> -1 AND hintsTenSets <> -1;
+
+
+findTenRecord
+
+SELECT tenSetsRecord,hintsTenSets
+FROM leaderBoard INNER JOIN users ON userId = id
+WHERE username = :user
+
+
+findAllRecord
+
+
+SELECT allSetsRecord,hintsAllSets
+FROM leaderBoard INNER JOIN users ON userId = id
+WHERE username = :user
+
+
+updateFindTenRecord
+
+
+UPDATE leaderBoard
+SET tenSetsRecord = :tensetsrecord, hintsTenSets = :hintstensets
+WHERE userId = (SELECT id FROM users WHERE username = :username);
+
+
+updateFindAllRecord
+
+
+UPDATE leaderBoard
+SET allSetsRecord = :allsetsrecord, hintsAllSets = :hintsallsets
+WHERE userId = (SELECT id FROM users WHERE username = :username);
+
+
+userNameExisted
+
+SELECT username FROM users WHERE username=:name
+
+
+highScoreRecord
+
+SELECT * FROM(
+SELECT username,hintsTenSets, tenSetsRecord, dateTenSetsRecord, 
+    hintsAllSets, allSetsRecord, dateAllSetsRecord, 
+    ROW_NUMBER() OVER(ORDER BY hintsTenSets,tenSetsRecord) AS rankingTen,
+    ROW_NUMBER() OVER(ORDER BY hintsAllSets,allSetsRecord) AS rankingAll
+    FROM leaderBoard INNER JOIN users ON userId = id) newTable
+WHERE username = :username;
+
+
