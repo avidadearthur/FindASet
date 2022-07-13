@@ -29,45 +29,163 @@ The current version of this app includes:
 	* Find all sets    
 
 ## Description
-An in-depth paragraph about your software structure, android versions supported etc.
+
+Originally created for Android Studio version 3.5.2; updated for version 4.1.2 (March, 2021); updated for Android Studio Bumblebee|2021.1.1 Patch 2 (February 2022) 
+
+InterfaceFindASet lists all methods implemented by AbstractFindASet and their javadocs explaining their basic functionality.
+ 
+The logic of the game is implemented based on the translation of the features of a card into a 4-digit cardId that facilitates the operations needed to carryout the game.
+
+AbstractFindASet is the parent class of the set Find All , Find learning and Find Ten game extensions. It contains the main logic common to all games.
+
+The RV adapters stand for the recycler view adapters that carry out the leaderboard display. This might become disfunctional when the campus deletes our database for the next group students' projects.
 
 ### Code
-	• Use a Model: create classes that implement a single abstraction and use instances all over your
-	app (see: “Android Tutorial refactoring”); provide the UML diagram of your model
-	• Make use of the Java and Android API documentation; finding your way through the
-	documentation is one of the goals of this course
-	• Choose the right collections
-	• Make use of lambda expressions
-	• Apply clean code principles: naming of classes, methods and variables should be as selfexplanatory as possible, find and apply design patterns, refactor 	your code (small methods,
-	small classes, …) often
-	• If possible, add something ”special” or “new” (in the sense of: “something where we did not
-	offer an introduction for”) in your app (for instance: a map, an API that makes use of specific
-	hardware in your mobile device, ...)
-### Database
-	short description of the 
 	
-### RESTful service
-The app communicatio to the database is done through a RESTful api service and the queries used can be found [here]()
+### Database and RESTful service
+
+The MySQL database architecture is very simple and consists of only two tables here's the ERD diagram:
+
+![alt text](https://github.com/avidadearthur/FindASet/blob/master/screenshots/ERD.png)
+
+The app communication to the database is done through a RESTful api service and the queries used can be found [here](ToDo)
+
 
 ## Features:
 ### Register and login
-Add info about the Register and login 
+The register and login functions use SHA-1 (Secure Hash Algorithm 1) just for illustration purposes. Since 2005, SHA-1 has not been considered secure against well-funded opponents. It also doesn't use cryptographic salt.
+
+<table>
+  <tr>
+    <td>Unlogged first screen page</td>
+    <td>Login page with error message</td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/avidadearthur/FindASet/blob/master/screenshots/welcome_guest.jpeg" width=90% height=90%></td>
+    <td><img src="https://github.com/avidadearthur/FindASet/blob/master/screenshots/login.jpeg" width=74% height=74%></td>
+  </tr>
+ </table>
+ 
+ <table>
+  <tr>
+    <td>Register page with error message</td>
+    <td>Logged first screen page</td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/avidadearthur/FindASet/blob/master/screenshots/register.jpeg" width=74% height=74%></td>
+    <td><img src="https://github.com/avidadearthur/FindASet/blob/master/screenshots/Welcome_logged.jpeg" width=90% height=90%></td>
+  </tr>
+ </table>
 
 ### Offline vesion
 Add info about the how the credentials cookie works
 
-### Online Ranking
-Add info about the how the online ranking works
+```
+{
+	"device": [{
+		"thisDevice": " ",
+		"FindTenScore": [" ", " ", " "],
+		"FindAllScore": [" ", " ", " "]
+	}],
+	"session": [{
+		"username": " "
+	}]
+}
+```
 
 ### Three playing modes:
 #### Find Learning
-Add info about the how the learning mode works
+When you click on two cards and watch the features at the bottom light up: Yellow means that this feature should differ in the 3rd card; Green means that the 3rd card should have this feature in common; if you press hint the a set shows up in blue on the screen.
+The cards icon in the top-center of the screen indicates how many cards that form a set have been found.
+
+<table>
+  <tr>
+    <td>Learning mode with two cards selected</td>
+    <td>Learning mode with set found</td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/avidadearthur/FindASet/blob/master/screenshots/learning_mode.jpeg" width=90% height=90%></td>
+    <td><img src="https://github.com/avidadearthur/FindASet/blob/master/screenshots/learning_mode_set.jpeg" width=90% height=90%></td>
+  </tr>
+ </table>
 
 #### Find all sets
-Add info about the find 10 mode
+The game has 81 unique cards and as you find sets of three cards, you eliminate other groups of possible sets. Throughout the game development we observed that other mobile versions of this game flag a win after the player has selected 23, 24, 25. Hence in the Find all mode, after the player has found 69, 72 or 75 cards that formed a set the check win method looks for a set in the current table of cards. If no sets are found the player wins the game.
+
+Here's the overriden method:
+
+```
+    @Override
+    public void checkWin() {
+        // check if there's still a set after updating
+        if (foundedSetCardsIds.size() < 69) {
+            updateWholeTable(checkAllSetOnPage());
+        }
+        else if (foundedSetCardsIds.size() == 69) {
+            if (!checkAllSetOnPage()) {
+                win = true;
+            }
+        }
+        // the player ha already found 24 sets or more
+        // so they win the find All game
+        else if (foundedSetCardsIds.size() == 72) {
+            // No need to display to display 12 cards
+            for (int j = 9; j < 12; j++) {
+                mainActivity.notifyUnavailable(j);
+            }
+            // display last 9 cards
+            initializeTable(9);
+            setCardsTable(9);
+            mainActivity.notifyNewGame(9);
+            // If there's no set remaining in the 9 cards the player wins the game
+            if (!checkAllSetOnPage()) {
+                win = true;
+            }
+        }
+        else if (foundedSetCardsIds.size() == 75) {
+            // No need to display to display 12 cards, just 6
+            for (int k = 6; k < 9; k++) {
+                mainActivity.notifyUnavailable(k);
+            }
+            initializeTable(6);
+            setCardsTable(6);
+            mainActivity.notifyNewGame(6);
+            // If there's no set remaining in the 6 cards the player wins the game
+            if (!checkAllSetOnPage()) {
+                win = true;
+            }
+        }
+    }
+```
+Here's the Find all activity screen. Notice that there's no user logged in (indicated by 'guest') and that the stopwatch is running on the top-right corner. The player can click on hint to reveal one set or on restart to reset the game.
+
+<table>
+  <tr>
+    <td>Find all mode with two cards selected</td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/avidadearthur/FindASet/blob/master/screenshots/normal_mode.jpeg" width=270 height=480></td>
+  </tr>
+ </table>
 
 #### Find 10 sets
-Add info about the find 10 mode
+The find 10 mode works the same way as the Find All but flags the win after the player has found 30 cards that form a set (10 sets).
+
+### Online Ranking
+Add info about the how the online ranking works
+<table>
+  <tr>
+    <td>Leaderboard</td>
+    <td>Empty high-score board</td>
+    <td>Logged high-score board</td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/avidadearthur/FindASet/blob/master/screenshots/leader_board.jpeg" width=270 height=480></td>
+    <td><img src="https://github.com/avidadearthur/FindASet/blob/master/screenshots/high_score_guest.jpeg" width=270 height=480></td>
+    <td><img src="https://github.com/avidadearthur/FindASet/blob/master/screenshots/high_score_logged.jpeg" width=270 height=480></td>
+  </tr>
+ </table>
+
 
 ### Dependencies
 
@@ -94,4 +212,5 @@ This project is licensed under the [NAME HERE] License - see the LICENSE.md file
 Add reference to the UI stuff that we had to reverse engineer and add reference to the find a set app we got the icons from.
 
 Inspiration, code snippets, etc.
+* [awesome-readme](https://github.com/matiassingers/awesome-readme)
 * [awesome-readme](https://github.com/matiassingers/awesome-readme)
